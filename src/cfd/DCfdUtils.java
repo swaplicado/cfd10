@@ -605,9 +605,8 @@ public abstract class DCfdUtils {
                         cfd.ver3.nom12.DElementOtrosPagos otrosPagos = new cfd.ver3.nom12.DElementOtrosPagos();
 
                         nodeChild = SXmlUtils.extractChildElements(node, "nomina:OtrosPagos").get(0);
-                        namedNodeMapChild = nodeChild.getAttributes();
                         
-                        nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:OtrosPago");
+                        nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:OtroPago");
 
                         for (int i = 0; i < nodeChilds.size(); i++) {
                             cfd.ver3.nom12.DElementOtroPago otroPago = new cfd.ver3.nom12.DElementOtroPago();
@@ -616,7 +615,22 @@ public abstract class DCfdUtils {
                             namedNodeMapChild = nodeChild.getAttributes();
 
                             otroPago.getAttTipoOtroPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoOtroPago", false));
+                            otroPago.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
+                            otroPago.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
+                            otroPago.getAttImporte().setDouble(DUtilUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
                             
+                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina:SubsidioAlEmpleo");
+
+                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
+                                cfd.ver3.nom12.DElementSubsidioEmpleo subsidio = new cfd.ver3.nom12.DElementSubsidioEmpleo();
+                                
+                                nodeChild = nodeChildsAux.get(sub);
+                                namedNodeMapChild = nodeChild.getAttributes();
+
+                                subsidio.getAttSubsidioCausado().setDouble(DUtilUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
+                                
+                                otroPago.setEltSubsidioEmpleo(subsidio);
+                            }
                             
                             otrosPagos.getEltHijosOtroPago().add(otroPago);
                         }
@@ -777,6 +791,33 @@ public abstract class DCfdUtils {
         }
 
         return comprobante;
+    }
+    
+    public static double getVersionPayrollComplement(String xml) {
+        DocumentBuilder docBuilder = null;
+        Document doc = null;
+        Node node = null;
+        double version = 0;
+        NamedNodeMap namedNodeMap = null;
+
+        try {
+            docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            doc = docBuilder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
+            
+            node = SXmlUtils.extractElements(doc, "cfdi:Complemento").item(0);
+
+            if (node != null) {
+                node = SXmlUtils.extractChildElements(node, "nomina:Nomina").get(0);
+                namedNodeMap = node.getAttributes();
+
+                version = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMap, "Version", true));
+            }
+        }
+        catch (Exception e) {
+            SLibUtils.printException(DCfdUtils.class, e);
+        }
+        
+        return version;
     }
     
     /**
