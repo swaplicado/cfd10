@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver3;
+package cfd.ver3.nom11;
 
 import cfd.DAttribute;
 import cfd.DAttributeInteger;

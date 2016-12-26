@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver3;
+package cfd.ver3.nom11;
 
 import cfd.DAttribute;
 import cfd.DAttributeDate;
@@ -41,10 +41,10 @@ public class DElementNomina extends cfd.DElement {
     protected cfd.DAttributeInteger moAttRiesgoPuesto;
     protected cfd.DAttributeTypeImporte moAttSalarioDiarioIntegrado;
 
-    protected cfd.ver3.DElementPercepciones moEltPercepciones;
-    protected cfd.ver3.DElementDeducciones moEltDeducciones;
-    protected cfd.ver3.DElementIncapacidades moEltIncapacidades;
-    protected cfd.ver3.DElementHorasExtras moEltHorasExtras;
+    protected cfd.ver3.nom11.DElementPercepciones moEltPercepciones;
+    protected cfd.ver3.nom11.DElementDeducciones moEltDeducciones;
+    protected cfd.ver3.nom11.DElementIncapacidades moEltIncapacidades;
+    protected cfd.ver3.nom11.DElementHorasExtras moEltHorasExtras;
 
     public DElementNomina() {
         super("nomina:Nomina");
@@ -103,10 +103,10 @@ public class DElementNomina extends cfd.DElement {
         moEltHorasExtras = null;
     }
 
-    public void setEltPercepciones(cfd.ver3.DElementPercepciones o) { moEltPercepciones = o; }
-    public void setEltDeducciones(cfd.ver3.DElementDeducciones o) { moEltDeducciones = o; }
-    public void setEltIncapacidades(cfd.ver3.DElementIncapacidades o) { moEltIncapacidades = o; }
-    public void setEltHorasExtras(cfd.ver3.DElementHorasExtras o) { moEltHorasExtras = o; }
+    public void setEltPercepciones(cfd.ver3.nom11.DElementPercepciones o) { moEltPercepciones = o; }
+    public void setEltDeducciones(cfd.ver3.nom11.DElementDeducciones o) { moEltDeducciones = o; }
+    public void setEltIncapacidades(cfd.ver3.nom11.DElementIncapacidades o) { moEltIncapacidades = o; }
+    public void setEltHorasExtras(cfd.ver3.nom11.DElementHorasExtras o) { moEltHorasExtras = o; }
     
     public cfd.DAttributeString getAttVersion() { return moAttVersion; }
     public cfd.DAttributeString getAttRegistroPatronal() { return moAttRegistroPatronal; }
@@ -131,10 +131,10 @@ public class DElementNomina extends cfd.DElement {
     public cfd.DAttributeInteger getAttRiesgoPuesto() { return moAttRiesgoPuesto; }
     public cfd.DAttributeTypeImporte getAttSalarioDiarioIntegrado() { return moAttSalarioDiarioIntegrado; }
 
-    public cfd.ver3.DElementPercepciones getEltPercepciones() { return moEltPercepciones; }
-    public cfd.ver3.DElementDeducciones getEltDeducciones() { return moEltDeducciones; }
-    public cfd.ver3.DElementIncapacidades getEltIncapacidades() { return moEltIncapacidades; }
-    public cfd.ver3.DElementHorasExtras getEltHorasExtras() { return moEltHorasExtras; }
+    public cfd.ver3.nom11.DElementPercepciones getEltPercepciones() { return moEltPercepciones; }
+    public cfd.ver3.nom11.DElementDeducciones getEltDeducciones() { return moEltDeducciones; }
+    public cfd.ver3.nom11.DElementIncapacidades getEltIncapacidades() { return moEltIncapacidades; }
+    public cfd.ver3.nom11.DElementHorasExtras getEltHorasExtras() { return moEltHorasExtras; }
 
     @Override
     public java.lang.String getElementForXml() {

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver3;
+package cfd.ver3.nom11;
 
 import cfd.DAttribute;
 import cfd.DElement;
@@ -13,17 +13,17 @@ import java.util.Vector;
  *
  * @author Juan Barajas
  */
-public class DElementHorasExtras extends cfd.DElement {
+public class DElementIncapacidades extends cfd.DElement {
 
-    protected java.util.Vector<cfd.ver3.DElementHorasExtra> mvEltHijosHorasExtra;
+    protected java.util.Vector<cfd.ver3.nom11.DElementIncapacidad> mvEltHijosIncapacidad;
 
-    public DElementHorasExtras() {
-        super("nomina:HorasExtras");
+    public DElementIncapacidades() {
+        super("nomina:Incapacidades");
 
-        mvEltHijosHorasExtra = new Vector<DElementHorasExtra>();
+        mvEltHijosIncapacidad = new Vector<DElementIncapacidad>();
     }
 
-    public java.util.Vector<cfd.ver3.DElementHorasExtra> getEltHijosHorasExtra() { return mvEltHijosHorasExtra; }
+    public java.util.Vector<cfd.ver3.nom11.DElementIncapacidad> getEltHijosIncapacidad() { return mvEltHijosIncapacidad; }
 
     @Override
     public java.lang.String getElementForXml() {
@@ -39,11 +39,11 @@ public class DElementHorasExtras extends cfd.DElement {
 
         string += ">";
 
-        if (mvEltHijosHorasExtra.isEmpty()) {
+        if (mvEltHijosIncapacidad.isEmpty()) {
             throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
         }
         else {
-            for (DElementHorasExtra incapacidad : mvEltHijosHorasExtra) {
+            for (DElementIncapacidad incapacidad : mvEltHijosIncapacidad) {
                 xml = incapacidad.getElementForXml();
                 string += xml.length() == 0 ? "" : "\n" + xml;
             }
@@ -58,8 +58,8 @@ public class DElementHorasExtras extends cfd.DElement {
     public java.lang.String getElementForOriginalString() {
         String string = "";
         
-        for (DElementHorasExtra horaExtra : mvEltHijosHorasExtra) {
-            string += horaExtra.getElementForOriginalString();
+        for (DElementIncapacidad incapacidad : mvEltHijosIncapacidad) {
+            string += incapacidad.getElementForOriginalString();
         }
 
         return string;

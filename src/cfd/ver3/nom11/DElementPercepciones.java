@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver3;
+package cfd.ver3.nom11;
 
 import cfd.DAttribute;
 import cfd.DAttributeTypeImporte;
@@ -19,7 +19,7 @@ public class DElementPercepciones extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttTotalGravado;
     protected cfd.DAttributeTypeImporte moAttTotalExento;
 
-    protected java.util.Vector<cfd.ver3.DElementPercepcion> mvEltHijosPercepcion;
+    protected java.util.Vector<cfd.ver3.nom11.DElementPercepcion> mvEltHijosPercepcion;
 
     public DElementPercepciones() {
         super("nomina:Percepciones");
@@ -38,7 +38,7 @@ public class DElementPercepciones extends cfd.DElement {
     public cfd.DAttributeTypeImporte getAttTotalGravado() { return moAttTotalGravado; }
     public cfd.DAttributeTypeImporte getAttTotalExento() { return moAttTotalExento; }
 
-    public java.util.Vector<cfd.ver3.DElementPercepcion> getEltHijosPercepcion() { return mvEltHijosPercepcion; }
+    public java.util.Vector<cfd.ver3.nom11.DElementPercepcion> getEltHijosPercepcion() { return mvEltHijosPercepcion; }
 
     @Override
     public java.lang.String getElementForXml() {

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver3;
+package cfd.ver3.nom11;
 
 import cfd.DAttribute;
 import cfd.DElement;
@@ -13,17 +13,17 @@ import java.util.Vector;
  *
  * @author Juan Barajas
  */
-public class DElementIncapacidades extends cfd.DElement {
+public class DElementHorasExtras extends cfd.DElement {
 
-    protected java.util.Vector<cfd.ver3.DElementIncapacidad> mvEltHijosIncapacidad;
+    protected java.util.Vector<cfd.ver3.nom11.DElementHorasExtra> mvEltHijosHorasExtra;
 
-    public DElementIncapacidades() {
-        super("nomina:Incapacidades");
+    public DElementHorasExtras() {
+        super("nomina:HorasExtras");
 
-        mvEltHijosIncapacidad = new Vector<DElementIncapacidad>();
+        mvEltHijosHorasExtra = new Vector<DElementHorasExtra>();
     }
 
-    public java.util.Vector<cfd.ver3.DElementIncapacidad> getEltHijosIncapacidad() { return mvEltHijosIncapacidad; }
+    public java.util.Vector<cfd.ver3.nom11.DElementHorasExtra> getEltHijosHorasExtra() { return mvEltHijosHorasExtra; }
 
     @Override
     public java.lang.String getElementForXml() {
@@ -39,11 +39,11 @@ public class DElementIncapacidades extends cfd.DElement {
 
         string += ">";
 
-        if (mvEltHijosIncapacidad.isEmpty()) {
+        if (mvEltHijosHorasExtra.isEmpty()) {
             throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
         }
         else {
-            for (DElementIncapacidad incapacidad : mvEltHijosIncapacidad) {
+            for (DElementHorasExtra incapacidad : mvEltHijosHorasExtra) {
                 xml = incapacidad.getElementForXml();
                 string += xml.length() == 0 ? "" : "\n" + xml;
             }
@@ -58,8 +58,8 @@ public class DElementIncapacidades extends cfd.DElement {
     public java.lang.String getElementForOriginalString() {
         String string = "";
         
-        for (DElementIncapacidad incapacidad : mvEltHijosIncapacidad) {
-            string += incapacidad.getElementForOriginalString();
+        for (DElementHorasExtra horaExtra : mvEltHijosHorasExtra) {
+            string += horaExtra.getElementForOriginalString();
         }
 
         return string;

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver3;
+package cfd.ver3.nom12;
 
 import cfd.DAttribute;
 import cfd.DAttributeTypeImporte;
@@ -16,30 +16,29 @@ import java.util.Vector;
  */
 public class DElementDeducciones extends cfd.DElement {
 
-    protected cfd.DAttributeTypeImporte moAttTotalGravado;
-    protected cfd.DAttributeTypeImporte moAttTotalExento;
+    protected cfd.DAttributeTypeImporte moAttTotalOtrasDeducciones;
+    protected cfd.DAttributeTypeImporte moAttTotalImpuestosRetenidos;
 
-    protected java.util.Vector<cfd.ver3.DElementDeduccion> mvEltHijosDeduccion;
+    protected java.util.Vector<cfd.ver3.nom12.DElementDeduccion> mvEltHijosDeduccion;
 
     public DElementDeducciones() {
         super("nomina:Deducciones");
 
-        moAttTotalGravado = new DAttributeTypeImporte("TotalGravado", true);
-        moAttTotalGravado.setCanBeZero(true);
-        moAttTotalExento = new DAttributeTypeImporte("TotalExento", true);
-        moAttTotalExento.setCanBeZero(true);
+        moAttTotalOtrasDeducciones = new DAttributeTypeImporte("TotalOtrasDeducciones", false);
+        moAttTotalOtrasDeducciones.setCanBeZero(true);
+        moAttTotalImpuestosRetenidos = new DAttributeTypeImporte("TotalImpuestosRetenidos", false);
+        moAttTotalImpuestosRetenidos.setCanBeZero(true);
 
-        mvAttributes.add(moAttTotalGravado);
-        mvAttributes.add(moAttTotalExento);
+        mvAttributes.add(moAttTotalOtrasDeducciones);
+        mvAttributes.add(moAttTotalImpuestosRetenidos);
 
         mvEltHijosDeduccion = new Vector<DElementDeduccion>();
     }
 
-    public cfd.DAttributeTypeImporte getAttTotalGravado() { return moAttTotalGravado; }
-    public cfd.DAttributeTypeImporte getAttTotalExento() { return moAttTotalExento; }
+    public cfd.DAttributeTypeImporte getAttTotalOtrasDeducciones() { return moAttTotalOtrasDeducciones; }
+    public cfd.DAttributeTypeImporte getAttTotalImpuestosRetenidos() { return moAttTotalImpuestosRetenidos; }
 
-
-    public java.util.Vector<cfd.ver3.DElementDeduccion> getEltHijosDeduccion() { return mvEltHijosDeduccion; }
+    public java.util.Vector<cfd.ver3.nom12.DElementDeduccion> getEltHijosDeduccion() { return mvEltHijosDeduccion; }
 
     @Override
     public java.lang.String getElementForXml() {
