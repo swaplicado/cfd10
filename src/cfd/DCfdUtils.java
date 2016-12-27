@@ -6,6 +6,7 @@ package cfd;
 
 import cfd.ext.addenda1.DElementAddenda1;
 import cfd.util.DUtilUtils;
+import cfd.ver3.DCfdVer3Consts;
 import java.io.ByteArrayInputStream;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -363,7 +364,7 @@ public abstract class DCfdUtils {
                 
                 versionPayroll = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
                 
-                if (versionPayroll == 1.1) {
+                if (versionPayroll == DCfdVer3Consts.VER_NOM_11) {
                     cfd.ver3.nom11.DElementNomina nomina = new cfd.ver3.nom11.DElementNomina();
 
                     nomina.getAttVersion().setString(versionPayroll + "");
@@ -497,7 +498,7 @@ public abstract class DCfdUtils {
                     }
                     complemento.getElements().add(nomina);
                 }
-                else if (versionPayroll == 1.2) {
+                else if (versionPayroll == DCfdVer3Consts.VER_NOM_12) {
                     cfd.ver3.nom12.DElementNomina nomina = new cfd.ver3.nom12.DElementNomina();
 
                     nomina.getAttVersion().setString(versionPayroll + "");
