@@ -21,7 +21,7 @@ public class DElementSeparacionIndemnizacion extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttIngresoNoAcumulable;
 
     public DElementSeparacionIndemnizacion() {
-        super("nomina:SeparacionIndemnizacion");
+        super("nomina12:SeparacionIndemnizacion");
 
         moAttTotalPagado = new DAttributeTypeImporte("TotalPagado", true);
         moAttTotalPagado.setCanBeZero(true);

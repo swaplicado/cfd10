@@ -26,11 +26,11 @@ public class DElementPercepcion extends cfd.DElement {
     protected java.util.Vector<cfd.ver3.nom12.DElementHorasExtra> mvEltHijosHorasExtra;
 
     public DElementPercepcion() {
-        super("nomina:Percepcion");
+        super("nomina12:Percepcion");
 
         moAttTipoPercepcion = new DAttributeString("TipoPercepcion", true, 3, 3);
-        moAttClave = new DAttributeString("Clave", true, 3, 15);
-        moAttConcepto = new DAttributeString("Concepto", true, 1);
+        moAttClave = new DAttributeString("Clave", true, 3, 15);// Existe un patron
+        moAttConcepto = new DAttributeString("Concepto", true, 1);// Existe un patron
         moAttImporteGravado = new DAttributeTypeImporte("ImporteGravado", true);
         moAttImporteGravado.setCanBeZero(true);
         moAttImporteExento = new DAttributeTypeImporte("ImporteExento", true);

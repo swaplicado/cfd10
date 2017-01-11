@@ -18,7 +18,7 @@ public class DElementIncapacidades extends cfd.DElement {
     protected java.util.Vector<cfd.ver3.nom12.DElementIncapacidad> mvEltHijosIncapacidad;
 
     public DElementIncapacidades() {
-        super("nomina:Incapacidades");
+        super("nomina12:Incapacidades");
 
         mvEltHijosIncapacidad = new Vector<DElementIncapacidad>();
     }

@@ -20,7 +20,7 @@ public class DElementDeduccion extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttImporte;
 
     public DElementDeduccion() {
-        super("nomina:Deduccion");
+        super("nomina12:Deduccion");
 
         moAttTipoDeduccion = new DAttributeString("TipoDeduccion", true, 3, 3);
         moAttClave = new DAttributeString("Clave", true, 3, 15);

@@ -5,9 +5,8 @@
 
 package cfd;
 
-import java.text.DecimalFormat;
-
 import cfd.util.DUtilUtils;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -31,7 +30,7 @@ public class DAttributeDouble extends DAttribute {
         setDecimals(decimals);
     }
 
-    public void setDecimals(int decimals) { mnDecimals = decimals; moDecimalFormat = new DecimalFormat("0." + DUtilUtils.textRepeat("0", mnDecimals)); }
+    public void setDecimals(int decimals) { mnDecimals = decimals; moDecimalFormat = new DecimalFormat((mnDecimals == 0 ? "0" : "0." + DUtilUtils.textRepeat("0", mnDecimals))); }
     public void setDouble(double value) { mdDouble = value; }
     public void setCanBeZero(boolean b) { mbCanBeZero = b; }
     public void setElementWithChildrenToCheck(cfd.DElementWithChildren i) { miElementWithChildrenToCheck = i; }

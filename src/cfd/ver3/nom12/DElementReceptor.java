@@ -39,19 +39,19 @@ public class DElementReceptor extends cfd.DElement {
     protected java.util.Vector<cfd.ver3.nom12.DElementSubcontratacion> mvEltHijosSubcontratacion;
 
     public DElementReceptor() {
-        super("nomina:Receptor");
+        super("nomina12:Receptor");
 
         moAttCurp = new DAttributeString("Curp", true);
         moAttNumSeguridadSocial = new DAttributeString("NumSeguridadSocial", false);
         moAttFechaInicioRelLaboral = new DAttributeDate("FechaInicioRelLaboral", false);
-        moAttAntiguedad = new DAttributeString("Antiguedad", false);
+        moAttAntiguedad = new DAttributeString("Antigüedad", false);// Existe un patron
         moAttTipoContrato = new DAttributeString("TipoContrato", true);
         moAttSindicalizado = new DAttributeString("Sindicalizado", false);
         moAttTipoJornada = new DAttributeString("TipoJornada", false);
         moAttTipoRegimen = new DAttributeString("TipoRegimen", true, 2, 2);
-        moAttNumEmpleado = new DAttributeString("NumEmpleado", true);
-        moAttDepartamento = new DAttributeString("Departamento", false);
-        moAttPuesto = new DAttributeString("Puesto", false);
+        moAttNumEmpleado = new DAttributeString("NumEmpleado", true, 1, 15);// Existe un patron
+        moAttDepartamento = new DAttributeString("Departamento", false);// Existe un patron
+        moAttPuesto = new DAttributeString("Puesto", false);// Existe un patron
         moAttRiesgoPuesto = new DAttributeString("RiesgoPuesto", false);
         moAttPeriodicidadPago = new DAttributeString("PeriodicidadPago", true);
         moAttBanco = new DAttributeString("Banco", false, 3, 3);

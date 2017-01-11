@@ -18,7 +18,7 @@ public class DElementSubcontratacion extends cfd.DElement {
     protected cfd.DAttributeDouble moAttPorcentajeTiempo;
     
     public DElementSubcontratacion() {
-        super("nomina:SubContratacion");
+        super("nomina12:SubContratacion");
 
         moAttRfcLabora = new DAttributeTypeRfc("RfcLabora", true);
         moAttPorcentajeTiempo = new DAttributeDouble("PorcentajeTiempo", true, 3);

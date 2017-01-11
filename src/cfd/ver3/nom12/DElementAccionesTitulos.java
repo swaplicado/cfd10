@@ -17,7 +17,7 @@ public class DElementAccionesTitulos extends cfd.DElement {
     protected cfd.DAttributeDouble moAttPrecioOtrogarse;
 
     public DElementAccionesTitulos() {
-        super("nomina:AccionesOTitulos");
+        super("nomina12:AccionesOTitulos");
 
         moAttValorMercado = new DAttributeDouble("ValorMercado", true, 6);
         moAttPrecioOtrogarse = new DAttributeDouble("PrecioAlOtrogarse", true, 6);

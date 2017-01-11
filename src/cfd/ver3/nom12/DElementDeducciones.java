@@ -22,12 +22,10 @@ public class DElementDeducciones extends cfd.DElement {
     protected java.util.Vector<cfd.ver3.nom12.DElementDeduccion> mvEltHijosDeduccion;
 
     public DElementDeducciones() {
-        super("nomina:Deducciones");
+        super("nomina12:Deducciones");
 
         moAttTotalOtrasDeducciones = new DAttributeTypeImporte("TotalOtrasDeducciones", false);
-        moAttTotalOtrasDeducciones.setCanBeZero(true);
         moAttTotalImpuestosRetenidos = new DAttributeTypeImporte("TotalImpuestosRetenidos", false);
-        moAttTotalImpuestosRetenidos.setCanBeZero(true);
 
         mvAttributes.add(moAttTotalOtrasDeducciones);
         mvAttributes.add(moAttTotalImpuestosRetenidos);

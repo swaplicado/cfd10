@@ -20,7 +20,7 @@ public class DElementJubilacionPensionRetiro extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttIngresoNoAcumulable;
 
     public DElementJubilacionPensionRetiro() {
-        super("nomina:JubilacionPensionRetiro");
+        super("nomina12:JubilacionPensionRetiro");
 
         moAttTotalExhibicion = new DAttributeTypeImporte("TotalUnaExhibicion", false);
         moAttTotalExhibicion.setCanBeZero(true);

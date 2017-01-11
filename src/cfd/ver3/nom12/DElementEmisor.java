@@ -22,10 +22,10 @@ public class DElementEmisor extends cfd.DElement {
     protected cfd.ver3.nom12.DElementEntidadSncf moEltEntidadSncf;
     
     public DElementEmisor() {
-        super("nomina:Emisor");
+        super("nomina12:Emisor");
 
         moAttCurp = new DAttributeString("Curp", false);
-        moAttRegistroPatronal = new DAttributeString("RegistroPatronal", false);
+        moAttRegistroPatronal = new DAttributeString("RegistroPatronal", false, 1, 20); // Existe un patron
         moAttRfcPatronOrigen = new DAttributeTypeRfc("RfcPatronOrigen", false);
 
         mvAttributes.add(moAttCurp);

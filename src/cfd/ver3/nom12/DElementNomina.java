@@ -35,7 +35,7 @@ public class DElementNomina extends cfd.DElement {
     protected cfd.ver3.nom12.DElementIncapacidades moEltIncapacidades;
 
     public DElementNomina() {
-        super("nomina:Nomina");
+        super("nomina12:Nomina");
 
         moAttVersion = new DAttributeString("Version", true);
         moAttVersion.setString("1.2");
@@ -43,14 +43,10 @@ public class DElementNomina extends cfd.DElement {
         moAttFechaPago = new DAttributeDate("FechaPago", true);
         moAttFechaInicialPago = new DAttributeDate("FechaInicialPago", true);
         moAttFechaFinalPago = new DAttributeDate("FechaFinalPago", true);
-        moAttNumDiasPagados = new DAttributeDouble("NumDiasPagados", true, 6);
-        moAttNumDiasPagados.setCanBeZero(true);
+        moAttNumDiasPagados = new DAttributeDouble("NumDiasPagados", true, 3);
         moAttTotalPercepciones = new DAttributeTypeImporte("TotalPercepciones", false);
-        moAttTotalPercepciones.setCanBeZero(true);
         moAttTotalDeducciones = new DAttributeTypeImporte("TotalDeducciones", false);
-        moAttTotalDeducciones.setCanBeZero(true);
         moAttTotalOtrosPagos = new DAttributeTypeImporte("TotalOtrosPagos", false);
-        moAttTotalOtrosPagos.setCanBeZero(true);
 
         mvAttributes.add(moAttVersion);
         mvAttributes.add(moAttTipoNomina);
@@ -101,7 +97,7 @@ public class DElementNomina extends cfd.DElement {
 
         string = "<" + msName + " " +
                 "xsi:schemaLocation=\"http://www.sat.gob.mx/nomina  http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd\" " +
-                "xmlns:nomina=\"http://www.sat.gob.mx/nomina\" ";
+                "xmlns:nomina12=\"http://www.sat.gob.mx/nomina12\" ";
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();

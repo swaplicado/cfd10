@@ -18,7 +18,7 @@ public class DElementEntidadSncf extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttMontoRecursoPropio;
 
     public DElementEntidadSncf() {
-        super("nomina:EntidadSNCF");
+        super("nomina12:EntidadSNCF");
 
         moAttOrigenRecurso = new DAttributeString("OrigenRecurso", true);
         moAttMontoRecursoPropio = new DAttributeTypeImporte("MontoRecursoPropio", false);

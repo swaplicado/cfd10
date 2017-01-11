@@ -21,15 +21,12 @@ public class DElementHorasExtra extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttImportePagado;
 
     public DElementHorasExtra() {
-        super("nomina:HorasExtra");
+        super("nomina12:HorasExtra");
 
         moAttDias = new DAttributeInteger("Dias", true);
-        moAttDias.setCanBeZero(true);
-        moAttTipoHoras = new DAttributeString("TipoHoras", true, 1);
+        moAttTipoHoras = new DAttributeString("TipoHoras", true);
         moAttHorasExtra = new DAttributeInteger("HorasExtra", true);
-        moAttHorasExtra.setCanBeZero(true);
         moAttImportePagado = new DAttributeTypeImporte("ImportePagado", true);
-        moAttImportePagado.setCanBeZero(true);
 
         mvAttributes.add(moAttDias);
         mvAttributes.add(moAttTipoHoras);

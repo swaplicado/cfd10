@@ -16,7 +16,7 @@ public class DElementSubsidioEmpleo extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttSubsidioCausado;
 
     public DElementSubsidioEmpleo() {
-        super("nomina:SubsidioAlEmpleo");
+        super("nomina12:SubsidioAlEmpleo");
 
         moAttSubsidioCausado = new DAttributeTypeImporte("SubsidioCausado", true);
         moAttSubsidioCausado.setCanBeZero(true);

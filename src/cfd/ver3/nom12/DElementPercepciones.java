@@ -27,14 +27,12 @@ public class DElementPercepciones extends cfd.DElement {
     protected cfd.ver3.nom12.DElementSeparacionIndemnizacion moEltSeparacionIndemnizacion;
 
     public DElementPercepciones() {
-        super("nomina:Percepciones");
+        super("nomina12:Percepciones");
 
         moAttTotalSueldos = new DAttributeTypeImporte("TotalSueldos", false);
         moAttTotalSueldos.setCanBeZero(true);
         moAttTotalSeparacionIndemnizacion = new DAttributeTypeImporte("TotalSeparacionIndemnizacion", false);
-        moAttTotalSeparacionIndemnizacion.setCanBeZero(true);
         moAttTotalJubilacionPensionRetiro = new DAttributeTypeImporte("TotalJubilacionPensionRetiro", false);
-        moAttTotalJubilacionPensionRetiro.setCanBeZero(true);
         moAttTotalGravado = new DAttributeTypeImporte("TotalGravado", true);
         moAttTotalGravado.setCanBeZero(true);
         moAttTotalExento = new DAttributeTypeImporte("TotalExento", true);

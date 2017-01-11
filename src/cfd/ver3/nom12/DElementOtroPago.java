@@ -24,7 +24,7 @@ public class DElementOtroPago extends cfd.DElement {
     protected cfd.ver3.nom12.DElementCompensacionSaldosFavor moEltCompensacionSaldosFavor;
 
     public DElementOtroPago() {
-        super("nomina:OtroPago");
+        super("nomina12:OtroPago");
 
         moAttTipoOtroPago = new DAttributeString("TipoOtroPago", true);
         moAttClave = new DAttributeString("Clave", true, 3, 15);

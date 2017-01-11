@@ -19,7 +19,7 @@ public class DElementCompensacionSaldosFavor extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttRemanenteSalFav;
 
     public DElementCompensacionSaldosFavor() {
-        super("nomina:CompensacionSaldosAFavor");
+        super("nomina12:CompensacionSaldosAFavor");
 
         moAttSaldoFavor = new DAttributeTypeImporte("SaldoAFavor", true);
         moAttAño = new DAttributeInteger("Año", true, 4);

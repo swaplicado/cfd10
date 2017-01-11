@@ -46,6 +46,10 @@ public class DElementEmisor extends cfd.DElement {
 
     public cfd.ver3.DElementTipoUbicacionFiscal getEltDomicilioFiscal() { return moEltDomicilioFiscal; }
     public cfd.ver3.DElementTipoUbicacion getEltOpcExpedidoEn() { return moEltOpcExpedidoEn; }
+    
+    public void clearEltDomicilioFiscal() {
+        moEltDomicilioFiscal = null;
+    }
 
     @Override
     public java.lang.String getElementForXml() {
@@ -61,8 +65,10 @@ public class DElementEmisor extends cfd.DElement {
 
         string += ">";
 
-        xml = moEltDomicilioFiscal.getElementForXml();
-        string += xml.length() == 0 ? "" : "\n" + xml;
+        if (moEltDomicilioFiscal != null) {
+            xml = moEltDomicilioFiscal.getElementForXml();
+            string += xml.length() == 0 ? "" : "\n" + xml;
+        }
 
         if (moEltOpcExpedidoEn != null) {
             xml = moEltOpcExpedidoEn.getElementForXml();
@@ -88,7 +94,9 @@ public class DElementEmisor extends cfd.DElement {
     public java.lang.String getElementForOriginalString() {
         String string = super.getElementForOriginalString();    // for element attributes
 
-        string += moEltDomicilioFiscal.getElementForOriginalString();
+        if (moEltDomicilioFiscal != null) {
+            string += moEltDomicilioFiscal.getElementForOriginalString();
+        }
 
         if (moEltOpcExpedidoEn != null) {
             string += moEltOpcExpedidoEn.getElementForOriginalString();

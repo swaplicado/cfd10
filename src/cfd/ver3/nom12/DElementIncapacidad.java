@@ -20,7 +20,7 @@ public class DElementIncapacidad extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttImporteMonetario;
 
     public DElementIncapacidad() {
-        super("nomina:Incapacidad");
+        super("nomina12:Incapacidad");
 
         moAttDiasIncapacidad = new DAttributeInteger("DiasIncapacidad", true, 1);
         moAttTipoIncapacidad = new DAttributeString("TipoIncapacidad", true, 2, 2);
