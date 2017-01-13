@@ -13,7 +13,7 @@ import java.util.HashSet;
  */
 public abstract class DVer3Utils {
     
-    public static final HashSet<Character> ValidKeySet = new HashSet<>();  // SAT pattern for keys as XML-attribute values
+    public static final HashSet<Character> ValidKeySet = new HashSet<>();   // SAT pattern for keys as XML-attribute values
     public static final HashSet<Character> ValidTextSet = new HashSet<>();  // SAT pattern for texts as XML-attribute values
     
     static {
@@ -65,8 +65,8 @@ public abstract class DVer3Utils {
     }
     
     /**
-     * Replaces non valid characters with white space onto provided text for 
-     * SAT defined pattern for keys as XML-attribute values "([A-Z]|[a-z]|[0-9]|Ñ|ñ|!|"|%|&|'|´|-|:|;|>|=|<|@|_|,|{|}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)".
+     * Removes non-valid characters from provided text for SAT defined pattern
+     * for keys as XML-attribute values: "([A-Z]|[a-z]|[0-9]|Ñ|ñ|!|"|%|&|'|´|-|:|;|>|=|<|@|_|,|{|}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)".
      * @param text Text to format.
      * @return Formatted text.
      */
@@ -75,15 +75,17 @@ public abstract class DVer3Utils {
         String value = "";
         
         for (int i = 0; i < array.length; i++) {
-            value += isValidAsciiChar(array[i]) || ValidKeySet.contains(array[i]) ? array[i] : ' ';
+            if (isValidAsciiChar(array[i]) || ValidKeySet.contains(array[i])) {
+                value += array[i];
+            }
         }
         
         return value;
     }
     
     /**
-     * Replaces non valid characters with white space onto provided text for 
-     * SAT defined pattern for texts as XML-attribute values "([A-Z]|[a-z]|[0-9]| |Ñ|ñ|!|"|%|&|'|´|-|:|;|>|=|<|@|_|,|{|}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)".
+     * Removes non-valid characters from provided text for SAT defined pattern
+     * for texts as XML-attribute values: "([A-Z]|[a-z]|[0-9]| |Ñ|ñ|!|"|%|&|'|´|-|:|;|>|=|<|@|_|,|{|}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)".
      * @param text Text to format.
      * @return Formatted text.
      */
@@ -92,7 +94,9 @@ public abstract class DVer3Utils {
         String value = "";
         
         for (int i = 0; i < array.length; i++) {
-            value += isValidAsciiChar(array[i]) || ValidTextSet.contains(array[i]) ? array[i] : ' ';
+            if (isValidAsciiChar(array[i]) || ValidTextSet.contains(array[i])) {
+                value += array[i];
+            }
         }
         
         return value;
