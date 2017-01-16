@@ -533,6 +533,8 @@ public abstract class DCfdUtils {
                     }
                     
                     // Receptor:
+                    String dateInicioLab = "";
+                    
                     
                     if (SXmlUtils.hasChildElement(node, "nomina12:Receptor")) {
                         cfd.ver3.nom12.DElementReceptor receptor = new cfd.ver3.nom12.DElementReceptor();
@@ -542,8 +544,13 @@ public abstract class DCfdUtils {
                         
                         receptor.getAttCurp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Curp", true));
                         receptor.getAttNumSeguridadSocial().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumSeguridadSocial", false));
-                        receptor.getAttFechaInicioRelLaboral().setDate(DUtilUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicioRelLaboral", false)));
-                        receptor.getAttAntiguedad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Antigüedad", true));
+                        
+                        dateInicioLab = SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicioRelLaboral", false);
+                        
+                        if (!dateInicioLab.isEmpty()) {
+                            receptor.getAttFechaInicioRelLaboral().setDate(DUtilUtils.DbmsDateFormatDate.parse(dateInicioLab));
+                        }
+                        receptor.getAttAntiguedad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Antigüedad", false));
                         receptor.getAttTipoContrato().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoContrato", true));
                         receptor.getAttSindicalizado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Sindicalizado", false));
                         receptor.getAttTipoJornada().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoJornada", false));
