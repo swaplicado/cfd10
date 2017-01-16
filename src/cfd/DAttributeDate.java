@@ -43,6 +43,6 @@ public class DAttributeDate extends DAttribute {
     @Override
     public java.lang.String getAttributeForOriginalString() {
         validateValue();
-        return moDateFormat.format(mtDate) + "|";
+        return mtDate == null ? "" : moDateFormat.format(mtDate) + "|";
     }
 }

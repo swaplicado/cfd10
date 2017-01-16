@@ -43,6 +43,6 @@ public class DAttributeDatetime extends DAttribute {
     @Override
     public java.lang.String getAttributeForOriginalString() {
         validateValue();
-        return moDatetimeFormat.format(mtDatetime) + "|";
+        return mtDatetime == null ? "" : moDatetimeFormat.format(mtDatetime) + "|";
     }
 }
