@@ -639,17 +639,19 @@ public abstract class DCfdUtils {
                             otroPago.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
                             otroPago.getAttImporte().setDouble(DUtilUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
                             
-                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:SubsidioAlEmpleo");
+                            if (SXmlUtils.hasChildElement(node, "nomina12:SubsidioAlEmpleo")) {
+                                nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:SubsidioAlEmpleo");
 
-                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
-                                cfd.ver3.nom12.DElementSubsidioEmpleo subsidio = new cfd.ver3.nom12.DElementSubsidioEmpleo();
-                                
-                                nodeChild = nodeChildsAux.get(sub);
-                                namedNodeMapChild = nodeChild.getAttributes();
+                                for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
+                                    cfd.ver3.nom12.DElementSubsidioEmpleo subsidio = new cfd.ver3.nom12.DElementSubsidioEmpleo();
 
-                                subsidio.getAttSubsidioCausado().setDouble(DUtilUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
-                                
-                                otroPago.setEltSubsidioEmpleo(subsidio);
+                                    nodeChild = nodeChildsAux.get(sub);
+                                    namedNodeMapChild = nodeChild.getAttributes();
+
+                                    subsidio.getAttSubsidioCausado().setDouble(DUtilUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
+
+                                    otroPago.setEltSubsidioEmpleo(subsidio);
+                                }
                             }
                             
                             otrosPagos.getEltHijosOtroPago().add(otroPago);
