@@ -82,7 +82,7 @@ public final class DCfd {
         return fileName;
     }
 
-    public String createFileName(cfd.ver3.DElementComprobante comprobante) {
+    public String createFileName(cfd.ver32.DElementComprobante comprobante) {
         String fileName = "";
 
         fileName += comprobante.getEltEmisor().getAttRfc().getString() + "_";
@@ -125,7 +125,7 @@ public final class DCfd {
         return result;
     }
 
-    public int write(cfd.ver3.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
+    public int write(cfd.ver32.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
         int result = 0;
         String xml = "";
         String xmlFileName = "";
@@ -266,7 +266,7 @@ public final class DCfd {
     }
     */
 
-    public static BufferedImage createQrCodeBufferedImage(final String rfcEmisor, final String rfcReceptor, final double total, final String uuid) {
+    public static BufferedImage createQrCodeBufferedImageCfdi32(final String rfcEmisor, final String rfcReceptor, final double total, final String uuid) {
         int x = 0;
         int y = 0;
         int grayValue = 0;
@@ -280,6 +280,44 @@ public final class DCfd {
         data += "&rr=" + rfcReceptor;
         data += "&tt=" + decimalFormat.format(total);
         data += "&id=" + uuid;
+
+        try {
+            bufferedImage = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
+            bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 140, 140);
+
+            for (y = 0; y < 140; y++) {
+                for (x = 0; x < 140; x++) {
+                     grayValue = (bitMatrix.get(x, y) ? 1 : 0) & 0xff;
+                     bufferedImage.setRGB(x, y, (grayValue == 0 ? 0xFFFFFF : 0));
+                }
+            }
+        }
+        catch (WriterException e) {
+            e.printStackTrace(System.err);
+        }
+        catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+
+        return bufferedImage;
+    }
+    
+    public static BufferedImage createQrCodeBufferedImageCfdi33(final String url, final String rfcEmisor, final String rfcReceptor, final double total, final String uuid, final String selloEmisor) {
+        int x = 0;
+        int y = 0;
+        int grayValue = 0;
+        String data  = "";
+        DecimalFormat decimalFormat = new DecimalFormat("0000000000.000000");
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = null;
+        BufferedImage bufferedImage = null;
+
+        data += url;
+        data += "&id=" + uuid;
+        data += "?re=" + rfcEmisor;
+        data += "&rr=" + rfcReceptor;
+        data += "&tt=" + decimalFormat.format(total);
+        data += "&fe=" + selloEmisor;
 
         try {
             bufferedImage = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
