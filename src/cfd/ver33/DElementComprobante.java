@@ -42,7 +42,7 @@ public class DElementComprobante extends cfd.DElement {
     protected cfd.ver33.DElementReceptor moEltReceptor;
     protected cfd.ver33.DElementConceptos moEltConceptos;
     protected cfd.ver33.DElementImpuestos moEltImpuestos;
-    protected cfd.ver33.DElementComplemento moEltOpcComplemento;
+    protected cfd.ver32.DElementComplemento moEltOpcComplemento;
     protected cfd.ver32.DElementAddenda moEltOpcAddenda;
 
     public DElementComprobante() {
@@ -106,7 +106,7 @@ public class DElementComprobante extends cfd.DElement {
     public void setEltOpcCfdiRelacionados(cfd.ver33.DElementCfdiRelacionados o) { moEltOpcCfdiRelacionados = o; }
     public void setEltEmisor(cfd.ver33.DElementEmisor o) { moEltEmisor = o; }
     public void setEltReceptor(cfd.ver33.DElementReceptor o) { moEltReceptor = o; }
-    public void setEltOpcComplemento(cfd.ver33.DElementComplemento o) { moEltOpcComplemento = o; }
+    public void setEltOpcComplemento(cfd.ver32.DElementComplemento o) { moEltOpcComplemento = o; }
     public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda) { moEltOpcAddenda = addenda; }
     public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddendaXmlLocationNs = addendaXmlLocationNs; }
 
@@ -135,7 +135,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver33.DElementReceptor getEltReceptor() { return moEltReceptor; }
     public cfd.ver33.DElementConceptos getEltConceptos() { return moEltConceptos; }
     public cfd.ver33.DElementImpuestos getEltImpuestos() { return moEltImpuestos; }
-    public cfd.ver33.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
+    public cfd.ver32.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
     public cfd.ver32.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
 
     @Override

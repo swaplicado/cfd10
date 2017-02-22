@@ -1336,7 +1336,7 @@ public abstract class DCfdUtils {
         moOptions = comprobante.getAttMetodoPago().moOptions;
 
         for (int i = 0; i < moOptions.size(); i++) {
-            if (((String) moOptions.values().toArray()[i]).compareTo(SXmlUtils.extractAttributeValue(namedNodeMap, "MetodoDePago", true)) == 0) {
+            if (((String) moOptions.values().toArray()[i]).compareTo(SXmlUtils.extractAttributeValue(namedNodeMap, "MetodoPago", true)) == 0) {
                 comprobante.getAttMetodoPago().setOption((Integer) moOptions.keySet().toArray()[i]);
                 break;
             }
@@ -1561,7 +1561,7 @@ public abstract class DCfdUtils {
 
         // Child elements of element 'cfdi:Complemento':
         
-        cfd.ver33.DElementComplemento complemento = new cfd.ver33.DElementComplemento();
+        cfd.ver32.DElementComplemento complemento = new cfd.ver32.DElementComplemento();
 
         node = SXmlUtils.extractElements(doc, "cfdi:Complemento").item(0);
 

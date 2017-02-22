@@ -17,9 +17,9 @@ public class DElementComercioExterior extends cfd.DElement {
     protected cfd.DAttributeString moAttClaveDePedimento;
     protected cfd.DAttributeInteger moAttCertificadoOrigen;
     protected cfd.DAttributeString moAttNumCertificadoOrigen;
-    protected cfd.DAttributeInteger moAttNumeroExportadorConfiable;
+    protected cfd.DAttributeString moAttNumeroExportadorConfiable;
     protected cfd.DAttributeString moAttIncoterm;
-    protected cfd.DAttributeString moAttSubdivision;
+    protected cfd.DAttributeInteger moAttSubdivision;
     protected cfd.DAttributeString moAttObservaciones;
     protected cfd.DAttributeTypeImporte moAttTipoCambioUSD;
     protected cfd.DAttributeTypeImporte moAttTotalUSD;
@@ -40,9 +40,9 @@ public class DElementComercioExterior extends cfd.DElement {
         moAttClaveDePedimento = new DAttributeString("ClaveDePedimento", false);
         moAttCertificadoOrigen = new DAttributeInteger("CertificadoOrigen", false);
         moAttNumCertificadoOrigen = new DAttributeString("NumCertificadoOrigen", false);
-        moAttNumeroExportadorConfiable = new DAttributeInteger("NumeroExportadorConfiable", false);
+        moAttNumeroExportadorConfiable = new DAttributeString("NumeroExportadorConfiable", false);
         moAttIncoterm = new DAttributeString("Incoterm", false);
-        moAttSubdivision = new DAttributeString("Subdivision", false);
+        moAttSubdivision = new DAttributeInteger("Subdivision", false);
         moAttObservaciones = new DAttributeString("Observaciones", false);
         moAttTipoCambioUSD = new DAttributeTypeImporte("TipoCambioUSD", false);
         moAttTotalUSD = new DAttributeTypeImporte("TotalUSD", false);
@@ -79,9 +79,9 @@ public class DElementComercioExterior extends cfd.DElement {
     public cfd.DAttributeString getAttClaveDePedimento() { return moAttClaveDePedimento; }
     public cfd.DAttributeInteger getAttCertificadoOrigen() { return moAttCertificadoOrigen; }
     public cfd.DAttributeString getAttNumCertificadoOrigen() { return moAttNumCertificadoOrigen; }
-    public cfd.DAttributeInteger getAttNumeroExportadorConfiable() { return moAttNumeroExportadorConfiable; }
+    public cfd.DAttributeString getAttNumeroExportadorConfiable() { return moAttNumeroExportadorConfiable; }
     public cfd.DAttributeString getAttIncoterm() { return moAttIncoterm; }
-    public cfd.DAttributeString getAttSubdivision() { return moAttSubdivision; }
+    public cfd.DAttributeInteger getAttSubdivision() { return moAttSubdivision; }
     public cfd.DAttributeString getAttObservaciones() { return moAttObservaciones; }
     public cfd.DAttributeTypeImporte getAttTipoCambioUSD() { return moAttTipoCambioUSD; }
     public cfd.DAttributeTypeImporte getAttTotalUSD() { return moAttTotalUSD; }
@@ -98,8 +98,8 @@ public class DElementComercioExterior extends cfd.DElement {
         String string = "";
 
         string = "<" + msName + " " +
-                "xsi:schemaLocation=\"http://www.sat.gob.mx/nomina  http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina11.xsd\" " +
-                "xmlns:nomina=\"http://www.sat.gob.mx/nomina\" ";
+                "xsi:schemaLocation=\"http://www.sat.gob.mx/ComercioExterior11  http://www.sat.gob.mx/sitio_internet/cfd/ComercioExterior11/ComercioExterior11.xsd\" " +
+                "xmlns:cce11=\"http://www.sat.gob.mx/ComercioExterior11\" ";
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();

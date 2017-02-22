@@ -58,4 +58,17 @@ public abstract class DElementParent extends cfd.DElement {
 
         return string;
     }
+    
+    public cfd.DElement extractChildElements(final String name) throws Exception {
+        cfd.DElement element = null;
+        
+        for (DElement elementRow : mvElements) {
+            if (elementRow.getName().compareTo(name) == 0) {
+                element = elementRow;
+                break;
+            }
+        }
+        
+        return element;
+    }
 }
