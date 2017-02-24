@@ -43,6 +43,7 @@ public class DElementComercioExterior extends cfd.DElement {
         moAttNumeroExportadorConfiable = new DAttributeString("NumeroExportadorConfiable", false);
         moAttIncoterm = new DAttributeString("Incoterm", false);
         moAttSubdivision = new DAttributeInteger("Subdivision", false);
+        moAttSubdivision.setCanBeZero(true);
         moAttObservaciones = new DAttributeString("Observaciones", false);
         moAttTipoCambioUSD = new DAttributeTypeImporte("TipoCambioUSD", false);
         moAttTotalUSD = new DAttributeTypeImporte("TotalUSD", false);

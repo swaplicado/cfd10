@@ -4,7 +4,6 @@ import cfd.DAttribute;
 import cfd.DAttributeDatetime;
 import cfd.DAttributeOptionCondicionesPago;
 import cfd.DAttributeOptionMetodoPago;
-import cfd.DAttributeOptionTipoComprobante;
 import cfd.DAttributeString;
 import cfd.DAttributeTipoCambio;
 import cfd.DAttributeTypeImporte;
@@ -32,7 +31,7 @@ public class DElementComprobante extends cfd.DElement {
     protected cfd.DAttributeString moAttMoneda;
     protected cfd.DAttributeTipoCambio moAttTipoCambio;
     protected cfd.DAttributeTypeImporte moAttTotal;
-    protected cfd.DAttributeOptionTipoComprobante moAttTipoDeComprobante;
+    protected cfd.ver33.DAttributeOptionTipoComprobante moAttTipoDeComprobante;
     protected cfd.DAttributeOptionMetodoPago moAttMetodoPago;
     protected cfd.DAttributeString moAttLugarExpedicion;
     protected cfd.DAttributeString moAttConfirmacion;
@@ -70,7 +69,7 @@ public class DElementComprobante extends cfd.DElement {
         moAttTipoCambio = new DAttributeTipoCambio("TipoCambio", false);
         moAttTotal = new DAttributeTypeImporte("Total", true);
         moAttTotal.setCanBeZero(true);
-        moAttTipoDeComprobante = new DAttributeOptionTipoComprobante("TipoDeComprobante", true);
+        moAttTipoDeComprobante = new cfd.ver33.DAttributeOptionTipoComprobante("TipoDeComprobante", true);
         moAttMetodoPago = new DAttributeOptionMetodoPago("MetodoPago", false);
         moAttLugarExpedicion = new DAttributeString("LugarExpedicion", true);
         moAttConfirmacion = new DAttributeString("Confirmacion", false);
@@ -125,7 +124,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.DAttributeTipoCambio getAttTipoCambio() { return moAttTipoCambio; }
     public cfd.DAttributeString getAttMoneda() { return moAttMoneda; }
     public cfd.DAttributeTypeImporte getAttTotal() { return moAttTotal; }
-    public cfd.DAttributeOptionTipoComprobante getAttTipoDeComprobante() { return moAttTipoDeComprobante; }
+    public cfd.ver33.DAttributeOptionTipoComprobante getAttTipoDeComprobante() { return moAttTipoDeComprobante; }
     public cfd.DAttributeOptionMetodoPago getAttMetodoPago() { return moAttMetodoPago; }
     public cfd.DAttributeString getAttLugarExpedicion() { return moAttLugarExpedicion; }
     public cfd.DAttributeString getAttConfirmacion() { return moAttConfirmacion; }

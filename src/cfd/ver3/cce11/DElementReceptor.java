@@ -27,6 +27,10 @@ public class DElementReceptor extends cfd.DElement {
     public cfd.DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
 
     public cfd.ver32.DElementTipoUbicacion getEltDomicilio() { return moEltDomicilio; }
+    
+    public void clearEltDomicilio() {
+        moEltDomicilio = null;
+    }
 
     @Override
     public java.lang.String getElementForXml() {
@@ -42,8 +46,10 @@ public class DElementReceptor extends cfd.DElement {
 
         string += ">";
 
-        xml = moEltDomicilio.getElementForXml();
-        string += xml.length() == 0 ? "" : "\n" + xml;
+        if (moEltDomicilio != null) {
+            xml = moEltDomicilio.getElementForXml();
+            string += xml.length() == 0 ? "" : "\n" + xml;
+        }
 
         string += "\n</" + msName + ">";
 
@@ -54,7 +60,9 @@ public class DElementReceptor extends cfd.DElement {
     public java.lang.String getElementForOriginalString() {
         String string = super.getElementForOriginalString();    // for element attributes
 
-        string += moEltDomicilio.getElementForOriginalString();
+        if (moEltDomicilio != null) {
+            string += moEltDomicilio.getElementForOriginalString();
+        }
 
         return string;
     }

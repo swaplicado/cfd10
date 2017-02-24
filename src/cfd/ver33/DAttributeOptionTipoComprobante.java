@@ -3,11 +3,13 @@
  * All rights reserved.
  */
 
-package cfd;
+package cfd.ver33;
+
+import cfd.DAttributeStringOption;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez
+ * @author Juan Barajas
  */
 public class DAttributeOptionTipoComprobante extends DAttributeStringOption {
 
@@ -19,9 +21,9 @@ public class DAttributeOptionTipoComprobante extends DAttributeStringOption {
     public DAttributeOptionTipoComprobante(java.lang.String name, boolean isRequired) {
         super(name, isRequired);
 
-        moOptions.put(CFD_INGRESO, "ingreso");
-        moOptions.put(CFD_EGRESO, "egreso");
-        moOptions.put(CFD_TRASLADO, "traslado");
-        moOptions.put(CFD_NOMINA, "egreso");
+        moOptions.put(CFD_INGRESO, "I");
+        moOptions.put(CFD_EGRESO, "E");
+        moOptions.put(CFD_TRASLADO, "T");
+        moOptions.put(CFD_NOMINA, "N");
     }
 }

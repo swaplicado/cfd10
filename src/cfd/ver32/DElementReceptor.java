@@ -17,6 +17,7 @@ public class DElementReceptor extends cfd.DElement {
 
     protected cfd.DAttributeTypeRfc moAttRfc;
     protected cfd.DAttributeString moAttNombre;
+    protected cfd.DAttributeString moAttNumRegIdTrib;
 
     protected cfd.ver32.DElementTipoUbicacion moEltDomicilio;
 
@@ -25,15 +26,18 @@ public class DElementReceptor extends cfd.DElement {
 
         moAttRfc = new DAttributeTypeRfc("rfc", true);
         moAttNombre = new DAttributeString("nombre", false, 1);
+        moAttNumRegIdTrib = new DAttributeString("NumRegIdTrib", false);
 
         mvAttributes.add(moAttRfc);
         mvAttributes.add(moAttNombre);
+        mvAttributes.add(moAttNumRegIdTrib);
 
         moEltDomicilio = new DElementTipoUbicacion("cfdi:Domicilio");
     }
 
     public cfd.DAttributeTypeRfc getAttRfc() { return moAttRfc; }
     public cfd.DAttributeString getAttNombre() { return moAttNombre; }
+    public cfd.DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
 
     public cfd.ver32.DElementTipoUbicacion getEltDomicilio() { return moEltDomicilio; }
 
