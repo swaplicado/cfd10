@@ -21,8 +21,8 @@ public class DElementComercioExterior extends cfd.DElement {
     protected cfd.DAttributeString moAttIncoterm;
     protected cfd.DAttributeInteger moAttSubdivision;
     protected cfd.DAttributeString moAttObservaciones;
-    protected cfd.DAttributeTypeImporte moAttTipoCambioUsd;
-    protected cfd.DAttributeTypeImporte moAttTotalUsd;
+    protected cfd.DAttributeTypeImporte moAttTipoCambioUSD;
+    protected cfd.DAttributeTypeImporte moAttTotalUSD;
 
     protected cfd.ver3.cce11.DElementEmisor moEltEmisor;
     protected cfd.ver3.cce11.DElementPropietario moEltPropietario;
@@ -45,8 +45,8 @@ public class DElementComercioExterior extends cfd.DElement {
         moAttSubdivision = new DAttributeInteger("Subdivision", false);
         moAttSubdivision.setCanBeZero(true);
         moAttObservaciones = new DAttributeString("Observaciones", false);
-        moAttTipoCambioUsd = new DAttributeTypeImporte("TipoCambioUSD", false);
-        moAttTotalUsd = new DAttributeTypeImporte("TotalUSD", false);
+        moAttTipoCambioUSD = new DAttributeTypeImporte("TipoCambioUSD", false);
+        moAttTotalUSD = new DAttributeTypeImporte("TotalUSD", false);
 
         mvAttributes.add(moAttVersion);
         mvAttributes.add(moAttMotivoTraslado);
@@ -58,8 +58,8 @@ public class DElementComercioExterior extends cfd.DElement {
         mvAttributes.add(moAttIncoterm);
         mvAttributes.add(moAttSubdivision);
         mvAttributes.add(moAttObservaciones);
-        mvAttributes.add(moAttTipoCambioUsd);
-        mvAttributes.add(moAttTotalUsd);
+        mvAttributes.add(moAttTipoCambioUSD);
+        mvAttributes.add(moAttTotalUSD);
 
         moEltEmisor = null;
         moEltPropietario = null;
@@ -84,8 +84,8 @@ public class DElementComercioExterior extends cfd.DElement {
     public cfd.DAttributeString getAttIncoterm() { return moAttIncoterm; }
     public cfd.DAttributeInteger getAttSubdivision() { return moAttSubdivision; }
     public cfd.DAttributeString getAttObservaciones() { return moAttObservaciones; }
-    public cfd.DAttributeTypeImporte getAttTipoCambioUsd() { return moAttTipoCambioUsd; }
-    public cfd.DAttributeTypeImporte getAttTotalUsd() { return moAttTotalUsd; }
+    public cfd.DAttributeTypeImporte getAttTipoCambioUSD() { return moAttTipoCambioUSD; }
+    public cfd.DAttributeTypeImporte getAttTotalUSD() { return moAttTotalUSD; }
 
     public cfd.ver3.cce11.DElementEmisor getEltEmisor() { return moEltEmisor; }
     public cfd.ver3.cce11.DElementPropietario getEltPropietario() { return moEltPropietario; }
@@ -153,8 +153,8 @@ public class DElementComercioExterior extends cfd.DElement {
         string += moAttIncoterm.getAttributeForOriginalString();
         string += moAttSubdivision.getAttributeForOriginalString();
         string += moAttObservaciones.getAttributeForOriginalString();
-        string += moAttTipoCambioUsd.getAttributeForOriginalString();
-        string += moAttTotalUsd.getAttributeForOriginalString();
+        string += moAttTipoCambioUSD.getAttributeForOriginalString();
+        string += moAttTotalUSD.getAttributeForOriginalString();
 
         if (moEltEmisor != null) {
             string += moEltEmisor.getElementForOriginalString();
