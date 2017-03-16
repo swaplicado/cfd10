@@ -5,10 +5,10 @@
 
 package cfd.ver3.cce11;
 
-import java.util.Vector;
-
 import cfd.DAttribute;
 import cfd.DElement;
+import java.util.Vector;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -26,6 +26,25 @@ public class DElementMercancias extends cfd.DElement {
 
     public java.util.Vector<cfd.ver3.cce11.DElementMercancia> getEltHijosMercancia() { return mvEltHijosMercancia; }
 
+    public void addEltHijosMercancia(cfd.ver3.cce11.DElementMercancia elementMercancia) {
+        boolean exists = false;
+        
+        for (cfd.ver3.cce11.DElementMercancia mercancia : mvEltHijosMercancia) {
+            if (mercancia.getAttNoIdentificacion().getString().compareTo(elementMercancia.getAttNoIdentificacion().getString()) == 0 &&
+                    mercancia.getAttFraccionArancelaria().getString().compareTo(elementMercancia.getAttFraccionArancelaria().getString()) == 0) {
+                mercancia.getAttCantidadAduana().setDouble(SLibUtils.round((mercancia.getAttCantidadAduana().getDouble() + elementMercancia.getAttCantidadAduana().getDouble()), elementMercancia.getAttCantidadAduana().getDecimals()));
+                mercancia.getAttValorDolares().setDouble(SLibUtils.round((mercancia.getAttValorDolares().getDouble() + elementMercancia.getAttValorDolares().getDouble()), SLibUtils.getDecimalFormatAmount().getMaximumFractionDigits()));
+                exists = true;
+                break;
+            }
+        }
+        
+        if (!exists) {
+            mvEltHijosMercancia.add(elementMercancia);
+        }
+    }
+    
+    
     @Override
     public java.lang.String getElementForXml() {
         String xml = "";
