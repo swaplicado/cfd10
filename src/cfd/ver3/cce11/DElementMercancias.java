@@ -26,7 +26,11 @@ public class DElementMercancias extends cfd.DElement {
 
     public java.util.Vector<cfd.ver3.cce11.DElementMercancia> getEltHijosMercancia() { return mvEltHijosMercancia; }
 
-    public void addEltHijosMercancia(cfd.ver3.cce11.DElementMercancia elementMercancia) {
+    /**
+     * Add one element Element Mercancia type to vector, if not exists.
+     * @param elementMercancia element to add.
+     */
+    public void addMercancia(cfd.ver3.cce11.DElementMercancia elementMercancia) {
         boolean exists = false;
         
         for (cfd.ver3.cce11.DElementMercancia mercancia : mvEltHijosMercancia) {

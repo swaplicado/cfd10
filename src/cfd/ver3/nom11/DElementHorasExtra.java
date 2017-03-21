@@ -5,7 +5,6 @@
 
 package cfd.ver3.nom11;
 
-import cfd.DAttribute;
 import cfd.DAttributeInteger;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
