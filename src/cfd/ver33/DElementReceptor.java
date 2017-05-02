@@ -1,6 +1,5 @@
 package cfd.ver33;
 
-import cfd.DAttribute;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeRfc;
 
@@ -37,21 +36,4 @@ public class DElementReceptor extends cfd.DElement {
     public cfd.DAttributeString getAttResidenciaFiscal() { return moAttResidenciaFiscal; }
     public cfd.DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
     public cfd.DAttributeString getAttUsoCFDI() { return moAttUsoCfdi; }
-    
-    @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
-        }
-
-        string += ">\n</" + msName + ">";
-
-        return string;
-    }
 }

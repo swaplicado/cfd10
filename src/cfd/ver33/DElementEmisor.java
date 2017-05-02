@@ -1,6 +1,5 @@
 package cfd.ver33;
 
-import cfd.DAttribute;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeRfc;
 
@@ -29,21 +28,4 @@ public class DElementEmisor extends cfd.DElement {
     public cfd.DAttributeTypeRfc getAttRfc() { return moAttRfc; }
     public cfd.DAttributeString getAttNombre() { return moAttNombre; }
     public cfd.DAttributeString getAttRegimenFiscal() { return moAttRegimenFiscal; }
-
-    @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
-        }
-        
-        string += ">\n</" + msName + ">";
-
-        return string;
-    }
 }
