@@ -6,16 +6,24 @@
 package cfd.util;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.RoundingMode;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 /**
  *
@@ -129,7 +137,15 @@ public abstract class DUtilUtils {
     }
 
     public static java.lang.String generateOriginalString(final cfd.DElement rootElement) {
-        return "||" + rootElement.getElementForOriginalString() + "|";
+        String string = "";
+        
+        if (rootElement instanceof cfd.ver32.DElementComprobante) {
+            string = "||" + rootElement.getElementForOriginalString() + "|";
+        }
+        else if (rootElement instanceof cfd.ver33.DElementComprobante) {
+            string = rootElement.getElementForOriginalString();
+        }
+        return string;
     }
 
     public static int getYear(java.util.Date date) {
@@ -163,5 +179,27 @@ public abstract class DUtilUtils {
         br.close();
 
         return xml;
+    }
+    
+    public static String createOriginalString(final String xml, final String xsltUrl) throws Exception {
+        
+        URL u;
+        OutputStream os = new ByteArrayOutputStream(xml.length());
+        
+        // cargar el archivo XSLT
+        u = new URL(xsltUrl);
+        
+        // cargar el CFDI
+        StreamSource sourceXML = new StreamSource(new ByteArrayInputStream(xml.getBytes()));
+ 
+        // crear el procesador XSLT que nos ayudará a generar la cadena original
+        // con base en las reglas del archivo XSLT
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Transformer transformer = tFactory.newTransformer(new StreamSource(u.openStream()));
+ 
+        // aplicar las reglas del XSLT con los datos del CFDI y escribir el resultado en output
+        transformer.transform(sourceXML, new StreamResult(os));
+        
+        return os.toString();
     }
 }

@@ -7,7 +7,11 @@ import cfd.DAttributeOptionMetodoPagoClave;
 import cfd.DAttributeString;
 import cfd.DAttributeTipoCambio;
 import cfd.DAttributeTypeImporte;
+import cfd.DCfdConsts;
 import cfd.ext.addenda1.DElementAddenda1;
+import cfd.util.DUtilUtils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -139,6 +143,10 @@ public class DElementComprobante extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForXml() {
+        return getElementForXml(false);
+    }
+    
+    private java.lang.String getElementForXml(final boolean isForOriginalString) {
         String aux = "";
         String xml = "";
 
@@ -150,9 +158,19 @@ public class DElementComprobante extends cfd.DElement {
                 (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[1]);
 
         for (DAttribute attribute : mvAttributes) {
-            aux = attribute.getAttributeForXml();
-            if (!aux.isEmpty()) {
-                xml += " " + aux;
+            if (isForOriginalString) {
+                if (attribute.getName().compareTo(moAttSello.getName()) != 0 && attribute.getName().compareTo(moAttCertificado.getName()) != 0) {
+                    aux = attribute.getAttributeForXml();
+                    if (!aux.isEmpty()) {
+                        xml += " " + aux;
+                    }
+                }
+            }
+            else {
+                aux = attribute.getAttributeForXml();
+                if (!aux.isEmpty()) {
+                    xml += " " + aux;
+                }
             }
         }
 
@@ -193,37 +211,14 @@ public class DElementComprobante extends cfd.DElement {
     @Override
     public java.lang.String getElementForOriginalString() {
         String string = "";
-
-        string += moAttVersion.getAttributeForOriginalString();
-        string += moAttSerie.getAttributeForOriginalString();
-        string += moAttFolio.getAttributeForOriginalString();
-        string += moAttFecha.getAttributeForOriginalString();
-        string += moAttFormaPago.getAttributeForOriginalString();
-        string += moAttNoCertificado.getAttributeForOriginalString();
-        string += moAttCondicionesDePago.getAttributeForOriginalString();
-        string += moAttSubTotal.getAttributeForOriginalString();
-        string += moAttDescuento.getAttributeForOriginalString();
-        string += moAttMoneda.getAttributeForOriginalString();
-        string += moAttTipoCambio.getAttributeForOriginalString();
-        string += moAttTotal.getAttributeForOriginalString();
-        string += moAttTipoDeComprobante.getAttributeForOriginalString();
-        string += moAttMetodoPago.getAttributeForOriginalString();
-        string += moAttLugarExpedicion.getAttributeForOriginalString();
-        string += moAttConfirmacion.getAttributeForOriginalString();
-
-        if (moEltOpcCfdiRelacionados != null) {
-            string += moEltOpcCfdiRelacionados.getElementForOriginalString();
+        
+        try {
+            string = DUtilUtils.createOriginalString(getElementForXml(true), DCfdConsts.URL_XSLT_CFDI_VER_33);
+        } 
+        catch (Exception ex) {
+            Logger.getLogger(DElementComprobante.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        string += moEltEmisor.getElementForOriginalString();
-        string += moEltReceptor.getElementForOriginalString();
-        string += moEltConceptos.getElementForOriginalString();
-        string += moEltImpuestos.getElementForOriginalString();
-
-        if (moEltOpcComplemento != null) {
-            string += moEltOpcComplemento.getElementForOriginalString();
-        }
-
         return string;
     }
 }

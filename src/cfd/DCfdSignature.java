@@ -5,24 +5,18 @@
 
 package cfd;
 
-import java.io.BufferedWriter;      // not used, but preserved only for reference
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;    // not used, but preserved only for reference
-import java.io.OutputStreamWriter;  // not used, but preserved only for reference
 import java.security.KeyFactory;
 import java.security.Signature;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.text.DecimalFormat;     // not used, but preserved only for reference
-
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Base64;
 
-import cfd.util.DUtilUtils;         // not used, but preserved only for reference
 
 /**
  *
@@ -45,24 +39,24 @@ public class DCfdSignature {
     private java.security.Signature moSignatureMd5WithRsa;
     private java.security.Signature moSignatureSha1WithRsa;
 
-    public DCfdSignature(byte[] bytesPrivateKey, byte[] bytesPublicKey, java.lang.String certNumber) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
-        initMembers(certNumber);
+    public DCfdSignature(byte[] bytesPrivateKey, byte[] bytesPublicKey, java.lang.String certNumber, float xmlType) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
+        initMembers(certNumber, xmlType);
         loadKeyPair(bytesPrivateKey, bytesPublicKey);
     }
 
-    public DCfdSignature(java.lang.String fileNamePrivateKey, java.lang.String fileNamePublicKey, java.lang.String certNumber) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
-        initMembers(certNumber);
+    public DCfdSignature(java.lang.String fileNamePrivateKey, java.lang.String fileNamePublicKey, java.lang.String certNumber, float xmlType) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
+        initMembers(certNumber, xmlType);
         loadKeyPair(readKey(fileNamePrivateKey), readKey(fileNamePublicKey));
     }
 
-    private void initMembers(java.lang.String certNumber) throws java.security.NoSuchAlgorithmException {
+    private void initMembers(java.lang.String certNumber, float xmlType) throws java.security.NoSuchAlgorithmException {
         msCertBase64 = "";
         msCertNumber = certNumber;
         miPrivateKey = null;
         miPublicKey = null;
         mtDate = null;
         mtExpirationDate = null;
-
+        
         /* Signature in 2 steps does not pass SAT validation.
          RSA encryption means to require ID of the hash algorithm also encrypted
         moDigestMd5 = MessageDigest.getInstance("MD5");
@@ -79,7 +73,13 @@ public class DCfdSignature {
         */
 
         moSignatureMd5WithRsa = Signature.getInstance("MD5withRSA");
-        moSignatureSha1WithRsa = Signature.getInstance("SHA1withRSA");
+        if (xmlType == DCfdConsts.CFDI_VER_32) {
+            moSignatureSha1WithRsa = Signature.getInstance("SHA1withRSA");
+        }
+        else if (xmlType == DCfdConsts.CFDI_VER_33) {
+            moSignatureSha1WithRsa = Signature.getInstance("SHA256withRSA");
+        }
+        
         //System.out.println("Signature Provider: " + moSignatureSha1WithRsa.getProvider());
         //System.out.println("Signature Algorithm: " + moSignatureSha1WithRsa.getAlgorithm());
     }

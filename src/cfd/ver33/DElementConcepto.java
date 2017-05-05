@@ -41,8 +41,7 @@ public class DElementConcepto extends cfd.DElement {
         moAttValorUnitario.setCanBeZero(true);
         moAttImporte = new DAttributeTypeImporte("Importe", true);
         moAttImporte.setCanBeZero(true);
-        moAttDescuento = new DAttributeTypeImporte("Descuento", true);
-        moAttDescuento.setCanBeZero(true);
+        moAttDescuento = new DAttributeTypeImporte("Descuento", false);
 
         mvAttributes.add(moAttClaveProdServ);
         mvAttributes.add(moAttNoIdentificacion);
