@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -7,7 +7,7 @@ package cfd.ext.bachoco;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 
 public class DElementPaymentIdentification extends cfd.DElementParent {
@@ -29,7 +29,7 @@ public class DElementPaymentIdentification extends cfd.DElementParent {
     public cfd.ext.bachoco.DElementCreatorIdentification getEltCreatorIdentification() { return moEltCreatorIdentification; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

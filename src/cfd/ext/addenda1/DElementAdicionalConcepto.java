@@ -1,11 +1,10 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ext.addenda1;
 
-import cfd.DAttribute;
 import cfd.DAttributeDouble;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
@@ -65,7 +64,7 @@ public class DElementAdicionalConcepto extends cfd.DElementParent {
     public cfd.ext.addenda1.DElementNotas getEltOpcNotas() { return moEltOpcNotas; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

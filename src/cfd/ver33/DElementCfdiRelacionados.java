@@ -3,67 +3,80 @@ package cfd.ver33;
 import cfd.DAttribute;
 import cfd.DAttributeString;
 import cfd.DElement;
+import java.util.ArrayList;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementCfdiRelacionados extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttTipoRelacion;
+    private final DAttributeString moAttTipoRelacion;
 
-    protected java.util.Vector<cfd.ver33.DElementCfdiRelacionado> mvEltCfdiRelacionado;
+    private final ArrayList<cfd.ver33.DElementCfdiRelacionado> maEltCfdiRelacionados;
 
     public DElementCfdiRelacionados() {
         super("cfdi:CfdiRelacionados");
 
-        moAttTipoRelacion = new DAttributeString("TipoRelacion", true);
+        moAttTipoRelacion = new DAttributeString("TipoRelacion", true, 2, 2);   // c_TipoRelacion catalog codes of 2 fixed digits
         
-        mvEltCfdiRelacionado = new java.util.Vector<cfd.ver33.DElementCfdiRelacionado>();
-
         mvAttributes.add(moAttTipoRelacion);
+        
+        maEltCfdiRelacionados = new ArrayList<>();
     }
 
-    public cfd.DAttributeString getAttTipoRelacion() { return moAttTipoRelacion; }
+    /*
+     * Private methods
+     */
+
+    /*
+     * Public methods
+     */
+
+    public DAttributeString getAttTipoRelacion() { return moAttTipoRelacion; }
     
-    public java.util.Vector<cfd.ver33.DElementCfdiRelacionado> getEltCfdiRelacionado() { return mvEltCfdiRelacionado; }
-    
+    public ArrayList<cfd.ver33.DElementCfdiRelacionado> getEltCfdiRelacionados() { return maEltCfdiRelacionados; }
     
     @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
+    public void validateElement() throws IllegalStateException, Exception {
+        if (maEltCfdiRelacionados.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementCfdiRelacionado().getName()) + "'.");
+        }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
-        }
-
-        string += ">";
-        
-        if (mvEltCfdiRelacionado.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
-        }
-        else {
-            for (DElementCfdiRelacionado cfdi : mvEltCfdiRelacionado) {
-                xml = cfdi.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+            String aux = attribute.getAttributeForXml();
+            if (!aux.isEmpty()) {
+                xml += " " + aux;
             }
         }
 
-        string += "\n</" + msName + ">";
+        xml += ">";
+        
+        for (DElement element : maEltCfdiRelacionados) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
+            }
+        }
 
-        return string;
+        xml += "\n</" + msName + ">";
+
+        return xml;
     }
     
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
 
-        for (DElementCfdiRelacionado cfdi : mvEltCfdiRelacionado) {
-            string += cfdi.getElementForOriginalString();
+        for (DElement element : maEltCfdiRelacionados) {
+            string += element.getElementForOriginalString();
         }
 
         return string;

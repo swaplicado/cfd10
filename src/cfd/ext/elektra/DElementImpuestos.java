@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DAttributeDouble;
 
 /**
  *
- * @author Néstor Ávalos Balcázar
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestos extends cfd.DElementParent {
 
@@ -35,7 +35,7 @@ public class DElementImpuestos extends cfd.DElementParent {
     public cfd.ext.elektra.DElementImpuestosTrasladados getEltImpuestosTrasladados() { return moEltImpuestosTrasladados; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

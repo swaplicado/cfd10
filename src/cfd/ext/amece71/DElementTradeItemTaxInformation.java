@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -7,7 +7,7 @@ package cfd.ext.amece71;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementTradeItemTaxInformation extends cfd.DElementParent {
 
@@ -32,7 +32,7 @@ public class DElementTradeItemTaxInformation extends cfd.DElementParent {
     public cfd.ext.amece71.DElementTradeItemTaxAmount getEltItemTaxAmount() { return moEltItemTaxAmount; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

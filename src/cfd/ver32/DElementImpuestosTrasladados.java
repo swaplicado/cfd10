@@ -1,15 +1,14 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ver32;
 
-import java.util.Vector;
-
 import cfd.DAttribute;
 import cfd.DElement;
 import cfd.DElementWithChildren;
+import java.util.Vector;
 
 /**
  *
@@ -28,7 +27,7 @@ public class DElementImpuestosTrasladados extends cfd.DElement implements DEleme
     public java.util.Vector<cfd.ver32.DElementImpuestoTraslado> getEltHijosImpuestoTrasladado() { return mvEltHijosImpuestoTrasladado; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -36,19 +35,19 @@ public class DElementImpuestosTrasladados extends cfd.DElement implements DEleme
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
-        if (mvEltHijosImpuestoTrasladado.size() == 0) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mvEltHijosImpuestoTrasladado.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver32.DElementImpuestoTraslado().getName()) + "'.");
         }
         else {
 
             for (DElementImpuestoTraslado traslado : mvEltHijosImpuestoTrasladado) {
                 xml = traslado.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -58,7 +57,7 @@ public class DElementImpuestosTrasladados extends cfd.DElement implements DEleme
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = "";
 
         for (DElementImpuestoTraslado traslado : mvEltHijosImpuestoTrasladado) {

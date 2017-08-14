@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -12,7 +12,7 @@ import java.util.Vector;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementPercepciones extends cfd.DElement {
 
@@ -64,7 +64,7 @@ public class DElementPercepciones extends cfd.DElement {
     public java.util.Vector<cfd.ver3.nom12.DElementPercepcion> getEltHijosPercepcion() { return mvEltHijosPercepcion; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -72,29 +72,29 @@ public class DElementPercepciones extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (mvEltHijosPercepcion.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver3.nom12.DElementPercepcion().getName()) + "'.");
         }
         else {
             for (DElementPercepcion percepcion : mvEltHijosPercepcion) {
                 xml = percepcion.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
         
         if (moEltJubilacionPensionRetiro != null) {
             xml = moEltJubilacionPensionRetiro.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltSeparacionIndemnizacion != null) {
             xml = moEltSeparacionIndemnizacion.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -103,7 +103,7 @@ public class DElementPercepciones extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
         
         for (DElementPercepcion percepcion : mvEltHijosPercepcion) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -13,7 +13,7 @@ import java.util.Vector;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementMercancia extends cfd.DElement {
 
@@ -58,7 +58,7 @@ public class DElementMercancia extends cfd.DElement {
     public java.util.Vector<cfd.ver3.cce11.DElementDescripcionesEspecificas> getEltHijosDescripcionesEspecificas() { return mvEltHijosDescripcionesEspecificas; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -66,14 +66,14 @@ public class DElementMercancia extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         for (DElementDescripcionesEspecificas infoAduanera : mvEltHijosDescripcionesEspecificas) {
             xml = infoAduanera.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -82,7 +82,7 @@ public class DElementMercancia extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
 
         for (DElementDescripcionesEspecificas descripcionesEspecificas : mvEltHijosDescripcionesEspecificas) {

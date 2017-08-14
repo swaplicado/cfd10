@@ -1,31 +1,48 @@
 package cfd.ver33;
 
 import cfd.DAttributeString;
-import cfd.DAttributeTypeRfc;
+import cfd.DElement;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementEmisor extends cfd.DElement {
 
-    protected cfd.DAttributeTypeRfc moAttRfc;
-    protected cfd.DAttributeString moAttNombre;
-    protected cfd.DAttributeString moAttRegimenFiscal;
+    private final DAttributeString moAttRfc;
+    private final DAttributeString moAttNombre;
+    private final DAttributeString moAttRegimenFiscal;
 
     public DElementEmisor() {
         super("cfdi:Emisor");
 
-        moAttRfc = new DAttributeTypeRfc("Rfc", true);
-        moAttNombre = new DAttributeString("Nombre", false);
-        moAttRegimenFiscal = new DAttributeString("RegimenFiscal", true);
+        moAttRfc = new DAttributeString("Rfc", true, 12, 13);           // from 12 to 13 characters
+        moAttNombre = new DAttributeString("Nombre", false, 1, 254);    // from 1 to 254 characters
+        moAttRegimenFiscal = new DAttributeString("RegimenFiscal", true, 3, 3);     // c_RegimenFiscal catalog codes of 3 fixed digits
 
         mvAttributes.add(moAttRfc);
         mvAttributes.add(moAttNombre);
         mvAttributes.add(moAttRegimenFiscal);
     }
 
-    public cfd.DAttributeTypeRfc getAttRfc() { return moAttRfc; }
-    public cfd.DAttributeString getAttNombre() { return moAttNombre; }
-    public cfd.DAttributeString getAttRegimenFiscal() { return moAttRegimenFiscal; }
+    /*
+     * Private methods
+     */
+
+    /*
+     * Public methods
+     */
+
+    public DAttributeString getAttRfc() { return moAttRfc; }
+    public DAttributeString getAttNombre() { return moAttNombre; }
+    public DAttributeString getAttRegimenFiscal() { return moAttRegimenFiscal; }
+
+    @Override
+    public void validateElement() throws IllegalStateException, Exception {
+        // validate text conformity to requiered regular expressions:
+        
+        if (!moAttNombre.getString().isEmpty() && !DCfdi33Utils.matches(moAttNombre.getString(), DCfdi33Consts.REGEX_DESCRIP + "{" + moAttNombre.getLengthMin() + "," + moAttNombre.getLengthMax() + "}")) {
+            throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttNombre.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
+        }
+    }
 }

@@ -8,7 +8,7 @@ import cfd.DElementExtAddendaType;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementAddendaContinentalTire extends cfd.DElementExtAddenda {
     

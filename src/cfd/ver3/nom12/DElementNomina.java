@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -13,7 +13,7 @@ import cfd.DAttributeTypeImporte;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementNomina extends cfd.DElement {
 
@@ -91,7 +91,7 @@ public class DElementNomina extends cfd.DElement {
     public cfd.ver3.nom12.DElementIncapacidades getEltIncapacidades() { return moEltIncapacidades; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -101,37 +101,37 @@ public class DElementNomina extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (moEltEmisor != null) {
             xml = moEltEmisor.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         xml = moEltReceptor.getElementForXml();
-        string += xml.length() == 0 ? "" : "\n" + xml;
+        string += xml.isEmpty() ? "" : "\n" + xml;
         
         if (moEltPercepciones != null) {
             xml = moEltPercepciones.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltDeducciones != null) {
             xml = moEltDeducciones.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltOtrosPagos != null) {
             xml = moEltOtrosPagos.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltIncapacidades != null) {
             xml = moEltIncapacidades.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -140,7 +140,7 @@ public class DElementNomina extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
 
         if (moEltEmisor != null) {

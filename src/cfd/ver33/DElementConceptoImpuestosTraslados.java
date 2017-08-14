@@ -1,62 +1,65 @@
 package cfd.ver33;
 
-import cfd.DAttribute;
 import cfd.DElement;
-import cfd.DElementWithChildren;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementConceptoImpuestosTraslados extends cfd.DElement implements DElementWithChildren {
+public class DElementConceptoImpuestosTraslados extends cfd.DElement implements cfd.DElementWithChildren {
 
-    protected java.util.Vector<cfd.ver33.DElementConceptoImpuestoTraslado> mvEltHijosConceptoImpuestoTrasladado;
+    private final ArrayList<cfd.ver33.DElementConceptoImpuestoTraslado> maEltConceptoImpuestoTrasladados;
 
     public DElementConceptoImpuestosTraslados() {
         super("cfdi:Traslados");
 
-        mvEltHijosConceptoImpuestoTrasladado = new Vector<DElementConceptoImpuestoTraslado>();
+        maEltConceptoImpuestoTrasladados = new ArrayList<>();
     }
 
-    public java.util.Vector<cfd.ver33.DElementConceptoImpuestoTraslado> getEltHijosImpuestoTrasladado() { return mvEltHijosConceptoImpuestoTrasladado; }
+    /*
+     * Private methods
+     */
+
+    /*
+     * Public methods
+     */
+
+    public ArrayList<cfd.ver33.DElementConceptoImpuestoTraslado> getEltImpuestoTrasladados() { return maEltConceptoImpuestoTrasladados; }
 
     @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+    public void validateElement() throws IllegalStateException, Exception {
+        if (maEltConceptoImpuestoTrasladados.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementConceptoImpuestoTraslado().getName()) + "'.");
         }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName + ">";
 
-        string += ">";
-
-        if (mvEltHijosConceptoImpuestoTrasladado.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
-        }
-        else {
-
-            for (DElementConceptoImpuestoTraslado traslado : mvEltHijosConceptoImpuestoTrasladado) {
-                xml = traslado.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+        for (DElement element : maEltConceptoImpuestoTrasladados) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
             }
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
 
-        return string;
+        return xml;
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
         String string = "";
 
-        for (DElementConceptoImpuestoTraslado traslado : mvEltHijosConceptoImpuestoTrasladado) {
-            string += traslado.getElementForOriginalString();
+        for (DElement element : maEltConceptoImpuestoTrasladados) {
+            string += element.getElementForOriginalString();
         }
 
         return string;
@@ -64,6 +67,6 @@ public class DElementConceptoImpuestosTraslados extends cfd.DElement implements 
 
     @Override
     public boolean hasChildren() {
-        return mvEltHijosConceptoImpuestoTrasladado.size() > 0;
+        return !maEltConceptoImpuestoTrasladados.isEmpty();
     }
 }

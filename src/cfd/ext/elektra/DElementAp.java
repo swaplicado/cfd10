@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -10,7 +10,7 @@ import cfd.DElementExtAddendaType;
 
 /**
  *
- * @author Néstor Ávalos Balcázar
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementAp extends cfd.DElementExtAddenda {
 
@@ -51,7 +51,7 @@ public class DElementAp extends cfd.DElementExtAddenda {
     public cfd.ext.elektra.DElementDetailItems getEltDetalleProductos() { return moEltDetalleProductos; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

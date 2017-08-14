@@ -7,7 +7,7 @@ import cfd.DAttributeTypeImporte;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementComercioExterior extends cfd.DElement {
 
@@ -95,7 +95,7 @@ public class DElementComercioExterior extends cfd.DElement {
     public cfd.ver3.cce11.DElementMercancias getEltMercancias() { return moEltMercancias; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -105,34 +105,34 @@ public class DElementComercioExterior extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (moEltEmisor != null) {
             xml = moEltEmisor.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltPropietario != null) {
             xml = moEltPropietario.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltReceptor != null) {
             xml = moEltReceptor.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltDestinatario != null) {
             xml = moEltDestinatario.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
         
         if (moEltMercancias != null) {
             xml = moEltMercancias.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -141,7 +141,7 @@ public class DElementComercioExterior extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = "";
 
         string += moAttVersion.getAttributeForOriginalString();

@@ -1,62 +1,72 @@
 package cfd.ver33;
 
-import cfd.DAttribute;
 import cfd.DElement;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementConceptos extends cfd.DElement {
+public class DElementConceptos extends cfd.DElement implements cfd.DElementWithChildren {
 
-    protected java.util.Vector<cfd.ver33.DElementConcepto> mvEltHijosConcepto;
+    private final ArrayList<cfd.ver33.DElementConcepto> maEltConceptos;
 
     public DElementConceptos() {
         super("cfdi:Conceptos");
 
-        mvEltHijosConcepto = new Vector<DElementConcepto>();
+        maEltConceptos = new ArrayList<>();
     }
 
-    public java.util.Vector<cfd.ver33.DElementConcepto> getEltHijosConcepto() { return mvEltHijosConcepto; }
+    /*
+     * Private methods
+     */
+
+    /*
+     * Public methods
+     */
+
+    public ArrayList<cfd.ver33.DElementConcepto> getEltConceptos() { return maEltConceptos; }
 
     @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+    public void validateElement() throws IllegalStateException, Exception {
+        if (maEltConceptos.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementConcepto().getName()) + "'.");
         }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName + ">";
 
-        string += ">";
-
-        if (mvEltHijosConcepto.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
-        }
-        else {
-            for (DElementConcepto concepto : mvEltHijosConcepto) {
-                xml = concepto.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+        for (DElement element : maEltConceptos) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
             }
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
+
+        return xml;
+    }
+
+    @Override
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
+        String string = "";
+
+        for (DElement element : maEltConceptos) {
+            string += element.getElementForOriginalString();
+        }
 
         return string;
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
-        String string = "";
-
-        for (DElementConcepto concepto : mvEltHijosConcepto) {
-            string += concepto.getElementForOriginalString();
-        }
-
-        return string;
+    public boolean hasChildren() {
+        return !maEltConceptos.isEmpty();
     }
 }

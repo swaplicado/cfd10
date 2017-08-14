@@ -6,7 +6,7 @@ import cfd.ver32.DElementTipoUbicacion;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementReceptor extends cfd.DElement {
 
@@ -33,7 +33,7 @@ public class DElementReceptor extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -41,14 +41,14 @@ public class DElementReceptor extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (moEltDomicilio != null) {
             xml = moEltDomicilio.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -57,7 +57,7 @@ public class DElementReceptor extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
 
         if (moEltDomicilio != null) {

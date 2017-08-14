@@ -1,58 +1,85 @@
 package cfd.ver33;
 
+import cfd.DElement;
+import java.util.ArrayList;
+
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementConceptoImpuestos extends cfd.DElement {
     
-    protected cfd.ver33.DElementConceptoImpuestosTraslados moEltOpcConceptoImpuestosTraslados;
-    protected cfd.ver33.DElementConceptoImpuestosRetenidos moEltOpcConceptoImpuestosRetenidos;
+    private cfd.ver33.DElementConceptoImpuestosTraslados moEltOpcConceptoImpuestosTraslados;
+    private cfd.ver33.DElementConceptoImpuestosRetenciones moEltOpcConceptoImpuestosRetenciones;
 
     public DElementConceptoImpuestos() {
         super("cfdi:Impuestos");
 
         moEltOpcConceptoImpuestosTraslados = null;
-        moEltOpcConceptoImpuestosRetenidos = null;
+        moEltOpcConceptoImpuestosRetenciones = null;
     }
+
+    /*
+     * Private methods
+     */
+
+    private ArrayList<DElement> createElementsArray() {
+        ArrayList<DElement> elements = new ArrayList<>();
+        
+        if (moEltOpcConceptoImpuestosTraslados != null) {
+            elements.add(moEltOpcConceptoImpuestosTraslados);
+        }
+        
+        if (moEltOpcConceptoImpuestosRetenciones != null) {
+            elements.add(moEltOpcConceptoImpuestosRetenciones);
+        }
+        
+        return elements;
+    }
+    
+    /*
+     * Public methods
+     */
 
     public void setEltOpcImpuestosTrasladados(cfd.ver33.DElementConceptoImpuestosTraslados o) { moEltOpcConceptoImpuestosTraslados = o; }
-    public void setEltOpcImpuestosRetenidos(cfd.ver33.DElementConceptoImpuestosRetenidos o) { moEltOpcConceptoImpuestosRetenidos = o; }
+    public void setEltOpcImpuestosRetenciones(cfd.ver33.DElementConceptoImpuestosRetenciones o) { moEltOpcConceptoImpuestosRetenciones = o; }
 
     public cfd.ver33.DElementConceptoImpuestosTraslados getEltOpcImpuestosTrasladados() { return moEltOpcConceptoImpuestosTraslados; }
-    public cfd.ver33.DElementConceptoImpuestosRetenidos getEltOpcImpuestosRetenidos() { return moEltOpcConceptoImpuestosRetenidos; }
+    public cfd.ver33.DElementConceptoImpuestosRetenciones getEltOpcImpuestosRetenciones() { return moEltOpcConceptoImpuestosRetenciones; }
 
     @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-        string = "<" + msName + ">";
+    public void validateElement() throws IllegalStateException, Exception {
+        if (moEltOpcConceptoImpuestosTraslados == null && moEltOpcConceptoImpuestosRetenciones == null) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODES + "'" + (new cfd.ver33.DElementConceptoImpuestosTraslados().getName()) + "', '" + (new cfd.ver33.DElementConceptoImpuestosRetenciones().getName()) + "'" + DElement.ERR_MSG_NODES_NO_EXIST);
+        }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName + ">";
 
-        if (moEltOpcConceptoImpuestosTraslados != null) {
-            xml = moEltOpcConceptoImpuestosTraslados.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+        for (DElement element : createElementsArray()) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
+            }
         }
 
-        if (moEltOpcConceptoImpuestosRetenidos != null) {
-            xml = moEltOpcConceptoImpuestosRetenidos.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
-        }
+        xml += "\n</" + msName + ">";
 
-        string += "\n</" + msName + ">";
-
-        return string;
+        return xml;
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
         String string = "";
-
-        if (moEltOpcConceptoImpuestosTraslados != null) {
-            string += moEltOpcConceptoImpuestosTraslados.getElementForOriginalString();
-        }
-
-        if (moEltOpcConceptoImpuestosRetenidos != null) {
-            string += moEltOpcConceptoImpuestosRetenidos.getElementForOriginalString();
+        
+        for (DElement element : createElementsArray()) {
+            string += element.getElementForOriginalString();
         }
 
         return string;

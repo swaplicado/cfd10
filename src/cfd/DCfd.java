@@ -1,11 +1,10 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd;
 
-import cfd.util.DUtilUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -15,6 +14,8 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
+import java.util.GregorianCalendar;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -47,6 +48,12 @@ public final class DCfd {
         msLastXmlFilePath = "";
     }
 
+    private int getYear(java.util.Date date) {
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(date);
+        return gc.get(GregorianCalendar.YEAR);
+    }
+    
     public void setLastTimestamp(java.util.Date t) { mtLastTimestamp = t; }
     public void setLastStringSigned(java.lang.String s) { msLastStringSigned = s; }
     public void setLastSignature(java.lang.String s) { msLastSignature = s; }
@@ -65,8 +72,8 @@ public final class DCfd {
     public java.lang.String getLastXmlFilePath() { return msLastXmlFilePath; }
 
     public int signAndWrite(cfd.ver2.DElementComprobante comprobante, cfd.DCfdSignature cfdSignature) throws java.io.IOException, java.lang.Exception {
-        String stringSigned = DUtilUtils.generateOriginalString(comprobante);
-        String signature = cfdSignature.sign(stringSigned, DUtilUtils.getYear(comprobante.getAttFecha().getDatetime()));
+        String stringSigned = DCfdUtils.generateOriginalString(comprobante);
+        String signature = cfdSignature.sign(stringSigned, getYear(comprobante.getAttFecha().getDatetime()));
 
         return write(comprobante, stringSigned, signature, cfdSignature.getCertNumber(), cfdSignature.getCertBase64());
     }
@@ -76,8 +83,8 @@ public final class DCfd {
 
         fileName += comprobante.getEltEmisor().getAttRfc().getString() + "_";
         fileName += comprobante.getAttTipoDeComprobante().getOption().substring(0, 1).toUpperCase() + "_";
-        fileName += (comprobante.getAttSerie().getString().length() == 0 ? "" : comprobante.getAttSerie().getString() + "_");
-        fileName += moDecimalFormat.format(DUtilUtils.parseLong(comprobante.getAttFolio().getString()));
+        fileName += (comprobante.getAttSerie().getString().isEmpty() ? "" : comprobante.getAttSerie().getString() + "_");
+        fileName += moDecimalFormat.format(SLibUtils.parseLong(comprobante.getAttFolio().getString()));
 
         return fileName;
     }
@@ -87,8 +94,8 @@ public final class DCfd {
 
         fileName += comprobante.getEltEmisor().getAttRfc().getString() + "_";
         fileName += comprobante.getAttTipoDeComprobante().getOption().substring(0, 1).toUpperCase() + "_";
-        fileName += (comprobante.getAttSerie().getString().length() == 0 ? "" : comprobante.getAttSerie().getString() + "_");
-        fileName += moDecimalFormat.format(DUtilUtils.parseLong(comprobante.getAttFolio().getString()));
+        fileName += (comprobante.getAttSerie().getString().isEmpty() ? "" : comprobante.getAttSerie().getString() + "_");
+        fileName += moDecimalFormat.format(SLibUtils.parseLong(comprobante.getAttFolio().getString()));
 
         return fileName;
     }

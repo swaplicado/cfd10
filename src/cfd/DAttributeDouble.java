@@ -1,12 +1,12 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd;
 
-import cfd.util.DUtilUtils;
 import java.text.DecimalFormat;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -30,7 +30,7 @@ public class DAttributeDouble extends DAttribute {
         setDecimals(decimals);
     }
 
-    public void setDecimals(int decimals) { mnDecimals = decimals; moDecimalFormat = new DecimalFormat((mnDecimals == 0 ? "0" : "0." + DUtilUtils.textRepeat("0", mnDecimals))); }
+    public void setDecimals(int decimals) { mnDecimals = decimals; moDecimalFormat = new DecimalFormat((mnDecimals == 0 ? "0" : "0." + SLibUtils.textRepeat("0", mnDecimals))); }
     public void setDouble(double value) { mdDouble = value; }
     public void setCanBeZero(boolean b) { mbCanBeZero = b; }
     public void setElementWithChildrenToCheck(cfd.DElementWithChildren i) { miElementWithChildrenToCheck = i; }

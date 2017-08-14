@@ -6,14 +6,14 @@ import cfd.DAttributeTypeImporte;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestoTraslado extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttImpuesto;
-    protected cfd.DAttributeString moAttTipoFactor;
-    protected cfd.DAttributeDouble moAttTasaOCuota;
-    protected cfd.DAttributeTypeImporte moAttImporte;
+    private final cfd.DAttributeString moAttImpuesto;
+    private final cfd.DAttributeString moAttTipoFactor;
+    private final cfd.DAttributeDouble moAttTasaOCuota;
+    private final cfd.DAttributeTypeImporte moAttImporte;
 
     public DElementImpuestoTraslado() {
         super("cfdi:Traslado");

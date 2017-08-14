@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 
 public class DElementRemision extends cfd.DElementParent {
@@ -133,7 +133,7 @@ public class DElementRemision extends cfd.DElementParent {
     public cfd.ext.soriana.DElementFolioNotaEntrada getEltOpcFolioNotaEntrada() { return moEltOpcFolioNotaEntrada; }
     
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

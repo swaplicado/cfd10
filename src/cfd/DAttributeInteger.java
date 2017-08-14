@@ -1,12 +1,12 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd;
 
-import cfd.util.DUtilUtils;
 import java.text.DecimalFormat;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -45,7 +45,7 @@ public class DAttributeInteger extends DAttribute {
         miElementWithChildrenToCheck = null;
         
         if (mnLengthFixed > 0) {
-            moFixedFormat = new DecimalFormat(DUtilUtils.textRepeat("0", mnLengthFixed));
+            moFixedFormat = new DecimalFormat(SLibUtils.textRepeat("0", mnLengthFixed));
         }
     }
     

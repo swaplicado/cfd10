@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementEmisor extends cfd.DElement {
 
@@ -30,7 +30,7 @@ public class DElementEmisor extends cfd.DElement {
     public cfd.DAttributeString getAttNumProveedor() { return moAttNumProveedor; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

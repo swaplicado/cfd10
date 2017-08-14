@@ -1,12 +1,12 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd;
 
-import cfd.util.DUtilUtils;
 import java.util.TreeMap;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -72,9 +72,9 @@ public abstract class DAttributeStringOption extends DAttribute {
             throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' contiene el caracter 'pipe'.");
         }
 
-        option = DUtilUtils.textTrim(msOption);
+        option = SLibUtils.textTrim(msOption);
 
-        if (mbIsRequired && option.length() == 0) {
+        if (mbIsRequired && option.isEmpty()) {
             throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' es requerida.");
         }
     }
@@ -83,15 +83,15 @@ public abstract class DAttributeStringOption extends DAttribute {
     public java.lang.String getAttributeForXml() {
         String value = "";
         validateValue();
-        value = DUtilUtils.textForXml(msOption);
-        return value.length() == 0 ? "" : msName + "=\"" + value + "\"";
+        value = SLibUtils.textToXml(msOption);
+        return value.isEmpty() ? "" : msName + "=\"" + value + "\"";
     }
 
     @Override
     public java.lang.String getAttributeForOriginalString() {
         String value = "";
         validateValue();
-        value = DUtilUtils.textForOriginalString(msOption);
-        return value.length() == 0 ? "" : value + "|";
+        value = DCfdUtils.textForOriginalString(msOption);
+        return value.isEmpty() ? "" : value + "|";
     }
 }

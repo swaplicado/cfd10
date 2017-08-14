@@ -1,18 +1,17 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ext.elektra;
 
 import cfd.DAttribute;
-import cfd.DAttributeInteger;
 import cfd.DElement;
 import java.util.Vector;
 
 /**
  *
- * @author Néstor Ávalos Balcázar
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestosTrasladados extends cfd.DElementParent {
 
@@ -27,7 +26,7 @@ public class DElementImpuestosTrasladados extends cfd.DElementParent {
     public java.util.Vector<cfd.ext.elektra.DElementTrasladado> getEltTrasladado() { return mvEltTrasladado; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
          String xml = "";
         String string = "";
 
@@ -35,18 +34,18 @@ public class DElementImpuestosTrasladados extends cfd.DElementParent {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (mvEltTrasladado.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ext.elektra.DElementTrasladado().getName()) + "'.");
         }
         else {
             for (DElementTrasladado item : mvEltTrasladado) {
                 xml = item.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -56,7 +55,7 @@ public class DElementImpuestosTrasladados extends cfd.DElementParent {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

@@ -3,18 +3,19 @@ package cfd.ver33;
 import cfd.DAttributeDouble;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
+import cfd.DCfdMath;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementConceptoImpuestoTraslado extends cfd.DElement {
 
-    protected cfd.DAttributeTypeImporte moAttBase;
-    protected cfd.DAttributeString moAttImpuesto;
-    protected cfd.DAttributeString moAttTipoFactor;
-    protected cfd.DAttributeDouble moAttTasaOCuota;
-    protected cfd.DAttributeTypeImporte moAttImporte;
+    private final cfd.DAttributeTypeImporte moAttBase;
+    private final cfd.DAttributeString moAttImpuesto;
+    private final cfd.DAttributeString moAttTipoFactor;
+    private final cfd.DAttributeDouble moAttTasaOCuota;
+    private final cfd.DAttributeTypeImporte moAttImporte;
 
     public DElementConceptoImpuestoTraslado() {
         super("cfdi:Traslado");
@@ -35,9 +36,40 @@ public class DElementConceptoImpuestoTraslado extends cfd.DElement {
         mvAttributes.add(moAttImporte);
     }
 
+    /*
+     * Private methods
+     */
+
+    /*
+     * Public methods
+     */
+
     public cfd.DAttributeTypeImporte getAttBase() { return moAttBase; }
     public cfd.DAttributeString getAttImpuesto() { return moAttImpuesto; }
     public cfd.DAttributeString getAttTipoFactor() { return moAttTipoFactor; }
     public cfd.DAttributeDouble getAttTasaOCuota() { return moAttTasaOCuota; }
     public cfd.DAttributeTypeImporte getAttImporte() { return moAttImporte; }
+
+    @Override
+    public void validateElement() throws IllegalStateException, Exception {
+        // validate attribute "Importe":
+        
+        // límite inferior: [(Base - 10^(-NumDecimalesBase)/2) * (TasaOCuota)] truncado con el número de decimales de la moneda
+        double limitLower = DCfdMath.trunck(
+                (moAttBase.getDouble() - Math.pow(10d, -moAttBase.getDecimals()) / 2d) * moAttTasaOCuota.getDouble(),
+                moAttImporte.getDecimals());
+        
+        if (moAttImporte.getDouble() < limitLower) {
+            throw new IllegalStateException("El valor del atributo '" + moAttImporte.getName() + "' <" + moAttImporte.getDouble() + "> no puede ser menor que el límite inferior permitido <" + limitLower + ">.");
+        }
+        
+        // límite superior: [(Base + 10^(-NumDecimalesBase)/2 - 10^(-12)) * (TasaOCuota)] redondeado hacia arriba con el número de decimales de la moneda
+        double limitUpper = DCfdMath.roundUp(
+                (moAttBase.getDouble() + Math.pow(10d, -moAttBase.getDecimals()) / 2d - Math.pow(10d, -12d)) * moAttTasaOCuota.getDouble(),
+                moAttImporte.getDecimals());
+        
+        if (moAttImporte.getDouble() > limitUpper) {
+            throw new IllegalStateException("El valor del atributo '" + moAttImporte.getName() + "' <" + moAttImporte.getDouble() + "> no puede ser mayor que el límite superior permitido <" + limitUpper + ">.");
+        }
+    }
 }

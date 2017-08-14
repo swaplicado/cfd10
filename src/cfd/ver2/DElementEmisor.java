@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -8,6 +8,7 @@ package cfd.ver2;
 import cfd.DAttribute;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeRfc;
+import cfd.DCfdConsts;
 import cfd.DElement;
 import java.util.Vector;
 
@@ -52,7 +53,7 @@ public class DElementEmisor extends cfd.DElement {
     public cfd.ver2.DElementTipoUbicacion getEltOpcExpedidoEn() { return moEltOpcExpedidoEn; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -60,27 +61,27 @@ public class DElementEmisor extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         xml = moEltDomicilioFiscal.getElementForXml();
-        string += xml.length() == 0 ? "" : "\n" + xml;
+        string += xml.isEmpty() ? "" : "\n" + xml;
 
         if (moEltOpcExpedidoEn != null) {
             xml = moEltOpcExpedidoEn.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
-        if (mfVersion == 2.2f) {
-            if (mvEltHijosRegimenFiscal.size() == 0) {
-                throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mfVersion == DCfdConsts.CFD_VER_22) {
+            if (mvEltHijosRegimenFiscal.isEmpty()) {
+                throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver2.DElementRegimenFiscal().getName()) + "'.");
             }
             else {
                 for (DElementRegimenFiscal regimen : mvEltHijosRegimenFiscal) {
                     xml = regimen.getElementForXml();
-                    string += xml.length() == 0 ? "" : "\n" + xml;
+                    string += xml.isEmpty() ? "" : "\n" + xml;
                 }
             }
         }
@@ -91,7 +92,7 @@ public class DElementEmisor extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
 
         string += moEltDomicilioFiscal.getElementForOriginalString();
@@ -100,7 +101,7 @@ public class DElementEmisor extends cfd.DElement {
             string += moEltOpcExpedidoEn.getElementForOriginalString();
         }
 
-        if (mfVersion == 2.2f) {
+        if (mfVersion == DCfdConsts.CFD_VER_22) {
             for (DElementRegimenFiscal regimen : mvEltHijosRegimenFiscal) {
                     string += regimen.getElementForOriginalString();
                 }

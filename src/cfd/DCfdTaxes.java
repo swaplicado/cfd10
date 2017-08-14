@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DCfdTaxes {
     

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -45,7 +45,7 @@ public class DElementAddenda1 extends cfd.DElementExtAddenda {
     public cfd.ext.addenda1.DElementPagare getEltOpcPagare() { return moEltOpcPagare; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 

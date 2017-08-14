@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -116,7 +116,7 @@ public class DElementAdicional extends cfd.DElementParent {
     public cfd.ext.addenda1.DElementNotas getEltOpcNotas() { return moEltOpcNotas; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

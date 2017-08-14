@@ -1,14 +1,13 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ext.addenda1;
 
-import java.util.Vector;
-
 import cfd.DAttribute;
 import cfd.DElement;
+import java.util.Vector;
 
 /**
  *
@@ -27,7 +26,7 @@ public class DElementAdicionalConceptos extends cfd.DElementParent {
     public java.util.Vector<cfd.ext.addenda1.DElementAdicionalConcepto> getEltHijosAdicionalConcepto() { return mvEltHijosAdicionalConcepto; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -35,18 +34,18 @@ public class DElementAdicionalConceptos extends cfd.DElementParent {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
-        if (mvEltHijosAdicionalConcepto.size() == 0) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mvEltHijosAdicionalConcepto.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ext.addenda1.DElementAdicionalConcepto().getName()) + "'.");
         }
         else {
             for (DElementAdicionalConcepto adicionalConcepto : mvEltHijosAdicionalConcepto) {
                 xml = adicionalConcepto.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -56,7 +55,7 @@ public class DElementAdicionalConceptos extends cfd.DElementParent {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

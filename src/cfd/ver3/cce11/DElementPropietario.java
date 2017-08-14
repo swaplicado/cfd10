@@ -5,7 +5,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementPropietario extends cfd.DElement {
 
@@ -26,7 +26,7 @@ public class DElementPropietario extends cfd.DElement {
     public cfd.DAttributeString getAttResidenciaFiscal() { return moAttResidenciaFiscal; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -34,7 +34,7 @@ public class DElementPropietario extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";

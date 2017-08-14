@@ -1,62 +1,66 @@
 package cfd.ver33;
 
-import cfd.DAttribute;
 import cfd.DElement;
 import cfd.DElementWithChildren;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestosTraslados extends cfd.DElement implements DElementWithChildren {
 
-    protected java.util.Vector<cfd.ver33.DElementImpuestoTraslado> mvEltHijosImpuestoTrasladado;
+    private final ArrayList<cfd.ver33.DElementImpuestoTraslado> maEltImpuestoTrasladados;
 
     public DElementImpuestosTraslados() {
         super("cfdi:Traslados");
 
-        mvEltHijosImpuestoTrasladado = new Vector<DElementImpuestoTraslado>();
+        maEltImpuestoTrasladados = new ArrayList<>();
     }
 
-    public java.util.Vector<cfd.ver33.DElementImpuestoTraslado> getEltHijosImpuestoTrasladado() { return mvEltHijosImpuestoTrasladado; }
+    /*
+     * Private methods
+     */
+
+    /*
+     * Public methods
+     */
+
+    public ArrayList<cfd.ver33.DElementImpuestoTraslado> getEltImpuestoTrasladados() { return maEltImpuestoTrasladados; }
 
     @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+    public void validateElement() throws IllegalStateException, Exception {
+        if (maEltImpuestoTrasladados.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementImpuestoTraslado().getName()) + "'.");
         }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName + ">";
 
-        string += ">";
-
-        if (mvEltHijosImpuestoTrasladado.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
-        }
-        else {
-
-            for (DElementImpuestoTraslado traslado : mvEltHijosImpuestoTrasladado) {
-                xml = traslado.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+        for (DElement element : maEltImpuestoTrasladados) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
             }
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
 
-        return string;
+        return xml;
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
         String string = "";
 
-        for (DElementImpuestoTraslado traslado : mvEltHijosImpuestoTrasladado) {
-            string += traslado.getElementForOriginalString();
+        for (DElement element : maEltImpuestoTrasladados) {
+            string += element.getElementForOriginalString();
         }
 
         return string;
@@ -64,6 +68,6 @@ public class DElementImpuestosTraslados extends cfd.DElement implements DElement
 
     @Override
     public boolean hasChildren() {
-        return mvEltHijosImpuestoTrasladado.size() > 0;
+        return maEltImpuestoTrasladados.size() > 0;
     }
 }

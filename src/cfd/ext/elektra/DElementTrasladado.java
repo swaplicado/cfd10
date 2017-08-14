@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -10,7 +10,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Néstor Ávalos Balcázar
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementTrasladado extends cfd.DElementParent {
 
@@ -37,7 +37,7 @@ public class DElementTrasladado extends cfd.DElementParent {
     public cfd.DAttributeDouble getAttImporte() { return moAttImporte; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

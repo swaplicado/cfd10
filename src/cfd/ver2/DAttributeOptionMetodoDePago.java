@@ -1,15 +1,17 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
-package cfd;
+package cfd.ver2;
+
+import cfd.DAttributeStringOption;
 
 /**
- *
+ * This attribute should stand for 'forma de pago' but, but was mistakenly taken as 'método de pago' by SAT confusion in CFD 2.0, 2.2 and CFDI 3.2.
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DAttributeOptionFormaPago extends DAttributeStringOption {
+public class DAttributeOptionMetodoDePago extends DAttributeStringOption {
 
     public static final int CFD_NO_APLICA = 1;
     public static final int CFD_EFECTIVO = 11;
@@ -24,7 +26,7 @@ public class DAttributeOptionFormaPago extends DAttributeStringOption {
     public static final int CFD_OTROS = 91;
     public static final int CFD_NO_IDENTIFICADO = 99;
 
-    public DAttributeOptionFormaPago(java.lang.String name, boolean isRequired) {
+    public DAttributeOptionMetodoDePago(java.lang.String name, boolean isRequired) {
         super(name, isRequired);
 
         moOptions.put(CFD_NO_APLICA, "(N/A)");

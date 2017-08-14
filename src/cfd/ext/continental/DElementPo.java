@@ -8,7 +8,7 @@ import cfd.DElement;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementPo extends DElement {
 

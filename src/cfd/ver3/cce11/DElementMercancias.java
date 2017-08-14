@@ -1,18 +1,18 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ver3.cce11;
 
 import cfd.DAttribute;
+import cfd.DCfdMath;
 import cfd.DElement;
 import java.util.Vector;
-import sa.lib.SLibUtils;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementMercancias extends cfd.DElement {
 
@@ -36,8 +36,8 @@ public class DElementMercancias extends cfd.DElement {
         for (cfd.ver3.cce11.DElementMercancia mercancia : mvEltHijosMercancia) {
             if (mercancia.getAttNoIdentificacion().getString().compareTo(elementMercancia.getAttNoIdentificacion().getString()) == 0 &&
                     mercancia.getAttFraccionArancelaria().getString().compareTo(elementMercancia.getAttFraccionArancelaria().getString()) == 0) {
-                mercancia.getAttCantidadAduana().setDouble(SLibUtils.round((mercancia.getAttCantidadAduana().getDouble() + elementMercancia.getAttCantidadAduana().getDouble()), elementMercancia.getAttCantidadAduana().getDecimals()));
-                mercancia.getAttValorDolares().setDouble(SLibUtils.round((mercancia.getAttValorDolares().getDouble() + elementMercancia.getAttValorDolares().getDouble()), SLibUtils.getDecimalFormatAmount().getMaximumFractionDigits()));
+                mercancia.getAttCantidadAduana().setDouble(DCfdMath.round((mercancia.getAttCantidadAduana().getDouble() + elementMercancia.getAttCantidadAduana().getDouble()), elementMercancia.getAttCantidadAduana().getDecimals()));
+                mercancia.getAttValorDolares().setDouble(DCfdMath.round((mercancia.getAttValorDolares().getDouble() + elementMercancia.getAttValorDolares().getDouble()), mercancia.getAttValorDolares().getDecimals()));
                 exists = true;
                 break;
             }
@@ -50,7 +50,7 @@ public class DElementMercancias extends cfd.DElement {
     
     
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -58,18 +58,18 @@ public class DElementMercancias extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
-        if (mvEltHijosMercancia.size() == 0) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mvEltHijosMercancia.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver3.cce11.DElementMercancia().getName()) + "'.");
         }
         else {
             for (DElementMercancia concepto : mvEltHijosMercancia) {
                 xml = concepto.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -79,7 +79,7 @@ public class DElementMercancias extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = "";
 
         for (DElementMercancia concepto : mvEltHijosMercancia) {

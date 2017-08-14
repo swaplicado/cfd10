@@ -1,11 +1,9 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ext.interfactura;
-
-import java.util.Vector;
 
 import cfd.DAttribute;
 import cfd.DAttributeDatetime;
@@ -13,10 +11,11 @@ import cfd.DAttributeDouble;
 import cfd.DAttributeOptionMoneda;
 import cfd.DAttributeString;
 import cfd.DElement;
+import java.util.Vector;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementEncabezado extends cfd.DElementParent {
 
@@ -99,7 +98,7 @@ public class DElementEncabezado extends cfd.DElementParent {
     public java.util.Vector<cfd.ext.interfactura.DElementCuerpo> getEltHijosEncabezado() { return mvEltHijosEncabezado; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -107,18 +106,18 @@ public class DElementEncabezado extends cfd.DElementParent {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
-        if (mvEltHijosEncabezado.size() == 0) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mvEltHijosEncabezado.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ext.interfactura.DElementCuerpo().getName()) + "'.");
         }
         else {
             for (DElementCuerpo cuerpo : mvEltHijosEncabezado) {
                 xml = cuerpo.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -128,7 +127,7 @@ public class DElementEncabezado extends cfd.DElementParent {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

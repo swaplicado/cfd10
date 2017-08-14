@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementTax extends cfd.DElementParent {
 
@@ -42,7 +42,7 @@ public class DElementTax extends cfd.DElementParent {
     public cfd.ext.grupomodelo.DElementTaxCategory getEltTaxCategory() { return moEltTaxCategory; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

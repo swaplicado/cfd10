@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -13,7 +13,13 @@ import java.util.Vector;
  */
 public abstract class DElement implements java.io.Serializable {
 
-    public static final java.lang.String MSG_ERR_NO_ELEMENTS = "No hay elementos para el atributo: ";
+    public static final java.lang.String ERR_MSG_NODE = "El nodo ";
+    public static final java.lang.String ERR_MSG_NODES = "Los nodos ";
+    public static final java.lang.String ERR_MSG_NODE_NO_EXIST = " no existe.";
+    public static final java.lang.String ERR_MSG_NODES_NO_EXIST = " no existen.";
+    public static final java.lang.String ERR_MSG_NODE_NO_CHILD = " no tiene nodos hijo ";
+    public static final java.lang.String ERR_MSG_ATTRIB = "El atributo ";
+    public static final java.lang.String ERR_MSG_ATTRIB_INVALID = " es inválido.";
 
     protected java.lang.String msName;
     protected java.lang.String msValue;
@@ -36,27 +42,36 @@ public abstract class DElement implements java.io.Serializable {
     public java.lang.String getValue() { return msValue; }
 
     public java.util.Vector<DAttribute> getAttributes() { return mvAttributes; }
-
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
-        }
-
-        if (msValue.length() == 0) {
-            string += "/>";
-        }
-        else {
-            string += ">" + msValue + "</" + msName + ">";
-        }
-
-        return string;
+    
+    public void validateElement() throws IllegalStateException, Exception {
+        
     }
 
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName;
+
+        for (DAttribute attribute : mvAttributes) {
+            String aux = attribute.getAttributeForXml();
+            if (!aux.isEmpty()) {
+                xml += " " + aux;
+            }
+        }
+
+        if (msValue.isEmpty()) {
+            xml += "/>";
+        }
+        else {
+            xml += ">" + msValue + "</" + msName + ">";
+        }
+
+        return xml;
+    }
+
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
         String string = "";
         
         for (DAttribute attribute : mvAttributes) {

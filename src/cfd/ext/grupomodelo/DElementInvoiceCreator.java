@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -7,7 +7,7 @@ package cfd.ext.grupomodelo;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementInvoiceCreator extends cfd.DElementParent {
 
@@ -32,7 +32,7 @@ public class DElementInvoiceCreator extends cfd.DElementParent {
     public cfd.ext.grupomodelo.DElementInvoiceNameAddress getEltNameAddress() { return moEltNameAddress; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

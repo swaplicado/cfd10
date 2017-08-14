@@ -8,7 +8,7 @@ import cfd.DElementParent;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementPosicionesPo extends DElementParent {
 

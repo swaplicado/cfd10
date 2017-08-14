@@ -1,14 +1,13 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ver32;
 
-import java.util.Vector;
-
 import cfd.DAttribute;
 import cfd.DElement;
+import java.util.Vector;
 
 /**
  *
@@ -27,7 +26,7 @@ public class DElementConceptos extends cfd.DElement {
     public java.util.Vector<cfd.ver32.DElementConcepto> getEltHijosConcepto() { return mvEltHijosConcepto; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -35,18 +34,18 @@ public class DElementConceptos extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
-        if (mvEltHijosConcepto.size() == 0) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mvEltHijosConcepto.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementConcepto().getName()) + "'.");
         }
         else {
             for (DElementConcepto concepto : mvEltHijosConcepto) {
                 xml = concepto.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -56,7 +55,7 @@ public class DElementConceptos extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = "";
 
         for (DElementConcepto concepto : mvEltHijosConcepto) {

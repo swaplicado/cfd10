@@ -1,11 +1,11 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd;
 
-import cfd.util.DUtilUtils;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -35,7 +35,7 @@ public class DAttributeString extends DAttribute {
 
     public void setLengthMin(int length) { mnLengthMin = length; }
     public void setLengthMax(int length) { mnLengthMax = length; }
-    public void setString(java.lang.String string) { msString = DUtilUtils.textTrim(string); }
+    public void setString(java.lang.String string) { msString = SLibUtils.textTrim(string); }
 
     public int getLengthMin() { return mnLengthMin; }
     public int getLengthMax() { return mnLengthMax; }
@@ -52,9 +52,9 @@ public class DAttributeString extends DAttribute {
             throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' contiene el caracter 'pipe'.");
         }
 
-        string = DUtilUtils.textTrim(msString);
+        string = SLibUtils.textTrim(msString);
 
-        if (mbIsRequired && string.length() == 0 && mnLengthMin > 0) {
+        if (mbIsRequired && string.isEmpty() && mnLengthMin > 0) {
             throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' es requerida.");
         }
         if (mbIsRequired || (!mbIsRequired && string.length() > 0)) {
@@ -71,15 +71,15 @@ public class DAttributeString extends DAttribute {
     public java.lang.String getAttributeForXml() {
         String value = "";
         validateValue();
-        value = DUtilUtils.textForXml(msString);
-        return !mbIsRequired && value.length() == 0 ? "" : msName + "=\"" + value + "\"";
+        value = SLibUtils.textToXml(msString);
+        return !mbIsRequired && value.isEmpty() ? "" : msName + "=\"" + value + "\"";
     }
 
     @Override
     public java.lang.String getAttributeForOriginalString() {
         String value = "";
         validateValue();
-        value = DUtilUtils.textForOriginalString(msString);
-        return value.length() == 0 ? "" : value + "|";
+        value = DCfdUtils.textForOriginalString(msString);
+        return value.isEmpty() ? "" : value + "|";
     }
 }

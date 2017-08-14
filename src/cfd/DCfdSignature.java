@@ -39,17 +39,17 @@ public class DCfdSignature {
     private java.security.Signature moSignatureMd5WithRsa;
     private java.security.Signature moSignatureSha1WithRsa;
 
-    public DCfdSignature(byte[] bytesPrivateKey, byte[] bytesPublicKey, java.lang.String certNumber, float cfdiVersion) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
-        initMembers(certNumber, cfdiVersion);
+    public DCfdSignature(byte[] bytesPrivateKey, byte[] bytesPublicKey, java.lang.String certNumber, float cfdVersion) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
+        initMembers(certNumber, cfdVersion);
         loadKeyPair(bytesPrivateKey, bytesPublicKey);
     }
 
-    public DCfdSignature(java.lang.String fileNamePrivateKey, java.lang.String fileNamePublicKey, java.lang.String certNumber, float cfdiVersion) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
-        initMembers(certNumber, cfdiVersion);
+    public DCfdSignature(java.lang.String fileNamePrivateKey, java.lang.String fileNamePublicKey, java.lang.String certNumber, float cfdVersion) throws java.security.NoSuchAlgorithmException, java.lang.Exception {
+        initMembers(certNumber, cfdVersion);
         loadKeyPair(readKey(fileNamePrivateKey), readKey(fileNamePublicKey));
     }
 
-    private void initMembers(java.lang.String certNumber, float cfdiVersion) throws java.security.NoSuchAlgorithmException {
+    private void initMembers(java.lang.String certNumber, float cfdVersion) throws java.security.NoSuchAlgorithmException {
         msCertBase64 = "";
         msCertNumber = certNumber;
         miPrivateKey = null;
@@ -73,10 +73,10 @@ public class DCfdSignature {
         */
 
         moSignatureMd5WithRsa = Signature.getInstance("MD5withRSA");
-        if (cfdiVersion == DCfdConsts.CFDI_VER_32) {
+        if (cfdVersion == DCfdConsts.CFDI_VER_32) {
             moSignatureSha1WithRsa = Signature.getInstance("SHA1withRSA");
         }
-        else if (cfdiVersion == DCfdConsts.CFDI_VER_33) {
+        else if (cfdVersion == DCfdConsts.CFDI_VER_33) {
             moSignatureSha1WithRsa = Signature.getInstance("SHA256withRSA");
         }
         

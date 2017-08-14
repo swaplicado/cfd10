@@ -7,7 +7,7 @@ package cfd;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementExtAddenda extends cfd.DElementParent {
 

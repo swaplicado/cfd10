@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -11,7 +11,7 @@ import cfd.DAttributeTypeRfc;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementEmisor extends cfd.DElement {
 
@@ -44,7 +44,7 @@ public class DElementEmisor extends cfd.DElement {
     public cfd.ver3.nom12.DElementEntidadSncf getEltEntidadSncf() { return moEltEntidadSncf; }
     
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -52,14 +52,14 @@ public class DElementEmisor extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
         
         if (moEltEntidadSncf != null) {
             xml = moEltEntidadSncf.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -68,7 +68,7 @@ public class DElementEmisor extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
         
         if (moEltEntidadSncf != null) {

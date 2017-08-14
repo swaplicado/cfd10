@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -12,7 +12,7 @@ import java.util.Vector;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementDeducciones extends cfd.DElement {
 
@@ -39,7 +39,7 @@ public class DElementDeducciones extends cfd.DElement {
     public java.util.Vector<cfd.ver3.nom12.DElementDeduccion> getEltHijosDeduccion() { return mvEltHijosDeduccion; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -47,18 +47,18 @@ public class DElementDeducciones extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (mvEltHijosDeduccion.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver3.nom12.DElementDeduccion().getName()) + "'.");
         }
         else {
             for (DElementDeduccion deduccion : mvEltHijosDeduccion) {
                 xml = deduccion.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -68,7 +68,7 @@ public class DElementDeducciones extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
         
         for (DElementDeduccion deduccion : mvEltHijosDeduccion) {

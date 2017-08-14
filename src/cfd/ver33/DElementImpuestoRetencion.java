@@ -5,12 +5,12 @@ import cfd.DAttributeTypeImporte;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestoRetencion extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttImpuesto;
-    protected cfd.DAttributeTypeImporte moAttImporte;
+    private final cfd.DAttributeString moAttImpuesto;
+    private final cfd.DAttributeTypeImporte moAttImporte;
 
     public DElementImpuestoRetencion() {
         super("cfdi:Retencion");

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DAttributeOptionMoneda;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementCurrency extends cfd.DElementParent {
 
@@ -34,7 +34,7 @@ public class DElementCurrency extends cfd.DElementParent {
     public cfd.ext.amece71.DElementCurrencyRate getEltRateOfChange() { return moEltRateOfChange; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

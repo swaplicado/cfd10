@@ -6,7 +6,7 @@ package cfd.ext.continental;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public enum DElementTipoProvOptions {
     //F,    //"Transportistas", not supported yet

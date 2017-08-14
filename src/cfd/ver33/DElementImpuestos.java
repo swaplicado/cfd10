@@ -2,20 +2,25 @@ package cfd.ver33;
 
 import cfd.DAttribute;
 import cfd.DAttributeTypeImporte;
+import cfd.DElement;
+import java.util.ArrayList;
+import sa.lib.SLibUtils;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestos extends cfd.DElement {
 
-    protected cfd.DAttributeTypeImporte moAttTotalImpuestosRetenidos;
-    protected cfd.DAttributeTypeImporte moAttTotalImpuestosTrasladados;
+    private final cfd.DAttributeTypeImporte moAttTotalImpuestosRetenidos;
+    private final cfd.DAttributeTypeImporte moAttTotalImpuestosTrasladados;
 
-    protected cfd.ver33.DElementImpuestosRetenidos moEltOpcImpuestosRetenidos;
-    protected cfd.ver33.DElementImpuestosTraslados moEltOpcImpuestosTraslados;
+    private cfd.ver33.DElementImpuestosRetenciones moEltOpcImpuestosRetenidos;
+    private cfd.ver33.DElementImpuestosTraslados moEltOpcImpuestosTraslados;
+    
+    private final cfd.ver33.DElementComprobante moEltParentComprobante;
 
-    public DElementImpuestos() {
+    public DElementImpuestos(cfd.ver33.DElementComprobante parentComprobante) {
         super("cfdi:Impuestos");
 
         moAttTotalImpuestosRetenidos = new DAttributeTypeImporte("TotalImpuestosRetenidos", false);
@@ -26,55 +31,138 @@ public class DElementImpuestos extends cfd.DElement {
 
         moEltOpcImpuestosRetenidos = null;
         moEltOpcImpuestosTraslados = null;
+        
+        moEltParentComprobante = parentComprobante;
     }
 
-    public void setEltOpcImpuestosRetenidos(cfd.ver33.DElementImpuestosRetenidos o) { moEltOpcImpuestosRetenidos = o; }
-    public void setEltOpcImpuestosTrasladados(cfd.ver33.DElementImpuestosTraslados o) { moEltOpcImpuestosTraslados = o; }
+    /*
+     * Private methods
+     */
+
+    private ArrayList<DElement> createElementsArray() {
+        ArrayList<DElement> elements = new ArrayList<>();
+        
+        if (moEltOpcImpuestosRetenidos != null) {
+            elements.add(moEltOpcImpuestosRetenidos );
+        }
+        
+        if (moEltOpcImpuestosTraslados != null) {
+            elements.add(moEltOpcImpuestosTraslados);
+        }
+        
+        return elements;
+    }
+
+    /*
+     * Public methods
+     */
+
+    public void setEltOpcImpuestosRetenidos(cfd.ver33.DElementImpuestosRetenciones o) { moEltOpcImpuestosRetenidos = o; moAttTotalImpuestosRetenidos.setElementWithChildrenToCheck(moEltOpcImpuestosRetenidos); }
+    public void setEltOpcImpuestosTrasladados(cfd.ver33.DElementImpuestosTraslados o) { moEltOpcImpuestosTraslados = o; moAttTotalImpuestosTrasladados.setElementWithChildrenToCheck(moEltOpcImpuestosTraslados); }
 
     public cfd.DAttributeTypeImporte getAttTotalImpuestosRetenidos() { return moAttTotalImpuestosRetenidos; }
     public cfd.DAttributeTypeImporte getAttTotalImpuestosTraslados() { return moAttTotalImpuestosTrasladados; }
 
-    public cfd.ver33.DElementImpuestosRetenidos getEltOpcImpuestosRetenidos() { return moEltOpcImpuestosRetenidos; }
+    public cfd.ver33.DElementImpuestosRetenciones getEltOpcImpuestosRetenidos() { return moEltOpcImpuestosRetenidos; }
     public cfd.ver33.DElementImpuestosTraslados getEltOpcImpuestosTraslados() { return moEltOpcImpuestosTraslados; }
 
+    public cfd.ver33.DElementComprobante getEltParentComprobante() { return moEltParentComprobante; }
+
     @Override
-    public java.lang.String getElementForXml() {
-        String xml = "";
-        String string = "";
-
-        moAttTotalImpuestosRetenidos.setElementWithChildrenToCheck(moEltOpcImpuestosRetenidos);
-        moAttTotalImpuestosTrasladados.setElementWithChildrenToCheck(moEltOpcImpuestosTraslados);
-
-        string = "<" + msName;
+    public void validateElement() throws IllegalStateException, Exception {
+        // validate attributes 'TotalImpuestosRetenidos':
+        
+        double imptosRetenidos = 0;
+        
+        for (DElementConcepto concepto : moEltParentComprobante.getEltConceptos().getEltConceptos()) {
+            if (concepto.getEltOpcConceptoImpuestos() != null) {
+                if (concepto.getEltOpcConceptoImpuestos().getEltOpcImpuestosRetenciones() != null) {
+                    for (DElementConceptoImpuestoRetencion impuestoRetencion : concepto.getEltOpcConceptoImpuestos().getEltOpcImpuestosRetenciones().getEltImpuestoRetenciones()) {
+                        imptosRetenidos += impuestoRetencion.getAttImporte().getDouble();
+                    }
+                }
+            }
+        }
+        
+        if (SLibUtils.round(imptosRetenidos, moAttTotalImpuestosRetenidos.getDecimals()) != SLibUtils.round(moAttTotalImpuestosRetenidos.getDouble(), moAttTotalImpuestosRetenidos.getDecimals())) {
+            throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosRetenidos.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
+        }
+        
+        if (moEltOpcImpuestosRetenidos != null) {
+            imptosRetenidos = 0;
+            
+            for (DElementImpuestoRetencion impuestoRetencion : moEltOpcImpuestosRetenidos.getEltImpuestoRetenciones()) {
+                imptosRetenidos += impuestoRetencion.getAttImporte().getDouble();
+            }
+            
+            if (SLibUtils.round(imptosRetenidos, moAttTotalImpuestosRetenidos.getDecimals()) != SLibUtils.round(moAttTotalImpuestosRetenidos.getDouble(), moAttTotalImpuestosRetenidos.getDecimals())) {
+                throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosRetenidos.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
+            }
+        }
+        
+        // validate attributes 'TotalImpuestosTrasladados':
+        
+        double imptosTrasladados = 0;
+        
+        for (DElementConcepto concepto : moEltParentComprobante.getEltConceptos().getEltConceptos()) {
+            if (concepto.getEltOpcConceptoImpuestos() != null) {
+                if (concepto.getEltOpcConceptoImpuestos().getEltOpcImpuestosTrasladados() != null) {
+                    for (DElementConceptoImpuestoTraslado impuestoTraslado : concepto.getEltOpcConceptoImpuestos().getEltOpcImpuestosTrasladados().getEltImpuestoTrasladados()) {
+                        imptosTrasladados += impuestoTraslado.getAttImporte().getDouble();
+                    }
+                }
+            }
+        }
+        
+        if (SLibUtils.round(imptosTrasladados, moAttTotalImpuestosTrasladados.getDecimals()) != SLibUtils.round(moAttTotalImpuestosTrasladados.getDouble(), moAttTotalImpuestosTrasladados.getDecimals())) {
+            throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosTrasladados.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
+        }
+        
+        if (moEltOpcImpuestosTraslados != null) {
+            imptosTrasladados = 0;
+            
+            for (DElementImpuestoTraslado impuestoTraslado : moEltOpcImpuestosTraslados.getEltImpuestoTrasladados()) {
+                imptosTrasladados += impuestoTraslado.getAttImporte().getDouble();
+            }
+            
+            if (SLibUtils.round(imptosTrasladados, moAttTotalImpuestosTrasladados.getDecimals()) != SLibUtils.round(moAttTotalImpuestosTrasladados.getDouble(), moAttTotalImpuestosTrasladados.getDecimals())) {
+                throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosTrasladados.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
+            }
+        }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            String aux = attribute.getAttributeForXml();
+            if (!aux.isEmpty()) {
+                xml += " " + aux;
+            }
         }
 
-        string += ">";
+        xml += ">";
 
-        if (moEltOpcImpuestosRetenidos != null) {
-            xml = moEltOpcImpuestosRetenidos.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+        for (DElement element : createElementsArray()) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
+            }
         }
 
-        if (moEltOpcImpuestosTraslados != null) {
-            xml = moEltOpcImpuestosTraslados.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
-        }
+        xml += "\n</" + msName + ">";
 
-        string += "\n</" + msName + ">";
-
-        return string;
+        return xml;
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
         String string = "";
-
-        moAttTotalImpuestosRetenidos.setElementWithChildrenToCheck(moEltOpcImpuestosRetenidos);
-        moAttTotalImpuestosTrasladados.setElementWithChildrenToCheck(moEltOpcImpuestosTraslados);
 
         if (moEltOpcImpuestosRetenidos != null) {
             string += moEltOpcImpuestosRetenidos.getElementForOriginalString();

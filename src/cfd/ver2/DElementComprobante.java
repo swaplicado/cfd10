@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,8 +9,6 @@ import cfd.DAttribute;
 import cfd.DAttributeDatetime;
 import cfd.DAttributeInteger;
 import cfd.DAttributeOptionCondicionesPago;
-import cfd.DAttributeOptionMetodoPago;
-import cfd.DAttributeOptionTipoComprobante;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
 import cfd.ext.addenda1.DElementAddenda1;
@@ -31,7 +29,7 @@ public class DElementComprobante extends cfd.DElement {
     protected cfd.DAttributeString moAttSello;
     protected cfd.DAttributeInteger moAttNoAprobacion;
     protected cfd.DAttributeInteger moAttAnoAprobacion;
-    protected cfd.DAttributeOptionMetodoPago moAttFormaDePago;
+    protected cfd.ver2.DAttributeOptionFormaDePago moAttFormaDePago;
     protected cfd.DAttributeString moAttNoCertificado;
     protected cfd.DAttributeString moAttCertificado;
     protected cfd.DAttributeOptionCondicionesPago moAttCondicionesDePago;
@@ -41,7 +39,7 @@ public class DElementComprobante extends cfd.DElement {
     protected cfd.DAttributeTypeImporte moAttTipoCambio;
     protected cfd.DAttributeString moAttMoneda;
     protected cfd.DAttributeTypeImporte moAttTotal;
-    protected cfd.DAttributeOptionTipoComprobante moAttTipoDeComprobante;
+    protected cfd.ver2.DAttributeOptionTipoDeComprobante moAttTipoDeComprobante;
     protected cfd.DAttributeString moAttMetodoDePago;
     protected cfd.DAttributeString moAttLugarExpedicion;
     protected cfd.DAttributeString moAttNumCtaPago;
@@ -71,7 +69,7 @@ public class DElementComprobante extends cfd.DElement {
         moAttSello = new DAttributeString("sello", true, 1);
         moAttNoAprobacion = new DAttributeInteger("noAprobacion", true);
         moAttAnoAprobacion = new DAttributeInteger("anoAprobacion", true, 4, 4);
-        moAttFormaDePago = new DAttributeOptionMetodoPago("formaDePago", true);
+        moAttFormaDePago = new DAttributeOptionFormaDePago("formaDePago", true);
         moAttNoCertificado = new DAttributeString("noCertificado", true, 20, 20);
         moAttCertificado = new DAttributeString("certificado", false, 1);
         moAttCondicionesDePago = new DAttributeOptionCondicionesPago("condicionesDePago", false);
@@ -83,7 +81,7 @@ public class DElementComprobante extends cfd.DElement {
         moAttMoneda = new DAttributeString("Moneda", false, 3, 3);
         moAttTotal = new DAttributeTypeImporte("total", true);
         moAttTotal.setCanBeZero(true);
-        moAttTipoDeComprobante = new DAttributeOptionTipoComprobante("tipoDeComprobante", true);
+        moAttTipoDeComprobante = new DAttributeOptionTipoDeComprobante("tipoDeComprobante", true);
         moAttMetodoDePago = new DAttributeString("metodoDePago", false);
         moAttLugarExpedicion = new DAttributeString("LugarExpedicion", false);
         moAttNumCtaPago = new DAttributeString("NumCtaPago", false, 4);
@@ -118,13 +116,13 @@ public class DElementComprobante extends cfd.DElement {
         moEltOpcAddenda = null;
     }
 
+    public float getVersion() { return mfVersion; }
     public void setEltEmisor(cfd.ver2.DElementEmisor o) { moEltEmisor = o; }
     public void setEltReceptor(cfd.ver2.DElementReceptor o) { moEltReceptor = o; }
     public void setEltOpcComplemento(cfd.ver2.DElementComplemento o) { moEltOpcComplemento = o; }
     public void setEltOpcAddenda(cfd.ver2.DElementAddenda addenda) { moEltOpcAddenda = addenda; }
     public void setEltOpcAddenda(cfd.ver2.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddendaXmlLocationNs = addendaXmlLocationNs; }
 
-    public float getVersion() { return mfVersion; }
     public String[] getAddendaXmlLocationNs() { return masAddendaXmlLocationNs; }
     public cfd.DAttributeString getAttVersion() { return moAttVersion; }
     public cfd.DAttributeString getAttSerie() { return moAttSerie; }
@@ -133,7 +131,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.DAttributeString getAttSello() { return moAttSello; }
     public cfd.DAttributeInteger getAttNoAprobacion() { return moAttNoAprobacion; }
     public cfd.DAttributeInteger getAttAnoAprobacion() { return moAttAnoAprobacion; }
-    public cfd.DAttributeOptionMetodoPago getAttFormaDePago() { return moAttFormaDePago; }
+    public cfd.ver2.DAttributeOptionFormaDePago getAttFormaDePago() { return moAttFormaDePago; }
     public cfd.DAttributeString getAttNoCertificado() { return moAttNoCertificado; }
     public cfd.DAttributeString getAttCertificado() { return moAttCertificado; }
     public cfd.DAttributeOptionCondicionesPago getAttCondicionesDePago() { return moAttCondicionesDePago; }
@@ -143,7 +141,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.DAttributeTypeImporte getAttTipoCambio() { return moAttTipoCambio; }
     public cfd.DAttributeString getAttMoneda() { return moAttMoneda; }
     public cfd.DAttributeTypeImporte getAttTotal() { return moAttTotal; }
-    public cfd.DAttributeOptionTipoComprobante getAttTipoDeComprobante() { return moAttTipoDeComprobante; }
+    public cfd.ver2.DAttributeOptionTipoDeComprobante getAttTipoDeComprobante() { return moAttTipoDeComprobante; }
     public cfd.DAttributeString getAttMetodoDePago() { return moAttMetodoDePago; }
     public cfd.DAttributeString getAttLugarExpedicion() { return moAttLugarExpedicion; }
     public cfd.DAttributeString getAttNumCtaPago() { return moAttNumCtaPago; }
@@ -156,7 +154,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver2.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String aux = "";
         String xml = "";
 
@@ -195,25 +193,25 @@ public class DElementComprobante extends cfd.DElement {
         xml += ">";
 
         aux = moEltEmisor.getElementForXml();
-        xml += aux.length() == 0 ? "" : "\n" + aux;
+        xml += aux.isEmpty() ? "" : "\n" + aux;
 
         aux = moEltReceptor.getElementForXml();
-        xml += aux.length() == 0 ? "" : "\n" + aux;
+        xml += aux.isEmpty() ? "" : "\n" + aux;
 
         aux = moEltConceptos.getElementForXml();
-        xml += aux.length() == 0 ? "" : "\n" + aux;
+        xml += aux.isEmpty() ? "" : "\n" + aux;
 
         aux = moEltImpuestos.getElementForXml();
-        xml += aux.length() == 0 ? "" : "\n" + aux;
+        xml += aux.isEmpty() ? "" : "\n" + aux;
 
         if (moEltOpcComplemento != null) {
             aux = moEltOpcComplemento.getElementForXml();
-            xml += aux.length() == 0 ? "" : "\n" + aux;
+            xml += aux.isEmpty() ? "" : "\n" + aux;
         }
 
         if (moEltOpcAddenda != null) {
             aux = moEltOpcAddenda.getElementForXml();
-            xml += aux.length() == 0 ? "" : "\n" + aux;
+            xml += aux.isEmpty() ? "" : "\n" + aux;
         }
 
         xml += "\n</" + msName + ">";
@@ -221,8 +219,13 @@ public class DElementComprobante extends cfd.DElement {
         return xml;
     }
 
+    /**
+     * Composes original string linking together each value.
+     * @return
+     * @throws Exception 
+     */
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = "";
 
         string += moAttVersion.getAttributeForOriginalString();

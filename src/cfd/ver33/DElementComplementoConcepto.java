@@ -2,9 +2,9 @@ package cfd.ver33;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementComplementoConcepto extends cfd.DElementParent {
+public class DElementComplementoConcepto extends cfd.DElement {
 
     public DElementComplementoConcepto() {
         super("cfdi:ComplementoConcepto");

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -10,7 +10,7 @@ import java.util.Vector;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementItems extends cfd.DElementParent {
 
@@ -24,17 +24,17 @@ public class DElementItems extends cfd.DElementParent {
     public java.util.Vector<cfd.ext.soriana.DElementArticulos> getEltHijosArticulos() { return mvEltHijosArticulos; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
-        if (mvEltHijosArticulos.size() == 0) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+        if (mvEltHijosArticulos.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ext.soriana.DElementArticulos().getName()) + "'.");
         }
         else {
             for (DElementArticulos item : mvEltHijosArticulos) {
                 xml = item.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -42,7 +42,7 @@ public class DElementItems extends cfd.DElementParent {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

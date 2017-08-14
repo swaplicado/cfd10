@@ -7,7 +7,7 @@ package cfd;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public interface DCfdTax {
     

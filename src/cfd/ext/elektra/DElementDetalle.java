@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Néstor Ávalos Balcázar
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementDetalle extends cfd.DElementParent {
 
@@ -34,7 +34,7 @@ public class DElementDetalle extends cfd.DElementParent {
     public cfd.ext.elektra.DElementProducto getEltProducto() { return moEltProducto; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

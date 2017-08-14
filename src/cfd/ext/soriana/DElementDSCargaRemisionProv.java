@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
@@ -9,7 +9,7 @@ import cfd.DElementExtAddendaType;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementDSCargaRemisionProv extends cfd.DElementExtAddenda {
 
@@ -46,7 +46,7 @@ public class DElementDSCargaRemisionProv extends cfd.DElementExtAddenda {
     public cfd.ext.soriana.DElementArticulosPorCajaTarima getEltArticulosCajas() { return moEltArticuloCajas; }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         return "";
     }
 }

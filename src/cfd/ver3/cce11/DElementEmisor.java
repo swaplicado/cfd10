@@ -6,7 +6,7 @@ import cfd.ver32.DElementTipoUbicacionFiscal;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementEmisor extends cfd.DElement {
 
@@ -29,7 +29,7 @@ public class DElementEmisor extends cfd.DElement {
     public cfd.ver32.DElementTipoUbicacionFiscal getEltDomicilio() { return moEltDomicilio; }
     
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -37,14 +37,14 @@ public class DElementEmisor extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
         
         if (moEltDomicilio != null) {
             xml = moEltDomicilio.getElementForXml();
-            string += xml.length() == 0 ? "" : "\n" + xml;
+            string += xml.isEmpty() ? "" : "\n" + xml;
         }
 
         string += "\n</" + msName + ">";
@@ -53,7 +53,7 @@ public class DElementEmisor extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();    // for element attributes
         
         if (moEltDomicilio != null) {

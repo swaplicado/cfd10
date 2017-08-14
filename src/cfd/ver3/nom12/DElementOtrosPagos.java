@@ -1,18 +1,18 @@
 /*
- * Copyright 2010-2011 Sergio Abraham Flores Gutiérrez
+ * Copyright Sergio Abraham Flores Gutiérrez
  * All rights reserved.
  */
 
 package cfd.ver3.nom12;
 
 import cfd.DAttribute;
+import cfd.DCfdMath;
 import cfd.DElement;
 import java.util.Vector;
-import sa.lib.SLibUtils;
 
 /**
  *
- * @author Juan Barajas
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementOtrosPagos extends cfd.DElement {
 
@@ -27,7 +27,7 @@ public class DElementOtrosPagos extends cfd.DElement {
     public java.util.Vector<cfd.ver3.nom12.DElementOtroPago> getEltHijosOtroPago() { return mvEltHijosOtroPago; }
 
     @Override
-    public java.lang.String getElementForXml() {
+    public java.lang.String getElementForXml() throws Exception {
         String xml = "";
         String string = "";
 
@@ -35,18 +35,18 @@ public class DElementOtrosPagos extends cfd.DElement {
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
-            string += xml.length() == 0 ? "" : " " + xml;
+            string += xml.isEmpty() ? "" : " " + xml;
         }
 
         string += ">";
 
         if (mvEltHijosOtroPago.isEmpty()) {
-            throw new IllegalStateException(DElement.MSG_ERR_NO_ELEMENTS + "'" + msName + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver3.nom12.DElementOtroPago().getName()) + "'.");
         }
         else {
             for (DElementOtroPago otroPago : mvEltHijosOtroPago) {
                 xml = otroPago.getElementForXml();
-                string += xml.length() == 0 ? "" : "\n" + xml;
+                string += xml.isEmpty() ? "" : "\n" + xml;
             }
         }
 
@@ -56,7 +56,7 @@ public class DElementOtrosPagos extends cfd.DElement {
     }
 
     @Override
-    public java.lang.String getElementForOriginalString() {
+    public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString();
         
         for (DElementOtroPago otroPago : mvEltHijosOtroPago) {
@@ -70,7 +70,7 @@ public class DElementOtrosPagos extends cfd.DElement {
         double total = 0;
         
         for (DElementOtroPago otroPago : mvEltHijosOtroPago) {
-            total = SLibUtils.round((total + otroPago.getAttImporte().getDouble()), SLibUtils.DecimalFormatValue2D.getMaximumFractionDigits());
+            total = DCfdMath.round((total + otroPago.getAttImporte().getDouble()), otroPago.moAttImporte.getDecimals());
         }
         return total;
     }
