@@ -16,6 +16,9 @@ import cfd.DAttributeTypeImporte;
  * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementNomina extends cfd.DElement {
+    
+    public static final String XSI = "http://www.sat.gob.mx/nomina  http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd";
+    public static final String XMLNS = "xmlns:nomina12=\"http://www.sat.gob.mx/nomina12\"";
 
     protected cfd.DAttributeString moAttVersion;
     protected cfd.DAttributeString moAttTipoNomina;
@@ -95,9 +98,7 @@ public class DElementNomina extends cfd.DElement {
         String xml = "";
         String string = "";
 
-        string = "<" + msName + " " +
-                "xsi:schemaLocation=\"http://www.sat.gob.mx/nomina  http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd\" " +
-                "xmlns:nomina12=\"http://www.sat.gob.mx/nomina12\" ";
+        string = "<" + msName + " ";
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();

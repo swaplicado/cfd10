@@ -8,6 +8,7 @@ import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
 import cfd.DElement;
 import cfd.ext.addenda1.DElementAddenda1;
+import cfd.ver3.nom12.DElementNomina;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,6 +116,10 @@ public class DElementComprobante extends cfd.DElement {
     /*
      * Private methods
      */
+    
+    private boolean isCfdiPayroll() {
+        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Consts.CFD_TP_P) == 0;
+    }
 
     private ArrayList<DElement> createElementsArray() {
         ArrayList<DElement> elements = new ArrayList<>();
@@ -226,9 +231,14 @@ public class DElementComprobante extends cfd.DElement {
         validateElement();
         computeEltOpcImpuestos();
         
-        String xml = "<" + msName + " " +
-                "xsi:schemaLocation=\"http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[0]) + "\" " +
-                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\"" + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[1]);
+        String xml = "<" + msName + " "
+                + "xsi:schemaLocation=\""
+                + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
+                + (!isCfdiPayroll() ? "" : DElementNomina.XSI)
+                + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[0]) + "\" "
+                + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\""
+                + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS)
+                + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[1]);
 
         for (DAttribute attribute : mvAttributes) {
             String aux = attribute.getAttributeForXml();

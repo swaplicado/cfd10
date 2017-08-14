@@ -18,4 +18,10 @@ public class DCfdi33Consts {
     public static final String REGEX_UUID = "[a-f0-9A-F]{8}-[a-f0-9A-F]{4}-[a-f0-9A-F]{4}-[a-f0-9A-F]{4}-[a-f0-9A-F]{12}";
     public static final String REGEX_NUM_PEDIMENTO = "[0-9]{2} [0-9]{2} [0-9]{4} [0-9]{7}";
     public static final String REGEX_NUM_PREDIAL = "[0-9]{1,150}";
+    
+    public static final String CFD_TP_I = "I";  // Ingreso
+    public static final String CFD_TP_E = "E";  // Egreso
+    public static final String CFD_TP_T = "T";  // Traslado
+    public static final String CFD_TP_N = "N";  // Nómina
+    public static final String CFD_TP_P = "P";  // Pago
 }
