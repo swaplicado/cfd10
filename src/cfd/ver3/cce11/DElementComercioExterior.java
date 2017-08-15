@@ -35,17 +35,17 @@ public class DElementComercioExterior extends cfd.DElement {
 
         moAttVersion = new DAttributeString("Version", true);
         moAttVersion.setString("1.1");
-        moAttMotivoTraslado = new DAttributeString("MotivoTraslado", false);
-        moAttTipoOperacion = new DAttributeString("TipoOperacion", true);
-        moAttClaveDePedimento = new DAttributeString("ClaveDePedimento", false);
-        moAttCertificadoOrigen = new DAttributeInteger("CertificadoOrigen", false);
+        moAttMotivoTraslado = new DAttributeString("MotivoTraslado", false, 2, 2);
+        moAttTipoOperacion = new DAttributeString("TipoOperacion", true, 1, 1);
+        moAttClaveDePedimento = new DAttributeString("ClaveDePedimento", true, 2, 2);
+        moAttCertificadoOrigen = new DAttributeInteger("CertificadoOrigen", true, 1, 1);
         moAttCertificadoOrigen.setCanBeZero(true);
-        moAttNumCertificadoOrigen = new DAttributeString("NumCertificadoOrigen", false);
-        moAttNumeroExportadorConfiable = new DAttributeString("NumeroExportadorConfiable", false);
-        moAttIncoterm = new DAttributeString("Incoterm", false);
-        moAttSubdivision = new DAttributeInteger("Subdivision", false);
+        moAttNumCertificadoOrigen = new DAttributeString("NumCertificadoOrigen", false, 6, 40);
+        moAttNumeroExportadorConfiable = new DAttributeString("NumeroExportadorConfiable", false, 1, 50);
+        moAttIncoterm = new DAttributeString("Incoterm", false, 3, 3);
+        moAttSubdivision = new DAttributeInteger("Subdivision", false, 1, 1);
         moAttSubdivision.setCanBeZero(true);
-        moAttObservaciones = new DAttributeString("Observaciones", false);
+        moAttObservaciones = new DAttributeString("Observaciones", false, 1, 300);
         moAttTipoCambioUSD = new DAttributeTypeImporte("TipoCambioUSD", false);
         moAttTotalUSD = new DAttributeTypeImporte("TotalUSD", false);
 

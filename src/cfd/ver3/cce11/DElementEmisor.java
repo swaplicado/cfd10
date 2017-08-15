@@ -1,8 +1,12 @@
+/*
+ * Copyright Sergio Abraham Flores Gutiérrez
+ * All rights reserved.
+ */
+
 package cfd.ver3.cce11;
 
 import cfd.DAttribute;
 import cfd.DAttributeString;
-import cfd.ver32.DElementTipoUbicacionFiscal;
 
 /**
  *
@@ -10,46 +14,45 @@ import cfd.ver32.DElementTipoUbicacionFiscal;
  */
 public class DElementEmisor extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttCurp;
+    private final cfd.DAttributeString moAttCurp;       // required if person
 
-    protected cfd.ver32.DElementTipoUbicacionFiscal moEltDomicilio;
+    private DElementTipoDomicilioNac moEltDomicilio;    // required in CFDI 3.3
     
     public DElementEmisor() {
         super("cce11:Emisor");
 
-        moAttCurp = new DAttributeString("Curp", false);
+        moAttCurp = new DAttributeString("Curp", false, 18, 18);    // text from 18 fixed characters
 
         mvAttributes.add(moAttCurp);
         
-        moEltDomicilio = new DElementTipoUbicacionFiscal("cce11:Domicilio");
+        moEltDomicilio = null;
     }
 
+    public void setEltDomicilio(DElementTipoDomicilioNac o) { moEltDomicilio = o; }
+    
     public cfd.DAttributeString getAttCurp() { return moAttCurp; }
     
-    public cfd.ver32.DElementTipoUbicacionFiscal getEltDomicilio() { return moEltDomicilio; }
+    public DElementTipoDomicilioNac getEltDomicilio() { return moEltDomicilio; }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
+        String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.isEmpty() ? "" : " " + xml;
+            String aux = attribute.getAttributeForXml();
+            xml += aux.isEmpty() ? "" : " " + aux;
         }
 
-        string += ">";
+        xml += ">";
         
         if (moEltDomicilio != null) {
-            xml = moEltDomicilio.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
+            String aux = moEltDomicilio.getElementForXml();
+            xml += aux.isEmpty() ? "" : "\n" + aux;
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
 
-        return string;
+        return xml;
     }
 
     @Override
