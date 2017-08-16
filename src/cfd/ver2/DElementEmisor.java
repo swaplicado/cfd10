@@ -93,7 +93,7 @@ public class DElementEmisor extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
 
         string += moEltDomicilioFiscal.getElementForOriginalString();
 
