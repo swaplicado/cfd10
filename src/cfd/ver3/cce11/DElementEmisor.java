@@ -14,7 +14,7 @@ import cfd.DAttributeString;
  */
 public class DElementEmisor extends cfd.DElement {
 
-    private final cfd.DAttributeString moAttCurp;       // required if person
+    private final DAttributeString moAttCurp;       // required if person
 
     private DElementTipoDomicilioNac moEltDomicilio;    // required in CFDI 3.3
     
@@ -30,12 +30,14 @@ public class DElementEmisor extends cfd.DElement {
 
     public void setEltDomicilio(DElementTipoDomicilioNac o) { moEltDomicilio = o; }
     
-    public cfd.DAttributeString getAttCurp() { return moAttCurp; }
+    public DAttributeString getAttCurp() { return moAttCurp; }
     
     public DElementTipoDomicilioNac getEltDomicilio() { return moEltDomicilio; }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
         String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
@@ -57,7 +59,7 @@ public class DElementEmisor extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
         
         if (moEltDomicilio != null) {
             string += moEltDomicilio.getElementForOriginalString();

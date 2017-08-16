@@ -8,6 +8,7 @@ import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
 import cfd.DElement;
 import cfd.ext.addenda1.DElementAddenda1;
+import cfd.ver3.cce11.DElementComercioExterior;
 import cfd.ver3.nom12.DElementNomina;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,8 +22,8 @@ import sa.lib.xml.SXmlUtils;
 public class DElementComprobante extends cfd.DElement {
 
     /*
-    Attributes' declaration-order according to CFDI 3.3 specification (a.k.a., "Anexo 20")
-    */
+     * Attributes' declaration-order according to CFDI 3.3 specification (a.k.a., "Anexo 20")
+     */
     
     private final DAttributeString moAttVersion;
     private final DAttributeString moAttSerie;
@@ -121,6 +122,21 @@ public class DElementComprobante extends cfd.DElement {
         return moAttTipoDeComprobante.getString().compareTo(DCfdi33Consts.CFD_TP_P) == 0;
     }
 
+    private boolean isCfdiIntCommerce() {
+        boolean is = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
+                    is = true;
+                    break;
+                }
+            }
+        }
+        
+        return is;
+    }
+
     private ArrayList<DElement> createElementsArray() {
         ArrayList<DElement> elements = new ArrayList<>();
 
@@ -147,10 +163,6 @@ public class DElementComprobante extends cfd.DElement {
         return elements;
     }
     
-    private void computeEltOpcImpuestos() {
-        // XXX complete this! (Sergio Flores, 2017-07-31)
-    }
-
     /*
      * Public methods
      */
@@ -229,15 +241,16 @@ public class DElementComprobante extends cfd.DElement {
     @Override
     public java.lang.String getElementForXml() throws Exception {
         validateElement();
-        computeEltOpcImpuestos();
         
         String xml = "<" + msName + " "
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
-                + (!isCfdiPayroll() ? "" : DElementNomina.XSI)
+                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XSI)
+                + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
                 + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[0]) + "\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\""
-                + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS)
+                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XMLNS)
+                + (!isCfdiPayroll() ? "" : " " + DElementNomina.XMLNS)
                 + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[1]);
 
         for (DAttribute attribute : mvAttributes) {

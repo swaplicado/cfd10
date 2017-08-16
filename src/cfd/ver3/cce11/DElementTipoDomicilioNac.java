@@ -13,16 +13,16 @@ import cfd.DAttributeString;
  */
 public class DElementTipoDomicilioNac extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttCalle;
-    protected cfd.DAttributeString moAttNoExterior;
-    protected cfd.DAttributeString moAttNoInterior;
-    protected cfd.DAttributeString moAttColonia;
-    protected cfd.DAttributeString moAttLocalidad;
-    protected cfd.DAttributeString moAttReferencia;
-    protected cfd.DAttributeString moAttMunicipio;
-    protected cfd.DAttributeString moAttEstado;
-    protected cfd.DAttributeString moAttPais;
-    protected cfd.DAttributeString moAttCodigoPostal;
+    private final DAttributeString moAttCalle;
+    private final DAttributeString moAttNoExterior;
+    private final DAttributeString moAttNoInterior;
+    private final DAttributeString moAttColonia;
+    private final DAttributeString moAttLocalidad;
+    private final DAttributeString moAttReferencia;
+    private final DAttributeString moAttMunicipio;
+    private final DAttributeString moAttEstado;
+    private final DAttributeString moAttPais;
+    private final DAttributeString moAttCodigoPostal;
 
     public DElementTipoDomicilioNac() {
         super("cce11:Domicilio");
@@ -50,14 +50,14 @@ public class DElementTipoDomicilioNac extends cfd.DElement {
         mvAttributes.add(moAttCodigoPostal);
     }
 
-    public cfd.DAttributeString getAttCalle() { return moAttCalle; }
-    public cfd.DAttributeString getAttNoExterior() { return moAttNoExterior; }
-    public cfd.DAttributeString getAttNoInterior() { return moAttNoInterior; }
-    public cfd.DAttributeString getAttColonia() { return moAttColonia; }
-    public cfd.DAttributeString getAttLocalidad() { return moAttLocalidad; }
-    public cfd.DAttributeString getAttReferencia() { return moAttReferencia; }
-    public cfd.DAttributeString getAttMunicipio() { return moAttMunicipio; }
-    public cfd.DAttributeString getAttEstado() { return moAttEstado; }
-    public cfd.DAttributeString getAttPais() { return moAttPais; }
-    public cfd.DAttributeString getAttCodigoPostal() { return moAttCodigoPostal; }
+    public DAttributeString getAttCalle() { return moAttCalle; }
+    public DAttributeString getAttNoExterior() { return moAttNoExterior; }
+    public DAttributeString getAttNoInterior() { return moAttNoInterior; }
+    public DAttributeString getAttColonia() { return moAttColonia; }
+    public DAttributeString getAttLocalidad() { return moAttLocalidad; }
+    public DAttributeString getAttReferencia() { return moAttReferencia; }
+    public DAttributeString getAttMunicipio() { return moAttMunicipio; }
+    public DAttributeString getAttEstado() { return moAttEstado; }
+    public DAttributeString getAttPais() { return moAttPais; }
+    public DAttributeString getAttCodigoPostal() { return moAttCodigoPostal; }
 }

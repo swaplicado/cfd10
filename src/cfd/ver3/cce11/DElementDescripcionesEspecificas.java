@@ -13,10 +13,10 @@ import cfd.DAttributeString;
  */
 public class DElementDescripcionesEspecificas extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttMarca;
-    protected cfd.DAttributeString moAttModelo;
-    protected cfd.DAttributeString moAttSubModelo;
-    protected cfd.DAttributeString moAttNumeroSerie;
+    private final DAttributeString moAttMarca;
+    private final DAttributeString moAttModelo;
+    private final DAttributeString moAttSubModelo;
+    private final DAttributeString moAttNumeroSerie;
 
     public DElementDescripcionesEspecificas() {
         super("cfdi:DescripcionesEspecificas");
@@ -32,8 +32,8 @@ public class DElementDescripcionesEspecificas extends cfd.DElement {
         mvAttributes.add(moAttNumeroSerie);
     }
 
-    public cfd.DAttributeString getAttMarca() { return moAttMarca; }
-    public cfd.DAttributeString getAttModelo() { return moAttModelo; }
-    public cfd.DAttributeString getAttSubModelo() { return moAttSubModelo; }
-    public cfd.DAttributeString getAttNumeroSerie() { return moAttNumeroSerie; }
+    public DAttributeString getAttMarca() { return moAttMarca; }
+    public DAttributeString getAttModelo() { return moAttModelo; }
+    public DAttributeString getAttSubModelo() { return moAttSubModelo; }
+    public DAttributeString getAttNumeroSerie() { return moAttNumeroSerie; }
 }

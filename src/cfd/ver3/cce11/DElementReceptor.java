@@ -14,7 +14,7 @@ import cfd.DAttributeString;
  */
 public class DElementReceptor extends cfd.DElement {
 
-    private final cfd.DAttributeString moAttNumRegIdTrib;
+    private final DAttributeString moAttNumRegIdTrib;
 
     private DElementTipoDomicilioInt moEltDomicilio;    // required in CFDI 3.3
 
@@ -30,12 +30,14 @@ public class DElementReceptor extends cfd.DElement {
 
     public void setEltDomicilio(DElementTipoDomicilioInt o) { moEltDomicilio = o; }
     
-    public cfd.DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
+    public DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
 
     public DElementTipoDomicilioInt getEltDomicilio() { return moEltDomicilio; }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
         String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
@@ -57,7 +59,7 @@ public class DElementReceptor extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
 
         if (moEltDomicilio != null) {
             string += moEltDomicilio.getElementForOriginalString();

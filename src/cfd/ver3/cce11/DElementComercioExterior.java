@@ -3,7 +3,10 @@ package cfd.ver3.cce11;
 import cfd.DAttribute;
 import cfd.DAttributeInteger;
 import cfd.DAttributeString;
+import cfd.DAttributeTipoCambio;
 import cfd.DAttributeTypeImporte;
+import cfd.DElement;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,18 +14,21 @@ import cfd.DAttributeTypeImporte;
  */
 public class DElementComercioExterior extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttVersion;
-    protected cfd.DAttributeString moAttMotivoTraslado;
-    protected cfd.DAttributeString moAttTipoOperacion;
-    protected cfd.DAttributeString moAttClaveDePedimento;
-    protected cfd.DAttributeInteger moAttCertificadoOrigen;
-    protected cfd.DAttributeString moAttNumCertificadoOrigen;
-    protected cfd.DAttributeString moAttNumeroExportadorConfiable;
-    protected cfd.DAttributeString moAttIncoterm;
-    protected cfd.DAttributeInteger moAttSubdivision;
-    protected cfd.DAttributeString moAttObservaciones;
-    protected cfd.DAttributeTypeImporte moAttTipoCambioUSD;
-    protected cfd.DAttributeTypeImporte moAttTotalUSD;
+    public static final String XSI = "http://www.sat.gob.mx/ComercioExterior11  http://www.sat.gob.mx/sitio_internet/cfd/ComercioExterior11/ComercioExterior11.xsd";
+    public static final String XMLNS = "xmlns:cce11=\"http://www.sat.gob.mx/ComercioExterior11\"";
+
+    private final DAttributeString moAttVersion;
+    private final DAttributeString moAttMotivoTraslado;
+    private final DAttributeString moAttTipoOperacion;
+    private final DAttributeString moAttClaveDePedimento;
+    private final DAttributeInteger moAttCertificadoOrigen;
+    private final DAttributeString moAttNumCertificadoOrigen;
+    private final DAttributeString moAttNumeroExportadorConfiable;
+    private final DAttributeString moAttIncoterm;
+    private final DAttributeInteger moAttSubdivision;
+    private final DAttributeString moAttObservaciones;
+    private final DAttributeTipoCambio moAttTipoCambioUSD;
+    private final DAttributeTypeImporte moAttTotalUSD;
 
     protected cfd.ver3.cce11.DElementEmisor moEltEmisor;
     protected cfd.ver3.cce11.DElementPropietario moEltPropietario;
@@ -46,7 +52,7 @@ public class DElementComercioExterior extends cfd.DElement {
         moAttSubdivision = new DAttributeInteger("Subdivision", false, 1, 1);
         moAttSubdivision.setCanBeZero(true);
         moAttObservaciones = new DAttributeString("Observaciones", false, 1, 300);
-        moAttTipoCambioUSD = new DAttributeTypeImporte("TipoCambioUSD", false);
+        moAttTipoCambioUSD = new DAttributeTipoCambio("TipoCambioUSD", false);
         moAttTotalUSD = new DAttributeTypeImporte("TotalUSD", false);
 
         mvAttributes.add(moAttVersion);
@@ -68,6 +74,39 @@ public class DElementComercioExterior extends cfd.DElement {
         moEltDestinatario = null;
         moEltMercancias = null;
     }
+    
+    /*
+     * Private methods:
+     */
+
+    private ArrayList<DElement> createElementsArray() {
+        ArrayList<DElement> elements = new ArrayList<>();
+
+        if (moEltEmisor != null) {
+            elements.add(moEltEmisor);
+        }
+        
+        if (moEltPropietario != null) {
+            elements.add(moEltPropietario);
+        }
+        
+        if (moEltReceptor != null) {
+            elements.add(moEltReceptor);
+        }
+        
+        if (moEltDestinatario != null) {
+            elements.add(moEltDestinatario);
+        }
+        
+        if (moEltMercancias != null) {
+            elements.add(moEltMercancias);
+        }
+        
+        return elements;
+    }
+    /*
+     * Public methods:
+     */
 
     public void setEltEmisor(cfd.ver3.cce11.DElementEmisor o) { moEltEmisor = o; }
     public void setEltPropietario(cfd.ver3.cce11.DElementPropietario o) { moEltPropietario = o; }
@@ -75,18 +114,18 @@ public class DElementComercioExterior extends cfd.DElement {
     public void setEltDestinatario(cfd.ver3.cce11.DElementDestinatario o) { moEltDestinatario = o; }
     public void setEltMercancias(cfd.ver3.cce11.DElementMercancias o) { moEltMercancias = o; }
     
-    public cfd.DAttributeString getAttVersion() { return moAttVersion; }
-    public cfd.DAttributeString getAttMotivoTraslado() { return moAttMotivoTraslado; }
-    public cfd.DAttributeString getAttTipoOperacion() { return moAttTipoOperacion; }
-    public cfd.DAttributeString getAttClaveDePedimento() { return moAttClaveDePedimento; }
-    public cfd.DAttributeInteger getAttCertificadoOrigen() { return moAttCertificadoOrigen; }
-    public cfd.DAttributeString getAttNumCertificadoOrigen() { return moAttNumCertificadoOrigen; }
-    public cfd.DAttributeString getAttNumeroExportadorConfiable() { return moAttNumeroExportadorConfiable; }
-    public cfd.DAttributeString getAttIncoterm() { return moAttIncoterm; }
-    public cfd.DAttributeInteger getAttSubdivision() { return moAttSubdivision; }
-    public cfd.DAttributeString getAttObservaciones() { return moAttObservaciones; }
-    public cfd.DAttributeTypeImporte getAttTipoCambioUSD() { return moAttTipoCambioUSD; }
-    public cfd.DAttributeTypeImporte getAttTotalUSD() { return moAttTotalUSD; }
+    public DAttributeString getAttVersion() { return moAttVersion; }
+    public DAttributeString getAttMotivoTraslado() { return moAttMotivoTraslado; }
+    public DAttributeString getAttTipoOperacion() { return moAttTipoOperacion; }
+    public DAttributeString getAttClaveDePedimento() { return moAttClaveDePedimento; }
+    public DAttributeInteger getAttCertificadoOrigen() { return moAttCertificadoOrigen; }
+    public DAttributeString getAttNumCertificadoOrigen() { return moAttNumCertificadoOrigen; }
+    public DAttributeString getAttNumeroExportadorConfiable() { return moAttNumeroExportadorConfiable; }
+    public DAttributeString getAttIncoterm() { return moAttIncoterm; }
+    public DAttributeInteger getAttSubdivision() { return moAttSubdivision; }
+    public DAttributeString getAttObservaciones() { return moAttObservaciones; }
+    public DAttributeTipoCambio getAttTipoCambioUSD() { return moAttTipoCambioUSD; }
+    public DAttributeTypeImporte getAttTotalUSD() { return moAttTotalUSD; }
 
     public cfd.ver3.cce11.DElementEmisor getEltEmisor() { return moEltEmisor; }
     public cfd.ver3.cce11.DElementPropietario getEltPropietario() { return moEltPropietario; }
@@ -96,87 +135,37 @@ public class DElementComercioExterior extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForXml() throws Exception {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName + " " +
-                "xsi:schemaLocation=\"http://www.sat.gob.mx/ComercioExterior11  http://www.sat.gob.mx/sitio_internet/cfd/ComercioExterior11/ComercioExterior11.xsd\" " +
-                "xmlns:cce11=\"http://www.sat.gob.mx/ComercioExterior11\" ";
+        validateElement();
+        
+        String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.isEmpty() ? "" : " " + xml;
+            String aux = attribute.getAttributeForXml();
+            xml += aux.isEmpty() ? "" : " " + aux;
         }
 
-        string += ">";
+        xml += ">";
 
-        if (moEltEmisor != null) {
-            xml = moEltEmisor.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
-        }
-        
-        if (moEltPropietario != null) {
-            xml = moEltPropietario.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
-        }
-        
-        if (moEltReceptor != null) {
-            xml = moEltReceptor.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
-        }
-        
-        if (moEltDestinatario != null) {
-            xml = moEltDestinatario.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
-        }
-        
-        if (moEltMercancias != null) {
-            xml = moEltMercancias.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
+        for (DElement element : createElementsArray()) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
+            }
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
 
-        return string;
+        return xml;
     }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = "";
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
+        
+        for (DElement element : createElementsArray()) {
+            string += element.getElementForOriginalString();
+        }
 
-        string += moAttVersion.getAttributeForOriginalString();
-        string += moAttMotivoTraslado.getAttributeForOriginalString();
-        string += moAttTipoOperacion.getAttributeForOriginalString();
-        string += moAttClaveDePedimento.getAttributeForOriginalString();
-        string += moAttCertificadoOrigen.getAttributeForOriginalString();
-        string += moAttNumCertificadoOrigen.getAttributeForOriginalString();
-        string += moAttNumeroExportadorConfiable.getAttributeForOriginalString();
-        string += moAttIncoterm.getAttributeForOriginalString();
-        string += moAttSubdivision.getAttributeForOriginalString();
-        string += moAttObservaciones.getAttributeForOriginalString();
-        string += moAttTipoCambioUSD.getAttributeForOriginalString();
-        string += moAttTotalUSD.getAttributeForOriginalString();
-
-        if (moEltEmisor != null) {
-            string += moEltEmisor.getElementForOriginalString();
-        }
-        
-        if (moEltPropietario != null) {
-            string += moEltPropietario.getElementForOriginalString();
-        }
-        
-        if (moEltReceptor != null) {
-            string += moEltReceptor.getElementForOriginalString();
-        }
-        
-        if (moEltDestinatario != null) {
-            string += moEltDestinatario.getElementForOriginalString();
-        }
-        
-        if (moEltMercancias != null) {
-            string += moEltMercancias.getElementForOriginalString();
-        }
-        
         return string;
     }
 }

@@ -8,7 +8,7 @@ package cfd.ver3.cce11;
 import cfd.DAttribute;
 import cfd.DCfdMath;
 import cfd.DElement;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,24 +16,24 @@ import java.util.Vector;
  */
 public class DElementMercancias extends cfd.DElement {
 
-    protected java.util.Vector<cfd.ver3.cce11.DElementMercancia> mvEltHijosMercancia;
+    private final ArrayList<DElementMercancia> maEltMercancias;
 
     public DElementMercancias() {
         super("cce11:Mercancias");
 
-        mvEltHijosMercancia = new Vector<DElementMercancia>();
+        maEltMercancias = new ArrayList<>();
     }
 
-    public java.util.Vector<cfd.ver3.cce11.DElementMercancia> getEltHijosMercancia() { return mvEltHijosMercancia; }
+    public ArrayList<DElementMercancia> getEltMercancias() { return maEltMercancias; }
 
     /**
-     * Add one element Element Mercancia type to vector, if not exists.
+     * Add one element Element Mercancia type to vector, if does not exist.
      * @param elementMercancia element to add.
      */
-    public void addMercancia(cfd.ver3.cce11.DElementMercancia elementMercancia) {
+    public void addMercancia(final DElementMercancia elementMercancia) {
         boolean exists = false;
         
-        for (cfd.ver3.cce11.DElementMercancia mercancia : mvEltHijosMercancia) {
+        for (DElementMercancia mercancia : maEltMercancias) {
             if (mercancia.getAttNoIdentificacion().getString().compareTo(elementMercancia.getAttNoIdentificacion().getString()) == 0 &&
                     mercancia.getAttFraccionArancelaria().getString().compareTo(elementMercancia.getAttFraccionArancelaria().getString()) == 0) {
                 mercancia.getAttCantidadAduana().setDouble(DCfdMath.round((mercancia.getAttCantidadAduana().getDouble() + elementMercancia.getAttCantidadAduana().getDouble()), elementMercancia.getAttCantidadAduana().getDecimals()));
@@ -44,46 +44,48 @@ public class DElementMercancias extends cfd.DElement {
         }
         
         if (!exists) {
-            mvEltHijosMercancia.add(elementMercancia);
+            maEltMercancias.add(elementMercancia);
         }
     }
     
+    @Override
+    public void validateElement() throws IllegalStateException, Exception {
+        if (maEltMercancias.isEmpty()) {
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new DElementMercancia().getName()) + "'.");
+        }
+    }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
+        validateElement();
+        
+        String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.isEmpty() ? "" : " " + xml;
+            String aux = attribute.getAttributeForXml();
+            xml += aux.isEmpty() ? "" : " " + aux;
         }
 
-        string += ">";
+        xml += ">";
 
-        if (mvEltHijosMercancia.isEmpty()) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver3.cce11.DElementMercancia().getName()) + "'.");
-        }
-        else {
-            for (DElementMercancia concepto : mvEltHijosMercancia) {
-                xml = concepto.getElementForXml();
-                string += xml.isEmpty() ? "" : "\n" + xml;
-            }
+        for (DElementMercancia element : maEltMercancias) {
+            String aux = element.getElementForXml();
+            xml += aux.isEmpty() ? "" : "\n" + aux;
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
 
-        return string;
+        return xml;
     }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
         String string = "";
 
-        for (DElementMercancia concepto : mvEltHijosMercancia) {
-            string += concepto.getElementForOriginalString();
+        for (DElementMercancia element : maEltMercancias) {
+            string += element.getElementForOriginalString();
         }
 
         return string;

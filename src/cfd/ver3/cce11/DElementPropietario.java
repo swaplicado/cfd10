@@ -13,8 +13,8 @@ import cfd.DAttributeString;
  */
 public class DElementPropietario extends cfd.DElement {
 
-    private final cfd.DAttributeString moAttNumRegIdTrib;
-    private final cfd.DAttributeString moAttResidenciaFiscal;
+    private final DAttributeString moAttNumRegIdTrib;
+    private final DAttributeString moAttResidenciaFiscal;
 
     public DElementPropietario() {
         super("cfdi:Propietario");
@@ -26,6 +26,6 @@ public class DElementPropietario extends cfd.DElement {
         mvAttributes.add(moAttResidenciaFiscal);
     }
 
-    public cfd.DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
-    public cfd.DAttributeString getAttResidenciaFiscal() { return moAttResidenciaFiscal; }
+    public DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
+    public DAttributeString getAttResidenciaFiscal() { return moAttResidenciaFiscal; }
 }

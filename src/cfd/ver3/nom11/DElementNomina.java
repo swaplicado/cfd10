@@ -143,7 +143,7 @@ public class DElementNomina extends cfd.DElement {
 
         string = "<" + msName + " " +
                 "xsi:schemaLocation=\"http://www.sat.gob.mx/nomina  http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina11.xsd\" " +
-                "xmlns:nomina=\"http://www.sat.gob.mx/nomina\" ";
+                "xmlns:nomina=\"http://www.sat.gob.mx/nomina\"";
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();

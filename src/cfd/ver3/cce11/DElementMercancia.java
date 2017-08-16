@@ -9,7 +9,7 @@ import cfd.DAttribute;
 import cfd.DAttributeDouble;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,14 +17,14 @@ import java.util.Vector;
  */
 public class DElementMercancia extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttNoIdentificacion;
-    protected cfd.DAttributeString moAttFraccionArancelaria;
-    protected cfd.DAttributeDouble moAttCantidadAduana;
-    protected cfd.DAttributeString moAttUnidadAduana;
-    protected cfd.DAttributeDouble moAttValorUnitarioAduana;
-    protected cfd.DAttributeTypeImporte moAttValorDolares;
+    private final DAttributeString moAttNoIdentificacion;
+    private final DAttributeString moAttFraccionArancelaria;
+    private final DAttributeDouble moAttCantidadAduana;
+    private final DAttributeString moAttUnidadAduana;
+    private final DAttributeDouble moAttValorUnitarioAduana;
+    private final DAttributeTypeImporte moAttValorDolares;
 
-    protected java.util.Vector<cfd.ver3.cce11.DElementDescripcionesEspecificas> mvEltHijosDescripcionesEspecificas;
+    private final ArrayList<DElementDescripcionesEspecificas> maEltDescripcionesEspecificas;
 
     public DElementMercancia() {
         super("cce11:Mercancia");
@@ -45,48 +45,47 @@ public class DElementMercancia extends cfd.DElement {
         mvAttributes.add(moAttValorUnitarioAduana);
         mvAttributes.add(moAttValorDolares);
 
-        mvEltHijosDescripcionesEspecificas = new Vector<DElementDescripcionesEspecificas>();
+        maEltDescripcionesEspecificas = new ArrayList<>();
     }
 
-    public cfd.DAttributeString getAttNoIdentificacion() { return moAttNoIdentificacion; }
-    public cfd.DAttributeString getAttFraccionArancelaria() { return moAttFraccionArancelaria; }
-    public cfd.DAttributeDouble getAttCantidadAduana() { return moAttCantidadAduana; }
-    public cfd.DAttributeString getAttUnidadAduana() { return moAttUnidadAduana; }
-    public cfd.DAttributeDouble getAttValorUnitarioAduana() { return moAttValorUnitarioAduana; }
-    public cfd.DAttributeTypeImporte getAttValorDolares() { return moAttValorDolares; }
+    public DAttributeString getAttNoIdentificacion() { return moAttNoIdentificacion; }
+    public DAttributeString getAttFraccionArancelaria() { return moAttFraccionArancelaria; }
+    public DAttributeDouble getAttCantidadAduana() { return moAttCantidadAduana; }
+    public DAttributeString getAttUnidadAduana() { return moAttUnidadAduana; }
+    public DAttributeDouble getAttValorUnitarioAduana() { return moAttValorUnitarioAduana; }
+    public DAttributeTypeImporte getAttValorDolares() { return moAttValorDolares; }
 
-    public java.util.Vector<cfd.ver3.cce11.DElementDescripcionesEspecificas> getEltHijosDescripcionesEspecificas() { return mvEltHijosDescripcionesEspecificas; }
+    public ArrayList<DElementDescripcionesEspecificas> getEltDescripcionesEspecificas() { return maEltDescripcionesEspecificas; }
 
     @Override
     public java.lang.String getElementForXml() throws Exception {
-        String xml = "";
-        String string = "";
-
-        string = "<" + msName;
+        validateElement();
+        
+        String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            xml = attribute.getAttributeForXml();
-            string += xml.isEmpty() ? "" : " " + xml;
+            String aux = attribute.getAttributeForXml();
+            xml += aux.isEmpty() ? "" : " " + aux;
         }
 
-        string += ">";
+        xml += ">";
 
-        for (DElementDescripcionesEspecificas infoAduanera : mvEltHijosDescripcionesEspecificas) {
-            xml = infoAduanera.getElementForXml();
-            string += xml.isEmpty() ? "" : "\n" + xml;
+        for (DElementDescripcionesEspecificas element : maEltDescripcionesEspecificas) {
+            String aux = element.getElementForXml();
+            xml += aux.isEmpty() ? "" : "\n" + aux;
         }
 
-        string += "\n</" + msName + ">";
+        xml += "\n</" + msName + ">";
 
-        return string;
+        return xml;
     }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
 
-        for (DElementDescripcionesEspecificas descripcionesEspecificas : mvEltHijosDescripcionesEspecificas) {
-            string += descripcionesEspecificas.getElementForOriginalString();
+        for (DElementDescripcionesEspecificas element : maEltDescripcionesEspecificas) {
+            string += element.getElementForOriginalString();
         }
 
         return string;

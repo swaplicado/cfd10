@@ -14,8 +14,8 @@ import cfd.DAttributeString;
  */
 public class DElementDestinatario extends cfd.DElement {
 
-    private final cfd.DAttributeString moAttNumRegIdTrib;
-    private final cfd.DAttributeString moAttNombre;
+    private final DAttributeString moAttNumRegIdTrib;
+    private final DAttributeString moAttNombre;
 
     private final DElementTipoDomicilioInt moEltDomicilio;  // required
 
@@ -31,13 +31,15 @@ public class DElementDestinatario extends cfd.DElement {
         moEltDomicilio = new DElementTipoDomicilioInt();
     }
 
-    public cfd.DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
-    public cfd.DAttributeString getAttNombre() { return moAttNombre; }
+    public DAttributeString getAttNumRegIdTrib() { return moAttNumRegIdTrib; }
+    public DAttributeString getAttNombre() { return moAttNombre; }
 
     public DElementTipoDomicilioInt getEltDomicilio() { return moEltDomicilio; }
 
     @Override
     public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
         String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
@@ -57,7 +59,7 @@ public class DElementDestinatario extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
 
         string += moEltDomicilio.getElementForOriginalString();
 

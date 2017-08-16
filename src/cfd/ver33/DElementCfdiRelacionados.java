@@ -73,7 +73,7 @@ public class DElementCfdiRelacionados extends cfd.DElement {
     
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
 
         for (DElement element : maEltCfdiRelacionados) {
             string += element.getElementForOriginalString();

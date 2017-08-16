@@ -98,7 +98,7 @@ public class DElementNomina extends cfd.DElement {
         String xml = "";
         String string = "";
 
-        string = "<" + msName + " ";
+        string = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
@@ -142,7 +142,7 @@ public class DElementNomina extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes
+        String string = super.getElementForOriginalString();    // for element attributes and element validation 
 
         if (moEltEmisor != null) {
             string += moEltEmisor.getElementForOriginalString();
