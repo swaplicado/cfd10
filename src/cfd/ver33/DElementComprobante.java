@@ -105,9 +105,9 @@ public class DElementComprobante extends cfd.DElement {
         mvAttributes.add(moAttConfirmacion);
 
         moEltOpcCfdiRelacionados = null;
-        moEltEmisor = null;
-        moEltReceptor = null;
-        moEltConceptos = new DElementConceptos();
+        moEltEmisor = new DElementEmisor();         // can be reset
+        moEltReceptor = new DElementReceptor();     // can be reset
+        moEltConceptos = new DElementConceptos();   // cannot be reset, is final
         moEltOpcImpuestos = null;
         moEltOpcComplemento = null;
         moEltOpcAddenda = null;

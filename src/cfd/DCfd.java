@@ -308,23 +308,23 @@ public final class DCfd {
 
         return bufferedImage;
     }
-    
-    public static BufferedImage createQrCodeBufferedImageCfdi33(final String url, final String rfcEmisor, final String rfcReceptor, final double total, final String uuid, final String selloEmisor) {
+
+    public static BufferedImage createQrCodeBufferedImageCfdi33(final String url, final String uuid, final String rfcEmisor, final String rfcReceptor, final double total, final String sello) {
         int x = 0;
         int y = 0;
         int grayValue = 0;
         String data  = "";
-        DecimalFormat decimalFormat = new DecimalFormat("0000000000.000000");
+        DecimalFormat decimalFormat = new DecimalFormat("#." + SLibUtils.textRepeat("0", 6));
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = null;
         BufferedImage bufferedImage = null;
 
         data += url;
-        data += "&id=" + uuid;
-        data += "?re=" + rfcEmisor;
-        data += "&rr=" + rfcReceptor;
+        data += "&id=" + (uuid == null || uuid.isEmpty() ? SLibUtils.textRepeat("0", 40) : uuid);
+        data += "?re=" + (rfcEmisor == null || rfcEmisor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcEmisor);
+        data += "&rr=" + (rfcReceptor == null || rfcReceptor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcReceptor);
         data += "&tt=" + decimalFormat.format(total);
-        data += "&fe=" + selloEmisor;
+        data += "&fe=" + (sello == null || sello.isEmpty() ? SLibUtils.textRepeat("0", 8) : sello);
 
         try {
             bufferedImage = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);

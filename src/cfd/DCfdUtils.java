@@ -881,7 +881,6 @@ public abstract class DCfdUtils {
         Vector<Node> nodeChildsParte = null;
         NamedNodeMap namedNodeMap = null;
         NamedNodeMap namedNodeMapChild = null;
-        TreeMap<Integer, String> moOptions = null;
 
         cfd.ver33.DElementComprobante comprobante = new cfd.ver33.DElementComprobante();
 
@@ -1070,70 +1069,72 @@ public abstract class DCfdUtils {
             comprobante.getEltConceptos().getEltConceptos().add(concepto);
         }
         
-        // Tax:
+        // Taxes:
+        
+        if (SXmlUtils.hasChildElement(doc, "cfdi:Impuestos")) {
+            node = SXmlUtils.extractElements(doc, "cfdi:Impuestos").item(0);
 
-        node = SXmlUtils.extractElements(doc, "cfdi:Impuestos").item(0);
+            cfd.ver33.DElementImpuestosRetenciones retenciones = new cfd.ver33.DElementImpuestosRetenciones();
+            cfd.ver33.DElementImpuestosTraslados trasladados = new cfd.ver33.DElementImpuestosTraslados();
 
-        cfd.ver33.DElementImpuestosRetenciones retenciones = new cfd.ver33.DElementImpuestosRetenciones();
-        cfd.ver33.DElementImpuestosTraslados trasladados = new cfd.ver33.DElementImpuestosTraslados();
+            if (SXmlUtils.hasChildElement(node, "cfdi:Retenciones")) {
+                nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Retenciones").get(0);
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Retencion");
 
-        if (SXmlUtils.hasChildElement(node, "cfdi:Retenciones")) {
-            nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Retenciones").get(0);
-            nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Retencion");
+                for (int i = 0; i < nodeChilds.size(); i++) {
+                    cfd.ver33.DElementImpuestoRetencion impuestoRetencion = new cfd.ver33.DElementImpuestoRetencion();
 
-            for (int i = 0; i < nodeChilds.size(); i++) {
-                cfd.ver33.DElementImpuestoRetencion impuestoRetencion = new cfd.ver33.DElementImpuestoRetencion();
+                    nodeChild = nodeChilds.get(i);
+                    namedNodeMapChild = nodeChild.getAttributes();
 
-                nodeChild = nodeChilds.get(i);
-                namedNodeMapChild = nodeChild.getAttributes();
-                
-                impuestoRetencion.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
-                dTotalImptoRetenido += SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true));
-                impuestoRetencion.getAttImporte().setDouble(dTotalImptoRetenido);
+                    impuestoRetencion.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
+                    dTotalImptoRetenido += SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true));
+                    impuestoRetencion.getAttImporte().setDouble(dTotalImptoRetenido);
 
-                retenciones.getEltImpuestoRetenciones().add(impuestoRetencion);
+                    retenciones.getEltImpuestoRetenciones().add(impuestoRetencion);
+                }
             }
-        }
 
-        if (SXmlUtils.hasChildElement(node, "cfdi:Traslados")) {
-            nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Traslados").get(0);
-            nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Traslado");
+            if (SXmlUtils.hasChildElement(node, "cfdi:Traslados")) {
+                nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Traslados").get(0);
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Traslado");
 
-            for (int i = 0; i < nodeChilds.size(); i++) {
-                cfd.ver33.DElementImpuestoTraslado impuestoTraslado = new cfd.ver33.DElementImpuestoTraslado();
+                for (int i = 0; i < nodeChilds.size(); i++) {
+                    cfd.ver33.DElementImpuestoTraslado impuestoTraslado = new cfd.ver33.DElementImpuestoTraslado();
 
-                nodeChild = nodeChilds.get(i);
-                namedNodeMapChild = nodeChild.getAttributes();
+                    nodeChild = nodeChilds.get(i);
+                    namedNodeMapChild = nodeChild.getAttributes();
 
-                impuestoTraslado.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
-                impuestoTraslado.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFactor", true));
-                impuestoTraslado.getAttTasaOCuota().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TasaOCuota", true)));
-                dTotalImptoTrasladado += SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true));
-                impuestoTraslado.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
+                    impuestoTraslado.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
+                    impuestoTraslado.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFactor", true));
+                    impuestoTraslado.getAttTasaOCuota().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TasaOCuota", true)));
+                    dTotalImptoTrasladado += SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true));
+                    impuestoTraslado.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
 
-                trasladados.getEltImpuestoTrasladados().add(impuestoTraslado);
+                    trasladados.getEltImpuestoTrasladados().add(impuestoTraslado);
+                }
             }
-        }
 
-        if (retenciones.getEltImpuestoRetenciones().size() > 0) {
-            comprobante.getEltOpcImpuestos().getAttTotalImpuestosRetenidos().setDouble(dTotalImptoRetenido);
-            comprobante.getEltOpcImpuestos().setEltOpcImpuestosRetenidos(retenciones);
-        }
+            if (retenciones.getEltImpuestoRetenciones().size() > 0) {
+                comprobante.getEltOpcImpuestos().getAttTotalImpuestosRetenidos().setDouble(dTotalImptoRetenido);
+                comprobante.getEltOpcImpuestos().setEltOpcImpuestosRetenidos(retenciones);
+            }
 
-        if (trasladados.getEltImpuestoTrasladados().size() > 0) {
-            comprobante.getEltOpcImpuestos().getAttTotalImpuestosTraslados().setDouble(dTotalImptoTrasladado);
-            comprobante.getEltOpcImpuestos().setEltOpcImpuestosTrasladados(trasladados);
+            if (trasladados.getEltImpuestoTrasladados().size() > 0) {
+                comprobante.getEltOpcImpuestos().getAttTotalImpuestosTraslados().setDouble(dTotalImptoTrasladado);
+                comprobante.getEltOpcImpuestos().setEltOpcImpuestosTrasladados(trasladados);
+            }
         }
 
         // Child elements of element 'cfdi:Complemento':
         
-        cfd.ver32.DElementComplemento complemento = new cfd.ver32.DElementComplemento();
-
-        node = SXmlUtils.extractElements(doc, "cfdi:Complemento").item(0);
-
-        if (node != null) {
-            // Digital signature:
+        if (SXmlUtils.hasChildElement(doc, "cfdi:Complemento")) {
+            cfd.ver32.DElementComplemento complemento = new cfd.ver32.DElementComplemento();
             
+            node = SXmlUtils.extractElements(doc, "cfdi:Complemento").item(0);
+
+            // digital signature:
+
             if (SXmlUtils.hasChildElement(node, "tfd:TimbreFiscalDigital")) {
                 cfd.ver32.DElementTimbreFiscalDigital tfd = new cfd.ver32.DElementTimbreFiscalDigital();
 
@@ -1149,23 +1150,23 @@ public abstract class DCfdUtils {
 
                 complemento.getElements().add(tfd);
             }
-            
-            // Payroll:
-            
+
+            // payroll:
+
             if (SXmlUtils.hasChildElement(node, "nomina:Nomina") || SXmlUtils.hasChildElement(node, "nomina12:Nomina")) {
                 complemento.getElements().add(getElementNomina(node));
             }
-        }
 
-        if (complemento.getElements().size() > 0) {
-            comprobante.setEltOpcComplemento(complemento);
+            if (complemento.getElements().size() > 0) {
+                comprobante.setEltOpcComplemento(complemento);
+            }
         }
 
         // Addenda:
 
-        node = SXmlUtils.extractElements(doc, "cfdi:Addenda").item(0);
+        if (SXmlUtils.hasChildElement(doc, "cfdi:Addenda")) {
+            node = SXmlUtils.extractElements(doc, "cfdi:Addenda").item(0);
 
-        if (node != null) {
             cfd.ver32.DElementAddenda addenda = (cfd.ver32.DElementAddenda) getElementAddenda(node);
 
             comprobante.setEltOpcAddenda(addenda, DElementAddenda1.createXmlLocationNs());
