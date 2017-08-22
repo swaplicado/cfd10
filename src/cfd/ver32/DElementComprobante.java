@@ -8,13 +8,16 @@ package cfd.ver32;
 import cfd.DAttribute;
 import cfd.DAttributeDatetime;
 import cfd.DAttributeOptionCondicionesPago;
-import cfd.ver2.DAttributeOptionFormaDePago;
-import cfd.ver2.DAttributeOptionTipoDeComprobante;
 import cfd.DAttributeString;
 import cfd.DAttributeTipoCambio;
 import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
+import cfd.DElement;
 import cfd.ext.addenda1.DElementAddenda1;
+import cfd.ver2.DAttributeOptionFormaDePago;
+import cfd.ver2.DAttributeOptionTipoDeComprobante;
+import cfd.ver3.cce11.DElementComercioExterior;
+import cfd.ver3.nom12.DElementNomina;
 
 /**
  *
@@ -22,7 +25,7 @@ import cfd.ext.addenda1.DElementAddenda1;
  */
 public class DElementComprobante extends cfd.DElement {
 
-    protected String[] masAddendaXmlLocationNs;
+    protected String[] masAddenda1XmlLocationNs;
 
     protected cfd.DAttributeString moAttVersion;
     protected cfd.DAttributeString moAttSerie;
@@ -62,7 +65,7 @@ public class DElementComprobante extends cfd.DElement {
     public DElementComprobante(boolean addenda1XmlLocationNs) {
         super("cfdi:Comprobante");
 
-        masAddendaXmlLocationNs = !addenda1XmlLocationNs ? null : DElementAddenda1.createXmlLocationNs();
+        masAddenda1XmlLocationNs = !addenda1XmlLocationNs ? null : DElementAddenda1.createXmlLocationNs();
 
         moAttVersion = new DAttributeString("version", true, 3, 3);
         moAttVersion.setString("" + DCfdConsts.CFDI_VER_32);
@@ -128,9 +131,9 @@ public class DElementComprobante extends cfd.DElement {
     public void setEltReceptor(cfd.ver32.DElementReceptor o) { moEltReceptor = o; }
     public void setEltOpcComplemento(cfd.ver32.DElementComplemento o) { moEltOpcComplemento = o; }
     public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda) { moEltOpcAddenda = addenda; }
-    public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddendaXmlLocationNs = addendaXmlLocationNs; }
+    public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddenda1XmlLocationNs = addendaXmlLocationNs; }
 
-    public String[] getAddendaXmlLocationNs() { return masAddendaXmlLocationNs; }
+    public String[] getAddendaXmlLocationNs() { return masAddenda1XmlLocationNs; }
     public cfd.DAttributeString getAttVersion() { return moAttVersion; }
     public cfd.DAttributeString getAttSerie() { return moAttSerie; }
     public cfd.DAttributeString getAttFolio() { return moAttFolio; }
@@ -162,17 +165,54 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver32.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
     public cfd.ver32.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
 
+    /*
+     * Private methods:
+     */
+    
+    private boolean isCfdiPayroll() {
+        boolean is = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.nom12.DElementNomina) {
+                    is = true;
+                    break;
+                }
+            }
+        }
+        
+        return is;
+    }
+
+    private boolean isCfdiIntCommerce() {
+        boolean is = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
+                    is = true;
+                    break;
+                }
+            }
+        }
+        
+        return is;
+    }
+
     @Override
     public java.lang.String getElementForXml() throws Exception {
         String aux = "";
-        String xml = "";
-
-        xml = "<" + msName + " " +
-                "xsi:schemaLocation=\"http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" +
-                (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[0]) + "\" " +
-                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\"" +
-                (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[1]);
+        
+        String xml = "<" + msName + " "
+                + "xsi:schemaLocation=\""
+                + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd"
+                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XSI)
+                + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
+                + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[0]) + "\" "
+                + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\""
+                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XMLNS)
+                + (!isCfdiPayroll() ? "" : " " + DElementNomina.XMLNS)
+                + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[1]);
 
         for (DAttribute attribute : mvAttributes) {
             aux = attribute.getAttributeForXml();
@@ -210,6 +250,14 @@ public class DElementComprobante extends cfd.DElement {
         return xml;
     }
 
+    /*
+     * Private methods:
+     */
+    
+    /*
+     * Public methods:
+     */
+    
     /**
      * Composes original string linking together each value.
      * @return

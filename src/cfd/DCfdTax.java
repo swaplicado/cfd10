@@ -17,7 +17,7 @@ public interface DCfdTax {
     
     public String getImpuestoClave();
     public double getTasa();
-    public String getTipopFactor();
+    public String getTipoFactor();
     public double getBase();
     public double getImporte();
     

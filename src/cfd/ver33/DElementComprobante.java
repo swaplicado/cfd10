@@ -115,7 +115,7 @@ public class DElementComprobante extends cfd.DElement {
     }
     
     /*
-     * Private methods
+     * Private methods:
      */
     
     private boolean isCfdiPayroll() {
@@ -164,7 +164,7 @@ public class DElementComprobante extends cfd.DElement {
     }
     
     /*
-     * Public methods
+     * Public methods:
      */
 
     public float getVersion() { return DCfdConsts.CFDI_VER_33; }
@@ -261,7 +261,7 @@ public class DElementComprobante extends cfd.DElement {
         }
 
         xml += ">";
-        
+
         for (DElement element : createElementsArray()) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {

@@ -27,8 +27,8 @@ public class DCfdTaxes {
         for (DCfdTax cfdTax : maCfdTaxes) {
             if (cfdTax.getTasa() == tax.getTasa() &&
                     cfdTax.getImpuestoClave().compareTo(tax.getImpuestoClave()) == 0 &&
-                    cfdTax.getTipopFactor().compareTo(tax.getTipopFactor()) == 0) {
-                cfdTax.addBaseImporte(tax.getBase(), cfdTax.getImporte());
+                    cfdTax.getTipoFactor().compareTo(tax.getTipoFactor()) == 0) {
+                cfdTax.addBaseImporte(tax.getBase(), tax.getImporte());
                 exists = true;
                 break;
             }

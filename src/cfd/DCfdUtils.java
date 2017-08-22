@@ -7,6 +7,7 @@ package cfd;
 
 import cfd.ext.addenda1.DElementAddenda1;
 import cfd.ver32.DCfdVer3Consts;
+import cfd.ver33.DElementImpuestos;
 import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
 import java.util.TreeMap;
@@ -873,39 +874,31 @@ public abstract class DCfdUtils {
         double dTotalImptoTrasladado = 0;
         DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = docBuilder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
-        Node node = null;
-        Node nodeChild = null;
-        Vector<Node> nodeChilds = null;
-        Vector<Node> nodeChildsAduanera = null;
-        Vector<Node> nodeChildsTaxConcept = null;
-        Vector<Node> nodeChildsParte = null;
-        NamedNodeMap namedNodeMap = null;
-        NamedNodeMap namedNodeMapChild = null;
 
         cfd.ver33.DElementComprobante comprobante = new cfd.ver33.DElementComprobante();
 
         // Comprobante:
 
-        node = SXmlUtils.extractElements(doc, "cfdi:Comprobante").item(0);
-        namedNodeMap = node.getAttributes();
+        Node nodeComprobante = SXmlUtils.extractElements(doc, "cfdi:Comprobante").item(0);
+        NamedNodeMap nodeComprobanteMap = nodeComprobante.getAttributes();
 
-        comprobante.getAttSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Serie", false));
-        comprobante.getAttFolio().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Folio", false));
-        comprobante.getAttFecha().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMap, "Fecha", true).replaceAll("T", " ")));
-        comprobante.getAttSello().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Sello", true));
-        comprobante.getAttFormaPago().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "FormaPago", false));
-        comprobante.getAttNoCertificado().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "NoCertificado", true));
-        comprobante.getAttCertificado().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Certificado", true));
-        comprobante.getAttCondicionesDePago().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "CondicionesDePago", false));
-        comprobante.getAttSubTotal().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMap, "SubTotal", true)));
-        comprobante.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMap, "Descuento", false)));
-        comprobante.getAttMoneda().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Moneda", false));
-        comprobante.getAttTipoCambio().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMap, "TipoCambio", false)));
-        comprobante.getAttTotal().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMap, "Total", true)));
-        comprobante.getAttTipoDeComprobante().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "TipoDeComprobante", true));
-        comprobante.getAttMetodoPago().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "MetodoPago", false));
-        comprobante.getAttLugarExpedicion().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "LugarExpedicion", true));
-        comprobante.getAttConfirmacion().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Confirmacion", false));
+        comprobante.getAttSerie().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Serie", false));
+        comprobante.getAttFolio().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Folio", false));
+        comprobante.getAttFecha().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Fecha", true).replaceAll("T", " ")));
+        comprobante.getAttSello().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Sello", true));
+        comprobante.getAttFormaPago().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "FormaPago", false));
+        comprobante.getAttNoCertificado().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "NoCertificado", true));
+        comprobante.getAttCertificado().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Certificado", true));
+        comprobante.getAttCondicionesDePago().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "CondicionesDePago", false));
+        comprobante.getAttSubTotal().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "SubTotal", true)));
+        comprobante.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Descuento", false)));
+        comprobante.getAttMoneda().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Moneda", false));
+        comprobante.getAttTipoCambio().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoCambio", false)));
+        comprobante.getAttTotal().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Total", true)));
+        comprobante.getAttTipoDeComprobante().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoDeComprobante", true));
+        comprobante.getAttMetodoPago().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "MetodoPago", false));
+        comprobante.getAttLugarExpedicion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "LugarExpedicion", true));
+        comprobante.getAttConfirmacion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Confirmacion", false));
 
         // CFDI Related:
         
@@ -913,157 +906,145 @@ public abstract class DCfdUtils {
         
         // Emisor:
 
-        node = SXmlUtils.extractElements(doc, "cfdi:Emisor").item(0);
-        namedNodeMap = node.getAttributes();
+        Node nodeEmisor = SXmlUtils.extractElements(doc, "cfdi:Emisor").item(0);
+        NamedNodeMap nodeEmisorMap = nodeEmisor.getAttributes();
 
-        comprobante.getEltEmisor().getAttRfc().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Rfc", true));
-        comprobante.getEltEmisor().getAttNombre().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Nombre", false));
-        comprobante.getEltEmisor().getAttRegimenFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "RegimenFiscal", true));
+        comprobante.getEltEmisor().getAttRfc().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "Rfc", true));
+        comprobante.getEltEmisor().getAttNombre().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "Nombre", false));
+        comprobante.getEltEmisor().getAttRegimenFiscal().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "RegimenFiscal", true));
 
         // Receptor:
 
-        node = SXmlUtils.extractElements(doc, "cfdi:Receptor").item(0);
-        namedNodeMap = node.getAttributes();
+        Node nodeReceptor = SXmlUtils.extractElements(doc, "cfdi:Receptor").item(0);
+        NamedNodeMap nodeReceptorMap = nodeReceptor.getAttributes();
 
-        comprobante.getEltReceptor().getAttRfc().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Rfc", true));
-        comprobante.getEltReceptor().getAttNombre().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Nombre", false));
-        comprobante.getEltReceptor().getAttResidenciaFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "ResidenciaFiscal", false));
-        comprobante.getEltReceptor().getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "NumRegIdTrib", false));
-        comprobante.getEltReceptor().getAttUsoCFDI().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "UsoCFDI", true));
+        comprobante.getEltReceptor().getAttRfc().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "Rfc", true));
+        comprobante.getEltReceptor().getAttNombre().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", false));
+        comprobante.getEltReceptor().getAttResidenciaFiscal().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "ResidenciaFiscal", false));
+        comprobante.getEltReceptor().getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "NumRegIdTrib", false));
+        comprobante.getEltReceptor().getAttUsoCFDI().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "UsoCFDI", true));
         
         // Concepts:
 
-        node = SXmlUtils.extractElements(doc, "cfdi:Conceptos").item(0);
-        nodeChilds = SXmlUtils.extractChildElements(node, "cfdi:Concepto");
+        Node nodeConceptos = SXmlUtils.extractElements(doc, "cfdi:Conceptos").item(0);
+        Vector<Node> childNodeConceptos = SXmlUtils.extractChildElements(nodeConceptos, "cfdi:Concepto");
 
-        for (int i = 0; i < nodeChilds.size(); i++) {
+        for (int i = 0; i < childNodeConceptos.size(); i++) {
+            NamedNodeMap childNodeConceptosMap = childNodeConceptos.get(i).getAttributes();
+
             cfd.ver33.DElementConcepto concepto = new cfd.ver33.DElementConcepto();
-
-            nodeChild = nodeChilds.get(i);
-            namedNodeMapChild = nodeChild.getAttributes();
-
-            concepto.getAttClaveProdServ().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveProdServ", true));
-            concepto.getAttNoIdentificacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NoIdentificacion", false));
-            concepto.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Cantidad", true)));
-            concepto.getAttClaveUnidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveUnidad", true));
-            concepto.getAttUnidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Unidad", false));
-            concepto.getAttDescripcion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Descripcion", true));
-            concepto.getAttValorUnitario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ValorUnitario", true)));
-            concepto.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
-            concepto.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Descuento", false)));
+            concepto.getAttClaveProdServ().setString(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "ClaveProdServ", true));
+            concepto.getAttNoIdentificacion().setString(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "NoIdentificacion", false));
+            concepto.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Cantidad", true)));
+            concepto.getAttClaveUnidad().setString(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "ClaveUnidad", true));
+            concepto.getAttUnidad().setString(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Unidad", false));
+            concepto.getAttDescripcion().setString(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Descripcion", true));
+            concepto.getAttValorUnitario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "ValorUnitario", true)));
+            concepto.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Importe", true)));
+            concepto.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Descuento", false)));
 
             // Tax concept:
 
-            if (SXmlUtils.hasChildElement(node, "cfdi:Impuestos")) {
-                nodeChildsTaxConcept = SXmlUtils.extractChildElements(nodeChild, "cfdi:Impuestos");
+            if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:Impuestos")) {
+                Vector<Node> childNodeImpuestos = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:Impuestos");
+                Node nodeImpuestos = childNodeImpuestos.get(0);
                 
                 cfd.ver33.DElementConceptoImpuestosRetenciones retenciones = new cfd.ver33.DElementConceptoImpuestosRetenciones();
                 cfd.ver33.DElementConceptoImpuestosTraslados trasladados = new cfd.ver33.DElementConceptoImpuestosTraslados();
 
-                nodeChild = nodeChildsTaxConcept.get(0);
-                if (SXmlUtils.hasChildElement(nodeChild, "cfdi:Traslados")) {
-                    nodeChild = SXmlUtils.extractChildElements(nodeChild, "cfdi:Traslados").get(0);
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Traslado");
+                if (SXmlUtils.hasChildElement(nodeImpuestos, "cfdi:Traslados")) {
+                    Node nodeTraslados = SXmlUtils.extractChildElements(nodeImpuestos, "cfdi:Traslados").get(0);
+                    Vector<Node> childNodeTraslado = SXmlUtils.extractChildElements(nodeTraslados, "cfdi:Traslado");
 
-                    for (int traslado = 0; traslado < nodeChilds.size(); traslado++) {
-                        cfd.ver33.DElementConceptoImpuestoTraslado conceptoImpuestoTraslado = new cfd.ver33.DElementConceptoImpuestoTraslado();
-
-                        nodeChild = nodeChilds.get(traslado);
-                        namedNodeMapChild = nodeChild.getAttributes();
+                    for (int indexTraslado = 0; indexTraslado < childNodeTraslado.size(); indexTraslado++) {
+                        NamedNodeMap childNodeTrasladosMap = childNodeTraslado.get(indexTraslado).getAttributes();
                         
-                        conceptoImpuestoTraslado.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
-                        conceptoImpuestoTraslado.getAttBase().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Base", true)));
-                        conceptoImpuestoTraslado.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFactor", true));
-                        conceptoImpuestoTraslado.getAttTasaOCuota().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TasaOCuota", false)));
-                        conceptoImpuestoTraslado.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", false)));
+                        cfd.ver33.DElementConceptoImpuestoTraslado conceptoImpuestoTraslado = new cfd.ver33.DElementConceptoImpuestoTraslado();
+                        conceptoImpuestoTraslado.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(childNodeTrasladosMap, "Impuesto", true));
+                        conceptoImpuestoTraslado.getAttBase().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeTrasladosMap, "Base", true)));
+                        conceptoImpuestoTraslado.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(childNodeTrasladosMap, "TipoFactor", true));
+                        conceptoImpuestoTraslado.getAttTasaOCuota().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeTrasladosMap, "TasaOCuota", false)));
+                        conceptoImpuestoTraslado.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeTrasladosMap, "Importe", false)));
 
                         trasladados.getEltImpuestoTrasladados().add(conceptoImpuestoTraslado);
                     }
                 }
                 
-                nodeChild = nodeChildsTaxConcept.get(0);
-                if (SXmlUtils.hasChildElement(nodeChild, "cfdi:Retenciones")) {
-                    nodeChild = SXmlUtils.extractChildElements(nodeChild, "cfdi:Retenciones").get(0);
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Retencion");
+                if (SXmlUtils.hasChildElement(nodeImpuestos, "cfdi:Retenciones")) {
+                    Node nodeRetenciones = SXmlUtils.extractChildElements(nodeImpuestos, "cfdi:Retenciones").get(0);
+                    Vector<Node> childNodeRetencion = SXmlUtils.extractChildElements(nodeRetenciones, "cfdi:Retencion");
 
-                    for (int retencion = 0; retencion < nodeChilds.size(); retencion++) {
+                    for (int indexRetencion = 0; indexRetencion < childNodeRetencion.size(); indexRetencion++) {
+                        NamedNodeMap childNodeRetencionesMap = childNodeRetencion.get(indexRetencion).getAttributes();
+
                         cfd.ver33.DElementConceptoImpuestoRetencion conceptoImpuestoRetencion = new cfd.ver33.DElementConceptoImpuestoRetencion();
-
-                        nodeChild = nodeChilds.get(retencion);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        conceptoImpuestoRetencion.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
-                        conceptoImpuestoRetencion.getAttBase().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Base", true)));
-                        conceptoImpuestoRetencion.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFactor", true));
-                        conceptoImpuestoRetencion.getAttTasaOCuota().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TasaOCuota", true)));
-                        conceptoImpuestoRetencion.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
+                        conceptoImpuestoRetencion.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(childNodeRetencionesMap, "Impuesto", true));
+                        conceptoImpuestoRetencion.getAttBase().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeRetencionesMap, "Base", true)));
+                        conceptoImpuestoRetencion.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(childNodeRetencionesMap, "TipoFactor", true));
+                        conceptoImpuestoRetencion.getAttTasaOCuota().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeRetencionesMap, "TasaOCuota", true)));
+                        conceptoImpuestoRetencion.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeRetencionesMap, "Importe", true)));
 
                         retenciones.getEltImpuestoRetenciones().add(conceptoImpuestoRetencion);
                     }
                 }
-                
             }
             
-            if (SXmlUtils.hasChildElement(node, "cfdi:InformacionAduanera")) {
-                nodeChildsAduanera = SXmlUtils.extractChildElements(nodeChild, "cfdi:InformacionAduanera");
+            if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:InformacionAduanera")) {
+                Vector<Node> childNodeInformacionAduanera = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:InformacionAduanera");
 
-                for (int j = 0; j < nodeChildsAduanera.size(); j++) {
-                    cfd.ver33.DElementConceptoInformacionAduanera aduanera = new cfd.ver33.DElementConceptoInformacionAduanera();
+                for (int indexInformacionAduanera = 0; indexInformacionAduanera < childNodeInformacionAduanera.size(); indexInformacionAduanera++) {
+                    NamedNodeMap childNodeInformacionAduaneraMap = childNodeInformacionAduanera.get(indexInformacionAduanera).getAttributes();
 
-                    nodeChild = nodeChildsAduanera.get(j);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    aduanera.getAttNumeroPedimento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroPedimento", true));
+                    cfd.ver33.DElementConceptoInformacionAduanera conceptoInformacionAduanera = new cfd.ver33.DElementConceptoInformacionAduanera();
+                    conceptoInformacionAduanera.getAttNumeroPedimento().setString(SXmlUtils.extractAttributeValue(childNodeInformacionAduaneraMap, "NumeroPedimento", true));
                     
-                    concepto.getEltOpcConceptoInformacionAduaneras().add(aduanera);
+                    concepto.getEltOpcConceptoInformacionAduaneras().add(conceptoInformacionAduanera);
                 }
             }
 
-            nodeChild = nodeChilds.get(i);
-            if (SXmlUtils.hasChildElement(node, "cfdi:Parte")) {
-                nodeChildsParte = SXmlUtils.extractChildElements(nodeChild, "cfdi:Parte");
+            if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:Parte")) {
+                Vector<Node> childNodeParte = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:Parte");
 
-                for (int j = 0; j < nodeChildsParte.size(); j++) {
-                    cfd.ver33.DElementConceptoParte parte = new cfd.ver33.DElementConceptoParte();
+                for (int indexParte = 0; indexParte < childNodeParte.size(); indexParte++) {
+                    NamedNodeMap childNodeParteMap = childNodeParte.get(indexParte).getAttributes();
 
-                    nodeChild = nodeChildsParte.get(j);
-                    namedNodeMapChild = nodeChild.getAttributes();
+                    cfd.ver33.DElementConceptoParte conceptoParte = new cfd.ver33.DElementConceptoParte();
+                    conceptoParte.getAttClaveProdServ().setString(SXmlUtils.extractAttributeValue(childNodeParteMap, "ClaveProdServ", true));
+                    conceptoParte.getAttNoIdentificacion().setString(SXmlUtils.extractAttributeValue(childNodeParteMap, "NoIdentificacion", false));
+                    conceptoParte.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeParteMap, "Cantidad", true)));
+                    conceptoParte.getAttUnidad().setString(SXmlUtils.extractAttributeValue(childNodeParteMap, "Unidad", false));
+                    conceptoParte.getAttDescripcion().setString(SXmlUtils.extractAttributeValue(childNodeParteMap, "Descripcion", true));
+                    conceptoParte.getAttValorUnitario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeParteMap, "ValorUnitario", true)));
+                    conceptoParte.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeParteMap, "Importe", true)));
+                    
+                    if (SXmlUtils.hasChildElement(childNodeParte.get(indexParte), "cfdi:InformacionAduanera")) {
+                        Vector<Node> childNodeParteInformacionAduanera = SXmlUtils.extractChildElements(childNodeParte.get(indexParte), "cfdi:InformacionAduanera");
 
-                    parte.getAttClaveProdServ().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveProdServ", true));
-                    parte.getAttNoIdentificacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NoIdentificacion", false));
-                    parte.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Cantidad", true)));
-                    parte.getAttUnidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Unidad", false));
-                    parte.getAttDescripcion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Descripcion", true));
-                    parte.getAttValorUnitario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ValorUnitario", true)));
-                    parte.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
+                        for (int indexParteInformacionAduanera = 0; indexParteInformacionAduanera < childNodeParteInformacionAduanera.size(); indexParteInformacionAduanera++) {
+                            NamedNodeMap childNodeParteInformacionAduaneraMap = childNodeParteInformacionAduanera.get(indexParteInformacionAduanera).getAttributes();
 
-                    nodeChildsAduanera = SXmlUtils.extractChildElements(nodeChild, "cfdi:InformacionAduanera");
+                            cfd.ver33.DElementConceptoInformacionAduanera parteConceptoInformacionAduanera = new cfd.ver33.DElementConceptoInformacionAduanera();
+                            parteConceptoInformacionAduanera.getAttNumeroPedimento().setString(SXmlUtils.extractAttributeValue(childNodeParteInformacionAduaneraMap, "NumeroPedimento", true));
 
-                    for (int k = 0; k < nodeChildsAduanera.size(); k++) {
-                        cfd.ver33.DElementConceptoInformacionAduanera aduanera = new cfd.ver33.DElementConceptoInformacionAduanera();
-
-                        nodeChild = nodeChildsAduanera.get(k);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        aduanera.getAttNumeroPedimento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroPedimento", true));
-
-                        parte.getEltOpcConceptoInformacionAduaneras().add(aduanera);
+                            conceptoParte.getEltOpcConceptoInformacionAduaneras().add(parteConceptoInformacionAduanera);
+                        }
                     }
 
-                    concepto.getEltOpcConceptoPartes().add(parte);
+                    concepto.getEltOpcConceptoPartes().add(conceptoParte);
                 }
             }
 
-            nodeChild = nodeChilds.get(i);
-            if (SXmlUtils.hasChildElement(nodeChild, "cfdi:CuentaPredial")) {
-                cfd.ver33.DElementConceptoCuentaPredial predial = new cfd.ver33.DElementConceptoCuentaPredial();
+            if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:CuentaPredial")) {
+                if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:CuentaPredial")) {
 
-                nodeChild = SXmlUtils.extractChildElements(nodeChild, "cfdi:CuentaPredial").get(0);
-                namedNodeMapChild = nodeChild.getAttributes();
+                    Node nodeCuentaPredial = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:CuentaPredial").get(0);
+                    NamedNodeMap nodeCuentaPredialMap = nodeCuentaPredial.getAttributes();
 
-                predial.getAttNumero().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Numero", true));
+                    cfd.ver33.DElementConceptoCuentaPredial predial = new cfd.ver33.DElementConceptoCuentaPredial();
+                    predial.getAttNumero().setString(SXmlUtils.extractAttributeValue(nodeCuentaPredialMap, "Numero", true));
 
-                concepto.setEltOpcConceptoCuentaPredial(predial);
+                    concepto.setEltOpcConceptoCuentaPredial(predial);
+                }
             }
             
             comprobante.getEltConceptos().getEltConceptos().add(concepto);
@@ -1071,21 +1052,21 @@ public abstract class DCfdUtils {
         
         // Taxes:
         
-        if (SXmlUtils.hasChildElement(doc, "cfdi:Impuestos")) {
-            node = SXmlUtils.extractElements(doc, "cfdi:Impuestos").item(0);
+        if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Impuestos")) {
+            Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Impuestos").get(0);
 
             cfd.ver33.DElementImpuestosRetenciones retenciones = new cfd.ver33.DElementImpuestosRetenciones();
             cfd.ver33.DElementImpuestosTraslados trasladados = new cfd.ver33.DElementImpuestosTraslados();
 
             if (SXmlUtils.hasChildElement(node, "cfdi:Retenciones")) {
-                nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Retenciones").get(0);
-                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Retencion");
+                Node nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Retenciones").get(0);
+                Vector<Node> nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Retencion");
 
                 for (int i = 0; i < nodeChilds.size(); i++) {
                     cfd.ver33.DElementImpuestoRetencion impuestoRetencion = new cfd.ver33.DElementImpuestoRetencion();
 
-                    nodeChild = nodeChilds.get(i);
-                    namedNodeMapChild = nodeChild.getAttributes();
+                    Node nodeChild1 = nodeChilds.get(i);
+                    NamedNodeMap namedNodeMapChild = nodeChild1.getAttributes();
 
                     impuestoRetencion.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
                     dTotalImptoRetenido += SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true));
@@ -1096,14 +1077,14 @@ public abstract class DCfdUtils {
             }
 
             if (SXmlUtils.hasChildElement(node, "cfdi:Traslados")) {
-                nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Traslados").get(0);
-                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Traslado");
+                Node nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Traslados").get(0);
+                Vector<Node> nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cfdi:Traslado");
 
                 for (int i = 0; i < nodeChilds.size(); i++) {
                     cfd.ver33.DElementImpuestoTraslado impuestoTraslado = new cfd.ver33.DElementImpuestoTraslado();
 
-                    nodeChild = nodeChilds.get(i);
-                    namedNodeMapChild = nodeChild.getAttributes();
+                    Node nodeChild1 = nodeChilds.get(i);
+                    NamedNodeMap namedNodeMapChild = nodeChild1.getAttributes();
 
                     impuestoTraslado.getAttImpuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Impuesto", true));
                     impuestoTraslado.getAttTipoFactor().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFactor", true));
@@ -1115,38 +1096,41 @@ public abstract class DCfdUtils {
                 }
             }
 
-            if (retenciones.getEltImpuestoRetenciones().size() > 0) {
-                comprobante.getEltOpcImpuestos().getAttTotalImpuestosRetenidos().setDouble(dTotalImptoRetenido);
-                comprobante.getEltOpcImpuestos().setEltOpcImpuestosRetenidos(retenciones);
-            }
+            if (!retenciones.getEltImpuestoRetenciones().isEmpty() || !trasladados.getEltImpuestoTrasladados().isEmpty()) {
+                comprobante.setEltOpcImpuestos(new DElementImpuestos(comprobante));
+                
+                if (!retenciones.getEltImpuestoRetenciones().isEmpty()) {
+                    comprobante.getEltOpcImpuestos().getAttTotalImpuestosRetenidos().setDouble(dTotalImptoRetenido);
+                    comprobante.getEltOpcImpuestos().setEltOpcImpuestosRetenidos(retenciones);
+                }
 
-            if (trasladados.getEltImpuestoTrasladados().size() > 0) {
-                comprobante.getEltOpcImpuestos().getAttTotalImpuestosTraslados().setDouble(dTotalImptoTrasladado);
-                comprobante.getEltOpcImpuestos().setEltOpcImpuestosTrasladados(trasladados);
+                if (!trasladados.getEltImpuestoTrasladados().isEmpty()) {
+                    comprobante.getEltOpcImpuestos().getAttTotalImpuestosTraslados().setDouble(dTotalImptoTrasladado);
+                    comprobante.getEltOpcImpuestos().setEltOpcImpuestosTrasladados(trasladados);
+                }
             }
         }
 
         // Child elements of element 'cfdi:Complemento':
         
-        if (SXmlUtils.hasChildElement(doc, "cfdi:Complemento")) {
-            cfd.ver32.DElementComplemento complemento = new cfd.ver32.DElementComplemento();
+        if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Complemento")) {
+            Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Complemento").get(0);
             
-            node = SXmlUtils.extractElements(doc, "cfdi:Complemento").item(0);
+            cfd.ver32.DElementComplemento complemento = new cfd.ver32.DElementComplemento();
 
             // digital signature:
 
             if (SXmlUtils.hasChildElement(node, "tfd:TimbreFiscalDigital")) {
+                Node nodeChild = SXmlUtils.extractChildElements(node, "tfd:TimbreFiscalDigital").get(0);
+                NamedNodeMap namedNodeMapChild = nodeChild.getAttributes();
+
                 cfd.ver32.DElementTimbreFiscalDigital tfd = new cfd.ver32.DElementTimbreFiscalDigital();
-
-                nodeChild = SXmlUtils.extractChildElements(node, "tfd:TimbreFiscalDigital").get(0);
-                namedNodeMapChild = nodeChild.getAttributes();
-
-                tfd.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "version", true));
+                tfd.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
                 tfd.getAttUuid().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUID", true));
                 tfd.getAttFechaTimbrado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaTimbrado", true));
-                tfd.getAttSelloCfd().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "selloCFD", true));
-                tfd.getAttNoCertificadoSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "noCertificadoSAT", true));
-                tfd.getAttSelloSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "selloSAT", true));
+                tfd.getAttSelloCfd().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SelloCFD", true));
+                tfd.getAttNoCertificadoSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NoCertificadoSAT", true));
+                tfd.getAttSelloSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SelloSAT", true));
 
                 complemento.getElements().add(tfd);
             }
@@ -1157,15 +1141,15 @@ public abstract class DCfdUtils {
                 complemento.getElements().add(getElementNomina(node));
             }
 
-            if (complemento.getElements().size() > 0) {
+            if (!complemento.getElements().isEmpty()) {
                 comprobante.setEltOpcComplemento(complemento);
             }
         }
 
         // Addenda:
 
-        if (SXmlUtils.hasChildElement(doc, "cfdi:Addenda")) {
-            node = SXmlUtils.extractElements(doc, "cfdi:Addenda").item(0);
+        if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Addenda")) {
+            Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Addenda").get(0);
 
             cfd.ver32.DElementAddenda addenda = (cfd.ver32.DElementAddenda) getElementAddenda(node);
 
