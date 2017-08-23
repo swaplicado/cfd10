@@ -7,6 +7,8 @@ package cfd;
 
 import cfd.ext.addenda1.DElementAddenda1;
 import cfd.ver32.DCfdVer3Consts;
+import cfd.ver33.DElementCfdiRelacionado;
+import cfd.ver33.DElementCfdiRelacionados;
 import cfd.ver33.DElementImpuestos;
 import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
@@ -902,7 +904,24 @@ public abstract class DCfdUtils {
 
         // CFDI Related:
         
-        // XXX Implement ASAP! (Sergio Flores, 2017-08-10)
+        if (SXmlUtils.hasChildElement(doc, "cfdi:CfdiRelacionados")) {
+            Node nodeCfdiRelacionados = SXmlUtils.extractElements(doc, "cfdi:CfdiRelacionados").item(0);
+            NamedNodeMap nodeCfdiRelacionadosMap = nodeCfdiRelacionados.getAttributes();
+            
+            DElementCfdiRelacionados cfdiRelacionados = new DElementCfdiRelacionados();
+            cfdiRelacionados.getAttTipoRelacion().setString(SXmlUtils.extractAttributeValue(nodeCfdiRelacionadosMap, "TipoRelacion", true));
+            
+            Vector<Node> childNodeCfdiRelacionados = SXmlUtils.extractChildElements(nodeCfdiRelacionados, "cfdi:CfdiRelacionado");
+            for (Node nodeCfdiRelacionado : childNodeCfdiRelacionados) {
+                NamedNodeMap nodeCfdiRelacionadoMap = nodeCfdiRelacionado.getAttributes();
+                
+                DElementCfdiRelacionado cfdiRelacionado = new DElementCfdiRelacionado();
+                cfdiRelacionado.getAttUuid().setString(SXmlUtils.extractAttributeValue(nodeCfdiRelacionadoMap, "UUID", true));
+                cfdiRelacionados.getEltCfdiRelacionados().add(cfdiRelacionado);
+            }
+            
+            comprobante.setEltOpcCfdiRelacionados(cfdiRelacionados);
+        }
         
         // Emisor:
 
