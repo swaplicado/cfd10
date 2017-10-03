@@ -26,6 +26,7 @@ public class DElementSeparacionIndemnizacion extends cfd.DElement {
         moAttTotalPagado = new DAttributeTypeImporte("TotalPagado", true);
         moAttTotalPagado.setCanBeZero(true);
         moAttNumAñosServicio = new DAttributeInteger("NumAñosServicio", true);
+        moAttNumAñosServicio.setCanBeZero(true);
         moAttUltimoSueldoMensOrd = new DAttributeTypeImporte("UltimoSueldoMensOrd", true);
         moAttUltimoSueldoMensOrd.setCanBeZero(true);
         moAttIngresoAcumulable = new DAttributeTypeImporte("IngresoAcumulable", true);
