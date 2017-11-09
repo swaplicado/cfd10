@@ -11,6 +11,8 @@ package cfd.ver32;
  */
 public class DElementComplementoConcepto extends cfd.DElementParent {
 
+    // NOTE: Child elements will be added on the fly.
+
     public DElementComplementoConcepto() {
         super("cfdi:ComplementoConcepto");
     }

@@ -10,6 +10,7 @@ import cfd.DElement;
 import cfd.ext.addenda1.DElementAddenda1;
 import cfd.ver3.cce11.DElementComercioExterior;
 import cfd.ver3.nom12.DElementNomina;
+import cfd.ver33.crp10.DElementPagos;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,15 +120,30 @@ public class DElementComprobante extends cfd.DElement {
      */
     
     private boolean isCfdiPayroll() {
-        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Consts.CFD_TP_P) == 0;
+        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Consts.CFD_TP_N) == 0;
     }
 
-    private boolean isCfdiIntCommerce() {
+    private boolean isCfdiComplementCe() {
         boolean is = false;
         
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
+                    is = true;
+                    break;
+                }
+            }
+        }
+        
+        return is;
+    }
+
+    private boolean isCfdiComplementRp() {
+        boolean is = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver33.crp10.DElementPagos) {
                     is = true;
                     break;
                 }
@@ -186,8 +202,8 @@ public class DElementComprobante extends cfd.DElement {
     public DAttributeString getAttCondicionesDePago() { return moAttCondicionesDePago; }
     public DAttributeTypeImporte getAttSubTotal() { return moAttSubTotal; }
     public DAttributeTypeImporte getAttDescuento() { return moAttDescuento; }
-    public DAttributeTipoCambio getAttTipoCambio() { return moAttTipoCambio; }
     public DAttributeString getAttMoneda() { return moAttMoneda; }
+    public DAttributeTipoCambio getAttTipoCambio() { return moAttTipoCambio; }
     public DAttributeTypeImporte getAttTotal() { return moAttTotal; }
     public DAttributeString getAttTipoDeComprobante() { return moAttTipoDeComprobante; }
     public DAttributeString getAttMetodoPago() { return moAttMetodoPago; }
@@ -245,11 +261,13 @@ public class DElementComprobante extends cfd.DElement {
         String xml = "<" + msName + " "
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
-                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XSI)
+                + (!isCfdiComplementCe()? "" : " " + DElementComercioExterior.XSI)
+                + (!isCfdiComplementRp()? "" : " " + DElementPagos.XSI)
                 + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
                 + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[0]) + "\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\""
-                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XMLNS)
+                + (!isCfdiComplementCe()? "" : " " + DElementComercioExterior.XMLNS)
+                + (!isCfdiComplementRp()? "" : " " + DElementPagos.XMLNS)
                 + (!isCfdiPayroll() ? "" : " " + DElementNomina.XMLNS)
                 + (masAddenda1XmlLocationNs == null ? "" : " " + masAddenda1XmlLocationNs[1]);
 

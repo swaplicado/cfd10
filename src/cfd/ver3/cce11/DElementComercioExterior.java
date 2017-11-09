@@ -104,6 +104,7 @@ public class DElementComercioExterior extends cfd.DElement {
         
         return elements;
     }
+    
     /*
      * Public methods:
      */
