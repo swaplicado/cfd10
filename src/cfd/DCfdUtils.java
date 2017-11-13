@@ -6,7 +6,7 @@
 package cfd;
 
 import cfd.ext.addenda1.DElementAddenda1;
-import cfd.ver32.DCfdVer3Consts;
+import cfd.ver3.DCfdVer3Consts;
 import cfd.ver33.DElementCfdiRelacionado;
 import cfd.ver33.DElementCfdiRelacionados;
 import cfd.ver33.DElementImpuestos;
