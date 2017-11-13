@@ -25,4 +25,9 @@ public class DCfdi33Consts {
     public static final String CFD_TP_T = "T";  // Traslado
     public static final String CFD_TP_N = "N";  // Nómina
     public static final String CFD_TP_P = "P";  // Pago
+    
+    public static final String CAT_TIPO_RELACION = "c_TipoRelacion";
+    public static final String CAT_USO_CFDI = "c_UsoCFDI";
+    public static final String CAT_CLAVE_UNIDAD = "c_ClaveUnidad";
+    public static final String CAT_CLAVE_PROD_SERV = "c_ClaveProdServ";
 }

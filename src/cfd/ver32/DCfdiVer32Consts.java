@@ -9,7 +9,7 @@ package cfd.ver32;
  *
  * @author Sergio Flores
  */
-public abstract class DCfdVer32Consts {
+public abstract class DCfdiVer32Consts {
 
     public static final String CFD_INGRESO = "ingreso";
     public static final String CFD_EGRESO = "egreso";
