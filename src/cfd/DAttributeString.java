@@ -16,6 +16,8 @@ public class DAttributeString extends DAttribute {
     protected int mnLengthMin;
     protected int mnLengthMax;
     protected java.lang.String msString;
+    protected boolean mbTrimmable;
+    protected boolean mbXmlAdaptable;
 
     public DAttributeString(java.lang.String name, boolean isRequired) {
         this(name, isRequired, -1, -1);
@@ -31,37 +33,38 @@ public class DAttributeString extends DAttribute {
         mnLengthMin = lengthMin;
         mnLengthMax = lengthMax;
         msString = "";
+        mbTrimmable = true;
+        mbXmlAdaptable = true;
     }
 
     public void setLengthMin(int length) { mnLengthMin = length; }
     public void setLengthMax(int length) { mnLengthMax = length; }
-    public void setString(java.lang.String string) { msString = SLibUtils.textTrim(string); }
+    public void setString(java.lang.String string) { msString = mbTrimmable ? SLibUtils.textTrim(string) : string; }
+    public void setTrimmable(boolean b) { mbTrimmable = b; }
+    public void setXmlAdaptable(boolean b) { mbXmlAdaptable = b; }
 
     public int getLengthMin() { return mnLengthMin; }
     public int getLengthMax() { return mnLengthMax; }
     public java.lang.String getString() { return msString; }
+    public boolean isTrimmable() { return mbTrimmable; }
+    public boolean isXmlAdaptable() { return mbXmlAdaptable; }
 
     @Override
     public void validateValue() {
-        String string = "";
-
         if (msString == null) {
             throw new IllegalStateException(DAttribute.MSG_ERR_VAL_UNDEF + "'" + msName + "'.");
         }
         if (msString.contains("|")) {
             throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' contiene el caracter 'pipe'.");
         }
-
-        string = SLibUtils.textTrim(msString);
-
-        if (mbIsRequired && string.isEmpty() && mnLengthMin > 0) {
+        if (mbIsRequired && msString.isEmpty() && mnLengthMin > 0) {
             throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' es requerida.");
         }
-        if (mbIsRequired || (!mbIsRequired && string.length() > 0)) {
-            if (mnLengthMin != -1 && string.length() < mnLengthMin) {
+        if (mbIsRequired || (!mbIsRequired && msString.length() > 0)) {
+            if (mnLengthMin != -1 && msString.length() < mnLengthMin) {
                 throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' no cumple con la longitud mínima (" + mnLengthMin + ").");
             }
-            if (mnLengthMax != -1 && string.length() > mnLengthMax) {
+            if (mnLengthMax != -1 && msString.length() > mnLengthMax) {
                 throw new IllegalStateException("La cadena de caracteres del atributo '" + msName + "' no cumple con la longitud máxima (" + mnLengthMax + ").");
             }
         }
@@ -69,17 +72,15 @@ public class DAttributeString extends DAttribute {
 
     @Override
     public java.lang.String getAttributeForXml() {
-        String value = "";
         validateValue();
-        value = SLibUtils.textToXml(msString);
+        String value = mbXmlAdaptable ? SLibUtils.textToXml(msString) : msString;
         return !mbIsRequired && value.isEmpty() ? "" : msName + "=\"" + value + "\"";
     }
 
     @Override
     public java.lang.String getAttributeForOriginalString() {
-        String value = "";
         validateValue();
-        value = DCfdUtils.textForOriginalString(msString);
+        String value = DCfdUtils.textForOriginalString(msString);
         return value.isEmpty() ? "" : value + "|";
     }
 }

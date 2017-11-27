@@ -50,8 +50,8 @@ public class DElementComprobante extends cfd.DElement {
     private cfd.ver33.DElementReceptor moEltReceptor;
     private final cfd.ver33.DElementConceptos moEltConceptos;
     private cfd.ver33.DElementImpuestos moEltOpcImpuestos;
-    private cfd.ver32.DElementComplemento moEltOpcComplemento;
-    private cfd.ver32.DElementAddenda moEltOpcAddenda;
+    private cfd.ver33.DElementComplemento moEltOpcComplemento;
+    private cfd.ver33.DElementAddenda moEltOpcAddenda;
     private String[] masAddenda1XmlLocationNs; // addenda namespace (index 0: schema location, index 1: schema namespace)
 
     /**
@@ -120,7 +120,7 @@ public class DElementComprobante extends cfd.DElement {
      */
     
     private boolean isCfdiPayroll() {
-        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Consts.CFD_TP_N) == 0;
+        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Catalogs.CFD_TP_N) == 0;
     }
 
     private boolean isCfdiComplementCe() {
@@ -188,9 +188,9 @@ public class DElementComprobante extends cfd.DElement {
     public void setEltEmisor(cfd.ver33.DElementEmisor o) { moEltEmisor = o; }
     public void setEltReceptor(cfd.ver33.DElementReceptor o) { moEltReceptor = o; }
     public void setEltOpcImpuestos(cfd.ver33.DElementImpuestos o) { moEltOpcImpuestos = o; }
-    public void setEltOpcComplemento(cfd.ver32.DElementComplemento o) { moEltOpcComplemento = o; }
-    public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda) { setEltOpcAddenda(addenda, null); }
-    public void setEltOpcAddenda(cfd.ver32.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddenda1XmlLocationNs = addendaXmlLocationNs; }
+    public void setEltOpcComplemento(cfd.ver33.DElementComplemento o) { moEltOpcComplemento = o; }
+    public void setEltOpcAddenda(cfd.ver33.DElementAddenda addenda) { setEltOpcAddenda(addenda, null); }
+    public void setEltOpcAddenda(cfd.ver33.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddenda1XmlLocationNs = addendaXmlLocationNs; }
 
     public DAttributeString getAttSerie() { return moAttSerie; }
     public DAttributeString getAttFolio() { return moAttFolio; }
@@ -215,8 +215,8 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver33.DElementReceptor getEltReceptor() { return moEltReceptor; }
     public cfd.ver33.DElementConceptos getEltConceptos() { return moEltConceptos; }
     public cfd.ver33.DElementImpuestos getEltOpcImpuestos() { return moEltOpcImpuestos; }
-    public cfd.ver32.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
-    public cfd.ver32.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
+    public cfd.ver33.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
+    public cfd.ver33.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
     public String[] getAddendaXmlLocationNs() { return masAddenda1XmlLocationNs; }
     
     @Override

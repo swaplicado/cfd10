@@ -15,7 +15,7 @@ public class DElementImpuestos extends cfd.DElement {
     private final cfd.DAttributeTypeImporte moAttTotalImpuestosRetenidos;
     private final cfd.DAttributeTypeImporte moAttTotalImpuestosTrasladados;
 
-    private cfd.ver33.DElementImpuestosRetenciones moEltOpcImpuestosRetenidos;
+    private cfd.ver33.DElementImpuestosRetenciones moEltOpcImpuestosRetenciones;
     private cfd.ver33.DElementImpuestosTraslados moEltOpcImpuestosTraslados;
     
     private final cfd.ver33.DElementComprobante moEltParentComprobante;
@@ -29,7 +29,7 @@ public class DElementImpuestos extends cfd.DElement {
         mvAttributes.add(moAttTotalImpuestosRetenidos);
         mvAttributes.add(moAttTotalImpuestosTrasladados);
 
-        moEltOpcImpuestosRetenidos = null;
+        moEltOpcImpuestosRetenciones = null;
         moEltOpcImpuestosTraslados = null;
         
         moEltParentComprobante = parentComprobante;
@@ -42,8 +42,8 @@ public class DElementImpuestos extends cfd.DElement {
     private ArrayList<DElement> createElementsArray() {
         ArrayList<DElement> elements = new ArrayList<>();
         
-        if (moEltOpcImpuestosRetenidos != null) {
-            elements.add(moEltOpcImpuestosRetenidos );
+        if (moEltOpcImpuestosRetenciones != null) {
+            elements.add(moEltOpcImpuestosRetenciones );
         }
         
         if (moEltOpcImpuestosTraslados != null) {
@@ -57,13 +57,13 @@ public class DElementImpuestos extends cfd.DElement {
      * Public methods
      */
 
-    public void setEltOpcImpuestosRetenidos(cfd.ver33.DElementImpuestosRetenciones o) { moEltOpcImpuestosRetenidos = o; moAttTotalImpuestosRetenidos.setElementWithChildrenToCheck(moEltOpcImpuestosRetenidos); }
+    public void setEltOpcImpuestosRetenciones(cfd.ver33.DElementImpuestosRetenciones o) { moEltOpcImpuestosRetenciones = o; moAttTotalImpuestosRetenidos.setElementWithChildrenToCheck(moEltOpcImpuestosRetenciones); }
     public void setEltOpcImpuestosTrasladados(cfd.ver33.DElementImpuestosTraslados o) { moEltOpcImpuestosTraslados = o; moAttTotalImpuestosTrasladados.setElementWithChildrenToCheck(moEltOpcImpuestosTraslados); }
 
     public cfd.DAttributeTypeImporte getAttTotalImpuestosRetenidos() { return moAttTotalImpuestosRetenidos; }
     public cfd.DAttributeTypeImporte getAttTotalImpuestosTraslados() { return moAttTotalImpuestosTrasladados; }
 
-    public cfd.ver33.DElementImpuestosRetenciones getEltOpcImpuestosRetenidos() { return moEltOpcImpuestosRetenidos; }
+    public cfd.ver33.DElementImpuestosRetenciones getEltOpcImpuestosRetenciones() { return moEltOpcImpuestosRetenciones; }
     public cfd.ver33.DElementImpuestosTraslados getEltOpcImpuestosTraslados() { return moEltOpcImpuestosTraslados; }
 
     public cfd.ver33.DElementComprobante getEltParentComprobante() { return moEltParentComprobante; }
@@ -88,10 +88,10 @@ public class DElementImpuestos extends cfd.DElement {
             throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosRetenidos.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
         }
         
-        if (moEltOpcImpuestosRetenidos != null) {
+        if (moEltOpcImpuestosRetenciones != null) {
             imptosRetenidos = 0;
             
-            for (DElementImpuestoRetencion impuestoRetencion : moEltOpcImpuestosRetenidos.getEltImpuestoRetenciones()) {
+            for (DElementImpuestoRetencion impuestoRetencion : moEltOpcImpuestosRetenciones.getEltImpuestoRetenciones()) {
                 imptosRetenidos += impuestoRetencion.getAttImporte().getDouble();
             }
             
@@ -164,8 +164,8 @@ public class DElementImpuestos extends cfd.DElement {
         
         String string = "";
 
-        if (moEltOpcImpuestosRetenidos != null) {
-            string += moEltOpcImpuestosRetenidos.getElementForOriginalString();
+        if (moEltOpcImpuestosRetenciones != null) {
+            string += moEltOpcImpuestosRetenciones.getElementForOriginalString();
             string += moAttTotalImpuestosRetenidos.getAttributeForOriginalString();
         }
 

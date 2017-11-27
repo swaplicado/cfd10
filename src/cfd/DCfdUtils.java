@@ -1120,7 +1120,7 @@ public abstract class DCfdUtils {
                 
                 if (!retenciones.getEltImpuestoRetenciones().isEmpty()) {
                     comprobante.getEltOpcImpuestos().getAttTotalImpuestosRetenidos().setDouble(dTotalImptoRetenido);
-                    comprobante.getEltOpcImpuestos().setEltOpcImpuestosRetenidos(retenciones);
+                    comprobante.getEltOpcImpuestos().setEltOpcImpuestosRetenciones(retenciones);
                 }
 
                 if (!trasladados.getEltImpuestoTrasladados().isEmpty()) {
@@ -1135,7 +1135,7 @@ public abstract class DCfdUtils {
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Complemento")) {
             Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Complemento").get(0);
             
-            cfd.ver32.DElementComplemento complemento = new cfd.ver32.DElementComplemento();
+            cfd.ver33.DElementComplemento complemento = new cfd.ver33.DElementComplemento();
 
             // digital signature:
 
@@ -1170,7 +1170,7 @@ public abstract class DCfdUtils {
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Addenda")) {
             Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Addenda").get(0);
 
-            cfd.ver32.DElementAddenda addenda = (cfd.ver32.DElementAddenda) getElementAddenda(node);
+            cfd.ver33.DElementAddenda addenda = (cfd.ver33.DElementAddenda) getElementAddenda(node);
 
             comprobante.setEltOpcAddenda(addenda, DElementAddenda1.createXmlLocationNs());
         }

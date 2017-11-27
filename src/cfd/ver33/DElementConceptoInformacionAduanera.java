@@ -14,7 +14,9 @@ public class DElementConceptoInformacionAduanera extends cfd.DElement {
     public DElementConceptoInformacionAduanera() {
         super("cfdi:InformacionAduanera");
 
-        moAttNumeroPedimento = new DAttributeString("NumeroPedimento", true, 1, 21);    // from 1 to 21 characters
+        moAttNumeroPedimento = new DAttributeString("NumeroPedimento", true, 21, 21);   // 21 characters
+        moAttNumeroPedimento.setTrimmable(false);       // prevent from removing double blank spaces
+        moAttNumeroPedimento.setXmlAdaptable(false);    // prevent from removing double blank spaces
 
         mvAttributes.add(moAttNumeroPedimento);
     }

@@ -100,6 +100,17 @@ public final class DCfd {
         return fileName;
     }
 
+    public String createFileName(cfd.ver33.DElementComprobante comprobante) {
+        String fileName = "";
+
+        fileName += comprobante.getEltEmisor().getAttRfc().getString() + "_";
+        fileName += comprobante.getAttTipoDeComprobante().getString()+ "_";
+        fileName += (comprobante.getAttSerie().getString().isEmpty() ? "" : comprobante.getAttSerie().getString() + "_");
+        fileName += moDecimalFormat.format(SLibUtils.parseLong(comprobante.getAttFolio().getString()));
+
+        return fileName;
+    }
+
     public int write(cfd.ver2.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
         int result = 0;
         String xml = "";
@@ -133,6 +144,38 @@ public final class DCfd {
     }
 
     public int write(cfd.ver32.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
+        int result = 0;
+        String xml = "";
+        String xmlFileName = "";
+        String xmlFilePath = "";
+        BufferedWriter bw = null;
+
+        resetLastMembers();
+
+        comprobante.getAttSello().setString(signature);
+        comprobante.getAttNoCertificado().setString(certNumber);
+        comprobante.getAttCertificado().setString(certBase64);
+
+        xmlFileName = createFileName(comprobante) + ".xml";
+        xmlFilePath = msXmlBaseDir + xmlFileName;
+
+        xml = DCfdConsts.XML_HEADER + comprobante.getElementForXml();
+
+        bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(xmlFilePath), "UTF-8"));
+        bw.write(xml);
+        bw.close();
+
+        mtLastTimestamp = comprobante.getAttFecha().getDatetime();
+        msLastStringSigned = stringSigned;
+        msLastSignature = signature;
+        msLastXml = xml;
+        msLastXmlFileName = xmlFileName;
+        msLastXmlFilePath = xmlFilePath;
+
+        return result;
+    }
+    
+    public int write(cfd.ver33.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
         int result = 0;
         String xml = "";
         String xmlFileName = "";
