@@ -29,6 +29,21 @@ import sa.lib.xml.SXmlUtils;
 public abstract class DCfdUtils {
     
     public static final DecimalFormat AmountFormat = new DecimalFormat("#." + SLibUtils.textRepeat("0", SLibUtils.getDecimalFormatAmount().getMaximumFractionDigits()));
+    
+    /**
+     * Clean all XML entites considered in sa.lib.SLibUtils.XmlEntityNamesMap from supplied XML String.
+     * @param xml Supplied XML String.
+     * @return 
+     */
+    public static String cleanXmlEntities(final String xml) {
+        String text = xml;
+        
+        for (Character character : SLibUtils.XmlEntityNamesMap.keySet()) {
+            text = text.replaceAll(SLibUtils.XmlEntityNamesMap.get(character), "" + character);
+        }
+        
+        return text;
+    }
 
     public static String textForOriginalString(final String text) {
         String textForOriginalString = text;

@@ -16,13 +16,13 @@ public class DElementTimbreFiscalDigital extends cfd.DElement {
     
     public static final String VER = "1.1";
 
-    protected cfd.DAttributeString moAttVersion;
-    protected cfd.DAttributeString moAttUuid;
-    protected cfd.DAttributeString moAttFechaTimbrado;
-    protected cfd.DAttributeString moAttSelloCFD;
-    protected cfd.DAttributeString moAttNoCertificadoSAT;
-    protected cfd.DAttributeString moAttSelloSAT;
-    protected cfd.DAttributeString moAttRfcProvCertif;
+    protected DAttributeString moAttVersion;
+    protected DAttributeString moAttUuid;
+    protected DAttributeString moAttFechaTimbrado;
+    protected DAttributeString moAttSelloCFD;
+    protected DAttributeString moAttNoCertificadoSAT;
+    protected DAttributeString moAttSelloSAT;
+    protected DAttributeString moAttRfcProvCertif;
 
     public DElementTimbreFiscalDigital() {
         super("tfd:TimbreFiscalDigital");
