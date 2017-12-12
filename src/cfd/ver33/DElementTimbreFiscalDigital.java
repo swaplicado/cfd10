@@ -19,10 +19,11 @@ public class DElementTimbreFiscalDigital extends cfd.DElement {
     protected DAttributeString moAttVersion;
     protected DAttributeString moAttUuid;
     protected DAttributeString moAttFechaTimbrado;
+    protected DAttributeString moAttRfcProvCertif;
+    protected DAttributeString moAttLeyenda;
     protected DAttributeString moAttSelloCFD;
     protected DAttributeString moAttNoCertificadoSAT;
     protected DAttributeString moAttSelloSAT;
-    protected DAttributeString moAttRfcProvCertif;
 
     public DElementTimbreFiscalDigital() {
         super("tfd:TimbreFiscalDigital");
@@ -31,27 +32,30 @@ public class DElementTimbreFiscalDigital extends cfd.DElement {
         moAttVersion.setString(VER);
         moAttUuid = new DAttributeString("UUID", true);
         moAttFechaTimbrado = new DAttributeString("FechaTimbrado", true);
+        moAttRfcProvCertif = new DAttributeString("RfcProvCertif", true);
+        moAttLeyenda = new DAttributeString("Leyenda", false);
         moAttSelloCFD = new DAttributeString("SelloCFD", true);
         moAttNoCertificadoSAT = new DAttributeString("NoCertificadoSAT", true);
         moAttSelloSAT = new DAttributeString("SelloSAT", true);
-        moAttRfcProvCertif = new DAttributeString("RfcProvCertif", true);
 
         mvAttributes.add(moAttVersion);
         mvAttributes.add(moAttUuid);
         mvAttributes.add(moAttFechaTimbrado);
+        mvAttributes.add(moAttRfcProvCertif);
+        mvAttributes.add(moAttLeyenda);
         mvAttributes.add(moAttSelloCFD);
         mvAttributes.add(moAttNoCertificadoSAT);
         mvAttributes.add(moAttSelloSAT);
-        mvAttributes.add(moAttRfcProvCertif);
     }
 
     public cfd.DAttributeString getAttVersion() { return moAttVersion; }
-    public cfd.DAttributeString getAttUuid() { return moAttUuid; }
+    public cfd.DAttributeString getAttUUID() { return moAttUuid; }
     public cfd.DAttributeString getAttFechaTimbrado() { return moAttFechaTimbrado; }
-    public cfd.DAttributeString getAttSelloCfd() { return moAttSelloCFD; }
+    public cfd.DAttributeString getAttRfcProvCertif() { return moAttRfcProvCertif; }
+    public cfd.DAttributeString getAttLeyenda() { return moAttLeyenda; }
+    public cfd.DAttributeString getAttSelloCFD() { return moAttSelloCFD; }
     public cfd.DAttributeString getAttNoCertificadoSAT() { return moAttNoCertificadoSAT; }
     public cfd.DAttributeString getAttSelloSAT() { return moAttSelloSAT; }
-    public cfd.DAttributeString getAttRfcProvCertif() { return moAttRfcProvCertif; }
 
     @Override
     public java.lang.String getElementForXml() throws Exception {

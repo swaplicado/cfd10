@@ -44,9 +44,9 @@ public class DElementTimbreFiscalDigital extends cfd.DElement {
     }
 
     public cfd.DAttributeString getAttVersion() { return moAttVersion; }
-    public cfd.DAttributeString getAttUuid() { return moAttUuid; }
+    public cfd.DAttributeString getAttUUID() { return moAttUuid; }
     public cfd.DAttributeString getAttFechaTimbrado() { return moAttFechaTimbrado; }
-    public cfd.DAttributeString getAttSelloCfd() { return moAttSelloCFD; }
+    public cfd.DAttributeString getAttSelloCFD() { return moAttSelloCFD; }
     public cfd.DAttributeString getAttNoCertificadoSAT() { return moAttNoCertificadoSAT; }
     public cfd.DAttributeString getAttSelloSAT() { return moAttSelloSAT; }
 

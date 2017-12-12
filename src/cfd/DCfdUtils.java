@@ -853,9 +853,9 @@ public abstract class DCfdUtils {
                 namedNodeMapChild = nodeChild.getAttributes();
 
                 tfd.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "version", true));
-                tfd.getAttUuid().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUID", true));
+                tfd.getAttUUID().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUID", true));
                 tfd.getAttFechaTimbrado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaTimbrado", true));
-                tfd.getAttSelloCfd().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "selloCFD", true));
+                tfd.getAttSelloCFD().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "selloCFD", true));
                 tfd.getAttNoCertificadoSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "noCertificadoSAT", true));
                 tfd.getAttSelloSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "selloSAT", true));
 
@@ -1158,11 +1158,13 @@ public abstract class DCfdUtils {
                 Node nodeChild = SXmlUtils.extractChildElements(node, "tfd:TimbreFiscalDigital").get(0);
                 NamedNodeMap namedNodeMapChild = nodeChild.getAttributes();
 
-                cfd.ver32.DElementTimbreFiscalDigital tfd = new cfd.ver32.DElementTimbreFiscalDigital();
+                cfd.ver33.DElementTimbreFiscalDigital tfd = new cfd.ver33.DElementTimbreFiscalDigital();
                 tfd.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
-                tfd.getAttUuid().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUID", true));
+                tfd.getAttUUID().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUID", true));
                 tfd.getAttFechaTimbrado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaTimbrado", true));
-                tfd.getAttSelloCfd().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SelloCFD", true));
+                tfd.getAttRfcProvCertif().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RfcProvCertif", true));
+                tfd.getAttLeyenda().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Leyenda", false));
+                tfd.getAttSelloCFD().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SelloCFD", true));
                 tfd.getAttNoCertificadoSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NoCertificadoSAT", true));
                 tfd.getAttSelloSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SelloSAT", true));
 

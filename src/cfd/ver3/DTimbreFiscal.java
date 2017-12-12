@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 
-package cfd.ver32;
+package cfd.ver3;
+
+import cfd.ver32.DElementTimbreFiscalDigital;
 
 /**
  *
@@ -11,18 +13,22 @@ package cfd.ver32;
  */
 public class DTimbreFiscal {
 
-    protected String msVersion;
-    protected String msUuid;
-    protected String msFechaTimbrado;
-    protected String msSelloCfd;
-    protected String msNoCertificadoSat;
-    protected String msSelloSat;
+    protected String msVersion;             // CFDI 3.2 & 3.3
+    protected String msUuid;                // CFDI 3.2 & 3.3
+    protected String msFechaTimbrado;       // CFDI 3.2 & 3.3
+    protected String msRfcProdCertif;       // CFDI 3.3
+    protected String msLeyenda;             // CFDI 3.3
+    protected String msSelloCfd;            // CFDI 3.2 & 3.3
+    protected String msNoCertificadoSat;    // CFDI 3.2 & 3.3
+    protected String msSelloSat;            // CFDI 3.2 & 3.3
     protected int mnPacId;
 
     public DTimbreFiscal() {
         msVersion = DElementTimbreFiscalDigital.VER;
         msUuid = "";
         msFechaTimbrado = "";
+        msRfcProdCertif = "";
+        msLeyenda = "";
         msSelloCfd = "";
         msNoCertificadoSat = "";
         msSelloSat = "";
@@ -32,6 +38,8 @@ public class DTimbreFiscal {
     public void setVersion(String s) { msVersion = s; }
     public void setUuid(String s) { msUuid = s; }
     public void setFechaTimbrado(String s) { msFechaTimbrado = s; }
+    public void setRfcProdCertif(String s) { msRfcProdCertif = s; }
+    public void setLeyenda(String s) { msLeyenda = s; }
     public void setSelloCfd(String s) { msSelloCfd = s; }
     public void setNoCertificadoSat(String s) { msNoCertificadoSat = s; }
     public void setSelloSat(String s) { msSelloSat = s; }
@@ -40,6 +48,8 @@ public class DTimbreFiscal {
     public String getVersion() { return msVersion; }
     public String getUuid() { return msUuid; }
     public String getFechaTimbrado() { return msFechaTimbrado; }
+    public String getRfcProdCertif() { return msRfcProdCertif; }
+    public String getLeyenda() { return msLeyenda; }
     public String getSelloCfd() { return msSelloCfd; }
     public String getNoCertificadoSat() { return msNoCertificadoSat; }
     public String getSelloSat() { return msSelloSat; }
