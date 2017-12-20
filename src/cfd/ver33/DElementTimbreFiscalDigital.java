@@ -62,7 +62,8 @@ public class DElementTimbreFiscalDigital extends cfd.DElement {
         String xml = "";
         String string = "";
 
-        string = "<" + msName + " ";
+        string = "<" + msName + " "
+                + "xmlns:tfd=\"http://www.sat.gob.mx/TimbreFiscalDigital\" xsi:schemaLocation=\"http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd\" ";
 
         for (DAttribute attribute : mvAttributes) {
             xml = attribute.getAttributeForXml();
