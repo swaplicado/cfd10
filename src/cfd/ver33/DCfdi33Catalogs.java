@@ -43,7 +43,7 @@ public abstract class DCfdi33Catalogs {
     
     public static final String FAC_TP_TASA = "Tasa";
     public static final String FAC_TP_CUOTA = "Cuota";
-    public static final String FAC_TP_EXCENTO = "Exento";
+    public static final String FAC_TP_EXENTO = "Exento";
 
     public static final String XML_MDP = "c_MetodoPago";
     public static final String XML_REL_TP = "c_TipoRelacion";

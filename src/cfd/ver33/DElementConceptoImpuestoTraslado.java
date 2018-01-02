@@ -1,5 +1,6 @@
 package cfd.ver33;
 
+import cfd.DAttribute;
 import cfd.DAttributeDouble;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
@@ -39,6 +40,10 @@ public class DElementConceptoImpuestoTraslado extends cfd.DElement {
     /*
      * Private methods
      */
+    
+    private boolean isNotRequiredBecauseTipoFactorIsExento(DAttribute attribute) {
+        return moAttTipoFactor.getString().compareTo(DCfdi33Catalogs.FAC_TP_EXENTO) == 0 && (attribute == moAttTasaOCuota || attribute == moAttImporte);
+    }
 
     /*
      * Public methods
@@ -71,5 +76,49 @@ public class DElementConceptoImpuestoTraslado extends cfd.DElement {
         if (moAttImporte.getDouble() > limitUpper) {
             throw new IllegalStateException("El valor del atributo '" + moAttImporte.getName() + "' <" + moAttImporte.getDouble() + "> no puede ser mayor que el límite superior permitido <" + limitUpper + ">.");
         }
+    }
+    
+    @Override
+    public java.lang.String getElementForXml() throws Exception {
+        validateElement();
+        
+        String xml = "<" + msName;
+
+        for (DAttribute attribute : mvAttributes) {
+            if (isNotRequiredBecauseTipoFactorIsExento(attribute)) {
+                continue;
+            }
+            
+            String aux = attribute.getAttributeForXml();
+            if (!aux.isEmpty()) {
+                xml += " " + aux;
+            }
+        }
+
+        if (msValue.isEmpty()) {
+            xml += "/>";
+        }
+        else {
+            xml += ">" + msValue + "</" + msName + ">";
+        }
+
+        return xml;
+    }
+
+    @Override
+    public java.lang.String getElementForOriginalString() throws Exception {
+        validateElement();
+        
+        String string = "";
+        
+        for (DAttribute attribute : mvAttributes) {
+            if (isNotRequiredBecauseTipoFactorIsExento(attribute)) {
+                continue;
+            }
+            
+            string += attribute.getAttributeForOriginalString();
+        }
+
+        return string;
     }
 }

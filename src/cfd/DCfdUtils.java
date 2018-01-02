@@ -887,18 +887,13 @@ public abstract class DCfdUtils {
     }
 
     public static cfd.ver33.DElementComprobante getCfdi33(String xml) throws Exception {
-        double dTotalImptoRetenido = 0;
-        double dTotalImptoTrasladado = 0;
-        DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document doc = docBuilder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
-
-        cfd.ver33.DElementComprobante comprobante = new cfd.ver33.DElementComprobante();
-
         // Comprobante:
 
+        Document doc = SXmlUtils.parseDocument(xml);
         Node nodeComprobante = SXmlUtils.extractElements(doc, "cfdi:Comprobante").item(0);
         NamedNodeMap nodeComprobanteMap = nodeComprobante.getAttributes();
 
+        cfd.ver33.DElementComprobante comprobante = new cfd.ver33.DElementComprobante();
         comprobante.getAttSerie().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Serie", false));
         comprobante.getAttFolio().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Folio", false));
         comprobante.getAttFecha().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Fecha", true).replaceAll("T", " ")));
@@ -918,9 +913,9 @@ public abstract class DCfdUtils {
         comprobante.getAttConfirmacion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Confirmacion", false));
 
         // CFDI Related:
-        
-        if (SXmlUtils.hasChildElement(doc, "cfdi:CfdiRelacionados")) {
-            Node nodeCfdiRelacionados = SXmlUtils.extractElements(doc, "cfdi:CfdiRelacionados").item(0);
+    
+        if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:CfdiRelacionados")) {
+            Node nodeCfdiRelacionados = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:CfdiRelacionados").get(0);
             NamedNodeMap nodeCfdiRelacionadosMap = nodeCfdiRelacionados.getAttributes();
             
             DElementCfdiRelacionados cfdiRelacionados = new DElementCfdiRelacionados();
@@ -937,7 +932,7 @@ public abstract class DCfdUtils {
             
             comprobante.setEltOpcCfdiRelacionados(cfdiRelacionados);
         }
-        
+
         // Emisor:
 
         Node nodeEmisor = SXmlUtils.extractElements(doc, "cfdi:Emisor").item(0);
@@ -1085,6 +1080,9 @@ public abstract class DCfdUtils {
         }
         
         // Taxes:
+        
+        double dTotalImptoRetenido = 0;
+        double dTotalImptoTrasladado = 0;
         
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Impuestos")) {
             Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Impuestos").get(0);

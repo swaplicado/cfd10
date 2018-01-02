@@ -2,6 +2,7 @@ package cfd.ver33;
 
 import cfd.DAttributeString;
 import cfd.DElement;
+import cfd.ver3.DCfdVer3Consts;
 
 /**
  *
@@ -14,7 +15,7 @@ public class DElementCfdiRelacionado extends cfd.DElement {
     public DElementCfdiRelacionado() {
         super("cfdi:CfdiRelacionado");
 
-        moAttUuid = new DAttributeString("UUID", true, 36, 36);     // identifiers of 36 fixed characters, e.g., "DC8CF736-5B2C-4A13-8A2B-DD689F0A45C3"
+        moAttUuid = new DAttributeString("UUID", true, DCfdVer3Consts.LEN_UUID, DCfdVer3Consts.LEN_UUID);   // identifiers of 36 fixed characters, e.g., "DC8CF736-5B2C-4A13-8A2B-DD689F0A45C3"
 
         mvAttributes.add(moAttUuid);
     }
