@@ -37,7 +37,7 @@ public class DElementConcepto extends cfd.DElement {
         moAttNoIdentificacion = new DAttributeString("NoIdentificacion", false, 1, 100);    // from 1 to 100 characters
         moAttCantidad = new DAttributeTypeImporteUnitario("Cantidad", true);
         moAttClaveUnidad = new DAttributeString("ClaveUnidad", true, 2, 3);     // c_ClaveUnidad catalog codes from 2 to 3 characters
-        moAttUnidad = new DAttributeString("Unidad", true, 1, 20);  // from 1 to 20 characters
+        moAttUnidad = new DAttributeString("Unidad", false, 1, 20);             // from 1 to 20 characters
         moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000);  // from 1 to 1000 characters
         moAttValorUnitario = new DAttributeTypeImporte("ValorUnitario", true);
         moAttValorUnitario.setCanBeZero(true);
