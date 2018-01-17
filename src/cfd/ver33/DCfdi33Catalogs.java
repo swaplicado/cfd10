@@ -51,6 +51,9 @@ public abstract class DCfdi33Catalogs {
     public static final String XML_CVE_UNID = "c_ClaveUnidad";
     public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
     
+    public static final String ClaveProdServServsFact = "84111506";
+    public static final String ClaveUnidadAct = "ACT";
+    
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();
     public static final HashMap<String, String> Impuesto = new HashMap<>();
     

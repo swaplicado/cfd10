@@ -9,6 +9,7 @@ import cfd.ext.addenda1.DElementAddenda1;
 import cfd.ver3.DCfdVer3Consts;
 import cfd.ver33.DElementCfdiRelacionado;
 import cfd.ver33.DElementCfdiRelacionados;
+import cfd.ver33.DElementConceptoImpuestos;
 import cfd.ver33.DElementImpuestos;
 import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
@@ -977,10 +978,9 @@ public abstract class DCfdUtils {
             if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:Impuestos")) {
                 Vector<Node> childNodeImpuestos = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:Impuestos");
                 Node nodeImpuestos = childNodeImpuestos.get(0);
-                
-                cfd.ver33.DElementConceptoImpuestosRetenciones retenciones = new cfd.ver33.DElementConceptoImpuestosRetenciones();
-                cfd.ver33.DElementConceptoImpuestosTraslados trasladados = new cfd.ver33.DElementConceptoImpuestosTraslados();
 
+                cfd.ver33.DElementConceptoImpuestosTraslados trasladados = new cfd.ver33.DElementConceptoImpuestosTraslados();
+                
                 if (SXmlUtils.hasChildElement(nodeImpuestos, "cfdi:Traslados")) {
                     Node nodeTraslados = SXmlUtils.extractChildElements(nodeImpuestos, "cfdi:Traslados").get(0);
                     Vector<Node> childNodeTraslado = SXmlUtils.extractChildElements(nodeTraslados, "cfdi:Traslado");
@@ -999,6 +999,8 @@ public abstract class DCfdUtils {
                     }
                 }
                 
+                cfd.ver33.DElementConceptoImpuestosRetenciones retenciones = new cfd.ver33.DElementConceptoImpuestosRetenciones();
+                
                 if (SXmlUtils.hasChildElement(nodeImpuestos, "cfdi:Retenciones")) {
                     Node nodeRetenciones = SXmlUtils.extractChildElements(nodeImpuestos, "cfdi:Retenciones").get(0);
                     Vector<Node> childNodeRetencion = SXmlUtils.extractChildElements(nodeRetenciones, "cfdi:Retencion");
@@ -1014,6 +1016,18 @@ public abstract class DCfdUtils {
                         conceptoImpuestoRetencion.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeRetencionesMap, "Importe", true)));
 
                         retenciones.getEltImpuestoRetenciones().add(conceptoImpuestoRetencion);
+                    }
+                }
+                
+                if (!trasladados.getEltImpuestoTrasladados().isEmpty() || !retenciones.getEltImpuestoRetenciones().isEmpty()) {
+                    concepto.setEltOpcConceptoImpuestos(new DElementConceptoImpuestos());
+                    
+                    if (!trasladados.getEltImpuestoTrasladados().isEmpty()) {
+                        concepto.getEltOpcConceptoImpuestos().setEltOpcImpuestosTrasladados(trasladados);
+                    }
+                    
+                    if (!retenciones.getEltImpuestoRetenciones().isEmpty()) {
+                        concepto.getEltOpcConceptoImpuestos().setEltOpcImpuestosRetenciones(retenciones);
                     }
                 }
             }
