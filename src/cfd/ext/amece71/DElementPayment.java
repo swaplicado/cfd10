@@ -7,13 +7,13 @@ package cfd.ext.amece71;
 
 import cfd.DAttributeDate;
 import cfd.DAttributeString;
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementPayment extends cfd.DElementExtAddenda {
+public class DElementPayment extends cfd.DSubelementAddenda {
 
     protected cfd.DAttributeString moAttType;
     protected cfd.DAttributeString moAttContentVersion;
@@ -39,7 +39,7 @@ public class DElementPayment extends cfd.DElementExtAddenda {
     protected cfd.ext.amece71.DElementPayableAmount moEltPayableAmount;
 
     public DElementPayment() {
-        super("requestForPayment", DElementExtAddendaType.Amece71);
+        super("requestForPayment", DSubelementAddendaType.Amece71);
 
         moAttType = new DAttributeString("type", true);
         moAttType.setString("SimpleInvoiceType");

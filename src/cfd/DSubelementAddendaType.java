@@ -9,7 +9,7 @@ package cfd;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public enum DElementExtAddendaType {
+public enum DSubelementAddendaType {
     SoftwareAplicado,
     Amece71,
     Soriana,

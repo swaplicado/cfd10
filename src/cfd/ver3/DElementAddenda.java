@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package cfd.ver2;
+package cfd.ver3;
 
 import cfd.DSubelementAddenda;
 
@@ -14,7 +14,7 @@ import cfd.DSubelementAddenda;
 public class DElementAddenda extends cfd.DElementParent {
 
     public DElementAddenda() {
-        super("Addenda");
+        super("cfdi:Addenda");
     }
     
     public String getNamespace() {

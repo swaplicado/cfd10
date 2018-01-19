@@ -6,20 +6,20 @@
 package cfd.ext.grupomodelo;
 
 import cfd.DAttributeString;
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementAddendaModelo extends cfd.DElementExtAddenda {
+public class DElementAddendaModelo extends cfd.DSubelementAddenda {
 
    protected cfd.DAttributeString moAttXmlns;
    protected cfd.DAttributeString moAttSchemaLocation;
    protected cfd.ext.grupomodelo.DElementPayment moEltPayment;
 
     public DElementAddendaModelo() {
-        super("modelo:AddendaModelo", DElementExtAddendaType.GrupoModelo);
+        super("modelo:AddendaModelo", DSubelementAddendaType.GrupoModelo);
 
         moAttXmlns = new DAttributeString("xmlns:modelo", true);
         moAttSchemaLocation = new DAttributeString("xsi:schemaLocation", true);

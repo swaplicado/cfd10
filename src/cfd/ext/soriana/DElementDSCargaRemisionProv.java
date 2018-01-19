@@ -5,13 +5,13 @@
 
 package cfd.ext.soriana;
 
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementDSCargaRemisionProv extends cfd.DElementExtAddenda {
+public class DElementDSCargaRemisionProv extends cfd.DSubelementAddenda {
 
     protected cfd.ext.soriana.DElementRemision moEltRemision;
     protected cfd.ext.soriana.DElementPedimento moEltPedimento;
@@ -21,7 +21,7 @@ public class DElementDSCargaRemisionProv extends cfd.DElementExtAddenda {
     protected cfd.ext.soriana.DElementArticulosPorCajaTarima moEltArticuloCajas;
 
     public DElementDSCargaRemisionProv() {
-        super("DSCargaRemisionProv", DElementExtAddendaType.Soriana);
+        super("DSCargaRemisionProv", DSubelementAddendaType.Soriana);
 
         moEltRemision = new DElementRemision();
         moEltPedimento = new DElementPedimento();

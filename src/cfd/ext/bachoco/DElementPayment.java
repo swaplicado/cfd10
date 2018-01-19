@@ -7,13 +7,13 @@ package cfd.ext.bachoco;
 
 import cfd.DAttributeDate;
 import cfd.DAttributeString;
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementPayment extends cfd.DElementExtAddenda {
+public class DElementPayment extends cfd.DSubelementAddenda {
 
     protected cfd.DAttributeString moAttType;
     protected cfd.DAttributeString moAttContentVersion;
@@ -37,7 +37,7 @@ public class DElementPayment extends cfd.DElementExtAddenda {
     protected cfd.ext.bachoco.DElementPayableAmount moEltPayableAmount;
 
     public DElementPayment() {
-        super("requestForPayment", DElementExtAddendaType.Bachoco);
+        super("requestForPayment", DSubelementAddendaType.Bachoco);
 
         moAttType = new DAttributeString("type", true);
         moAttContentVersion = new DAttributeString("contentVersion", true);

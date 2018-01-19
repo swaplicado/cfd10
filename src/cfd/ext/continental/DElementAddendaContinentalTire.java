@@ -4,13 +4,13 @@
  */
 package cfd.ext.continental;
 
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementAddendaContinentalTire extends cfd.DElementExtAddenda {
+public class DElementAddendaContinentalTire extends cfd.DSubelementAddenda {
     
     public static final String NAME = "AddendaContinentalTire";
 
@@ -20,7 +20,7 @@ public class DElementAddendaContinentalTire extends cfd.DElementExtAddenda {
     protected DElementPosicionesPo moEltPosicionesPo;
 
     public DElementAddendaContinentalTire() {
-        super(NAME, DElementExtAddendaType.Continental);
+        super(NAME, DSubelementAddendaType.Continental);
         
         moEltPo = new DElementPo(DElementPoOptions.CON);
         moEltPedido = new DElementPedido("");

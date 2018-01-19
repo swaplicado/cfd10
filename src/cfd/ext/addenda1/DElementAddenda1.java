@@ -5,23 +5,23 @@
 
 package cfd.ext.addenda1;
 
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementAddenda1 extends cfd.DElementExtAddenda {
+public class DElementAddenda1 extends cfd.DSubelementAddenda {
 
-    public static final String ADDENDA_LOCATION = "http://www.tron.com.mx/addenda http://www.tron.com.mx/addenda/addenda1.xsd";
-    public static final String ADDENDA_NAME_SPACE = "xmlns:myadd=\"http://www.tron.com.mx/addenda\"";
+    public static final String ADDENDA1_NAMESPACE = "xmlns:myadd=\"http://www.tron.com.mx/addenda\"";
+    public static final String ADDENDA1_SCHEMA_LOCATION = "http://www.tron.com.mx/addenda http://www.tron.com.mx/addenda/addenda1.xsd";
 
     protected cfd.ext.addenda1.DElementMoneda moEltMoneda;
     protected cfd.ext.addenda1.DElementAdicional moEltAdicional;
     protected cfd.ext.addenda1.DElementPagare moEltOpcPagare;
 
     public DElementAddenda1() {
-        super("myadd:Addenda1", DElementExtAddendaType.SoftwareAplicado);
+        super("myadd:Addenda1", DSubelementAddendaType.SoftwareAplicado, ADDENDA1_NAMESPACE, ADDENDA1_SCHEMA_LOCATION);
 
         moEltMoneda = new DElementMoneda();
         moEltAdicional = new DElementAdicional();
@@ -47,9 +47,5 @@ public class DElementAddenda1 extends cfd.DElementExtAddenda {
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
         return "";
-    }
-
-    public static String[] createXmlLocationNs() {
-        return new String[] { ADDENDA_LOCATION, ADDENDA_NAME_SPACE };
     }
 }

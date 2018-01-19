@@ -6,13 +6,13 @@
 package cfd.ext.elektra;
 
 import cfd.DAttributeString;
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementAp extends cfd.DElementExtAddenda {
+public class DElementAp extends cfd.DSubelementAddenda {
 
     protected cfd.DAttributeString moAttXmlns;
     protected cfd.DAttributeString moAttSchemaLocation;
@@ -23,7 +23,7 @@ public class DElementAp extends cfd.DElementExtAddenda {
     protected cfd.ext.elektra.DElementDetailItems moEltDetalleProductos;
 
     public DElementAp() {
-        super("ap:ap", DElementExtAddendaType.Elektra);
+        super("ap:ap", DSubelementAddendaType.Elektra);
 
         moAttXmlns = new DAttributeString("xmlns:ap", true);
         moAttSchemaLocation = new DAttributeString("schemaLocation", true);

@@ -6,13 +6,13 @@
 package cfd.ext.interfactura;
 
 import cfd.DAttributeString;
-import cfd.DElementExtAddendaType;
+import cfd.DSubelementAddendaType;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementFacturaInterfactura extends cfd.DElementExtAddenda {
+public class DElementFacturaInterfactura extends cfd.DSubelementAddenda {
 
     protected cfd.DAttributeString moAttxmlns;
     protected cfd.DAttributeString moAttTipoDocumento;
@@ -22,7 +22,7 @@ public class DElementFacturaInterfactura extends cfd.DElementExtAddenda {
     protected cfd.ext.interfactura.DElementEncabezado moEltEncabezado;
 
     public DElementFacturaInterfactura() {
-        super("if:FacturaInterfactura", DElementExtAddendaType.LOreal);
+        super("if:FacturaInterfactura", DSubelementAddendaType.LOreal);
 
         moAttxmlns = new DAttributeString("xmlns:if", true);
         moAttTipoDocumento = new DAttributeString("TipoDocumento", true);

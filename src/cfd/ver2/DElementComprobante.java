@@ -11,7 +11,6 @@ import cfd.DAttributeInteger;
 import cfd.DAttributeOptionCondicionesPago;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
-import cfd.ext.addenda1.DElementAddenda1;
 
 /**
  *
@@ -20,7 +19,6 @@ import cfd.ext.addenda1.DElementAddenda1;
 public class DElementComprobante extends cfd.DElement {
 
     protected float mfVersion;
-    protected String[] masAddendaXmlLocationNs;
 
     protected cfd.DAttributeString moAttVersion;
     protected cfd.DAttributeString moAttSerie;
@@ -52,14 +50,9 @@ public class DElementComprobante extends cfd.DElement {
     protected cfd.ver2.DElementAddenda moEltOpcAddenda;
 
     public DElementComprobante(float version) {
-        this(version, false);
-    }
-
-    public DElementComprobante(float version, boolean addenda1XmlLocationNs) {
         super("Comprobante");
 
         mfVersion = version;
-        masAddendaXmlLocationNs = !addenda1XmlLocationNs ? null : DElementAddenda1.createXmlLocationNs();
 
         moAttVersion = new DAttributeString("version", true, 3, 3);
         moAttVersion.setString("" + mfVersion);
@@ -120,10 +113,8 @@ public class DElementComprobante extends cfd.DElement {
     public void setEltEmisor(cfd.ver2.DElementEmisor o) { moEltEmisor = o; }
     public void setEltReceptor(cfd.ver2.DElementReceptor o) { moEltReceptor = o; }
     public void setEltOpcComplemento(cfd.ver2.DElementComplemento o) { moEltOpcComplemento = o; }
-    public void setEltOpcAddenda(cfd.ver2.DElementAddenda addenda) { moEltOpcAddenda = addenda; }
-    public void setEltOpcAddenda(cfd.ver2.DElementAddenda addenda, String[] addendaXmlLocationNs) { moEltOpcAddenda = addenda; masAddendaXmlLocationNs = addendaXmlLocationNs; }
+    public void setEltOpcAddenda(cfd.ver2.DElementAddenda o) { moEltOpcAddenda = o; }
 
-    public String[] getAddendaXmlLocationNs() { return masAddendaXmlLocationNs; }
     public cfd.DAttributeString getAttVersion() { return moAttVersion; }
     public cfd.DAttributeString getAttSerie() { return moAttSerie; }
     public cfd.DAttributeString getAttFolio() { return moAttFolio; }
@@ -160,19 +151,19 @@ public class DElementComprobante extends cfd.DElement {
 
         if (mfVersion == 2.0f) {
             xml = "<" + msName + " " +
-                    "xsi:schemaLocation=\"http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv2.xsd" +
-                    (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[0]) + "\" " +
                     "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                    "xmlns=\"http://www.sat.gob.mx/cfd/2\"" +
-                    (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[1]);
+                    "xmlns=\"http://www.sat.gob.mx/cfd/2\" " +
+                    (moEltOpcAddenda == null || moEltOpcAddenda.getNamespace().isEmpty() ? "" : moEltOpcAddenda.getNamespace() + " ") +
+                    "xsi:schemaLocation=\"http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv2.xsd" +
+                    (moEltOpcAddenda == null || moEltOpcAddenda.getXsdLocation().isEmpty() ? "" : " " + moEltOpcAddenda.getXsdLocation()) + "\"";
         }
         else if (mfVersion == 2.2f) {
             xml = "<" + msName + " " +
-                    "xsi:schemaLocation=\"http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv22.xsd" +
-                    (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[0]) + "\" " +
                     "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                    "xmlns=\"http://www.sat.gob.mx/cfd/2\"" +
-                    (masAddendaXmlLocationNs == null ? "" : " " + masAddendaXmlLocationNs[1]);
+                    "xmlns=\"http://www.sat.gob.mx/cfd/2\" " +
+                    (moEltOpcAddenda == null || moEltOpcAddenda.getNamespace().isEmpty() ? "" : moEltOpcAddenda.getNamespace() + " ") +
+                    "xsi:schemaLocation=\"http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv22.xsd" +
+                    (moEltOpcAddenda == null || moEltOpcAddenda.getXsdLocation().isEmpty() ? "" : " " + moEltOpcAddenda.getXsdLocation()) + "\"";
         }
 
         for (DAttribute attribute : mvAttributes) {

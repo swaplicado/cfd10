@@ -5,7 +5,6 @@
 
 package cfd;
 
-import cfd.ext.addenda1.DElementAddenda1;
 import cfd.ver3.DCfdVer3Consts;
 import cfd.ver33.DElementCfdiRelacionado;
 import cfd.ver33.DElementCfdiRelacionados;
@@ -435,8 +434,8 @@ public abstract class DCfdUtils {
         return elementNomina;
     }
 
-    private static cfd.DElement getElementAddenda(Node node) throws Exception {
-        cfd.DElement elementAddenda1 = null;
+    private static cfd.ver3.DElementAddenda getElementAddendaWithAddenda1(Node node) throws Exception {
+        cfd.ver3.DElementAddenda addenda = null;
         Node nodeChild = null;
         Vector<Node> nodeChilds = null;
         NamedNodeMap namedNodeMapChild = null;
@@ -445,7 +444,6 @@ public abstract class DCfdUtils {
         if (SXmlUtils.hasChildElement(node, "myadd:Addenda1")) {
             node = SXmlUtils.extractChildElements(node, "myadd:Addenda1").get(0);
 
-            cfd.ver32.DElementAddenda addenda = new cfd.ver32.DElementAddenda();
             cfd.ext.addenda1.DElementAddenda1 addenda1 = new cfd.ext.addenda1.DElementAddenda1();
 
             nodeChild = SXmlUtils.extractChildElements(node, "myadd:Moneda").get(0);
@@ -519,12 +517,11 @@ public abstract class DCfdUtils {
                 }
             }
 
+            addenda = new cfd.ver3.DElementAddenda();
             addenda.getElements().add(addenda1);
-
-            elementAddenda1 = addenda;
         }
         
-        return elementAddenda1;
+        return addenda;
     }
 
     public static cfd.ver2.DElementComprobante getCfd(String xml) throws Exception {
@@ -876,12 +873,12 @@ public abstract class DCfdUtils {
 
         // Addenda:
         
-        node = SXmlUtils.extractElements(doc, "cfdi:Addenda").item(0);
+        node = SXmlUtils.extractElements(doc, "cfdi:Addenda").item(0);  // note that it is assumed that allways exists an addenda node!
 
         if (node != null) {
-            cfd.ver32.DElementAddenda addenda = (cfd.ver32.DElementAddenda) getElementAddenda(node);
+            cfd.ver3.DElementAddenda addenda = getElementAddendaWithAddenda1(node);
             
-            comprobante.setEltOpcAddenda(addenda, DElementAddenda1.createXmlLocationNs());
+            comprobante.setEltOpcAddenda(addenda);
         }
 
         return comprobante;
@@ -1199,9 +1196,9 @@ public abstract class DCfdUtils {
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Addenda")) {
             Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Addenda").get(0);
 
-            cfd.ver33.DElementAddenda addenda = (cfd.ver33.DElementAddenda) getElementAddenda(node);
+            cfd.ver3.DElementAddenda addenda = getElementAddendaWithAddenda1(node);
 
-            comprobante.setEltOpcAddenda(addenda, DElementAddenda1.createXmlLocationNs());
+            comprobante.setEltOpcAddenda(addenda);
         }
         
         return comprobante;
