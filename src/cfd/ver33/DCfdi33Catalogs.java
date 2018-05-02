@@ -13,29 +13,29 @@ import java.util.HashMap;
  */
 public abstract class DCfdi33Catalogs {
     
-    public static final int CAT_CFDI_TP = 1;
-    public static final int CAT_CFDI_USO = 2;
-    public static final int CAT_REG_FISC = 3;
-    public static final int CAT_MDP = 4;
-    public static final int CAT_FDP = 5;
-    public static final int CAT_MON = 6;
-    public static final int CAT_PAIS = 7;
-    public static final int CAT_IMP = 8;
-    public static final int CAT_FAC_TP = 9;
-    public static final int CAT_REL_TP = 10;
-    public static final int CAT_CVE_UNID = 11;
-    public static final int CAT_CVE_PROD_SERV = 12;
+    public static final int CAT_CFDI_TP = 1;        // tipo CFDI
+    public static final int CAT_CFDI_USO = 2;       // uso CFDI
+    public static final int CAT_REG_FISC = 3;       // régimen fiscal
+    public static final int CAT_MDP = 4;            // método de pago
+    public static final int CAT_FDP = 5;            // forma de pago
+    public static final int CAT_MON = 6;            // moneda
+    public static final int CAT_PAIS = 7;           // país
+    public static final int CAT_IMP = 8;            // impuesto
+    public static final int CAT_FAC_TP = 9;         // tipo factor
+    public static final int CAT_REL_TP = 10;        // tipo relación
+    public static final int CAT_CVE_UNID = 11;      // clave unidad
+    public static final int CAT_CVE_PROD_SERV = 12; // clave producto o servicio
     
-    public static final String CFD_TP_I = "I";  // Ingreso
-    public static final String CFD_TP_E = "E";  // Egreso
-    public static final String CFD_TP_T = "T";  // Traslado
-    public static final String CFD_TP_N = "N";  // Nómina
-    public static final String CFD_TP_P = "P";  // Pago
+    public static final String CFD_TP_I = "I";      // Ingreso
+    public static final String CFD_TP_E = "E";      // Egreso
+    public static final String CFD_TP_T = "T";      // Traslado
+    public static final String CFD_TP_N = "N";      // Nómina
+    public static final String CFD_TP_P = "P";      // Pago
     
     public static final String CFDI_USO_POR_DEF = "P01"; // Por definir
     
-    public static final int MDP_PUE_ID = 1; // Pago en una sola exhibición
-    public static final int MDP_PPD_ID = 2; // Pago en parcialidades o diferido
+    public static final int MDP_PUE_ID = 1;         // Pago en una sola exhibición
+    public static final int MDP_PPD_ID = 2;         // Pago en parcialidades o diferido
     
     public static final String IMP_ISR = "001";     // ISR
     public static final String IMP_IVA = "002";     // IVA
@@ -44,6 +44,8 @@ public abstract class DCfdi33Catalogs {
     public static final String FAC_TP_TASA = "Tasa";
     public static final String FAC_TP_CUOTA = "Cuota";
     public static final String FAC_TP_EXENTO = "Exento";
+    
+    public static final String REL_TP_SUSTITUCION = "04";
 
     public static final String XML_MDP = "c_MetodoPago";
     public static final String XML_REL_TP = "c_TipoRelacion";
