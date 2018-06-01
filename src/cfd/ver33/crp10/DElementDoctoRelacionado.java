@@ -30,14 +30,14 @@ public class DElementDoctoRelacionado extends cfd.DElement {
     private final DAttributeTypeImporte moAttImpSaldoInsoluto;
 
     /**
-     * 
+     * Creates a new instance of class DElementDoctoRelacionado.
      */
     public DElementDoctoRelacionado() {
         super("pago10:DoctoRelacionado");
 
         moAttIdDocumento = new DAttributeString("IdDocumento", true, 16, 36);   // text from 16 to 36 characters
         moAttSerie = new DAttributeString("Serie", false, 1, 25);       // text from 1 to 25 characters
-        moAttFolio = new DAttributeString("Folio", false, 1, 40);       // text from 1 to 25 characters
+        moAttFolio = new DAttributeString("Folio", false, 1, 40);       // text from 1 to 40 characters
         moAttMonedaDR = new DAttributeString("MonedaDR", true, 3, 3);   // c_Moneda catalog codes of 3 fixed digits
         moAttTipoCambioDR = new DAttributeTipoCambio("TipoCambioDR", false);
         moAttMetodoDePagoDR = new DAttributeString("MetodoDePagoDR", true, 3, 3);   // c_MetodoPago catalog codes of 3 fixed digits

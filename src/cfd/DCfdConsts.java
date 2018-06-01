@@ -10,6 +10,8 @@ package cfd;
  */
 public abstract class DCfdConsts {
     
+    public static final int CFD_NUM_LEN = 10;
+    
     public static final float CFD_VER_20 = 2.0f;
     public static final float CFD_VER_22 = 2.2f;
     
@@ -18,5 +20,8 @@ public abstract class DCfdConsts {
     
     public static final float COMP_RP_10 = 1.0f;
 
-    public static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n";
+    public static final String RFC_GEN_NAC = "XAXX010101000";
+    public static final String RFC_GEN_INT = "XEXX010101000";
+    
+    public static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
 }

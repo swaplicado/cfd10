@@ -34,8 +34,11 @@ public abstract class DCfdi33Catalogs {
     
     public static final String CFDI_USO_POR_DEF = "P01"; // Por definir
     
-    public static final int MDP_PUE_ID = 1;         // Pago en una sola exhibición
-    public static final int MDP_PPD_ID = 2;         // Pago en parcialidades o diferido
+    public static final int MDP_PUE_ID = 1;         // ID pago en una sola exhibición
+    public static final int MDP_PPD_ID = 2;         // ID pago en parcialidades o diferido
+    
+    public static final String MDP_PUE = "PUE";     // Pago en una sola exhibición
+    public static final String MDP_PPD = "PPD";     // Pago en parcialidades o diferido
     
     public static final String IMP_ISR = "001";     // ISR
     public static final String IMP_IVA = "002";     // IVA
@@ -53,8 +56,13 @@ public abstract class DCfdi33Catalogs {
     public static final String XML_CVE_UNID = "c_ClaveUnidad";
     public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
     
-    public static final String ClaveProdServServsFact = "84111506";
+    public static final String ClaveMonedaMxn = "MXN";
+    public static final String ClaveMonedaXxx = "XXX";
+    public static final String ClaveProdServServsSueldosSalarios = "84111505";
+    public static final String ClaveProdServServsFacturacion = "84111506";
     public static final String ClaveUnidadAct = "ACT";
+    public static final String ConceptoServsSueldosSalarios = "Pago de nómina";
+    public static final String ConceptoPago = "Pago";
     
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();
     public static final HashMap<String, String> Impuesto = new HashMap<>();

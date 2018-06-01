@@ -12,7 +12,7 @@ package cfd.ext.soriana;
 public class DElementCita extends cfd.DElement {
 
     public DElementCita(java.lang.String value) {
-        super("Citas", value);
+        super("Cita", value);
     }
     
     @Override

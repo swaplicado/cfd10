@@ -96,7 +96,7 @@ public class DElementRemision extends cfd.DElementParent {
         //mvElements.add(moEltEmpqCajas);
         //mvElements.add(moEltEmpqTarimas);
         //mvElements.add(moEltCantCajasTarimas);
-        //mvElements.add(moEltCita);
+        mvElements.add(moEltCita);
         //mvElements.add(moEltOpcFolioNotaEntrada);
     }
     

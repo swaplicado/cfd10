@@ -20,7 +20,7 @@ public class DElementConcepto extends cfd.DElement {
     private final DAttributeString moAttClaveUnidad;
     private final DAttributeString moAttUnidad;
     private final DAttributeString moAttDescripcion;
-    private final DAttributeTypeImporte moAttValorUnitario;
+    private final DAttributeTypeImporteUnitario moAttValorUnitario;
     private final DAttributeTypeImporte moAttImporte;
     private final DAttributeTypeImporte moAttDescuento;
 
@@ -39,7 +39,7 @@ public class DElementConcepto extends cfd.DElement {
         moAttClaveUnidad = new DAttributeString("ClaveUnidad", true, 2, 3);     // c_ClaveUnidad catalog codes from 2 to 3 characters
         moAttUnidad = new DAttributeString("Unidad", false, 1, 20);             // from 1 to 20 characters
         moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000);  // from 1 to 1000 characters
-        moAttValorUnitario = new DAttributeTypeImporte("ValorUnitario", true);
+        moAttValorUnitario = new DAttributeTypeImporteUnitario("ValorUnitario", true);
         moAttValorUnitario.setCanBeZero(true);
         moAttImporte = new DAttributeTypeImporte("Importe", true);
         moAttImporte.setCanBeZero(true);
@@ -100,13 +100,13 @@ public class DElementConcepto extends cfd.DElement {
     public void setEltOpcConceptoCuentaPredial(cfd.ver33.DElementConceptoCuentaPredial o) { moEltOpcConceptoCuentaPredial = o; }
     public void setEltOpcComplementoConcepto(cfd.ver33.DElementComplementoConcepto o) { moEltOpcComplementoConcepto = o; }
 
-    public DAttributeString getAttClaveProdServ() { return moAttClaveProdServ; }
-    public DAttributeString getAttNoIdentificacion() { return moAttNoIdentificacion; }
+    public cfd.DAttributeString getAttClaveProdServ() { return moAttClaveProdServ; }
+    public cfd.DAttributeString getAttNoIdentificacion() { return moAttNoIdentificacion; }
     public cfd.DAttributeDouble getAttCantidad() { return moAttCantidad; }
-    public DAttributeString getAttClaveUnidad() { return moAttClaveUnidad; }
-    public DAttributeString getAttUnidad() { return moAttUnidad; }
-    public DAttributeString getAttDescripcion() { return moAttDescripcion; }
-    public cfd.DAttributeTypeImporte getAttValorUnitario() { return moAttValorUnitario; }
+    public cfd.DAttributeString getAttClaveUnidad() { return moAttClaveUnidad; }
+    public cfd.DAttributeString getAttUnidad() { return moAttUnidad; }
+    public cfd.DAttributeString getAttDescripcion() { return moAttDescripcion; }
+    public cfd.DAttributeTypeImporteUnitario getAttValorUnitario() { return moAttValorUnitario; }
     public cfd.DAttributeTypeImporte getAttImporte() { return moAttImporte; }
     public cfd.DAttributeTypeImporte getAttDescuento() { return moAttDescuento; }
 

@@ -37,18 +37,14 @@ public class DElementPagosPago extends cfd.DElement {
     private ArrayList<DElementDoctoRelacionado> maEltDoctoRelacionados;
     
     /**
-     * 
+     * Creates a new instance of class DElementPagosPago.
      */
     public DElementPagosPago() {
-        this(false);
-    }
-    
-    public DElementPagosPago(boolean addAddenda1XmlLocationNs) {
-        super("cfdi:Comprobante");
+        super("pago10:Pago");
 
         moAttFechaPago = new DAttributeDatetime("FechaPago", true);
-        moAttFormaDePagoP = new DAttributeString("FormaDePagoP", false, 2, 2);            // c_FormaPago catalog codes of 2 fixed digits
-        moAttMonedaP = new DAttributeString("MonedaP", true, 3, 3);   // c_Moneda catalog codes of 3 fixed digits
+        moAttFormaDePagoP = new DAttributeString("FormaDePagoP", true, 2, 2);   // c_FormaPago catalog codes of 2 fixed digits
+        moAttMonedaP = new DAttributeString("MonedaP", true, 3, 3);     // c_Moneda catalog codes of 3 fixed digits
         moAttTipoCambioP = new DAttributeTipoCambio("TipoCambioP", false);
         moAttMonto = new DAttributeTypeImporte("Monto", true);
         moAttNumOperacion = new DAttributeString("NumOperacion", false, 1);
@@ -99,6 +95,7 @@ public class DElementPagosPago extends cfd.DElement {
     public DAttributeString getAttNomBancoOrdExt() { return moAttNomBancoOrdExt; }
     public DAttributeString getAttCtaOrdenante() { return moAttCtaOrdenante; }
     public DAttributeString getAttRfcEmisorCtaBen() { return moAttRfcEmisorCtaBen; }
+    public DAttributeString getAttCtaBeneficiario() { return moAttCtaBeneficiario; }
     public DAttributeString getAttTipoCadPago() { return moAttTipoCadPago; }
     public DAttributeString getAttCertPago() { return moAttCertPago; }
     public DAttributeString getAttCadPago() { return moAttCadPago; }

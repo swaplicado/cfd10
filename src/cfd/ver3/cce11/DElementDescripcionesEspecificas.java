@@ -19,7 +19,7 @@ public class DElementDescripcionesEspecificas extends cfd.DElement {
     private final DAttributeString moAttNumeroSerie;
 
     public DElementDescripcionesEspecificas() {
-        super("cfdi:DescripcionesEspecificas");
+        super("cce11:DescripcionesEspecificas");
 
         moAttMarca = new DAttributeString("Marca", true);
         moAttModelo = new DAttributeString("Modelo", false);

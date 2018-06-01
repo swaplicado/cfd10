@@ -24,13 +24,9 @@ public class DElementPagos extends cfd.DElement {
     private final ArrayList<DElementPagosPago> maEltPagos;
 
     /**
-     * 
+     * Creates a new instance of class DElementPagos.
      */
     public DElementPagos() {
-        this(false);
-    }
-    
-    public DElementPagos(boolean addAddenda1XmlLocationNs) {
         super("pago10:Pagos");
 
         moAttVersion = new DAttributeString("Version", true, 3, 3); // fixed text value "1.0"
@@ -51,7 +47,9 @@ public class DElementPagos extends cfd.DElement {
 
     public float getVersion() { return DCfdConsts.COMP_RP_10; }
 
-    private final ArrayList<DElementPagosPago> getEltPagos() { return maEltPagos; }
+    public DAttributeString getAttVersion() { return moAttVersion; }
+    
+    public ArrayList<DElementPagosPago> getEltPagos() { return maEltPagos; }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
