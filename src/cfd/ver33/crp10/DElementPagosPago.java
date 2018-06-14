@@ -47,16 +47,16 @@ public class DElementPagosPago extends cfd.DElement {
         moAttMonedaP = new DAttributeString("MonedaP", true, 3, 3);     // c_Moneda catalog codes of 3 fixed digits
         moAttTipoCambioP = new DAttributeTipoCambio("TipoCambioP", false);
         moAttMonto = new DAttributeTypeImporte("Monto", true);
-        moAttNumOperacion = new DAttributeString("NumOperacion", false, 1);
+        moAttNumOperacion = new DAttributeString("NumOperacion", false, 1, 100);
         moAttRfcEmisorCtaOrd = new DAttributeString("RfcEmisorCtaOrd", false, 12, 13);
         moAttNomBancoOrdExt = new DAttributeString("NomBancoOrdExt", false, 1, 300);
         moAttCtaOrdenante = new DAttributeString("CtaOrdenante", false, 10, 50);
         moAttRfcEmisorCtaBen = new DAttributeString("RfcEmisorCtaBen", false, 12, 12);
         moAttCtaBeneficiario = new DAttributeString("CtaBeneficiario", false, 10, 50);
         moAttTipoCadPago = new DAttributeString("TipoCadPago", false, 2, 2);
-        moAttCertPago = new DAttributeString("CertPago", false, 1);
-        moAttCadPago = new DAttributeString("CadPago", false, 1);
-        moAttSelloPago = new DAttributeString("SelloPago", false, 1);
+        moAttCertPago = new DAttributeString("CertPago", false, 1);     // xs:base64Binary
+        moAttCadPago = new DAttributeString("CadPago", false, 1, 8192);
+        moAttSelloPago = new DAttributeString("SelloPago", false, 1);   // xs:base64Binary
 
         mvAttributes.add(moAttFechaPago);
         mvAttributes.add(moAttFormaDePagoP);
