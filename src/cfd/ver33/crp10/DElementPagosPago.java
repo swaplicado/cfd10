@@ -51,7 +51,7 @@ public class DElementPagosPago extends cfd.DElement {
         moAttRfcEmisorCtaOrd = new DAttributeString("RfcEmisorCtaOrd", false, 12, 13);
         moAttNomBancoOrdExt = new DAttributeString("NomBancoOrdExt", false, 1, 300);
         moAttCtaOrdenante = new DAttributeString("CtaOrdenante", false, 10, 50);
-        moAttRfcEmisorCtaBen = new DAttributeString("RfcEmisorCtaBen", false, 13, 13);
+        moAttRfcEmisorCtaBen = new DAttributeString("RfcEmisorCtaBen", false, 12, 12);
         moAttCtaBeneficiario = new DAttributeString("CtaBeneficiario", false, 10, 50);
         moAttTipoCadPago = new DAttributeString("TipoCadPago", false, 2, 2);
         moAttCertPago = new DAttributeString("CertPago", false, 1);
