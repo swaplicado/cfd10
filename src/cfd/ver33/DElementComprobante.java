@@ -300,7 +300,8 @@ public class DElementComprobante extends cfd.DElement {
         String string = "";
         
         try {
-            string = SXmlUtils.transformXml(getElementForXml(), DCfdi33Consts.URL_XSLT);
+            //string = SXmlUtils.transformXmlFromUrl(getElementForXml(), DCfdi33Consts.XSLT_3_3_URL);
+            string = SXmlUtils.transformXmlFromFile(getElementForXml(), DCfdi33Consts.XSLT_3_3_FILE);
         } 
         catch (Exception ex) {
             Logger.getLogger(DElementComprobante.class.getName()).log(Level.SEVERE, null, ex);

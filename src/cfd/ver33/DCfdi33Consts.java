@@ -11,7 +11,10 @@ package cfd.ver33;
  */
 public class DCfdi33Consts {
     
-    public static final String URL_XSLT = "http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt";
+    public static final String XSLT_3_3_URL = "http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt";
+    //public static final String XSLT_3_3_URL = "http://omawww.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt";
+    //public static final String XSLT_3_3_URL = "http://facturacion.finkok.com/static/cfdi/xslt/3.3/cadenaoriginal_3_3.xslt";
+    public static final String XSLT_3_3_FILE = "cfdi/xslt/3.3/cadenaoriginal_3_3.xslt";
     public static final String URL_VERIFIC = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx";
     
     //public static final String REGEX_DESCRIP = "([A-Z]|[a-z]|[0-9]| |Ñ|ñ|!|\"|%|&|'|´|-|:|;|>|=|<|@|_|,|\\{|\\}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)";
