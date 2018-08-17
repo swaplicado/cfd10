@@ -238,16 +238,16 @@ public final class DCfd {
         int y = 0;
         int grayValue = 0;
         String data  = "";
-        DecimalFormat decimalFormat = new DecimalFormat("#." + SLibUtils.textRepeat("0", 6));
+        DecimalFormat decimalFormat = new DecimalFormat("#." + SLibUtils.textRepeat("#", 6));
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = null;
         BufferedImage bufferedImage = null;
 
         data += url;
-        data += "&id=" + (uuid == null || uuid.isEmpty() ? SLibUtils.textRepeat("0", 40) : uuid);
-        data += "?re=" + (rfcEmisor == null || rfcEmisor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcEmisor);
+        data += "?id=" + (uuid == null || uuid.isEmpty() ? SLibUtils.textRepeat("0", 40) : uuid);
+        data += "&re=" + (rfcEmisor == null || rfcEmisor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcEmisor);
         data += "&rr=" + (rfcReceptor == null || rfcReceptor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcReceptor);
-        data += "&tt=" + decimalFormat.format(total);
+        data += "&tt=" + decimalFormat.format(SLibUtils.roundAmount(total));
         data += "&fe=" + (sello == null || sello.isEmpty() ? SLibUtils.textRepeat("0", 8) : sello);
 
         try {
