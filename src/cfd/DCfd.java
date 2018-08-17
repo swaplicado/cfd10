@@ -5,6 +5,7 @@
 
 package cfd;
 
+import cfd.ver33.DCfdi33Consts;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -233,7 +234,7 @@ public final class DCfd {
         return bufferedImage;
     }
 
-    public static BufferedImage createQrCodeBufferedImageCfdi33(final String url, final String uuid, final String rfcEmisor, final String rfcReceptor, final double total, final String sello) {
+    public static BufferedImage createQrCodeBufferedImageCfdi33(final String uuid, final String rfcEmisor, final String rfcReceptor, final double total, final String sello) {
         int x = 0;
         int y = 0;
         int grayValue = 0;
@@ -243,7 +244,7 @@ public final class DCfd {
         BitMatrix bitMatrix = null;
         BufferedImage bufferedImage = null;
 
-        data += url;
+        data += DCfdi33Consts.URL_VERIFIC;
         data += "?id=" + (uuid == null || uuid.isEmpty() ? SLibUtils.textRepeat("0", 40) : uuid);
         data += "&re=" + (rfcEmisor == null || rfcEmisor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcEmisor);
         data += "&rr=" + (rfcReceptor == null || rfcReceptor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcReceptor);
