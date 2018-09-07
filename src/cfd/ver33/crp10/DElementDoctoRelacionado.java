@@ -72,7 +72,7 @@ public class DElementDoctoRelacionado extends cfd.DElement {
     public DAttributeString getAttFolio() { return moAttFolio; }
     public DAttributeString getAttMonedaDR() { return moAttMonedaDR; }
     public DAttributeTipoCambio getAttTipoCambioDR() { return moAttTipoCambioDR; }
-    public DAttributeString getAttMetodoPagoDR() { return moAttMetodoDePagoDR; }
+    public DAttributeString getAttMetodoDePagoDR() { return moAttMetodoDePagoDR; }
     public DAttributeInteger getAttNumParcialidad() { return moAttNumParcialidad; }
     public DAttributeTypeImporte getAttImpSaldoAnt() { return moAttImpSaldoAnt; }
     public DAttributeTypeImporte getAttImpPagado() { return moAttImpPagado; }
