@@ -50,9 +50,11 @@ public abstract class DCfdi33Catalogs {
     
     public static final String REL_TP_SUSTITUCION = "04";
 
-    public static final String XML_MDP = "c_MetodoPago";
-    public static final String XML_REL_TP = "c_TipoRelacion";
     public static final String XML_CFDI_USO = "c_UsoCFDI";
+    public static final String XML_MDP = "c_MetodoPago";
+    public static final String XML_FDP = "c_FormaPago";
+    public static final String XML_MON = "c_Moneda";
+    public static final String XML_REL_TP = "c_TipoRelacion";
     public static final String XML_CVE_UNID = "c_ClaveUnidad";
     public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
     
