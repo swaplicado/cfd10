@@ -38,4 +38,13 @@ public class DCfdi33Utils {
     public static boolean notRequiredAccountReceipt(final String formaPago) {
         return notRequiredAccountPayer(formaPago) || formaPago.equals("06");
     }
+    
+    /**
+     * Check SAT CFDI 3.3 Catalogs for reference.
+     * @param formaPago
+     * @return 
+     */
+    public static boolean notRequiredBankPayer(final String formaPago) {
+        return notRequiredAccountPayer(formaPago) || formaPago.equals("05") || formaPago.equals("06");
+    }
 }
