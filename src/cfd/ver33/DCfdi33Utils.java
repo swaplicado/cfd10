@@ -35,7 +35,7 @@ public class DCfdi33Utils {
      * @param formaPago
      * @return 
      */
-    public static boolean notRequiredAccountPayerReceipt(final String formaPago) {
+    public static boolean notRequiredAccountReceipt(final String formaPago) {
         return notRequiredAccountPayer(formaPago) || formaPago.equals("06");
     }
 }
