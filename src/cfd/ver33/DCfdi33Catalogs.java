@@ -40,6 +40,8 @@ public abstract class DCfdi33Catalogs {
     public static final String MDP_PUE = "PUE";     // Pago en una sola exhibición
     public static final String MDP_PPD = "PPD";     // Pago en parcialidades o diferido
     
+    public static final String FDP_EFECTIVO = "01";
+    public static final String FDP_CHEQUE = "02";
     public static final String FDP_POR_DEF = "99";  // Por definir
     
     public static final String IMP_ISR = "001";     // ISR
