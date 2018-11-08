@@ -35,6 +35,7 @@ public class DCfdi33Consts {
     
     public static final String CFDI_ESTATUS_VIG = "Vigente";
     public static final String CFDI_ESTATUS_CAN = "Cancelado";
+    public static final String CFDI_ESTATUS_NO_ENC = "No Encontrado";
     
     public static final String ESTATUS_CANCEL_PROC = "En proceso";
     public static final String ESTATUS_CANCEL_RECH = "Solicitud rechazada";
@@ -43,10 +44,11 @@ public class DCfdi33Consts {
     public static final String ESTATUS_CANCEL_PLAZO_VENC = "Cancelado Plazo Vencido";
     public static final String ESTATUS_CANCEL_NINGUNO = "None";
     
-    public static final String ESTATUS_CANCEL_PROC_GUI_CODE = "EP";
-    public static final String ESTATUS_CANCEL_RECH_GUI_CODE = "SR";
-    public static final String ESTATUS_CANCEL_SIN_ACEPT_GUI_CODE = "CSA";
-    public static final String ESTATUS_CANCEL_CON_ACEPT_GUI_CODE = "CCA";
-    public static final String ESTATUS_CANCEL_PLAZO_VENC_GUI_CODE = "CPV";
-    public static final String ESTATUS_CANCEL_NINGUNO_GUI_CODE = "";
+    public static final String ESTATUS_CANCEL_PROC_CODE = "Prc";
+    public static final String ESTATUS_CANCEL_RECH_CODE = "Rec";
+    public static final String ESTATUS_CANCEL_SIN_ACEPT_CODE = "CSA";
+    public static final String ESTATUS_CANCEL_CON_ACEPT_CODE = "CCA";
+    public static final String ESTATUS_CANCEL_PLAZO_VENC_CODE = "CPV";
+    public static final String ESTATUS_CANCEL_NINGUNO_CODE = "";
+    public static final String ESTATUS_CANCEL_PEND_BUFF_CODE = "Buf"; // CFDI in pending buffer
 }
