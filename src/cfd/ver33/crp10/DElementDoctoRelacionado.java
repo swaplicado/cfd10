@@ -2,7 +2,7 @@ package cfd.ver33.crp10;
 
 import cfd.DAttributeInteger;
 import cfd.DAttributeString;
-import cfd.DAttributeTipoCambio;
+import cfd.DAttributeTipoCambio6d;
 import cfd.DAttributeTypeImporte;
 import cfd.DElement;
 import cfd.ver33.DCfdi33Consts;
@@ -22,7 +22,7 @@ public class DElementDoctoRelacionado extends cfd.DElement {
     private final DAttributeString moAttSerie;
     private final DAttributeString moAttFolio;
     private final DAttributeString moAttMonedaDR;
-    private final DAttributeTipoCambio moAttTipoCambioDR;
+    private final DAttributeTipoCambio6d moAttTipoCambioDR;
     private final DAttributeString moAttMetodoDePagoDR;
     private final DAttributeInteger moAttNumParcialidad;
     private final DAttributeTypeImporte moAttImpSaldoAnt;
@@ -39,7 +39,7 @@ public class DElementDoctoRelacionado extends cfd.DElement {
         moAttSerie = new DAttributeString("Serie", false, 1, 25);       // text from 1 to 25 characters
         moAttFolio = new DAttributeString("Folio", false, 1, 40);       // text from 1 to 40 characters
         moAttMonedaDR = new DAttributeString("MonedaDR", true, 3, 3);   // c_Moneda catalog codes of 3 fixed digits
-        moAttTipoCambioDR = new DAttributeTipoCambio("TipoCambioDR", false);
+        moAttTipoCambioDR = new DAttributeTipoCambio6d("TipoCambioDR", false);
         moAttMetodoDePagoDR = new DAttributeString("MetodoDePagoDR", true, 3, 3);   // c_MetodoPago catalog codes of 3 fixed digits
         moAttNumParcialidad = new DAttributeInteger("NumParcialidad", true);
         moAttImpSaldoAnt = new DAttributeTypeImporte("ImpSaldoAnt", true);
@@ -71,7 +71,7 @@ public class DElementDoctoRelacionado extends cfd.DElement {
     public DAttributeString getAttSerie() { return moAttSerie; }
     public DAttributeString getAttFolio() { return moAttFolio; }
     public DAttributeString getAttMonedaDR() { return moAttMonedaDR; }
-    public DAttributeTipoCambio getAttTipoCambioDR() { return moAttTipoCambioDR; }
+    public DAttributeTipoCambio6d getAttTipoCambioDR() { return moAttTipoCambioDR; }
     public DAttributeString getAttMetodoDePagoDR() { return moAttMetodoDePagoDR; }
     public DAttributeInteger getAttNumParcialidad() { return moAttNumParcialidad; }
     public DAttributeTypeImporte getAttImpSaldoAnt() { return moAttImpSaldoAnt; }
