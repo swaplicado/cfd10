@@ -41,7 +41,8 @@ public class DCfdi33Consts {
     public static final String ESTATUS_CANCEL_RECH = "Solicitud rechazada";
     public static final String ESTATUS_CANCEL_SIN_ACEPT = "Cancelado sin aceptación";
     public static final String ESTATUS_CANCEL_CON_ACEPT = "Cancelado con aceptación";
-    public static final String ESTATUS_CANCEL_PLAZO_VENC = "Cancelado Plazo Vencido";
+    public static final String ESTATUS_CANCEL_PLAZO_VENC = "Plazo vencido";
+    public static final String ESTATUS_CANCEL_PLAZO_VENC_EXT = "Cancelado plazo vencido";
     public static final String ESTATUS_CANCEL_NINGUNO = "None";
     
     public static final String ESTATUS_CANCEL_PROC_CODE = "Prc";
