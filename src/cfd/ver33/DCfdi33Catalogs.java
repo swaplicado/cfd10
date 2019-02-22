@@ -63,13 +63,30 @@ public abstract class DCfdi33Catalogs {
     public static final String XML_CVE_UNID = "c_ClaveUnidad";
     public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
     
+    public static final String TxtSí = "Sí";
+    public static final String TxtNo = "No";
+    
     public static final String ClaveMonedaMxn = "MXN";
     public static final String ClaveMonedaXxx = "XXX";
     public static final String ClaveProdServServsSueldosSalarios = "84111505";
     public static final String ClaveProdServServsFacturacion = "84111506";
     public static final String ClaveUnidadAct = "ACT";
-    public static final String ConceptoServsSueldosSalarios = "Pago de nómina";
+    
     public static final String ConceptoPago = "Pago";
+    public static final String ConceptoSueldosSalarios = "Pago de nómina";
+    
+    public static final String ClaveNominaOrd = "O";
+    public static final String ClaveNominaExt = "E";
+    public static final String ClavePeriodicidadPagoSem = "02";
+    public static final String ClavePeriodicidadPagoQna = "04";
+    public static final String ClavePeriodicidadPagoOtra = "99";
+    public static final String ClaveTipoContratoModalidadTrabajoComision = "08";
+    public static final String ClaveTipoRegimenSueldos = "02";
+    public static final String ClaveTipoRegimenJubilados = "03";
+    public static final String ClaveTipoRegimenPensionados = "04";
+    public static final String ClaveTipoRegimenJubiladosOPensionados = "12";
+    
+    public static final double DIAS_PAG_MIN = 0.001;
     
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();
     public static final HashMap<String, String> Impuesto = new HashMap<>();
