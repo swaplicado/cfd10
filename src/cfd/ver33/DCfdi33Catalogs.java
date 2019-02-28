@@ -85,6 +85,7 @@ public abstract class DCfdi33Catalogs {
     public static final String ClaveTipoRegimenJubilados = "03";
     public static final String ClaveTipoRegimenPensionados = "04";
     public static final String ClaveTipoRegimenJubiladosOPensionados = "12";
+    public static final String ClaveTipoOtroPagoSubsidioEmpleo = "002";
     
     public static final double DIAS_PAG_MIN = 0.001;
     
