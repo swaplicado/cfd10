@@ -357,7 +357,7 @@ public abstract class DCfdUtils {
                         otroPago.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
                         otroPago.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
 
-                        if (SXmlUtils.hasChildElement(node, "nomina12:SubsidioAlEmpleo")) {
+                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:SubsidioAlEmpleo")) {
                             nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:SubsidioAlEmpleo");
 
                             for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
