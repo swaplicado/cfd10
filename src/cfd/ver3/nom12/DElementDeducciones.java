@@ -30,7 +30,7 @@ public class DElementDeducciones extends cfd.DElement {
         mvAttributes.add(moAttTotalOtrasDeducciones);
         mvAttributes.add(moAttTotalImpuestosRetenidos);
 
-        mvEltHijosDeduccion = new Vector<DElementDeduccion>();
+        mvEltHijosDeduccion = new Vector<>();
     }
 
     public cfd.DAttributeTypeImporte getAttTotalOtrasDeducciones() { return moAttTotalOtrasDeducciones; }

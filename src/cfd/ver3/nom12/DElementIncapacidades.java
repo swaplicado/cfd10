@@ -20,7 +20,7 @@ public class DElementIncapacidades extends cfd.DElement {
     public DElementIncapacidades() {
         super("nomina12:Incapacidades");
 
-        mvEltHijosIncapacidad = new Vector<DElementIncapacidad>();
+        mvEltHijosIncapacidad = new Vector<>();
     }
 
     public java.util.Vector<cfd.ver3.nom12.DElementIncapacidad> getEltHijosIncapacidad() { return mvEltHijosIncapacidad; }

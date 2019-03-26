@@ -21,7 +21,7 @@ public class DElementOtrosPagos extends cfd.DElement {
     public DElementOtrosPagos() {
         super("nomina12:OtrosPagos");
 
-        mvEltHijosOtroPago = new Vector<DElementOtroPago>();
+        mvEltHijosOtroPago = new Vector<>();
     }
 
     public java.util.Vector<cfd.ver3.nom12.DElementOtroPago> getEltHijosOtroPago() { return mvEltHijosOtroPago; }

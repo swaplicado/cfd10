@@ -44,7 +44,7 @@ public class DElementPercepciones extends cfd.DElement {
         mvAttributes.add(moAttTotalGravado);
         mvAttributes.add(moAttTotalExento);
 
-        mvEltHijosPercepcion = new Vector<DElementPercepcion>();
+        mvEltHijosPercepcion = new Vector<>();
         moEltJubilacionPensionRetiro = null;
         moEltSeparacionIndemnizacion = null;
     }

@@ -79,7 +79,7 @@ public class DElementReceptor extends cfd.DElement {
         mvAttributes.add(moAttSalarioDiarioIntegrado);
         mvAttributes.add(moAttClaveEntFed);
 
-        mvEltHijosSubcontratacion = new Vector<DElementSubcontratacion>();
+        mvEltHijosSubcontratacion = new Vector<>();
     }
 
     public cfd.DAttributeString getAttNumEmpleado() { return moAttNumEmpleado; }
