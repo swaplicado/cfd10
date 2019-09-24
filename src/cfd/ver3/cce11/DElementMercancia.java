@@ -82,7 +82,7 @@ public class DElementMercancia extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes and element validation 
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
 
         for (DElementDescripcionesEspecificas element : maEltDescripcionesEspecificas) {
             string += element.getElementForOriginalString();

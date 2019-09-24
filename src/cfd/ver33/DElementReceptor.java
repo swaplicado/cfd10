@@ -47,6 +47,8 @@ public class DElementReceptor extends cfd.DElement {
 
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
         // validate text conformity to requiered regular expressions:
         
         if (!moAttNombre.getString().isEmpty() && !DCfdi33Utils.matches(moAttNombre.getString(), DCfdi33Consts.REGEX_DESCRIP + "{" + moAttNombre.getLengthMin() + "," + moAttNombre.getLengthMax() + "}")) {

@@ -50,6 +50,10 @@ public class DElementMercancias extends cfd.DElement {
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+
+        // validate child elements:
+        
         if (maEltMercancias.isEmpty()) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new DElementMercancia().getName()) + "'.");
         }
@@ -80,9 +84,7 @@ public class DElementMercancias extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        validateElement();
-        
-        String string = "";
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
 
         for (DElementMercancia element : maEltMercancias) {
             string += element.getElementForOriginalString();

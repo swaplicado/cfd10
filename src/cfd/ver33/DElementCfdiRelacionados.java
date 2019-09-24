@@ -39,6 +39,10 @@ public class DElementCfdiRelacionados extends cfd.DElement {
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
+        // validate child elements:
+        
         if (maEltCfdiRelacionados.isEmpty()) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementCfdiRelacionado().getName()) + "'.");
         }
@@ -73,7 +77,7 @@ public class DElementCfdiRelacionados extends cfd.DElement {
     
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes and element validation 
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
 
         for (DElement element : maEltCfdiRelacionados) {
             string += element.getElementForOriginalString();

@@ -29,6 +29,10 @@ public class DElementConceptoImpuestosTraslados extends cfd.DElement implements 
 
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
+        // validate child elements:
+        
         if (maEltConceptoImpuestoTrasladados.isEmpty()) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementConceptoImpuestoTraslado().getName()) + "'.");
         }
@@ -54,9 +58,7 @@ public class DElementConceptoImpuestosTraslados extends cfd.DElement implements 
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        validateElement();
-        
-        String string = "";
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
 
         for (DElement element : maEltConceptoImpuestoTrasladados) {
             string += element.getElementForOriginalString();

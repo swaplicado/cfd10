@@ -57,6 +57,8 @@ public class DElementConceptoImpuestoTraslado extends cfd.DElement {
 
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
         // validate attribute "Importe":
         
         // límite inferior: [(Base - 10^(-NumDecimalesBase)/2) * (TasaOCuota)] truncado con el número de decimales de la moneda
@@ -107,9 +109,7 @@ public class DElementConceptoImpuestoTraslado extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        validateElement();
-        
-        String string = "";
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         for (DAttribute attribute : mvAttributes) {
             if (isNotRequiredBecauseTipoFactorIsExento(attribute)) {

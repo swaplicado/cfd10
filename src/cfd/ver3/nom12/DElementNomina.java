@@ -17,7 +17,7 @@ import cfd.DAttributeTypeImporte;
  */
 public class DElementNomina extends cfd.DElement {
     
-    public static final String XSI = "http://www.sat.gob.mx/nomina  http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd";
+    public static final String XSI = "http://www.sat.gob.mx/nomina http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd";
     public static final String XMLNS = "xmlns:nomina12=\"http://www.sat.gob.mx/nomina12\"";
 
     protected cfd.DAttributeString moAttVersion;
@@ -142,7 +142,7 @@ public class DElementNomina extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes and element validation 
+        String string = super.getElementForOriginalString();    // for element attributes and element validation
 
         if (moEltEmisor != null) {
             string += moEltEmisor.getElementForOriginalString();

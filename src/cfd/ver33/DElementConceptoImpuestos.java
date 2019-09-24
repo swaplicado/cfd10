@@ -49,6 +49,10 @@ public class DElementConceptoImpuestos extends cfd.DElement {
 
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
+        // validate child elements:
+        
         if (moEltOpcConceptoImpuestosTraslados == null && moEltOpcConceptoImpuestosRetenciones == null) {
             throw new IllegalStateException(DElement.ERR_MSG_NODES + "'" + (new cfd.ver33.DElementConceptoImpuestosTraslados().getName()) + "', '" + (new cfd.ver33.DElementConceptoImpuestosRetenciones().getName()) + "'" + DElement.ERR_MSG_NODES_NO_EXIST);
         }
@@ -74,9 +78,7 @@ public class DElementConceptoImpuestos extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        validateElement();
-        
-        String string = "";
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         for (DElement element : createElementsArray()) {
             string += element.getElementForOriginalString();

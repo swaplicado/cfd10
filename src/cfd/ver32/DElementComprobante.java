@@ -16,6 +16,7 @@ import cfd.DElement;
 import cfd.ver2.DAttributeOptionFormaDePago;
 import cfd.ver2.DAttributeOptionTipoDeComprobante;
 import cfd.ver3.cce11.DElementComercioExterior;
+import cfd.ver3.clf10.DElementLeyendasFiscales;
 import cfd.ver3.nom12.DElementNomina;
 
 /**
@@ -158,36 +159,55 @@ public class DElementComprobante extends cfd.DElement {
      * Private methods:
      */
     
-    private boolean isCfdiPayroll() {
-        boolean is = false;
-        
-        if (moEltOpcComplemento != null) {
-            for (DElement element : moEltOpcComplemento.getElements()) {
-                if (element instanceof cfd.ver3.nom12.DElementNomina) {
-                    is = true;
-                    break;
-                }
-            }
-        }
-        
-        return is;
-    }
-
-    private boolean isCfdiIntCommerce() {
-        boolean is = false;
+    private boolean hasComplementCe11() {
+        boolean has = false;
         
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
-                    is = true;
+                    has = true;
                     break;
                 }
             }
         }
         
-        return is;
+        return has;
     }
 
+    private boolean hasComplementLf10() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.clf10.DElementLeyendasFiscales) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
+
+    private boolean hasComplementNom12() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.nom12.DElementNomina) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
+
+    /*
+     * Public methods:
+     */
+    
     @Override
     public java.lang.String getElementForXml() throws Exception {
         String aux = "";
@@ -195,13 +215,15 @@ public class DElementComprobante extends cfd.DElement {
         String xml = "<" + msName + " "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" "
-                + (!isCfdiIntCommerce()? "" : DElementComercioExterior.XMLNS + " ")
-                + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS + " ")
+                + (!hasComplementCe11() ? "" : DElementComercioExterior.XMLNS + " ")
+                + (!hasComplementLf10()? "" : DElementLeyendasFiscales.XMLNS + " ")
+                + (!hasComplementNom12() ? "" : DElementNomina.XMLNS + " ")
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getNamespace().isEmpty() ? "" : moEltOpcAddenda.getNamespace() + " ")
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd"
-                + (!isCfdiIntCommerce()? "" : " " + DElementComercioExterior.XSI)
-                + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
+                + (!hasComplementCe11() ? "" : " " + DElementComercioExterior.XSI)
+                + (!hasComplementLf10()? "" : " " + DElementLeyendasFiscales.XSI)
+                + (!hasComplementNom12() ? "" : " " + DElementNomina.XSI)
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getXsdLocation().isEmpty() ? "" : " " + moEltOpcAddenda.getXsdLocation()) + "\"";
 
         for (DAttribute attribute : mvAttributes) {
@@ -240,14 +262,6 @@ public class DElementComprobante extends cfd.DElement {
         return xml;
     }
 
-    /*
-     * Private methods:
-     */
-    
-    /*
-     * Public methods:
-     */
-    
     /**
      * Composes original string linking together each value.
      * @return

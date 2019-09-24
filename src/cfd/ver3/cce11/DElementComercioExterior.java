@@ -161,7 +161,7 @@ public class DElementComercioExterior extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes and element validation 
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         for (DElement element : createElementsArray()) {
             string += element.getElementForOriginalString();

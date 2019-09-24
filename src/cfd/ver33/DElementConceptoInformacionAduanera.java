@@ -25,6 +25,8 @@ public class DElementConceptoInformacionAduanera extends cfd.DElement {
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
         // validate text conformity to requiered regular expressions:
         
         if (!DCfdi33Utils.matches(moAttNumeroPedimento.getString(), DCfdi33Consts.REGEX_NUM_PEDIMENTO)) {

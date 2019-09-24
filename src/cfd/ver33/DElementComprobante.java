@@ -8,6 +8,7 @@ import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
 import cfd.DElement;
 import cfd.ver3.cce11.DElementComercioExterior;
+import cfd.ver3.clf10.DElementLeyendasFiscales;
 import cfd.ver3.nom12.DElementNomina;
 import cfd.ver33.crp10.DElementPagos;
 import java.util.ArrayList;
@@ -115,39 +116,54 @@ public class DElementComprobante extends cfd.DElement {
     /*
      * Private methods:
      */
-    
-    private boolean isCfdiPayroll() {
-        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Catalogs.CFD_TP_N) == 0;
-    }
 
-    private boolean isCfdiComplementCe() {
-        boolean is = false;
+    private boolean hasComplementCe11() {
+        boolean has = false;
         
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
-                    is = true;
+                    has = true;
                     break;
                 }
             }
         }
         
-        return is;
+        return has;
     }
 
-    private boolean isCfdiComplementRp() {
-        boolean is = false;
+    private boolean hasComplementLf10() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.clf10.DElementLeyendasFiscales) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
+
+    private boolean hasComplementRp10() {
+        boolean has = false;
         
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver33.crp10.DElementPagos) {
-                    is = true;
+                    has = true;
                     break;
                 }
             }
         }
         
-        return is;
+        return has;
+    }
+    
+    private boolean isCfdiPayroll() {
+        return moAttTipoDeComprobante.getString().compareTo(DCfdi33Catalogs.CFD_TP_N) == 0;
     }
 
     private ArrayList<DElement> createElementsArray() {
@@ -216,7 +232,9 @@ public class DElementComprobante extends cfd.DElement {
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
-        // validate required elements:
+        super.validateElement(); // validates attributes, if any
+        
+        // validate child elements:
         
         if (moEltEmisor == null) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + (new cfd.ver33.DElementEmisor().getName()) + "'" + DElement.ERR_MSG_NODE_NO_EXIST);
@@ -256,14 +274,16 @@ public class DElementComprobante extends cfd.DElement {
         String xml = "<" + msName + " "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" "
-                + (!isCfdiComplementCe()? "" : DElementComercioExterior.XMLNS + " ")
-                + (!isCfdiComplementRp()? "" : DElementPagos.XMLNS + " ")
+                + (!hasComplementCe11()? "" : DElementComercioExterior.XMLNS + " ")
+                + (!hasComplementLf10()? "" : DElementLeyendasFiscales.XMLNS + " ")
+                + (!hasComplementRp10()? "" : DElementPagos.XMLNS + " ")
                 + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS + " ")
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getNamespace().isEmpty() ? "" : moEltOpcAddenda.getNamespace() + " ")
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
-                + (!isCfdiComplementCe()? "" : " " + DElementComercioExterior.XSI)
-                + (!isCfdiComplementRp()? "" : " " + DElementPagos.XSI)
+                + (!hasComplementCe11()? "" : " " + DElementComercioExterior.XSI)
+                + (!hasComplementLf10()? "" : " " + DElementLeyendasFiscales.XSI)
+                + (!hasComplementRp10()? "" : " " + DElementPagos.XSI)
                 + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getXsdLocation().isEmpty() ? "" : " " + moEltOpcAddenda.getXsdLocation()) + "\"";
 
@@ -295,9 +315,7 @@ public class DElementComprobante extends cfd.DElement {
      */
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        validateElement();
-        
-        String string = "";
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         try {
             //string = SXmlUtils.transformXmlFromUrl(getElementForXml(), DCfdi33Consts.XSLT_3_3_URL);

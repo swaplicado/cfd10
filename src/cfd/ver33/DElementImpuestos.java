@@ -70,6 +70,8 @@ public class DElementImpuestos extends cfd.DElement {
 
     @Override
     public void validateElement() throws IllegalStateException, Exception {
+        super.validateElement(); // validates attributes, if any
+        
         // validate attributes 'TotalImpuestosRetenidos':
         
         double imptosRetenidos = 0;
@@ -87,6 +89,8 @@ public class DElementImpuestos extends cfd.DElement {
         if (SLibUtils.round(imptosRetenidos, moAttTotalImpuestosRetenidos.getDecimals()) != SLibUtils.round(moAttTotalImpuestosRetenidos.getDouble(), moAttTotalImpuestosRetenidos.getDecimals())) {
             throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosRetenidos.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
         }
+        
+        // validate child elements:
         
         if (moEltOpcImpuestosRetenciones != null) {
             imptosRetenidos = 0;
@@ -160,9 +164,7 @@ public class DElementImpuestos extends cfd.DElement {
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        validateElement();
-        
-        String string = "";
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
 
         if (moEltOpcImpuestosRetenciones != null) {
             string += moEltOpcImpuestosRetenciones.getElementForOriginalString();

@@ -105,7 +105,9 @@ public class DElementPagosPago extends cfd.DElement {
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
-        // validate required elements:
+        super.validateElement(); // validates attributes, if any
+        
+        // validate child elements:
         
         if (maEltDoctoRelacionados.isEmpty()) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + (this.getName()) + "'" + DElement.ERR_MSG_NODE_NO_CHILD);
@@ -141,7 +143,7 @@ public class DElementPagosPago extends cfd.DElement {
     
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString();    // for element attributes and element validation 
+        String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         for (DElementDoctoRelacionado element : maEltDoctoRelacionados) {
             string += element.getElementForOriginalString();

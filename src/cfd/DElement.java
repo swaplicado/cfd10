@@ -32,7 +32,7 @@ public abstract class DElement implements java.io.Serializable {
     public DElement(java.lang.String name, java.lang.String value) {
         msName = name;
         msValue = value;
-        mvAttributes = new Vector<cfd.DAttribute>();
+        mvAttributes = new Vector<>();
     }
 
     public void setName(java.lang.String name) { msName = name; }
@@ -41,10 +41,12 @@ public abstract class DElement implements java.io.Serializable {
     public java.lang.String getName() { return msName; }
     public java.lang.String getValue() { return msValue; }
 
-    public java.util.Vector<DAttribute> getAttributes() { return mvAttributes; }
+    public java.util.Vector<cfd.DAttribute> getAttributes() { return mvAttributes; }
     
     public void validateElement() throws IllegalStateException, Exception {
-        
+        for (DAttribute attribute : mvAttributes) {
+            attribute.validateValue();
+        }
     }
 
     public java.lang.String getElementForXml() throws Exception {
