@@ -14,7 +14,7 @@ public class DElementTradeItemDescriptionInformation extends cfd.DElementParent 
     protected cfd.ext.amece71.DElementLongText moEltLongText;
 
     public DElementTradeItemDescriptionInformation() {
-        super("tradeItemIdentification");
+        super("tradeItemDescriptionIdentification");
 
         moEltLongText = new DElementLongText("");
 

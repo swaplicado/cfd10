@@ -20,6 +20,7 @@ public class DElementPaymentTermsTime extends cfd.DElementParent {
         super("timePeriodDue");
 
         moAttTimePeriod = new DAttributeString("timePeriod", true);
+        moAttTimePeriod.setString("DAYS");
         moEltValue = new DElementPaymentTermsValue("");
 
         mvAttributes.add(moAttTimePeriod);

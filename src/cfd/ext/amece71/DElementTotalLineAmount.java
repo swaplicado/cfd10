@@ -21,6 +21,7 @@ public class DElementTotalLineAmount extends cfd.DElementParent {
         moEltNetAmount = new DElementNetAmount();
 
         mvElements.add(moEltGrossAmount);
+        mvElements.add(moEltNetAmount);
     }
 
     public cfd.ext.amece71.DElementGrossAmount getEltGrossAmount() { return moEltGrossAmount; }

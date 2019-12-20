@@ -13,17 +13,18 @@ import cfd.DAttributeString;
  */
 public class DElementSellerAlternatePartyIdentification extends cfd.DElement {
 
-    protected cfd.DAttributeString moAttType;
+    protected cfd.DAttributeString moAttAlternatePartyIdentification;
 
     public DElementSellerAlternatePartyIdentification(java.lang.String value) {
         super("alternatePartyIdentification", value);
 
-        moAttType = new DAttributeString("type", true);
+        moAttAlternatePartyIdentification = new DAttributeString("type", true);
+        moAttAlternatePartyIdentification.setString("SELLER_ASSIGNED_IDENTIFIER_FOR_A_PARTY");
 
-        mvAttributes.add(moAttType);
+        mvAttributes.add(moAttAlternatePartyIdentification);
     }
 
-    public cfd.DAttributeString getAttType() { return moAttType; }
+    public cfd.DAttributeString getAttAlternatePartyIdentification() { return moAttAlternatePartyIdentification; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {

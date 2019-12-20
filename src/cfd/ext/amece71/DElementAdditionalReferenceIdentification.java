@@ -19,6 +19,7 @@ public class DElementAdditionalReferenceIdentification extends cfd.DElement {
         super("referenceIdentification", value);
 
         moAttType = new DAttributeString("type", true);
+        moAttType.setString("ON");
 
         mvAttributes.add(moAttType);
     }

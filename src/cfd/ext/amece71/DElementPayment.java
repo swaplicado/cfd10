@@ -17,8 +17,8 @@ public class DElementPayment extends cfd.DSubelementAddenda {
 
     protected cfd.DAttributeString moAttType;
     protected cfd.DAttributeString moAttContentVersion;
-    protected cfd.DAttributeString moAttDocStructureVersion;
-    protected cfd.DAttributeString moAttDocStatus;
+    protected cfd.DAttributeString moAttDocumentStructureVersion;
+    protected cfd.DAttributeString moAttDocumentStatus;
     protected cfd.DAttributeDate moAttDeliveryDate;
 
     protected cfd.ext.amece71.DElementPaymentIdentification moEltPaymentIdentification;
@@ -35,6 +35,7 @@ public class DElementPayment extends cfd.DSubelementAddenda {
     protected cfd.ext.amece71.DElementPaymentTerms moEltPaymentTerms;
     protected cfd.ext.amece71.DElementItems moEltItems;
     protected cfd.ext.amece71.DElementTotalAmount moEltTotalAmount;
+    protected cfd.ext.amece71.DElementBaseAmount moEltBaseAmount;
     protected cfd.ext.amece71.DElementTax moEltTax;
     protected cfd.ext.amece71.DElementPayableAmount moEltPayableAmount;
 
@@ -45,14 +46,16 @@ public class DElementPayment extends cfd.DSubelementAddenda {
         moAttType.setString("SimpleInvoiceType");
         moAttContentVersion = new DAttributeString("contentVersion", true);
         moAttContentVersion.setString("1.3.1");
-        moAttDocStructureVersion = new DAttributeString("documentStructureVersion", true);
-        moAttDocStructureVersion.setString("AMC7.1");
-        moAttDocStatus = new DAttributeString("documentStatus", true);
+        moAttDocumentStructureVersion = new DAttributeString("documentStructureVersion", true);
+        moAttDocumentStructureVersion.setString("AMC7.1");
+        moAttDocumentStatus = new DAttributeString("documentStatus", true);
+        moAttDocumentStatus.setString("ORIGINAL");
         moAttDeliveryDate = new DAttributeDate("DeliveryDate", true);
 
         moEltPaymentIdentification = new DElementPaymentIdentification();
         moEltSpecialInstruction = new DElementSpecialInstruction();
         moEltOrderIdentification = new DElementOrderIdentification();
+        moEltAdditionalInformation = new DElementAdditionalInformation();
         moEltDeliveryNote = new DElementDeliveryNote();
         moEltBuyer = new DElementBuyer();
         moEltSeller = new DElementSeller();
@@ -63,41 +66,45 @@ public class DElementPayment extends cfd.DSubelementAddenda {
         moEltPaymentTerms = new DElementPaymentTerms();
         moEltItems = new DElementItems();
         moEltTotalAmount = new DElementTotalAmount();
+        moEltBaseAmount = new DElementBaseAmount();
         moEltTax = new DElementTax();
         moEltPayableAmount = new DElementPayableAmount();
 
         mvAttributes.add(moAttType);
         mvAttributes.add(moAttContentVersion);
-        mvAttributes.add(moAttDocStructureVersion);
-        mvAttributes.add(moAttDocStatus);
+        mvAttributes.add(moAttDocumentStructureVersion);
+        mvAttributes.add(moAttDocumentStatus);
         mvAttributes.add(moAttDeliveryDate);
 
         mvElements.add(moEltPaymentIdentification);
         mvElements.add(moEltSpecialInstruction);
         mvElements.add(moEltOrderIdentification);
-        mvElements.add(moEltDeliveryNote);
+        mvElements.add(moEltAdditionalInformation);
+        //mvElements.add(moEltDeliveryNote);
         mvElements.add(moEltBuyer);
         mvElements.add(moEltSeller);
         mvElements.add(moEltShipTo);
-        mvElements.add(moEltInvoiceCreator);
-        mvElements.add(moEltCustoms);
+        //mvElements.add(moEltInvoiceCreator);
+        //mvElements.add(moEltCustoms);
         mvElements.add(moEltCurrency);
         mvElements.add(moEltPaymentTerms);
         mvElements.add(moEltItems);
         mvElements.add(moEltTotalAmount);
+        mvElements.add(moEltBaseAmount);
         mvElements.add(moEltTax);
         mvElements.add(moEltPayableAmount);
     }
 
     public cfd.DAttributeString getAttType() { return moAttType; }
     public cfd.DAttributeString getAttContentVersion() { return moAttContentVersion; }
-    public cfd.DAttributeString getAttDocStructureVersion() { return moAttDocStructureVersion; }
-    public cfd.DAttributeString getAttDocStatus() { return moAttDocStatus; }
+    public cfd.DAttributeString getAttDocumentStructureVersion() { return moAttDocumentStructureVersion; }
+    public cfd.DAttributeString getAttDocumentStatus() { return moAttDocumentStatus; }
     public cfd.DAttributeDate getAttDeliveryDate() { return moAttDeliveryDate; }
 
     public cfd.ext.amece71.DElementPaymentIdentification getEltPaymentIdentification() { return moEltPaymentIdentification; }
     public cfd.ext.amece71.DElementSpecialInstruction getEltSpecialInstruction() { return moEltSpecialInstruction; }
     public cfd.ext.amece71.DElementOrderIdentification getEltOrderIdentification() { return moEltOrderIdentification; }
+    public cfd.ext.amece71.DElementAdditionalInformation getEltAdditionalInformation() { return moEltAdditionalInformation; }
     public cfd.ext.amece71.DElementDeliveryNote getEltDeliveryNote() { return moEltDeliveryNote; }
     public cfd.ext.amece71.DElementBuyer getEltBuyer() { return moEltBuyer; }
     public cfd.ext.amece71.DElementSeller getEltSeller() { return moEltSeller; }
@@ -106,8 +113,9 @@ public class DElementPayment extends cfd.DSubelementAddenda {
     public cfd.ext.amece71.DElementCustoms getEltCustoms() { return moEltCustoms; }
     public cfd.ext.amece71.DElementCurrency getEltCurrency() { return moEltCurrency; }
     public cfd.ext.amece71.DElementPaymentTerms getEltPaymentTerms() { return moEltPaymentTerms; }
-    public cfd.ext.amece71.DElementItems getEltItem() { return moEltItems; }
+    public cfd.ext.amece71.DElementItems getEltItems() { return moEltItems; }
     public cfd.ext.amece71.DElementTotalAmount getEltTotalAmount() { return moEltTotalAmount; }
+    public cfd.ext.amece71.DElementBaseAmount getEltBaseAmount() { return moEltBaseAmount; }
     public cfd.ext.amece71.DElementTax getEltTax() { return moEltTax; }
     public cfd.ext.amece71.DElementPayableAmount getEltPayableAmount() { return moEltPayableAmount; }
 

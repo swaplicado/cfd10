@@ -23,10 +23,11 @@ public class DElementTax extends cfd.DElementParent {
         super("tax");
 
         moAttType = new DAttributeString("type", true);
+        moAttType.setString("VAT");
 
         moEltTaxPercentage = new DElementTaxPercentage("");
         moEltTaxAmount = new DElementTaxAmount("");
-        moEltTaxCategory = new DElementTaxCategory("");
+        moEltTaxCategory = new DElementTaxCategory("TRANSFERIDO");
 
         mvAttributes.add(moAttType);
 

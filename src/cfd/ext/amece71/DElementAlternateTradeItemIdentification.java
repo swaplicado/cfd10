@@ -11,16 +11,17 @@ import cfd.DAttributeString;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementAlternateTradeItemIdentification extends cfd.DElementParent {
+public class DElementAlternateTradeItemIdentification extends cfd.DElement {
 
     protected cfd.DAttributeString moAttType;
 
-    public DElementAlternateTradeItemIdentification() {
-        super("tradeItemIdentification");
+    public DElementAlternateTradeItemIdentification(java.lang.String value) {
+        super("alternateTradeItemIdentification", value);
 
         moAttType = new DAttributeString("type", true);
+        moAttType.setString("BUYER_ASSIGNED");
 
-        mvAttributes.add(moAttType);;
+        mvAttributes.add(moAttType);
     }
 
     public cfd.DAttributeString getAttType() { return moAttType; }

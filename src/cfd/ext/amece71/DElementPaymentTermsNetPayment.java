@@ -13,21 +13,22 @@ import cfd.DAttributeString;
  */
 public class DElementPaymentTermsNetPayment extends cfd.DElementParent {
 
-    protected cfd.DAttributeString moAttType;
+    protected cfd.DAttributeString moAttNetPaymentTermsType;
     protected cfd.ext.amece71.DElementPaymentTermsTimePeriod moEltTimePeriod;
 
     public DElementPaymentTermsNetPayment() {
         super("netPayment");
 
-        moAttType = new DAttributeString("netPaymentTermsType", true);
+        moAttNetPaymentTermsType = new DAttributeString("netPaymentTermsType", true);
+        moAttNetPaymentTermsType.setString("BASIC_NET");
         moEltTimePeriod = new DElementPaymentTermsTimePeriod();
 
         mvElements.add(moEltTimePeriod);
 
-        mvAttributes.add(moAttType);
+        mvAttributes.add(moAttNetPaymentTermsType);
     }
 
-    public cfd.DAttributeString getAttTimePeriod() { return moAttType; }
+    public cfd.DAttributeString getAttNetPaymentTermsType() { return moAttNetPaymentTermsType; }
     public cfd.ext.amece71.DElementPaymentTermsTimePeriod getEltTimePeriod() { return moEltTimePeriod; }
 
     @Override

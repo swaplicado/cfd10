@@ -18,7 +18,7 @@ public class DElementItems extends cfd.DElementParent {
 
     public DElementItems() {
         super("");
-        mvEltHijosLineItem = new Vector<DElementLineItem>();
+        mvEltHijosLineItem = new Vector<>();
     }
 
     public java.util.Vector<cfd.ext.amece71.DElementLineItem> getEltHijosLineItem() { return mvEltHijosLineItem; }

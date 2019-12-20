@@ -23,7 +23,7 @@ public class DElementInvoicedQuantity extends cfd.DElement {
         mvAttributes.add(moAttUnit);
     }
 
-    public cfd.DAttributeString getAttUnit() { return moAttUnit; }
+    public cfd.DAttributeString getAttUnitOfMeasure() { return moAttUnit; }
     
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
