@@ -5,22 +5,33 @@
 
 package cfd.ext.amece71;
 
+import cfd.DAttributeString;
+
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementTradeItemDescriptionInformation extends cfd.DElementParent {
 
+    protected cfd.DAttributeString moAttLanguage;
+    
     protected cfd.ext.amece71.DElementLongText moEltLongText;
 
     public DElementTradeItemDescriptionInformation() {
-        super("tradeItemDescriptionIdentification");
+        super("tradeItemDescriptionInformation");
 
+        moAttLanguage = new DAttributeString("language", true);
+        moAttLanguage.setString("ES");
+        
         moEltLongText = new DElementLongText("");
 
+        mvAttributes.add(moAttLanguage);
+        
         mvElements.add(moEltLongText);
     }
 
+    public cfd.DAttributeString getAttLanguage() { return moAttLanguage; }
+    
     public cfd.ext.amece71.DElementLongText getEltLongText() { return moEltLongText; }
 
     @Override
