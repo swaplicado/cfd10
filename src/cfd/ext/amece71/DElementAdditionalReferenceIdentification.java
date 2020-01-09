@@ -12,6 +12,11 @@ import cfd.DAttributeString;
  * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementAdditionalReferenceIdentification extends cfd.DElement {
+    
+    /** Número de pedido (comprador.) */
+    public static final java.lang.String TYPE_ON = "ON";
+    /** Número de aprobación. */
+    public static final java.lang.String TYPE_ATZ = "ATZ";
 
     protected cfd.DAttributeString moAttType;
 
@@ -19,7 +24,7 @@ public class DElementAdditionalReferenceIdentification extends cfd.DElement {
         super("referenceIdentification", value);
 
         moAttType = new DAttributeString("type", true);
-        moAttType.setString("ON");
+        moAttType.setString("ON"); 
 
         mvAttributes.add(moAttType);
     }
