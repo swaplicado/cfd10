@@ -25,7 +25,6 @@ public class DElementItems extends cfd.DElementParent {
 
     @Override
     public java.lang.String getElementForXml() throws Exception {
-        String xml = "";
         String string = "";
 
         if (mvEltHijosLineItem.isEmpty()) {
@@ -33,8 +32,10 @@ public class DElementItems extends cfd.DElementParent {
         }
         else {
             for (DElementLineItem item : mvEltHijosLineItem) {
-                xml = item.getElementForXml();
-                string += xml.isEmpty() ? "" : "\n" + xml;
+                String xml = item.getElementForXml();
+                if (!xml.isEmpty()) {
+                    string += (string.isEmpty() ? "" : "\n") + xml;
+                }
             }
         }
 

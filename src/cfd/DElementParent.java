@@ -17,7 +17,7 @@ public abstract class DElementParent extends cfd.DElement {
 
     public DElementParent(java.lang.String name) {
         super(name);
-        mvElements = new Vector<DElement>();
+        mvElements = new Vector<>();
     }
 
     public java.util.Vector<cfd.DElement> getElements() { return mvElements; }
