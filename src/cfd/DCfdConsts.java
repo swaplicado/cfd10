@@ -10,7 +10,10 @@ package cfd;
  */
 public abstract class DCfdConsts {
     
-    public static final int CFD_NUM_LEN = 10;
+    public static final int LEN_CFD_NUM = 10;
+    public static final int LEN_RFC_PER = 13;
+    public static final int LEN_RFC_ORG = 12;
+    public static final int LEN_CURP = 18;
     
     public static final float CFD_VER_20 = 2.0f;
     public static final float CFD_VER_22 = 2.2f;

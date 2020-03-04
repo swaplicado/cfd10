@@ -29,7 +29,7 @@ import sa.lib.xml.SXmlUtils;
 public abstract class DCfdUtils {
     
     public static final DecimalFormat AmountFormat = new DecimalFormat("#." + SLibUtils.textRepeat("0", SLibUtils.getDecimalFormatAmount().getMaximumFractionDigits()));
-    public static final DecimalFormat CfdNumberFormat = new DecimalFormat(SLibUtils.textRepeat("0", DCfdConsts.CFD_NUM_LEN));   // to be used in composing XML file name
+    public static final DecimalFormat CfdNumberFormat = new DecimalFormat(SLibUtils.textRepeat("0", DCfdConsts.LEN_CFD_NUM));   // to be used in composing XML file name
     
     /**
      * Clean all XML entites considered in sa.lib.SLibUtils.XmlEntityNamesMap from supplied XML String.
