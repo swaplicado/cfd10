@@ -10,10 +10,16 @@ package cfd;
  */
 public abstract class DCfdConsts {
     
+    /** Longitud de número de Comprobante Fiscal Digital. */
     public static final int LEN_CFD_NUM = 10;
+    /** Longitud de clave de Registro Federal de Contribuyentes, persona física. */
     public static final int LEN_RFC_PER = 13;
+    /** Longitud de clave de Registro Federal de Contribuyentes, persona moral. */
     public static final int LEN_RFC_ORG = 12;
+    /** Longitud de Clave Única de Registro Poblacional. */
     public static final int LEN_CURP = 18;
+    /** Longitud de número de seguridad social. */
+    public static final int LEN_SS_NUM = 11;
     
     public static final float CFD_VER_20 = 2.0f;
     public static final float CFD_VER_22 = 2.2f;
