@@ -23,6 +23,8 @@ public class DCfdi33Consts {
     public static final String REGEX_UUID = "[a-f0-9A-F]{8}-[a-f0-9A-F]{4}-[a-f0-9A-F]{4}-[a-f0-9A-F]{4}-[a-f0-9A-F]{12}";
     public static final String REGEX_NUM_PEDIMENTO = "[0-9]{2}  [0-9]{2}  [0-9]{4}  [0-9]{7}";
     public static final String REGEX_NUM_PREDIAL = "[0-9]{1,150}";
+    
+    public static final int STAMP_LAST_CHARS = 8;
 
     /*
     Constantes para la gestión de la cancelación de CFDI.
