@@ -253,7 +253,6 @@ public abstract class DCfdUtils {
                 // Receptor:
                 String dateInicioLab = "";
 
-
                 if (SXmlUtils.hasChildElement(node, "nomina12:Receptor")) {
                     cfd.ver3.nom12.DElementReceptor receptor = new cfd.ver3.nom12.DElementReceptor();
 
@@ -361,14 +360,31 @@ public abstract class DCfdUtils {
                             nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:SubsidioAlEmpleo");
 
                             for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
-                                cfd.ver3.nom12.DElementSubsidioEmpleo subsidio = new cfd.ver3.nom12.DElementSubsidioEmpleo();
+                                cfd.ver3.nom12.DElementSubsidioEmpleo subsidioEmpleo = new cfd.ver3.nom12.DElementSubsidioEmpleo();
 
                                 nodeChild = nodeChildsAux.get(sub);
                                 namedNodeMapChild = nodeChild.getAttributes();
 
-                                subsidio.getAttSubsidioCausado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
+                                subsidioEmpleo.getAttSubsidioCausado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
 
-                                otroPago.setEltSubsidioEmpleo(subsidio);
+                                otroPago.setEltSubsidioEmpleo(subsidioEmpleo);
+                            }
+                        }
+
+                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:CompensacionSaldosAFavor")) {
+                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:CompensacionSaldosAFavor");
+
+                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
+                                cfd.ver3.nom12.DElementCompensacionSaldosFavor compensacionSaldosFavor = new cfd.ver3.nom12.DElementCompensacionSaldosFavor();
+
+                                nodeChild = nodeChildsAux.get(sub);
+                                namedNodeMapChild = nodeChild.getAttributes();
+
+                                compensacionSaldosFavor.getAttSaldoFavor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SaldoAFavor", true)));
+                                compensacionSaldosFavor.getAttAño().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Año", true)));
+                                compensacionSaldosFavor.getAttRemanenteSalFav().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RemanenteSalFav", false)));
+
+                                otroPago.setEltCompensacionSaldosFavor(compensacionSaldosFavor);
                             }
                         }
 
