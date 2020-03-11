@@ -7,6 +7,7 @@ package cfd.ver3.nom12;
 
 import cfd.DAttributeInteger;
 import cfd.DAttributeTypeImporte;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -34,4 +35,11 @@ public class DElementCompensacionSaldosFavor extends cfd.DElement {
     public cfd.DAttributeTypeImporte getAttSaldoFavor() { return moAttSaldoFavor; }
     public cfd.DAttributeInteger getAttAño() { return moAttAño; }
     public cfd.DAttributeTypeImporte getAttRemanenteSalFav() { return moAttRemanenteSalFav; }
+    
+    @Override
+    public String toString() {
+        return moAttSaldoFavor.getName() + ": " + SLibUtils.getDecimalFormatAmount().format(moAttSaldoFavor.getDouble()) + "; " +
+                moAttAño.getName() + ": " + moAttAño.getInteger() + "; " +
+                moAttRemanenteSalFav.getName() + ": " + SLibUtils.getDecimalFormatAmount().format(moAttRemanenteSalFav.getDouble());
+    }
 }

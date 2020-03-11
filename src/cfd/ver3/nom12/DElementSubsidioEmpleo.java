@@ -6,6 +6,7 @@
 package cfd.ver3.nom12;
 
 import cfd.DAttributeTypeImporte;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -25,4 +26,9 @@ public class DElementSubsidioEmpleo extends cfd.DElement {
     }
 
     public cfd.DAttributeTypeImporte getAttSubsidioCausado() { return moAttSubsidioCausado; }
+    
+    @Override
+    public String toString() {
+        return moAttSubsidioCausado.getName() + ": " + SLibUtils.getDecimalFormatAmount().format(moAttSubsidioCausado.getDouble());
+    }
 }
