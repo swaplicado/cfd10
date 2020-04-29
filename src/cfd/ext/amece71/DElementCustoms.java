@@ -12,17 +12,17 @@ package cfd.ext.amece71;
 public class DElementCustoms extends cfd.DElementParent {
 
     protected cfd.ext.amece71.DElementCustomsGln moEltGln;
-    protected cfd.ext.amece71.DElementCustomsPartyIdentification moEltPartyIdentification;
+    protected cfd.ext.amece71.DElementCustomsAlternatePartyIdentification moEltPartyIdentification;
     protected cfd.ext.amece71.DElementCustomsReferenceDate moEltReferenceDate;
-    protected cfd.ext.amece71.DElementCustomsNameAddress moEltNameAndAddress;
+    protected cfd.ext.amece71.DElementCustomsNameAndAddress moEltNameAndAddress;
 
     public DElementCustoms() {
         super("Customs");
 
         moEltGln = new DElementCustomsGln("");
-        moEltPartyIdentification = new DElementCustomsPartyIdentification("");
+        moEltPartyIdentification = new DElementCustomsAlternatePartyIdentification("");
         moEltReferenceDate = new DElementCustomsReferenceDate("");
-        moEltNameAndAddress = new DElementCustomsNameAddress();
+        moEltNameAndAddress = new DElementCustomsNameAndAddress();
 
         mvElements.add(moEltGln);
         mvElements.add(moEltPartyIdentification);
@@ -31,9 +31,9 @@ public class DElementCustoms extends cfd.DElementParent {
     }
 
     public cfd.ext.amece71.DElementCustomsGln getEltGln() { return moEltGln; }
-    public cfd.ext.amece71.DElementCustomsPartyIdentification getEltAlternatePartyIdentification() { return moEltPartyIdentification; }
+    public cfd.ext.amece71.DElementCustomsAlternatePartyIdentification getEltAlternatePartyIdentification() { return moEltPartyIdentification; }
     public cfd.ext.amece71.DElementCustomsReferenceDate getEltReferenceDate() { return moEltReferenceDate; }
-    public cfd.ext.amece71.DElementCustomsNameAddress getEltNameAddress() { return moEltNameAndAddress; }
+    public cfd.ext.amece71.DElementCustomsNameAndAddress getEltNameAndAddress() { return moEltNameAndAddress; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {

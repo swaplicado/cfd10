@@ -13,20 +13,23 @@ import cfd.DAttributeString;
  */
 public class DElementPaymentTermsDiscountPayment extends cfd.DElementParent {
 
-    protected cfd.DAttributeString moAttType;
+    protected cfd.DAttributeString moAttDiscountType;
+    
     protected cfd.ext.amece71.DElementPaymentTermsPercentage moEltPercentage;
 
     public DElementPaymentTermsDiscountPayment() {
         super("discountPayment");
 
-        moAttType = new DAttributeString("discountType", true);
+        moAttDiscountType = new DAttributeString("discountType", true);
+        
         moEltPercentage = new DElementPaymentTermsPercentage("");
 
-        mvAttributes.add(moAttType);
+        mvAttributes.add(moAttDiscountType);
+        
         mvElements.add(moEltPercentage);
     }
 
-    public cfd.DAttributeString getAttTimePeriod() { return moAttType; }
+    public cfd.DAttributeString getAttDiscountType() { return moAttDiscountType; }
     public cfd.ext.amece71.DElementPaymentTermsPercentage getEltPercentage() { return moEltPercentage; }
 
     @Override

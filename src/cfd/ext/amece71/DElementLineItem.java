@@ -16,14 +16,14 @@ public class DElementLineItem extends cfd.DElementParent {
     protected cfd.DAttributeString moAttType;
     protected cfd.DAttributeString moAttNumber;
 
-    protected cfd.ext.amece71.DElementTradeItemIdentification moEltTradeItemIdentification;
-    protected cfd.ext.amece71.DElementAlternateTradeItemIdentification moEltAlternateTradeItemIdentification;
-    protected cfd.ext.amece71.DElementTradeItemDescriptionInformation moEltTradeItemDescriptionInformation;
-    protected cfd.ext.amece71.DElementInvoicedQuantity moEltInvoicedQuantity;
-    protected cfd.ext.amece71.DElementGrossPrice moEltGrossPrice;
-    protected cfd.ext.amece71.DElementNetPrice moEltNetPrice;
+    protected cfd.ext.amece71.DElementLineItemTradeItemIdentification moEltTradeItemIdentification;
+    protected cfd.ext.amece71.DElementLineItemAlternateTradeItemIdentification moEltAlternateTradeItemIdentification;
+    protected cfd.ext.amece71.DElementLineItemTradeItemDescriptionInformation moEltTradeItemDescriptionInformation;
+    protected cfd.ext.amece71.DElementLineItemInvoicedQuantity moEltInvoicedQuantity;
+    protected cfd.ext.amece71.DElementLineItemGrossPrice moEltGrossPrice;
+    protected cfd.ext.amece71.DElementLineItemNetPrice moEltNetPrice;
     protected cfd.ext.amece71.DElementAdditionalInformation moEltAdditionalInformation;
-    protected cfd.ext.amece71.DElementTotalLineAmount moEltTotalLineAmount;
+    protected cfd.ext.amece71.DElementLineItemTotalLineAmount moEltTotalLineAmount;
 
     public DElementLineItem() {
         super("lineItem");
@@ -32,14 +32,14 @@ public class DElementLineItem extends cfd.DElementParent {
         moAttType.setString("SimpleInvoiceLineItemType");
         moAttNumber = new DAttributeString("number", true);
 
-        moEltTradeItemIdentification = new DElementTradeItemIdentification();
-        moEltAlternateTradeItemIdentification = new DElementAlternateTradeItemIdentification("");
-        moEltTradeItemDescriptionInformation = new DElementTradeItemDescriptionInformation();
-        moEltInvoicedQuantity = new DElementInvoicedQuantity("");
-        moEltGrossPrice = new DElementGrossPrice();
-        moEltNetPrice = new DElementNetPrice();
+        moEltTradeItemIdentification = new DElementLineItemTradeItemIdentification();
+        moEltAlternateTradeItemIdentification = new DElementLineItemAlternateTradeItemIdentification("");
+        moEltTradeItemDescriptionInformation = new DElementLineItemTradeItemDescriptionInformation();
+        moEltInvoicedQuantity = new DElementLineItemInvoicedQuantity("");
+        moEltGrossPrice = new DElementLineItemGrossPrice();
+        moEltNetPrice = new DElementLineItemNetPrice();
         moEltAdditionalInformation = new DElementAdditionalInformation();
-        moEltTotalLineAmount = new DElementTotalLineAmount();
+        moEltTotalLineAmount = new DElementLineItemTotalLineAmount();
 
         mvAttributes.add(moAttType);
         mvAttributes.add(moAttNumber);
@@ -57,14 +57,14 @@ public class DElementLineItem extends cfd.DElementParent {
     public cfd.DAttributeString getAttType() { return moAttType; }
     public cfd.DAttributeString getAttNumber() { return moAttNumber; }
     
-    public cfd.ext.amece71.DElementTradeItemIdentification getEltTradeItemIdentification() { return moEltTradeItemIdentification; }
-    public cfd.ext.amece71.DElementAlternateTradeItemIdentification getEltAlternateTradeItemIdentification() { return moEltAlternateTradeItemIdentification; }
-    public cfd.ext.amece71.DElementTradeItemDescriptionInformation getEltTradeItemDescriptionInformation() { return moEltTradeItemDescriptionInformation; }
-    public cfd.ext.amece71.DElementInvoicedQuantity getEltInvoicedQuantity() { return moEltInvoicedQuantity; }
-    public cfd.ext.amece71.DElementGrossPrice getEltGrossPrice() { return moEltGrossPrice; }
-    public cfd.ext.amece71.DElementNetPrice getEltNetPrice() { return moEltNetPrice; }
+    public cfd.ext.amece71.DElementLineItemTradeItemIdentification getEltTradeItemIdentification() { return moEltTradeItemIdentification; }
+    public cfd.ext.amece71.DElementLineItemAlternateTradeItemIdentification getEltAlternateTradeItemIdentification() { return moEltAlternateTradeItemIdentification; }
+    public cfd.ext.amece71.DElementLineItemTradeItemDescriptionInformation getEltTradeItemDescriptionInformation() { return moEltTradeItemDescriptionInformation; }
+    public cfd.ext.amece71.DElementLineItemInvoicedQuantity getEltInvoicedQuantity() { return moEltInvoicedQuantity; }
+    public cfd.ext.amece71.DElementLineItemGrossPrice getEltGrossPrice() { return moEltGrossPrice; }
+    public cfd.ext.amece71.DElementLineItemNetPrice getEltNetPrice() { return moEltNetPrice; }
     public cfd.ext.amece71.DElementAdditionalInformation getEltAdditionalInformation() { return moEltAdditionalInformation; }
-    public cfd.ext.amece71.DElementTotalLineAmount getEltTotalLineAmount() { return moEltTotalLineAmount; }
+    public cfd.ext.amece71.DElementLineItemTotalLineAmount getEltTotalLineAmount() { return moEltTotalLineAmount; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {

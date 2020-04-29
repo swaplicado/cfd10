@@ -13,29 +13,29 @@ import cfd.DAttributeOptionMoneda;
  */
 public class DElementCurrency extends cfd.DElementParent {
 
-    protected cfd.DAttributeOptionMoneda moAttcurrencyISOCode;
+    protected cfd.DAttributeOptionMoneda moAttCurrencyIsoCode;
     
     protected cfd.ext.amece71.DElementCurrencyFunction moEltCurrencyFunction;
-    protected cfd.ext.amece71.DElementCurrencyRate moEltRateOfChange;
+    protected cfd.ext.amece71.DElementCurrencyRateOfChange moEltRateOfChange;
 
     public DElementCurrency() {
         super("currency");
 
-        moAttcurrencyISOCode = new DAttributeOptionMoneda("currencyISOCode", true);
+        moAttCurrencyIsoCode = new DAttributeOptionMoneda("currencyISOCode", true);
         
         moEltCurrencyFunction = new DElementCurrencyFunction("");
-        moEltRateOfChange = new DElementCurrencyRate("");
+        moEltRateOfChange = new DElementCurrencyRateOfChange("");
 
-        mvAttributes.add(moAttcurrencyISOCode);
+        mvAttributes.add(moAttCurrencyIsoCode);
         
         mvElements.add(moEltCurrencyFunction);
         mvElements.add(moEltRateOfChange);
     }
 
-    public cfd.DAttributeOptionMoneda getAttCurrencyISOCode() { return moAttcurrencyISOCode; }
+    public cfd.DAttributeOptionMoneda getAttCurrencyIsoCode() { return moAttCurrencyIsoCode; }
     
     public cfd.ext.amece71.DElementCurrencyFunction getEltCurrencyFunction() { return moEltCurrencyFunction; }
-    public cfd.ext.amece71.DElementCurrencyRate getEltRateOfChange() { return moEltRateOfChange; }
+    public cfd.ext.amece71.DElementCurrencyRateOfChange getEltRateOfChange() { return moEltRateOfChange; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {

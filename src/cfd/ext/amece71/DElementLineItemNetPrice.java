@@ -9,12 +9,12 @@ package cfd.ext.amece71;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementPayableAmount extends cfd.DElementParent {
+public class DElementLineItemNetPrice extends cfd.DElementParent {
 
-   protected cfd.ext.amece71.DElementAmount moEltAmount;
+    protected cfd.ext.amece71.DElementAmount moEltAmount;
 
-    public DElementPayableAmount() {
-        super("payableAmount");
+    public DElementLineItemNetPrice() {
+        super("netPrice");
 
         moEltAmount = new DElementAmount("");
 

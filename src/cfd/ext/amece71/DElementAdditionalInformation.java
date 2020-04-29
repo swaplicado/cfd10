@@ -11,17 +11,17 @@ package cfd.ext.amece71;
  */
 public class DElementAdditionalInformation extends cfd.DElementParent {
 
-    protected cfd.ext.amece71.DElementAdditionalReferenceIdentification moEltReferenceIdentification;
+    protected cfd.ext.amece71.DElementAdditionalInformationReferenceIdentification moEltReferenceIdentification;
 
     public DElementAdditionalInformation() {
         super("AdditionalInformation");
 
-        moEltReferenceIdentification = new DElementAdditionalReferenceIdentification("");
+        moEltReferenceIdentification = new DElementAdditionalInformationReferenceIdentification("");
 
         mvElements.add(moEltReferenceIdentification);
     }
 
-    public cfd.ext.amece71.DElementAdditionalReferenceIdentification getEltReferenceIdentification() { return moEltReferenceIdentification; }
+    public cfd.ext.amece71.DElementAdditionalInformationReferenceIdentification getEltReferenceIdentification() { return moEltReferenceIdentification; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {

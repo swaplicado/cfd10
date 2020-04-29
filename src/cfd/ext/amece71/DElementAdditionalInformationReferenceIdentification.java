@@ -11,18 +11,20 @@ import cfd.DAttributeString;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementOrderReferenceIdentification extends cfd.DElement {
-
-    /** Orden de Compra. */
-    public static final java.lang.String TYPE_ON = "ON";
+public class DElementAdditionalInformationReferenceIdentification extends cfd.DElement {
     
+    /** Número de aprobación. */
+    public static final java.lang.String TYPE_ATZ = "ATZ";
+    /** Número de pedido (comprador). */
+    public static final java.lang.String TYPE_ON = "ON";
+
     protected cfd.DAttributeString moAttType;
 
-    public DElementOrderReferenceIdentification(java.lang.String value) {
+    public DElementAdditionalInformationReferenceIdentification(java.lang.String value) {
         super("referenceIdentification", value);
 
         moAttType = new DAttributeString("type", true);
-        moAttType.setString(TYPE_ON);
+        moAttType.setString(TYPE_ON); 
 
         mvAttributes.add(moAttType);
     }

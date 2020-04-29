@@ -12,21 +12,21 @@ package cfd.ext.amece71;
 
 public class DElementPaymentIdentification extends cfd.DElementParent {
 
-    protected cfd.ext.amece71.DElementEntityType moEltEntityType;
-    protected cfd.ext.amece71.DElementCreatorIdentification moEltCreatorIdentification;
+    protected cfd.ext.amece71.DElementPaymentEntityType moEltEntityType;
+    protected cfd.ext.amece71.DElementPaymentUniqueCreatorIdentification moEltUniqueCreatorIdentification;
 
     public DElementPaymentIdentification() {
         super("requestForPaymentIdentification");
 
-        moEltEntityType = new DElementEntityType("");
-        moEltCreatorIdentification = new DElementCreatorIdentification("");
+        moEltEntityType = new DElementPaymentEntityType("");
+        moEltUniqueCreatorIdentification = new DElementPaymentUniqueCreatorIdentification("");
 
         mvElements.add(moEltEntityType);
-        mvElements.add(moEltCreatorIdentification);
+        mvElements.add(moEltUniqueCreatorIdentification);
     }
 
-    public cfd.ext.amece71.DElementEntityType getEltEntityType() { return moEltEntityType; }
-    public cfd.ext.amece71.DElementCreatorIdentification getEltCreatorIdentification() { return moEltCreatorIdentification; }
+    public cfd.ext.amece71.DElementPaymentEntityType getEltEntityType() { return moEltEntityType; }
+    public cfd.ext.amece71.DElementPaymentUniqueCreatorIdentification getEltUniqueCreatorIdentification() { return moEltUniqueCreatorIdentification; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {

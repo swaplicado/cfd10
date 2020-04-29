@@ -14,24 +14,24 @@ import java.util.Vector;
  */
 public class DElementItems extends cfd.DElementParent {
 
-    protected java.util.Vector<cfd.ext.amece71.DElementLineItem> mvEltHijosLineItem;
+    protected java.util.Vector<cfd.ext.amece71.DElementLineItem> mvEltLineItems;
 
     public DElementItems() {
         super("");
-        mvEltHijosLineItem = new Vector<>();
+        mvEltLineItems = new Vector<>();
     }
 
-    public java.util.Vector<cfd.ext.amece71.DElementLineItem> getEltHijosLineItem() { return mvEltHijosLineItem; }
+    public java.util.Vector<cfd.ext.amece71.DElementLineItem> getEltLineItems() { return mvEltLineItems; }
 
     @Override
     public java.lang.String getElementForXml() throws Exception {
         String string = "";
 
-        if (mvEltHijosLineItem.isEmpty()) {
+        if (mvEltLineItems.isEmpty()) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ext.amece71.DElementLineItem().getName()) + "'.");
         }
         else {
-            for (DElementLineItem item : mvEltHijosLineItem) {
+            for (DElementLineItem item : mvEltLineItems) {
                 String xml = item.getElementForXml();
                 if (!xml.isEmpty()) {
                     string += (string.isEmpty() ? "" : "\n") + xml;

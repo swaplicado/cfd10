@@ -13,8 +13,8 @@ import cfd.DAttributeString;
  */
 public class DElementPaymentTerms extends cfd.DElementParent {
 
-    protected cfd.DAttributeString moAttPaymentTermsRelationTime;
     protected cfd.DAttributeString moAttPaymentTermsEvent;
+    protected cfd.DAttributeString moAttPaymentTermsRelationTime;
 
     protected cfd.ext.amece71.DElementPaymentTermsNetPayment moEltNetPayment;
     protected cfd.ext.amece71.DElementPaymentTermsDiscountPayment moEltDiscountPayment;
@@ -22,23 +22,23 @@ public class DElementPaymentTerms extends cfd.DElementParent {
     public DElementPaymentTerms() {
         super("paymentTerms");
 
-        moAttPaymentTermsRelationTime = new DAttributeString("PaymentTermsRelationTime", true);
-        moAttPaymentTermsRelationTime.setString("REFERENCE_AFTER");
         moAttPaymentTermsEvent = new DAttributeString("paymentTermsEvent", true);
         moAttPaymentTermsEvent.setString("DATE_OF_INVOICE");
+        moAttPaymentTermsRelationTime = new DAttributeString("PaymentTermsRelationTime", true);
+        moAttPaymentTermsRelationTime.setString("REFERENCE_AFTER");
 
         moEltNetPayment = new DElementPaymentTermsNetPayment();
         moEltDiscountPayment = new DElementPaymentTermsDiscountPayment();
 
-        mvAttributes.add(moAttPaymentTermsRelationTime);
         mvAttributes.add(moAttPaymentTermsEvent);
+        mvAttributes.add(moAttPaymentTermsRelationTime);
 
         mvElements.add(moEltNetPayment);
-        //mvElements.add(moEltDiscountPayment);
+        mvElements.add(moEltDiscountPayment);
     }
 
-    public cfd.DAttributeString getAttPaymentTermsRelationTime() { return moAttPaymentTermsRelationTime; }
     public cfd.DAttributeString getAttPaymentTermsEvent() { return moAttPaymentTermsEvent; }
+    public cfd.DAttributeString getAttPaymentTermsRelationTime() { return moAttPaymentTermsRelationTime; }
     
     public cfd.ext.amece71.DElementPaymentTermsNetPayment getEltNetPayment() { return moEltNetPayment; }
     public cfd.ext.amece71.DElementPaymentTermsDiscountPayment getEltDiscountPayment() { return moEltDiscountPayment; }

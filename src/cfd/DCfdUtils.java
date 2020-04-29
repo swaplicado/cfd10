@@ -74,25 +74,118 @@ public abstract class DCfdUtils {
         return string;
     }
     
-    private static cfd.DElement getElementComplementoNomina(Node node) throws Exception {
-        cfd.DElement elementNomina = null;
-        Node nodeChild = null;
-        Vector<Node> nodeChilds = null;
-        Vector<Node> nodeChildsAux = null;
-        NamedNodeMap namedNodeMapChild = null;
-        double versionPayroll = 0;
+    private static cfd.DElement getElementComplementoTimbreFiscalDigital(final Node nodeTfd) throws Exception {
+        cfd.DElement elementTfd = null;
         
-        if (SXmlUtils.hasChildElement(node, "nomina:Nomina") || SXmlUtils.hasChildElement(node, "nomina12:Nomina")) {
-            if (SXmlUtils.hasChildElement(node, "nomina:Nomina")) {
-                node = SXmlUtils.extractChildElements(node, "nomina:Nomina").get(0);
+        if (SXmlUtils.hasChildElement(nodeTfd, "tfd:TimbreFiscalDigital")) {
+            Node node = null;
+            NamedNodeMap namedNodeMapTfd = null;
+            
+            node = SXmlUtils.extractChildElements(nodeTfd, "tfd:TimbreFiscalDigital").get(0);
+            namedNodeMapTfd = node.getAttributes();
+
+            cfd.ver33.DElementTimbreFiscalDigital tfd = new cfd.ver33.DElementTimbreFiscalDigital();
+            
+            tfd.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "Version", true));
+            tfd.getAttUUID().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "UUID", true));
+            tfd.getAttFechaTimbrado().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "FechaTimbrado", true));
+            tfd.getAttRfcProvCertif().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "RfcProvCertif", true));
+            tfd.getAttLeyenda().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "Leyenda", false));
+            tfd.getAttSelloCFD().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "SelloCFD", true));
+            tfd.getAttNoCertificadoSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "NoCertificadoSAT", true));
+            tfd.getAttSelloSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "SelloSAT", true));
+            
+            elementTfd = tfd;
+        }
+        
+        return elementTfd;
+    }
+    
+    private static cfd.DElement getElementComplementoPagos(final Node nodePagos) throws Exception {
+        cfd.DElement elementPagos = null;
+        
+        if (SXmlUtils.hasChildElement(nodePagos, "pago10:Pagos")) {
+            Node node = null;
+            NamedNodeMap namedNodeMap = null;
+
+            node = SXmlUtils.extractChildElements(nodePagos, "pago10:Pagos").get(0);
+            namedNodeMap = node.getAttributes();
+
+            cfd.ver33.crp10.DElementPagos pagos = new cfd.ver33.crp10.DElementPagos();
+
+            pagos.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Version", true));
+
+            for (Node nodePago : SXmlUtils.extractChildElements(node, "pago10:Pago")) {
+                NamedNodeMap namedNodeMapPago = nodePago.getAttributes();
+
+                cfd.ver33.crp10.DElementPagosPago pago = new cfd.ver33.crp10.DElementPagosPago();
+
+                pago.getAttFechaPago().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FechaPago", true).replaceAll("T", " ")));
+                pago.getAttFormaDePagoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FormaDePagoP", true));
+                pago.getAttMonedaP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "MonedaP", true));
+                pago.getAttTipoCambioP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCambioP", false)));
+                pago.getAttMonto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "Monto", true)));
+                pago.getAttNumOperacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NumOperacion", false));
+                pago.getAttRfcEmisorCtaOrd().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaOrd", false));
+                pago.getAttNomBancoOrdExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NomBancoOrdExt", false));
+                pago.getAttCtaOrdenante().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaOrdenante", false));
+                pago.getAttRfcEmisorCtaBen().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaBen", false));
+                pago.getAttCtaBeneficiario().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaBeneficiario", false));
+                pago.getAttTipoCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCadPago", false));
+                pago.getAttCertPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CertPago", false));
+                pago.getAttCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CadPago", false));
+                pago.getAttSelloPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "SelloPago", false));
+
+                for (Node nodeDoctoRelacionado : SXmlUtils.extractChildElements(nodePago, "pago10:DoctoRelacionado")) {
+                    NamedNodeMap namedNodeMapDoctoRelacionado = nodeDoctoRelacionado.getAttributes();
+
+                    cfd.ver33.crp10.DElementDoctoRelacionado doctoRelacionado = new cfd.ver33.crp10.DElementDoctoRelacionado();
+                    
+                    doctoRelacionado.getAttIdDocumento().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "IdDocumento", true));
+                    doctoRelacionado.getAttSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Serie", false));
+                    doctoRelacionado.getAttFolio().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Folio", false));
+                    doctoRelacionado.getAttMonedaDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MonedaDR", true));
+                    doctoRelacionado.getAttTipoCambioDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "TipoCambioDR", false)));
+                    doctoRelacionado.getAttMetodoDePagoDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MetodoDePagoDR", true));
+                    doctoRelacionado.getAttNumParcialidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "NumParcialidad", true)));
+                    doctoRelacionado.getAttImpSaldoAnt().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoAnt", true)));
+                    doctoRelacionado.getAttImpPagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpPagado", false)));
+                    doctoRelacionado.getAttImpSaldoInsoluto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoInsoluto", false)));
+
+                    pago.getEltDoctoRelacionados().add(doctoRelacionado);
+                }
+
+                pagos.getEltPagos().add(pago);
+            }
+
+            elementPagos = pagos;
+        }
+        
+        return elementPagos;
+    }
+    
+    private static cfd.DElement getElementComplementoNomina(final Node nodeNomina) throws Exception {
+        cfd.DElement elementNomina = null;
+        boolean version11 = SXmlUtils.hasChildElement(nodeNomina, "nomina:Nomina");
+        boolean version12 = SXmlUtils.hasChildElement(nodeNomina, "nomina:Nomina");
+        
+        if (version11 || version12) {
+            Node node = null;
+            Node nodeChild = null;
+            Vector<Node> nodeChilds = null;
+            Vector<Node> nodeChildsAux = null;
+            NamedNodeMap namedNodeMapChild = null;
+
+            if (version11) {
+                node = SXmlUtils.extractChildElements(nodeNomina, "nomina:Nomina").get(0);
                 namedNodeMapChild = node.getAttributes();
             }
             else {
-                node = SXmlUtils.extractChildElements(node, "nomina12:Nomina").get(0);
+                node = SXmlUtils.extractChildElements(nodeNomina, "nomina12:Nomina").get(0);
                 namedNodeMapChild = node.getAttributes();
             }
 
-            versionPayroll = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
+            double versionPayroll = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
 
             if (versionPayroll == DCfdVer3Consts.VER_NOM_11) {
                 cfd.ver3.nom11.DElementNomina nomina = new cfd.ver3.nom11.DElementNomina();
@@ -226,6 +319,7 @@ public abstract class DCfdUtils {
                     }
                     nomina.setEltHorasExtras(horasExtras);
                 }
+                
                 elementNomina = nomina;
             }
             else if (versionPayroll == DCfdVer3Consts.VER_NOM_12) {
@@ -445,6 +539,7 @@ public abstract class DCfdUtils {
                     }
                     nomina.setEltIncapacidades(incapacidades);
                 }
+                
                 elementNomina = nomina;
             }
         }
@@ -452,16 +547,18 @@ public abstract class DCfdUtils {
         return elementNomina;
     }
 
-    private static cfd.DElement getElementComplementoComercioExterior(Node node) throws Exception {
+    private static cfd.DElement getElementComplementoComercioExterior(final Node nodeCce) throws Exception {
         cfd.DElement elementCce = null;
-        Node nodeChild = null;
-        Node nodeChildGrand = null;
-        Vector<Node> nodeChilds = null;
-        Vector<Node> nodeChildsAux = null;
-        NamedNodeMap namedNodeMapChild = null;
         
-        if (SXmlUtils.hasChildElement(node, "cce11:ComercioExterior")) {
-            node = SXmlUtils.extractChildElements(node, "cce11:ComercioExterior").get(0);
+        if (SXmlUtils.hasChildElement(nodeCce, "cce11:ComercioExterior")) {
+            Node node = null;
+            Node nodeChild = null;
+            Node nodeChildGrand = null;
+            Vector<Node> nodeChilds = null;
+            Vector<Node> nodeChildsAux = null;
+            NamedNodeMap namedNodeMapChild = null;
+
+            node = SXmlUtils.extractChildElements(nodeCce, "cce11:ComercioExterior").get(0);
             namedNodeMapChild = node.getAttributes();
 
             cfd.ver3.cce11.DElementComercioExterior cce = new cfd.ver3.cce11.DElementComercioExterior();
@@ -643,15 +740,17 @@ public abstract class DCfdUtils {
         return elementCce;
     }
 
-    private static cfd.ver3.DElementAddenda getElementAddendaWithAddenda1(Node node) throws Exception {
+    private static cfd.ver3.DElementAddenda getElementAddendaAddenda1(final Node nodeAddenda) throws Exception {
         cfd.ver3.DElementAddenda addenda = null;
-        Node nodeChild = null;
-        Vector<Node> nodeChilds = null;
-        NamedNodeMap namedNodeMapChild = null;
-        TreeMap<Integer, String> moOptions = null;
         
-        if (SXmlUtils.hasChildElement(node, "myadd:Addenda1")) {
-            node = SXmlUtils.extractChildElements(node, "myadd:Addenda1").get(0);
+        if (SXmlUtils.hasChildElement(nodeAddenda, "myadd:Addenda1")) {
+            Node node = null;
+            Node nodeChild = null;
+            Vector<Node> nodeChilds = null;
+            NamedNodeMap namedNodeMapChild = null;
+            TreeMap<Integer, String> moOptions = null;
+
+            node = SXmlUtils.extractChildElements(nodeAddenda, "myadd:Addenda1").get(0);
 
             cfd.ext.addenda1.DElementAddenda1 addenda1 = new cfd.ext.addenda1.DElementAddenda1();
 
@@ -733,13 +832,524 @@ public abstract class DCfdUtils {
         return addenda;
     }
 
+    private static cfd.ver3.DElementAddenda getElementAddendaAmece71(final Node nodeAddenda) throws Exception {
+        cfd.ver3.DElementAddenda addenda = null;
+        
+        if (SXmlUtils.hasChildElement(nodeAddenda, "requestForPayment")) {
+            Node nodeAmece71 = SXmlUtils.extractChildElements(nodeAddenda, "requestForPayment").get(0);
+            NamedNodeMap mapAmece71 = nodeAmece71.getAttributes();
+
+            cfd.ext.amece71.DElementPayment payment = new cfd.ext.amece71.DElementPayment();
+            
+            payment.getAttType().setString(SXmlUtils.extractAttributeValue(mapAmece71, "type", true));
+            payment.getAttContentVersion().setString(SXmlUtils.extractAttributeValue(mapAmece71, "contentVersion", true));
+            payment.getAttDocumentStructureVersion().setString(SXmlUtils.extractAttributeValue(mapAmece71, "documentStructureVersion", true));
+            payment.getAttDocumentStatus().setString(SXmlUtils.extractAttributeValue(mapAmece71, "documentStatus", true));
+            payment.getAttDeliveryDate().setDate(SLibUtils.IsoFormatDatetime.parse(SXmlUtils.extractAttributeValue(mapAmece71, "DeliveryDate", true)));
+            
+            if (SXmlUtils.hasChildElement(nodeAmece71, "requestForPaymentIdentification")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "requestForPaymentIdentification").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "entityType")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "entityType").get(0);
+                    
+                    payment.getEltPaymentIdentification().getEltEntityType().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "uniqueCreatorIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "uniqueCreatorIdentification").get(0);
+                    
+                    payment.getEltPaymentIdentification().getEltUniqueCreatorIdentification().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "specialInstruction")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "specialInstruction").get(0);
+                NamedNodeMap map = node.getAttributes();
+                
+                payment.getEltSpecialInstruction().getAttCode().setString(SXmlUtils.extractAttributeValue(map, "code", true));
+                
+                if (SXmlUtils.hasChildElement(node, "text")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "text").get(0);
+                    
+                    payment.getEltSpecialInstruction().getEltText().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "orderIdentification")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "orderIdentification").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "referenceIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "referenceIdentification").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltOrderIdentification().getEltReferenceIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map1, "type", true));
+                    
+                    payment.getEltOrderIdentification().getEltReferenceIdentification().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "ReferenceDate")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "ReferenceDate").get(0);
+                    
+                    payment.getEltOrderIdentification().getEltReferenceDate().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "AdditionalInformation")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "AdditionalInformation").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "referenceIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "referenceIdentification").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltAdditionalInformation().getEltReferenceIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map1, "type", true));
+                    
+                    payment.getEltAdditionalInformation().getEltReferenceIdentification().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "DeliveryNote")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "DeliveryNote").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "referenceIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "referenceIdentification").get(0);
+                    
+                    payment.getEltDeliveryNote().getEltReferenceIdentification().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "ReferenceDate")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "ReferenceDate").get(0);
+                    
+                    payment.getEltDeliveryNote().getEltReferenceDate().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "buyer")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "buyer").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "gln")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "gln").get(0);
+                    
+                    payment.getEltBuyer().getEltGln().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "contactInformation")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "contactInformation").get(0);
+                    
+                    if (SXmlUtils.hasChildElement(node1, "personOrDepartmentName")) {
+                        Node node2 = SXmlUtils.extractChildElements(node1, "personOrDepartmentName").get(0);
+
+                        if (SXmlUtils.hasChildElement(node2, "text")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "text").get(0);
+
+                            payment.getEltBuyer().getEltContactInformation().getEltPersonOrDepartmentName().getEltText().setValue(node3.getNodeValue());
+                        }
+                    }
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "seller")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "seller").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "gln")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "gln").get(0);
+                    
+                    payment.getEltSeller().getEltGln().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "alternatePartyIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "alternatePartyIdentification").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltSeller().getEltAlternatePartyIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map1, "type", true));
+                    
+                    payment.getEltSeller().getEltAlternatePartyIdentification().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "shipTo")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "shipTo").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "gln")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "gln").get(0);
+                    
+                    payment.getEltShipTo().getEltGln().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "nameAndAddress")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "nameAndAddress").get(0);
+                    
+                    if (SXmlUtils.hasChildElement(node1, "nameAndAddress")) {
+                        Node node2 = SXmlUtils.extractChildElements(node1, "nameAndAddress").get(0);
+
+                        if (SXmlUtils.hasChildElement(node2, "name")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "name").get(0);
+
+                            payment.getEltShipTo().getEltNameAndAddress().getEltName().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "streetAddressOne")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "streetAddressOne").get(0);
+
+                            payment.getEltShipTo().getEltNameAndAddress().getEltStreetAddressOne().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "city")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "city").get(0);
+
+                            payment.getEltShipTo().getEltNameAndAddress().getEltCity().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "postalCode")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "postalCode").get(0);
+
+                            payment.getEltShipTo().getEltNameAndAddress().getEltPostalCode().setValue(node3.getNodeValue());
+                        }
+                    }
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "InvoiceCreator")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "InvoiceCreator").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "gln")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "gln").get(0);
+                    
+                    payment.getEltInvoiceCreator().getEltGln().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "alternatePartyIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "alternatePartyIdentification").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltInvoiceCreator().getEltAlternatePartyIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map1, "type", true));
+                    
+                    payment.getEltInvoiceCreator().getEltAlternatePartyIdentification().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "nameAndAddress")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "nameAndAddress").get(0);
+                    
+                    if (SXmlUtils.hasChildElement(node1, "nameAndAddress")) {
+                        Node node2 = SXmlUtils.extractChildElements(node1, "nameAndAddress").get(0);
+
+                        if (SXmlUtils.hasChildElement(node2, "name")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "name").get(0);
+
+                            payment.getEltInvoiceCreator().getEltNameAndAddress().getEltName().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "streetAddressOne")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "streetAddressOne").get(0);
+
+                            payment.getEltInvoiceCreator().getEltNameAndAddress().getEltStreetAddressOne().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "city")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "city").get(0);
+
+                            payment.getEltInvoiceCreator().getEltNameAndAddress().getEltCity().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "postalCode")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "postalCode").get(0);
+
+                            payment.getEltInvoiceCreator().getEltNameAndAddress().getEltPostalCode().setValue(node3.getNodeValue());
+                        }
+                    }
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "Customs")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "Customs").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "gln")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "gln").get(0);
+                    
+                    payment.getEltCustoms().getEltGln().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "alternatePartyIdentification")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "alternatePartyIdentification").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltCustoms().getEltAlternatePartyIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map1, "type", true));
+                    
+                    payment.getEltCustoms().getEltAlternatePartyIdentification().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "ReferenceDate")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "ReferenceDate").get(0);
+                    
+                    payment.getEltCustoms().getEltReferenceDate().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "nameAndAddress")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "nameAndAddress").get(0);
+                    
+                    if (SXmlUtils.hasChildElement(node1, "nameAndAddress")) {
+                        Node node2 = SXmlUtils.extractChildElements(node1, "nameAndAddress").get(0);
+
+                        if (SXmlUtils.hasChildElement(node2, "name")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "name").get(0);
+
+                            payment.getEltCustoms().getEltNameAndAddress().getEltName().setValue(node3.getNodeValue());
+                        }
+
+                        if (SXmlUtils.hasChildElement(node2, "city")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "city").get(0);
+
+                            payment.getEltCustoms().getEltNameAndAddress().getEltCity().setValue(node3.getNodeValue());
+                        }
+                    }
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "currency")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "currency").get(0);
+                NamedNodeMap map = node.getAttributes();
+                
+                payment.getEltCurrency().getAttCurrencyIsoCode().setOption(SXmlUtils.extractAttributeValue(map, "currencyISOCode", true));
+                
+                if (SXmlUtils.hasChildElement(node, "currencyFunction")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "currencyFunction").get(0);
+                    
+                    payment.getEltCurrency().getEltCurrencyFunction().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "rateOfChange")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "rateOfChange").get(0);
+                    
+                    payment.getEltCurrency().getEltRateOfChange().setValue(node1.getNodeValue());
+                }
+            }
+            
+            if (SXmlUtils.hasChildElement(nodeAmece71, "paymentTerms")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "paymentTerms").get(0);
+                NamedNodeMap map = node.getAttributes();
+                
+                payment.getEltPaymentTerms().getAttPaymentTermsEvent().setString(SXmlUtils.extractAttributeValue(map, "paymentTermsEvent", true));
+                payment.getEltPaymentTerms().getAttPaymentTermsRelationTime().setString(SXmlUtils.extractAttributeValue(map, "PaymentTermsRelationTime", true));
+                
+                if (SXmlUtils.hasChildElement(node, "netPayment")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "netPayment").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltPaymentTerms().getEltNetPayment().getAttNetPaymentTermsType().setString(SXmlUtils.extractAttributeValue(map1, "netPaymentTermsType", true));
+                    
+                    if (SXmlUtils.hasChildElement(node1, "paymentTimePeriod")) {
+                        Node node2 = SXmlUtils.extractChildElements(node1, "paymentTimePeriod").get(0);
+
+                        if (SXmlUtils.hasChildElement(node2, "timePeriodDue")) {
+                            Node node3 = SXmlUtils.extractChildElements(node2, "timePeriodDue").get(0);
+                            NamedNodeMap map3 = node3.getAttributes();
+                            
+                            payment.getEltPaymentTerms().getEltNetPayment().getEltPaymentTimePeriod().getEltTimePeriodDue().getAttTimePeriod().setString(SXmlUtils.extractAttributeValue(map3, "timePeriod", true));
+
+                            if (SXmlUtils.hasChildElement(node3, "value")) {
+                                Node node4 = SXmlUtils.extractChildElements(node3, "value").get(0);
+                                
+                                payment.getEltPaymentTerms().getEltNetPayment().getEltPaymentTimePeriod().getEltTimePeriodDue().getEltValue().setValue(node4.getNodeValue());
+                            }
+                        }
+                    }
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "discountPayment")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "discountPayment").get(0);
+                    NamedNodeMap map1 = node1.getAttributes();
+                    
+                    payment.getEltPaymentTerms().getEltDiscountPayment().getAttDiscountType().setString(SXmlUtils.extractAttributeValue(map1, "discountType", true));
+                    
+                    if (SXmlUtils.hasChildElement(node1, "percentage")) {
+                        Node node2 = SXmlUtils.extractChildElements(node1, "percentage").get(0);
+
+                        payment.getEltPaymentTerms().getEltDiscountPayment().getEltPercentage().setValue(node2.getNodeValue());
+                    }
+                }
+            }
+            
+            if (SXmlUtils.hasChildElement(nodeAmece71, "lineItem")) {
+                Vector<Node> nodes = SXmlUtils.extractChildElements(nodeAddenda, "lineItem");
+                
+                for (Node node : nodes) {
+                    cfd.ext.amece71.DElementLineItem lineItem = new cfd.ext.amece71.DElementLineItem();
+                    NamedNodeMap map = node.getAttributes();
+
+                    lineItem.getAttType().setString(SXmlUtils.extractAttributeValue(map, "type", true));
+                    lineItem.getAttNumber().setString(SXmlUtils.extractAttributeValue(map, "number", true));
+
+                    if (SXmlUtils.hasChildElement(node, "tradeItemIdentification")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "tradeItemIdentification").get(0);
+
+                        if (SXmlUtils.hasChildElement(node1, "gtin")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "gtin").get(0);
+
+                            lineItem.getEltTradeItemIdentification().getEltGtin().setValue(node2.getNodeValue());
+                        }
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "alternateTradeItemIdentification")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "alternateTradeItemIdentification").get(0);
+                        NamedNodeMap map1 = node1.getAttributes();
+                        
+                        lineItem.getEltAlternateTradeItemIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map1, "type", true));
+
+                        lineItem.getEltAlternateTradeItemIdentification().setValue(node1.getNodeValue());
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "tradeItemDescriptionInformation")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "tradeItemDescriptionInformation").get(0);
+                        NamedNodeMap map1 = node1.getAttributes();
+                        
+                        lineItem.getEltTradeItemDescriptionInformation().getAttLanguage().setString(SXmlUtils.extractAttributeValue(map1, "language", true));
+
+                        if (SXmlUtils.hasChildElement(node1, "longText")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "longText").get(0);
+
+                            lineItem.getEltTradeItemDescriptionInformation().getEltLongText().setValue(node2.getNodeValue());
+                        }
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "invoicedQuantity")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "invoicedQuantity").get(0);
+                        NamedNodeMap map1 = node1.getAttributes();
+                        
+                        lineItem.getEltInvoicedQuantity().getAttUnitOfMeasure().setString(SXmlUtils.extractAttributeValue(map1, "unitOfMeasure", true));
+
+                        lineItem.getEltInvoicedQuantity().setValue(node1.getNodeValue());
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "grossPrice")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "grossPrice").get(0);
+
+                        if (SXmlUtils.hasChildElement(node1, "amount")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "amount").get(0);
+
+                            lineItem.getEltGrossPrice().getEltAmount().setValue(node2.getNodeValue());
+                        }
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "netPrice")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "netPrice").get(0);
+
+                        if (SXmlUtils.hasChildElement(node1, "amount")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "amount").get(0);
+
+                            lineItem.getEltNetPrice().getEltAmount().setValue(node2.getNodeValue());
+                        }
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "AdditionalInformation")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "AdditionalInformation").get(0);
+
+                        if (SXmlUtils.hasChildElement(node1, "referenceIdentification")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "referenceIdentification").get(0);
+                            NamedNodeMap map2 = node2.getAttributes();
+                            
+                            lineItem.getEltAdditionalInformation().getEltReferenceIdentification().getAttType().setString(SXmlUtils.extractAttributeValue(map2, "type", true));
+
+                            lineItem.getEltAdditionalInformation().getEltReferenceIdentification().setValue(node2.getNodeValue());
+                        }
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(node, "totalLineAmount")) {
+                        Node node1 = SXmlUtils.extractChildElements(node, "totalLineAmount").get(0);
+
+                        if (SXmlUtils.hasChildElement(node1, "grossAmount")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "grossAmount").get(0);
+                            
+                            if (SXmlUtils.hasChildElement(node2, "amount")) {
+                                Node node3 = SXmlUtils.extractChildElements(node2, "amount").get(0);
+
+                                lineItem.getEltTotalLineAmount().getEltGrossAmount().getEltAmount().setValue(node3.getNodeValue());
+                            }
+                        }
+
+                        if (SXmlUtils.hasChildElement(node1, "netAmount")) {
+                            Node node2 = SXmlUtils.extractChildElements(node1, "netAmount").get(0);
+                            
+                            if (SXmlUtils.hasChildElement(node2, "amount")) {
+                                Node node3 = SXmlUtils.extractChildElements(node2, "amount").get(0);
+
+                                lineItem.getEltTotalLineAmount().getEltNetAmount().getEltAmount().setValue(node3.getNodeValue());
+                            }
+                        }
+                    }
+                    
+                    payment.getEltItems().getEltLineItems().add(lineItem);
+                }
+            }
+            
+            if (SXmlUtils.hasChildElement(nodeAmece71, "totalAmount")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "totalAmount").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "amount")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "amount").get(0);
+                    
+                    payment.getEltTotalAmount().getEltAmount().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "baseAmount")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "baseAmount").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "amount")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "amount").get(0);
+                    
+                    payment.getEltBaseAmount().getEltAmount().setValue(node1.getNodeValue());
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeAmece71, "tax")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "tax").get(0);
+                NamedNodeMap map = node.getAttributes();
+                
+                payment.getEltTax().getAttType().setString(SXmlUtils.extractAttributeValue(map, "type", true));
+                
+                if (SXmlUtils.hasChildElement(node, "taxPercentage")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "taxPercentage").get(0);
+                    
+                    payment.getEltTax().getEltTaxPercentage().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "taxAmount")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "taxAmount").get(0);
+                    
+                    payment.getEltTax().getEltTaxAmount().setValue(node1.getNodeValue());
+                }
+                
+                if (SXmlUtils.hasChildElement(node, "taxCategory")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "taxCategory").get(0);
+                    
+                    payment.getEltTax().getEltTaxCategory().setValue(node1.getNodeValue());
+                }
+            }
+            
+            if (SXmlUtils.hasChildElement(nodeAmece71, "payableAmount")) {
+                Node node = SXmlUtils.extractChildElements(nodeAddenda, "payableAmount").get(0);
+                
+                if (SXmlUtils.hasChildElement(node, "amount")) {
+                    Node node1 = SXmlUtils.extractChildElements(node, "amount").get(0);
+                    
+                    payment.getEltPayableAmount().getEltAmount().setValue(node1.getNodeValue());
+                }
+            }
+
+            addenda = new cfd.ver3.DElementAddenda();
+            addenda.getElements().add(payment);
+        }
+        
+        return addenda;
+    }
+
     @Deprecated
-    public static cfd.ver2.DElementComprobante getCfd(String xml) throws Exception {
+    public static cfd.ver2.DElementComprobante getCfd(final String xml) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Deprecated
-    public static cfd.ver32.DElementComprobante getCfdi32(String xml) throws Exception {
+    public static cfd.ver32.DElementComprobante getCfdi32(final String xml) throws Exception {
         double dTotalImptoRetenido = 0;
         double dTotalImptoTrasladado = 0;
         DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -1087,7 +1697,7 @@ public abstract class DCfdUtils {
         node = SXmlUtils.extractElements(doc, "cfdi:Addenda").item(0);  // note that it is assumed that allways exists an addenda node!
 
         if (node != null) {
-            cfd.ver3.DElementAddenda addenda = getElementAddendaWithAddenda1(node);
+            cfd.ver3.DElementAddenda addenda = getElementAddendaAddenda1(node);
             
             comprobante.setEltOpcAddenda(addenda);
         }
@@ -1095,7 +1705,7 @@ public abstract class DCfdUtils {
         return comprobante;
     }
 
-    public static cfd.ver33.DElementComprobante getCfdi33(String xml) throws Exception {
+    public static cfd.ver33.DElementComprobante getCfdi33(final String xml) throws Exception {
         // Comprobante:
 
         Document doc = SXmlUtils.parseDocument(xml);
@@ -1375,73 +1985,13 @@ public abstract class DCfdUtils {
             // 'Complemento Timbrado':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "tfd:TimbreFiscalDigital")) {
-                Node nodeTfd = SXmlUtils.extractChildElements(nodeComplemento, "tfd:TimbreFiscalDigital").get(0);
-                NamedNodeMap namedNodeMapTfd = nodeTfd.getAttributes();
-
-                cfd.ver33.DElementTimbreFiscalDigital tfd = new cfd.ver33.DElementTimbreFiscalDigital();
-                tfd.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "Version", true));
-                tfd.getAttUUID().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "UUID", true));
-                tfd.getAttFechaTimbrado().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "FechaTimbrado", true));
-                tfd.getAttRfcProvCertif().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "RfcProvCertif", true));
-                tfd.getAttLeyenda().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "Leyenda", false));
-                tfd.getAttSelloCFD().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "SelloCFD", true));
-                tfd.getAttNoCertificadoSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "NoCertificadoSAT", true));
-                tfd.getAttSelloSAT().setString(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "SelloSAT", true));
-
-                complemento.getElements().add(tfd);
+                complemento.getElements().add(getElementComplementoTimbreFiscalDigital(nodeComplemento));
             }
 
             // 'Complemento Recepción Pagos':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "pago10:Pagos")) {
-                Node nodePagos = SXmlUtils.extractChildElements(nodeComplemento, "pago10:Pagos").get(0);
-                NamedNodeMap namedNodeMapPagos = nodePagos.getAttributes();
-
-                cfd.ver33.crp10.DElementPagos pagos = new cfd.ver33.crp10.DElementPagos();
-                pagos.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapPagos, "Version", true));
-                
-                for (Node nodePago : SXmlUtils.extractChildElements(nodePagos, "pago10:Pago")) {
-                    NamedNodeMap namedNodeMapPago = nodePago.getAttributes();
-                    
-                    cfd.ver33.crp10.DElementPagosPago pago = new cfd.ver33.crp10.DElementPagosPago();
-                    pago.getAttFechaPago().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FechaPago", true).replaceAll("T", " ")));
-                    pago.getAttFormaDePagoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FormaDePagoP", true));
-                    pago.getAttMonedaP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "MonedaP", true));
-                    pago.getAttTipoCambioP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCambioP", false)));
-                    pago.getAttMonto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "Monto", true)));
-                    pago.getAttNumOperacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NumOperacion", false));
-                    pago.getAttRfcEmisorCtaOrd().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaOrd", false));
-                    pago.getAttNomBancoOrdExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NomBancoOrdExt", false));
-                    pago.getAttCtaOrdenante().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaOrdenante", false));
-                    pago.getAttRfcEmisorCtaBen().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaBen", false));
-                    pago.getAttCtaBeneficiario().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaBeneficiario", false));
-                    pago.getAttTipoCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCadPago", false));
-                    pago.getAttCertPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CertPago", false));
-                    pago.getAttCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CadPago", false));
-                    pago.getAttSelloPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "SelloPago", false));
-
-                    for (Node nodeDoctoRelacionado : SXmlUtils.extractChildElements(nodePago, "pago10:DoctoRelacionado")) {
-                        NamedNodeMap namedNodeMapDoctoRelacionado = nodeDoctoRelacionado.getAttributes();
-
-                        cfd.ver33.crp10.DElementDoctoRelacionado doctoRelacionado = new cfd.ver33.crp10.DElementDoctoRelacionado();
-                        doctoRelacionado.getAttIdDocumento().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "IdDocumento", true));
-                        doctoRelacionado.getAttSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Serie", false));
-                        doctoRelacionado.getAttFolio().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Folio", false));
-                        doctoRelacionado.getAttMonedaDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MonedaDR", true));
-                        doctoRelacionado.getAttTipoCambioDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "TipoCambioDR", false)));
-                        doctoRelacionado.getAttMetodoDePagoDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MetodoDePagoDR", true));
-                        doctoRelacionado.getAttNumParcialidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "NumParcialidad", true)));
-                        doctoRelacionado.getAttImpSaldoAnt().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoAnt", true)));
-                        doctoRelacionado.getAttImpPagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpPagado", false)));
-                        doctoRelacionado.getAttImpSaldoInsoluto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoInsoluto", false)));
-                        
-                        pago.getEltDoctoRelacionados().add(doctoRelacionado);
-                    }
-
-                    pagos.getEltPagos().add(pago);
-                }
-
-                complemento.getElements().add(pagos);
+                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
             }
 
             // 'Complemento Nómina':
@@ -1464,17 +2014,21 @@ public abstract class DCfdUtils {
         // Addenda:
 
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Addenda")) {
-            Node node = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Addenda").get(0);
+            Node nodeAddenda = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Addenda").get(0);
 
-            cfd.ver3.DElementAddenda addenda = getElementAddendaWithAddenda1(node);
+            if (SXmlUtils.hasChildElement(nodeAddenda, "myadd:Addenda1")) {
+                comprobante.setEltOpcAddenda(getElementAddendaAddenda1(nodeAddenda));
+            }
 
-            comprobante.setEltOpcAddenda(addenda);
+            if (SXmlUtils.hasChildElement(nodeAddenda, "requestForPayment")) {
+                comprobante.setEltOpcAddenda(getElementAddendaAmece71(nodeAddenda));
+            }
         }
         
         return comprobante;
     }
     
-    public static double getVersionPayrollComplement(String xml) throws Exception {
+    public static double getVersionPayrollComplement(final String xml) throws Exception {
         DocumentBuilder docBuilder = null;
         Document doc = null;
         Node node = null;

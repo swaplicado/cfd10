@@ -5,15 +5,13 @@
 
 package cfd;
 
-import java.text.SimpleDateFormat;
+import sa.lib.SLibUtils;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
 public class DAttributeDate extends DAttribute {
-
-    private static final java.text.SimpleDateFormat moDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     protected java.util.Date mtDate;
 
@@ -37,12 +35,12 @@ public class DAttributeDate extends DAttribute {
     @Override
     public java.lang.String getAttributeForXml() {
         validateValue();
-        return mtDate == null ? "" : msName + "=\"" + moDateFormat.format(mtDate) + "\"";
+        return mtDate == null ? "" : msName + "=\"" + SLibUtils.IsoFormatDate.format(mtDate) + "\"";
     }
 
     @Override
     public java.lang.String getAttributeForOriginalString() {
         validateValue();
-        return mtDate == null ? "" : moDateFormat.format(mtDate) + "|";
+        return mtDate == null ? "" : SLibUtils.IsoFormatDate.format(mtDate) + "|";
     }
 }

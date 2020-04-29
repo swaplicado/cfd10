@@ -14,22 +14,24 @@ import cfd.DAttributeString;
 public class DElementPaymentTermsNetPayment extends cfd.DElementParent {
 
     protected cfd.DAttributeString moAttNetPaymentTermsType;
-    protected cfd.ext.amece71.DElementPaymentTermsTimePeriod moEltTimePeriod;
+    
+    protected cfd.ext.amece71.DElementPaymentTermsNetPaymentTimePeriod moEltPaymentTimePeriod;
 
     public DElementPaymentTermsNetPayment() {
         super("netPayment");
 
         moAttNetPaymentTermsType = new DAttributeString("netPaymentTermsType", true);
         moAttNetPaymentTermsType.setString("BASIC_NET");
-        moEltTimePeriod = new DElementPaymentTermsTimePeriod();
-
-        mvElements.add(moEltTimePeriod);
+        
+        moEltPaymentTimePeriod = new DElementPaymentTermsNetPaymentTimePeriod();
 
         mvAttributes.add(moAttNetPaymentTermsType);
+        
+        mvElements.add(moEltPaymentTimePeriod);
     }
 
     public cfd.DAttributeString getAttNetPaymentTermsType() { return moAttNetPaymentTermsType; }
-    public cfd.ext.amece71.DElementPaymentTermsTimePeriod getEltTimePeriod() { return moEltTimePeriod; }
+    public cfd.ext.amece71.DElementPaymentTermsNetPaymentTimePeriod getEltPaymentTimePeriod() { return moEltPaymentTimePeriod; }
 
     @Override
     public java.lang.String getElementForOriginalString() throws Exception {
