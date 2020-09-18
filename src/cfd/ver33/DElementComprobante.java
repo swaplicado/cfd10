@@ -318,7 +318,7 @@ public class DElementComprobante extends cfd.DElement {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         try {
-            //string = SXmlUtils.transformXmlFromUrl(getElementForXml(), DCfdi33Consts.XSLT_3_3_URL);
+            //string = SXmlUtils.transformXmlFromUrl(getElementForXml(), DCfdi33Consts.XSLT_3_3_URL); // due to an URL failure in SAT web site, this option is temporarily disabled
             string = SXmlUtils.transformXmlFromFile(getElementForXml(), DCfdi33Consts.XSLT_3_3_FILE);
         } 
         catch (Exception ex) {
