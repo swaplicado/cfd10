@@ -44,7 +44,7 @@ public class DCfdi33Consts {
     public static final String ESTATUS_CANCEL_SIN_ACEPT = "Cancelado sin aceptación";
     public static final String ESTATUS_CANCEL_CON_ACEPT = "Cancelado con aceptación";
     public static final String ESTATUS_CANCEL_PLAZO_VENC = "Plazo vencido";
-    public static final String ESTATUS_CANCEL_PLAZO_VENC_EXT = "Cancelado plazo vencido";
+    public static final String ESTATUS_CANCEL_PLAZO_VENC_ALT = "Cancelado plazo vencido";
     public static final String ESTATUS_CANCEL_NINGUNO = "None";
     
     public static final String ESTATUS_CANCEL_PROC_CODE = "Prc";
@@ -52,6 +52,8 @@ public class DCfdi33Consts {
     public static final String ESTATUS_CANCEL_SIN_ACEPT_CODE = "CSA";
     public static final String ESTATUS_CANCEL_CON_ACEPT_CODE = "CCA";
     public static final String ESTATUS_CANCEL_PLAZO_VENC_CODE = "CPV";
-    public static final String ESTATUS_CANCEL_NINGUNO_CODE = "";
     public static final String ESTATUS_CANCEL_PEND_BUFF_CODE = "Buf"; // CFDI in pending buffer
+    
+    /** Unexpected message in a succesful cancelation. */
+    public static final String RESPONSE_CANCEL = "Petición de cancelación realizada exitosamente";
 }
