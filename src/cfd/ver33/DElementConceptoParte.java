@@ -30,11 +30,11 @@ public class DElementConceptoParte extends cfd.DElement {
         moAttClaveProdServ = new DAttributeString("ClaveProdServ", true, 1);
         moAttNoIdentificacion = new DAttributeString("NoIdentificacion", false, 1, 100);    // from 1 to 100 characters
         moAttCantidad = new DAttributeTypeImporteUnitario("Cantidad", true);
-        moAttUnidad = new DAttributeString("Unidad", true, 1, 20);  // from 1 to 20 characters
+        moAttUnidad = new DAttributeString("Unidad", false, 1, 20);  // from 1 to 20 characters
         moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000);  // from 1 to 1000 characters
-        moAttValorUnitario = new DAttributeTypeImporteUnitario("ValorUnitario", true);
+        moAttValorUnitario = new DAttributeTypeImporteUnitario("ValorUnitario", false);
         moAttValorUnitario.setCanBeZero(true);
-        moAttImporte = new DAttributeTypeImporte("Importe", true);
+        moAttImporte = new DAttributeTypeImporte("Importe", false);
         moAttImporte.setCanBeZero(true);
 
         mvAttributes.add(moAttClaveProdServ);
