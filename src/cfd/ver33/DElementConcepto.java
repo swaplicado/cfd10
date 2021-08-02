@@ -33,17 +33,18 @@ public class DElementConcepto extends cfd.DElement {
     public DElementConcepto() {
         super("cfdi:Concepto");
 
-        moAttClaveProdServ = new DAttributeString("ClaveProdServ", true, 6, 8);     // c_ClaveProdServ catalog codes of 8 fixed digits, but can be used as well first 6 digits
-        moAttNoIdentificacion = new DAttributeString("NoIdentificacion", false, 1, 100);    // from 1 to 100 characters
+        moAttClaveProdServ = new DAttributeString("ClaveProdServ", true, 6, 8); // c_ClaveProdServ catalog codes of 8 fixed digits, but can be used as well first 6 digits
+        moAttNoIdentificacion = new DAttributeString("NoIdentificacion", false, 1, 100); // from 1 to 100 characters
         moAttCantidad = new DAttributeTypeImporteUnitario("Cantidad", true);
-        moAttClaveUnidad = new DAttributeString("ClaveUnidad", true, 2, 3);     // c_ClaveUnidad catalog codes from 2 to 3 characters
-        moAttUnidad = new DAttributeString("Unidad", false, 1, 20);             // from 1 to 20 characters
-        moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000);  // from 1 to 1000 characters
+        moAttClaveUnidad = new DAttributeString("ClaveUnidad", true, 2, 3); // c_ClaveUnidad catalog codes from 2 to 3 characters
+        moAttUnidad = new DAttributeString("Unidad", false, 1, 20); // from 1 to 20 characters
+        moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000); // from 1 to 1000 characters
         moAttValorUnitario = new DAttributeTypeImporteUnitario("ValorUnitario", true);
         moAttValorUnitario.setCanBeZero(true);
         moAttImporte = new DAttributeTypeImporte("Importe", true);
         moAttImporte.setCanBeZero(true);
         moAttDescuento = new DAttributeTypeImporte("Descuento", false);
+        //moAttDescuento.setCanBeZero(...); // due the attribute is not mandatory, setting that it can be zero is nonsense
 
         mvAttributes.add(moAttClaveProdServ);
         mvAttributes.add(moAttNoIdentificacion);

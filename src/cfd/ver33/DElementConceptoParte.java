@@ -28,14 +28,14 @@ public class DElementConceptoParte extends cfd.DElement {
         super("cfdi:Parte");
 
         moAttClaveProdServ = new DAttributeString("ClaveProdServ", true, 1);
-        moAttNoIdentificacion = new DAttributeString("NoIdentificacion", false, 1, 100);    // from 1 to 100 characters
+        moAttNoIdentificacion = new DAttributeString("NoIdentificacion", false, 1, 100); // from 1 to 100 characters
         moAttCantidad = new DAttributeTypeImporteUnitario("Cantidad", true);
-        moAttUnidad = new DAttributeString("Unidad", false, 1, 20);  // from 1 to 20 characters
-        moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000);  // from 1 to 1000 characters
+        moAttUnidad = new DAttributeString("Unidad", false, 1, 20); // from 1 to 20 characters
+        moAttDescripcion = new DAttributeString("Descripcion", true, 1, 1000); // from 1 to 1000 characters
         moAttValorUnitario = new DAttributeTypeImporteUnitario("ValorUnitario", false);
-        moAttValorUnitario.setCanBeZero(true);
+        //moAttValorUnitario.setCanBeZero(...); // due the attribute is not mandatory, setting that it can be zero is nonsense
         moAttImporte = new DAttributeTypeImporte("Importe", false);
-        moAttImporte.setCanBeZero(true);
+        //moAttImporte.setCanBeZero(...); // due the attribute is not mandatory, setting that it can be zero is nonsense
 
         mvAttributes.add(moAttClaveProdServ);
         mvAttributes.add(moAttNoIdentificacion);
