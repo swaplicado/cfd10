@@ -101,4 +101,14 @@ public abstract class DCfdVer3Utils {
         
         return value;
     }
+    
+    /**
+     * Composes a catalog description for printing.
+     * @param code The code part of the description as is.
+     * @param name The name part of the description as is.
+     * @return A catalog description in format "code - name".
+     */
+    public static String composeCatalogDescription(final String code, final String name) {
+        return code + " - " + name;
+    }
 }
