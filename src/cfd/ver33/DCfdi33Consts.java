@@ -9,15 +9,15 @@ package cfd.ver33;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DCfdi33Consts {
+public abstract class DCfdi33Consts {
     
     public static final String XSLT_3_3_URL = "http://www.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt";
-    //public static final String XSLT_3_3_URL = "http://omawww.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt";
-    //public static final String XSLT_3_3_URL = "http://facturacion.finkok.com/static/cfdi/xslt/3.3/cadenaoriginal_3_3.xslt";
+    //public static final String XSLT_3_3_URL = "http://omawww.sat.gob.mx/sitio_internet/cfd/3/cadenaoriginal_3_3/cadenaoriginal_3_3.xslt"; //URL obsoleta
+    //public static final String XSLT_3_3_URL = "http://facturacion.finkok.com/static/cfdi/xslt/3.3/cadenaoriginal_3_3.xslt"; //URL obsoleta, lo correcto es usar la del SAT
     public static final String XSLT_3_3_FILE = "cfdi/xslt/3.3/cadenaoriginal_3_3.xslt";
     public static final String URL_VERIFIC = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx";
     
-    //public static final String REGEX_DESCRIP = "([A-Z]|[a-z]|[0-9]| |Ñ|ñ|!|\"|%|&|'|´|-|:|;|>|=|<|@|_|,|\\{|\\}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)";
+    //public static final String REGEX_DESCRIP = "([A-Z]|[a-z]|[0-9]| |Ñ|ñ|!|\"|%|&|'|´|-|:|;|>|=|<|@|_|,|\\{|\\}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü)"; //a fin de cuentas se permitieron todos los caracteres UTF-8
     public static final String REGEX_DESCRIP = "[^|]";
     public static final String REGEX_CONFIRM = "[0-9a-zA-Z]{5}";
     public static final String REGEX_UUID = "[a-f0-9A-F]{8}-[a-f0-9A-F]{4}-[a-f0-9A-F]{4}-[a-f0-9A-F]{4}-[a-f0-9A-F]{12}";

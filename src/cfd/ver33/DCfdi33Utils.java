@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DCfdi33Utils {
+public abstract class DCfdi33Utils {
     
     public static boolean matches(final String text, final String regex) throws Exception{
         Pattern pattern = Pattern.compile(regex);

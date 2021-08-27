@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author Sergio Flores
  */
-public class DCce11Catalogs {
+public abstract class DCce11Catalogs {
     
     /** CertificadoOrigen. No funge como tal. */
     public static final String CO_NO_FUNGE = "0";
