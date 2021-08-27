@@ -20,6 +20,7 @@ public class DElementLineItem extends cfd.DElementParent {
     protected cfd.ext.amece71.DElementLineItemAlternateTradeItemIdentification moEltAlternateTradeItemIdentification;
     protected cfd.ext.amece71.DElementLineItemTradeItemDescriptionInformation moEltTradeItemDescriptionInformation;
     protected cfd.ext.amece71.DElementLineItemInvoicedQuantity moEltInvoicedQuantity;
+    protected cfd.ext.amece71.DElementLineItemAditionalQuantity moEltOpcAditionalQuantity;
     protected cfd.ext.amece71.DElementLineItemGrossPrice moEltGrossPrice;
     protected cfd.ext.amece71.DElementLineItemNetPrice moEltNetPrice;
     protected cfd.ext.amece71.DElementAdditionalInformation moEltAdditionalInformation;
@@ -36,6 +37,7 @@ public class DElementLineItem extends cfd.DElementParent {
         moEltAlternateTradeItemIdentification = new DElementLineItemAlternateTradeItemIdentification("");
         moEltTradeItemDescriptionInformation = new DElementLineItemTradeItemDescriptionInformation();
         moEltInvoicedQuantity = new DElementLineItemInvoicedQuantity("");
+        moEltOpcAditionalQuantity = null;
         moEltGrossPrice = new DElementLineItemGrossPrice();
         moEltNetPrice = new DElementLineItemNetPrice();
         moEltAdditionalInformation = new DElementAdditionalInformation();
@@ -54,6 +56,8 @@ public class DElementLineItem extends cfd.DElementParent {
         mvElements.add(moEltTotalLineAmount);
     }
 
+    public void setEltOpcAditionalQuantity(cfd.ext.amece71.DElementLineItemAditionalQuantity o) { moEltOpcAditionalQuantity = o; }
+    
     public cfd.DAttributeString getAttType() { return moAttType; }
     public cfd.DAttributeString getAttNumber() { return moAttNumber; }
     
@@ -61,6 +65,7 @@ public class DElementLineItem extends cfd.DElementParent {
     public cfd.ext.amece71.DElementLineItemAlternateTradeItemIdentification getEltAlternateTradeItemIdentification() { return moEltAlternateTradeItemIdentification; }
     public cfd.ext.amece71.DElementLineItemTradeItemDescriptionInformation getEltTradeItemDescriptionInformation() { return moEltTradeItemDescriptionInformation; }
     public cfd.ext.amece71.DElementLineItemInvoicedQuantity getEltInvoicedQuantity() { return moEltInvoicedQuantity; }
+    public cfd.ext.amece71.DElementLineItemAditionalQuantity getEltOpcAditionalQuantity() { return moEltOpcAditionalQuantity; }
     public cfd.ext.amece71.DElementLineItemGrossPrice getEltGrossPrice() { return moEltGrossPrice; }
     public cfd.ext.amece71.DElementLineItemNetPrice getEltNetPrice() { return moEltNetPrice; }
     public cfd.ext.amece71.DElementAdditionalInformation getEltAdditionalInformation() { return moEltAdditionalInformation; }

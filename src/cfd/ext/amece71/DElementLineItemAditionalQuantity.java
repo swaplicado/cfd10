@@ -11,11 +11,11 @@ import cfd.DAttributeString;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementAditionalQuantity extends cfd.DElement {
+public class DElementLineItemAditionalQuantity extends cfd.DElement {
 
     protected cfd.DAttributeString moAttQuantityType;
 
-    public DElementAditionalQuantity(java.lang.String value) {
+    public DElementLineItemAditionalQuantity(java.lang.String value) {
         super("aditionalQuantity", value);
 
         moAttQuantityType = new DAttributeString("QuantityType", true);
