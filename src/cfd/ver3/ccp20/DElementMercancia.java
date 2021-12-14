@@ -58,7 +58,7 @@ public class DElementMercancia extends cfd.DElement {
         moAttFraccionArancelaria = new DAttributeString("FraccionArancelaria", false);
         moAttUUIDComercioExt = new DAttributeString("UUIDComercioExt", false);
         
-        mvAttributes.add(moAttMoneda);
+        mvAttributes.add(moAttBienesTransp);
         mvAttributes.add(moAttClaveSTCC);
         mvAttributes.add(moAttDescripcion);
         mvAttributes.add(moAttCantidad);
@@ -109,9 +109,6 @@ public class DElementMercancia extends cfd.DElement {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new DElementCantidadTransporta().getName()) + "'.");
         }
         
-        if (maEltPedimentos.isEmpty()) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new DElementPedimentos().getName()) + "'.");
-        }
     }
     
     @Override
@@ -132,9 +129,11 @@ public class DElementMercancia extends cfd.DElement {
             xml += aux.isEmpty() ? "" : "\n" + aux;
         }
         
-        for (DElementPedimentos element : maEltPedimentos) {
-            String aux = element.getElementForXml();
-            xml += aux.isEmpty() ? "" : "\n" + aux;
+        if (maEltPedimentos != null) {
+            for (DElementPedimentos element : maEltPedimentos) {
+                String aux = element.getElementForXml();
+                xml += aux.isEmpty() ? "" : "\n" + aux;
+            }
         }
         
         xml += "\n</" + msName + ">";

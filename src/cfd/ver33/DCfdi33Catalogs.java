@@ -87,6 +87,14 @@ public abstract class DCfdi33Catalogs {
     public static final String ClaveTipoRegimenJubiladosOPensionados = "12";
     public static final String ClaveTipoOtroPagoSubsidioEmpleo = "002";
     
+    public static final String ClaveChofer = "01";
+    public static final String ClavePropietario = "02";
+    public static final String ClaveArrendador = "03";
+    public static final String ClaveNotificado = "04";
+    
+    public static final String PrefijoClaveOrigen = "OR";
+    public static final String PrefijoClaveDestino = "DE";
+    
     public static final double DIAS_PAG_MIN = 0.001;
     
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();

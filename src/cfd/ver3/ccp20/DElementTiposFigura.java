@@ -8,7 +8,6 @@ package cfd.ver3.ccp20;
 import cfd.DAttribute;
 import cfd.DAttributeString;
 import cfd.DAttributeTypeRfc;
-import cfd.DElement;
 import java.util.ArrayList;
 
 /**
@@ -24,10 +23,11 @@ public class DElementTiposFigura extends cfd.DElement {
     private final DAttributeString moAttNumRegIdTribFigura;
     private final DAttributeString moAttResidenciaFiscalFigura;
     
+    private DElementDomicilio moEltDomicilio;
     private final ArrayList<DElementPartesTransporte> maEltPartesTransporte;
     
     public DElementTiposFigura() {
-        super("cartaporte20:Operadores");
+        super("cartaporte20:TiposFigura");
         
         moAttTipoFigura = new DAttributeString("TipoFigura", true);
         moAttRFCFigura = new DAttributeTypeRfc("RFCFigura", false);
@@ -43,8 +43,11 @@ public class DElementTiposFigura extends cfd.DElement {
         mvAttributes.add(moAttNumRegIdTribFigura);
         mvAttributes.add(moAttResidenciaFiscalFigura);
         
-        maEltPartesTransporte = null;
+        moEltDomicilio = null;
+        maEltPartesTransporte = new ArrayList<>();
     }
+    
+    public void setEltDomicilio(DElementDomicilio o) { moEltDomicilio = o; }
     
     public DAttributeString getAttTipoFigura() { return moAttTipoFigura; }
     public DAttributeTypeRfc getAttRFCFigura() { return moAttRFCFigura; }
@@ -53,17 +56,13 @@ public class DElementTiposFigura extends cfd.DElement {
     public DAttributeString getAttNumRegIdTribFigura() { return moAttNumRegIdTribFigura; }
     public DAttributeString getAttResidenciaFiscalFigura() { return moAttResidenciaFiscalFigura; }
     
+    public DElementDomicilio getEltDomicilio() { return moEltDomicilio; }
     public ArrayList<DElementPartesTransporte> getEltPartesTransporte() { return maEltPartesTransporte; }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
         super.validateElement(); // validates attributes, if any
 
-        // validate child elements:
-        
-        if (maEltPartesTransporte.isEmpty()) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new DElementPartesTransporte().getName()) + "'.");
-        }
     }
     
     @Override
@@ -83,6 +82,11 @@ public class DElementTiposFigura extends cfd.DElement {
             String aux = element.getElementForXml();
             xml += aux.isEmpty() ? "" : "\n" + aux;
         }
+        
+        if (moEltDomicilio != null) {
+            String aux = moEltDomicilio.getElementForXml();
+            xml += aux.isEmpty() ? "" : "\n" + aux;
+        }
 
         xml += "\n</" + msName + ">";
 
@@ -97,6 +101,7 @@ public class DElementTiposFigura extends cfd.DElement {
             string += element.getElementForOriginalString();
         }
 
+        string += moEltDomicilio.getElementForOriginalString();
         return string;
     }
 }

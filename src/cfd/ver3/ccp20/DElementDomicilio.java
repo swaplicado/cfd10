@@ -5,7 +5,6 @@
  */
 package cfd.ver3.ccp20;
 
-import cfd.DAttribute;
 import cfd.DAttributeString;
 
 /**
@@ -28,7 +27,7 @@ public class DElementDomicilio extends cfd.DElement {
     public DElementDomicilio() {
         super("cartaporte20:Domicilio");
         
-        moAttCalle = new DAttributeString("Calle", true);
+        moAttCalle = new DAttributeString("Calle", false);
         moAttNumeroExteror = new DAttributeString("NumeroExterior", false);
         moAttNumeroInterior = new DAttributeString("NumeroInterior", false);
         moAttColonia = new DAttributeString("Colonia", false);
@@ -62,28 +61,4 @@ public class DElementDomicilio extends cfd.DElement {
     public DAttributeString getAttPais() { return moAttPais; } 
     public DAttributeString getAttCodigoPostal() { return moAttCodigoPostal; }
     
-    @Override
-    public java.lang.String getElementForXml() throws Exception {
-        validateElement();
-        
-        String xml = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            String aux = attribute.getAttributeForXml();
-            xml += aux.isEmpty() ? "" : " " + aux;
-        }
-
-        xml += ">";
-
-        xml += "\n</" + msName + ">";
-
-        return xml;
-    }
-
-    @Override
-    public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString(); // for element attributes and element validation
-        
-        return string;
-    }
 }

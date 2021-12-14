@@ -8,6 +8,7 @@ import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
 import cfd.DElement;
 import cfd.ver3.cce11.DElementComercioExterior;
+import cfd.ver3.ccp20.DElementCartaPorte;
 import cfd.ver3.clf10.DElementLeyendasFiscales;
 import cfd.ver3.nom12.DElementNomina;
 import cfd.ver33.crp10.DElementPagos;
@@ -123,6 +124,21 @@ public class DElementComprobante extends cfd.DElement {
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
+    
+    private boolean hasComplementCp20() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver3.ccp20.DElementCartaPorte) {
                     has = true;
                     break;
                 }
@@ -275,6 +291,7 @@ public class DElementComprobante extends cfd.DElement {
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" "
                 + (!hasComplementCe11()? "" : DElementComercioExterior.XMLNS + " ")
+                + (!hasComplementCp20()? "" : DElementCartaPorte.XMLNS + " ")
                 + (!hasComplementLf10()? "" : DElementLeyendasFiscales.XMLNS + " ")
                 + (!hasComplementRp10()? "" : DElementPagos.XMLNS + " ")
                 + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS + " ")
@@ -282,6 +299,7 @@ public class DElementComprobante extends cfd.DElement {
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
                 + (!hasComplementCe11()? "" : " " + DElementComercioExterior.XSI)
+                + (!hasComplementCp20()? "" : " " + DElementCartaPorte.XSI)
                 + (!hasComplementLf10()? "" : " " + DElementLeyendasFiscales.XSI)
                 + (!hasComplementRp10()? "" : " " + DElementPagos.XSI)
                 + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)

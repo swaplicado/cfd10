@@ -40,7 +40,7 @@ public class DElementUbicacion extends cfd.DElement {
         moAttNumRegIdTrib = new DAttributeString("NumRegTrib", false, 6, 40);
         moAttResidenciaFiscal = new DAttributeString("ResidenciaFiscal", false);
         moAttFechaHoraSalidaLlegada = new DAttributeDatetime("FechaHoraSalidaLlegada", true);
-        moAttDistanciaRecorrida = new DAttributeDouble("DistanciaRecorrida", true, 2);
+        moAttDistanciaRecorrida = new DAttributeDouble("DistanciaRecorrida", false, 2);
         
         mvAttributes.add(moAttTipoUbicacion);
         mvAttributes.add(moAttIDUbicacion);
@@ -51,7 +51,7 @@ public class DElementUbicacion extends cfd.DElement {
         mvAttributes.add(moAttFechaHoraSalidaLlegada);
         mvAttributes.add(moAttDistanciaRecorrida);
         
-        moEltDomicilio = null;
+        moEltDomicilio = new DElementDomicilio();
     }
     
     private ArrayList<DElement> createElementsArray() {

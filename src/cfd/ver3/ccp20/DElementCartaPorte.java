@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class DElementCartaPorte extends cfd.DElement {
 
-    public static final String XSI = "http://www.sat.gob.mx/CartaPorte20  http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte.xsd";
-    public static final String XMLNS = "xmlns:ccp20=\"http://www.sat.gob.mx/CartaPorte20\"";
+    public static final String XSI = "http://www.sat.gob.mx/CartaPorte20  http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte20.xsd";
+    public static final String XMLNS = "xmlns:cartaporte20=\"http://www.sat.gob.mx/CartaPorte20\"";
 
     private final DAttributeString moAttVersion;
     private final DAttributeString moAttTranspInternac;
@@ -44,9 +44,9 @@ public class DElementCartaPorte extends cfd.DElement {
         mvAttributes.add(moAttPaisOrigenDestino);
         mvAttributes.add(moAttTotalDistRec);
         
-        moEltUbicaciones = null;
-        moEltMercancias = null;
-        moEltFiguraTransporte = null;
+        moEltUbicaciones = new DElementUbicaciones();
+        moEltMercancias = new DElementMercancias();
+        moEltFiguraTransporte = new DElementFiguraTransporte();
     }
     
     /*

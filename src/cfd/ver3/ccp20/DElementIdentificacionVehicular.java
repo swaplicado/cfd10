@@ -5,7 +5,6 @@
  */
 package cfd.ver3.ccp20;
 
-import cfd.DAttribute;
 import cfd.DAttributeInteger;
 import cfd.DAttributeString;
 
@@ -35,28 +34,4 @@ public class DElementIdentificacionVehicular extends cfd.DElement {
     public DAttributeString getAttPlacaVM() { return moAttPlacaVM; }
     public DAttributeInteger getAttAnioModeloVM() { return moAttAnioModeloVM; }
     
-    @Override
-    public java.lang.String getElementForXml() throws Exception {
-        validateElement();
-        
-        String xml = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            String aux = attribute.getAttributeForXml();
-            xml += aux.isEmpty() ? "" : " " + aux;
-        }
-
-        xml += ">";
-        
-        xml += "\n</" + msName + ">";
-
-        return xml;
-    }
-
-    @Override
-    public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString(); // for element attributes and element validation
-
-        return string;
-    }
 }

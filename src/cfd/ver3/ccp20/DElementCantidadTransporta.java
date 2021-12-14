@@ -5,7 +5,6 @@
  */
 package cfd.ver3.ccp20;
 
-import cfd.DAttribute;
 import cfd.DAttributeDouble;
 import cfd.DAttributeString;
 
@@ -39,28 +38,4 @@ public class DElementCantidadTransporta extends cfd.DElement {
     public DAttributeString getAttIDDestino() { return moAttIDDestino; }
     public DAttributeString getAttCvesTransporte() { return moAttCvesTransporte; }
     
-    @Override
-    public java.lang.String getElementForXml() throws Exception {
-        validateElement();
-        
-        String xml = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            String aux = attribute.getAttributeForXml();
-            xml += aux.isEmpty() ? "" : " " + aux;
-        }
-
-        xml += ">";
-
-        xml += "\n</" + msName + ">";
-
-        return xml;
-    }
-
-    @Override
-    public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString(); // for element attributes and element validation
-
-        return string;
-    }
 }

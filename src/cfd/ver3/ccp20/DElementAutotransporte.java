@@ -21,7 +21,7 @@ public class DElementAutotransporte extends cfd.DElement {
     
     private final DElementIdentificacionVehicular moEltIdentificacionVehicular;
     private final DElementSeguros moEltSeguros;
-    private final DElementRemolques moEltRemolques;
+    private DElementRemolques moEltRemolques;
     
     public DElementAutotransporte() {
         super("cartaporte20:Autotransporte");
@@ -34,7 +34,7 @@ public class DElementAutotransporte extends cfd.DElement {
         
         moEltIdentificacionVehicular = new DElementIdentificacionVehicular();
         moEltSeguros = new DElementSeguros();
-        moEltRemolques = new DElementRemolques();
+        moEltRemolques = null;
     }
     
     /*
@@ -69,6 +69,8 @@ public class DElementAutotransporte extends cfd.DElement {
     public DElementIdentificacionVehicular getEltIdentificacionVehicular() { return moEltIdentificacionVehicular; }
     public DElementSeguros getEltSeguros() { return moEltSeguros; }
     public DElementRemolques getEltRemolques() { return moEltRemolques; }
+    
+    public void setEltRemolques(DElementRemolques o) { moEltRemolques = o; }  
     
     @Override
     public java.lang.String getElementForXml() throws Exception {

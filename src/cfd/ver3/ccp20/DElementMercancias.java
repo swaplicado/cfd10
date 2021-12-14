@@ -31,7 +31,7 @@ public class DElementMercancias extends cfd.DElement {
         
         moAttPesoBrutoTotal = new DAttributeDouble("PesoBrutoTotal", true, 3);
         moAttUnidadPeso = new DAttributeString("UnidadPeso", true);
-        moAttPesoNetoTotal = new DAttributeDouble("PesoNetoTotal", true, 3);
+        moAttPesoNetoTotal = new DAttributeDouble("PesoNetoTotal", false, 3);
         moAttNumTotalMercancias = new DAttributeInteger("NumTotalMercancias", true);
         
         mvAttributes.add(moAttPesoBrutoTotal);
@@ -49,7 +49,7 @@ public class DElementMercancias extends cfd.DElement {
     public DAttributeInteger getAttNumTotalMercancias() { return moAttNumTotalMercancias; }
 
     public ArrayList<DElementMercancia> getEltMercancias() { return maEltMercancias; }
-    public DElementAutotransporte getAutotransporteFederal() { return moEltAutotransporte; }
+    public DElementAutotransporte getEltAutotransporte() { return moEltAutotransporte; }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {

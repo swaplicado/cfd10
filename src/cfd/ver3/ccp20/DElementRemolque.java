@@ -21,7 +21,7 @@ public class DElementRemolque extends cfd.DElement {
         super("cartaporte20:Remolque");
         
         moAttSubTipoRem = new DAttributeString("SubTipoRem", true);
-        moAttPlaca = new DAttributeString("Placa", true);
+        moAttPlaca = new DAttributeString("Placa", true, 5, 7);
         
         mvAttributes.add(moAttSubTipoRem);
         mvAttributes.add(moAttPlaca);
