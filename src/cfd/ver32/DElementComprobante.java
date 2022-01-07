@@ -155,6 +155,21 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver32.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
     public cfd.ver3.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
 
+    public cfd.ver32.DElementTimbreFiscalDigital getEltOpcComplementoTimbreFiscalDigital() {
+        cfd.ver32.DElementTimbreFiscalDigital tfd = null;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element.getName().compareTo("tfd:TimbreFiscalDigital") == 0) {
+                    tfd = (cfd.ver32.DElementTimbreFiscalDigital) element;
+                    break;
+                }
+            }
+        }
+        
+        return tfd;
+    }
+    
     /*
      * Private methods:
      */

@@ -246,6 +246,21 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver33.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
     public cfd.ver3.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
     
+    public cfd.ver33.DElementTimbreFiscalDigital getEltOpcComplementoTimbreFiscalDigital() {
+        cfd.ver33.DElementTimbreFiscalDigital tfd = null;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element.getName().compareTo("tfd:TimbreFiscalDigital") == 0) {
+                    tfd = (cfd.ver33.DElementTimbreFiscalDigital) element;
+                    break;
+                }
+            }
+        }
+        
+        return tfd;
+    }
+    
     @Override
     public void validateElement() throws IllegalStateException, Exception {
         super.validateElement(); // validates attributes, if any
