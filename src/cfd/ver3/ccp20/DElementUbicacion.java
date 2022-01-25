@@ -34,7 +34,7 @@ public class DElementUbicacion extends cfd.DElement {
         super("cartaporte20:Ubicacion");
         
         moAttTipoUbicacion = new DAttributeString("TipoUbicacion", true);
-        moAttIDUbicacion = new DAttributeString("IDUbicacion", true);
+        moAttIDUbicacion = new DAttributeString("IDUbicacion", false);
         moAttRFCRemitenteDestinatario = new DAttributeTypeRfc("RFCRemitenteDestinatario", false);
         moAttNombreRemitenteDestinatario = new DAttributeString("NombreRemitenteDestinatario", false);
         moAttNumRegIdTrib = new DAttributeString("NumRegTrib", false, 6, 40);
