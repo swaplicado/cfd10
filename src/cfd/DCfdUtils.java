@@ -770,7 +770,7 @@ public abstract class DCfdUtils {
             ccp.getAttEntradaSalidaMerc().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "EntradaSalidaMerc", false));
             ccp.getAttViaEntradaSalida().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ViaEntradaSalida", false));
             ccp.getAttPaisOrigenDestino().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PaisOrigenDestino", false));
-            ccp.getAttTotalDistRec().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalDistRec", true)));
+            ccp.getAttTotalDistRec().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalDistRec", false)));
             
             // Ubicaciones:
 
@@ -788,12 +788,12 @@ public abstract class DCfdUtils {
                     namedNodeMapChild = nodeChildGrand.getAttributes();
 
                     ubicacion.getAttTipoUbicacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoUbicacion", true));
-                    ubicacion.getAttIDUbicacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDUbicacion", true));
-                    ubicacion.getAttRFCRemitenteDestinatario().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RFCRemitenteDestinatario", false));
+                    ubicacion.getAttIDUbicacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDUbicacion", false));
+                    ubicacion.getAttRFCRemitenteDestinatario().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RFCRemitenteDestinatario", true));
                     ubicacion.getAttNombreRemitenteDestinatario().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NombreRemitenteDestinatario", false));
                     ubicacion.getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTrib", false));
                     ubicacion.getAttResidenciaFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ResidenciaFiscal", false));
-                    ubicacion.getAttFechaHoraSalidaLlegada().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaHoraSalidaLlegada", false).replaceAll("T", " ")));
+                    ubicacion.getAttFechaHoraSalidaLlegada().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaHoraSalidaLlegada", true).replaceAll("T", " ")));
                     ubicacion.getAttDistanciaRecorrida().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "DistanciaRecorrida", false)));
                     
                     if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte20:Domicilio")) {
@@ -854,20 +854,21 @@ public abstract class DCfdUtils {
                     mercancia.getAttFraccionArancelaria().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FraccionArancelaria", false));
                     mercancia.getAttUUIDComercioExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUIDComercioExt", false));
 
-                    nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte20:CantidadTransporta");
-                    for (int j = 0; j < nodeChildsAux.size(); j++) {
-                        cfd.ver3.ccp20.DElementCantidadTransporta cantidadTransporta = new DElementCantidadTransporta();
-                        nodeChildGrandAux = nodeChildsAux.get(j);
-                        namedNodeMapChild = nodeChildGrandAux.getAttributes();
-                        
-                        cantidadTransporta.getAttIDOrigen().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDOrigen", true));
-                        cantidadTransporta.getAttIDDestino().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDDestino", true));
-                        cantidadTransporta.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Cantidad", true)));
-                        cantidadTransporta.getAttCvesTransporte().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CvesTransporte", false));
-                        
-                        mercancia.getEltCantidadTransporta().add(cantidadTransporta);
+                    if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte20:CantidadTransporta")) {
+                        nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte20:CantidadTransporta");
+                        for (int j = 0; j < nodeChildsAux.size(); j++) {
+                            cfd.ver3.ccp20.DElementCantidadTransporta cantidadTransporta = new DElementCantidadTransporta();
+                            nodeChildGrandAux = nodeChildsAux.get(j);
+                            namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                            cantidadTransporta.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Cantidad", true)));
+                            cantidadTransporta.getAttIDOrigen().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDOrigen", true));
+                            cantidadTransporta.getAttIDDestino().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDDestino", true));
+                            cantidadTransporta.getAttCvesTransporte().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CvesTransporte", false));
+
+                            mercancia.getEltCantidadTransporta().add(cantidadTransporta);
+                        }
                     }
-                    
                     mercancias.getEltMercancias().add(mercancia);
                     
                     if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte20:Pedimentos")) {
@@ -965,7 +966,7 @@ public abstract class DCfdUtils {
                     namedNodeMapChild = nodeChildGrand.getAttributes();
 
                     tiposFigura.getAttTipoFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFigura", true));
-                    tiposFigura.getAttRFCFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RFCFigura", true));
+                    tiposFigura.getAttRFCFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RFCFigura", false));
                     tiposFigura.getAttNumLicencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumLicencia", false));
                     tiposFigura.getAttNombreFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NombreFigura", false));
                     tiposFigura.getAttNumRegIdTribFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTribFigura", false));

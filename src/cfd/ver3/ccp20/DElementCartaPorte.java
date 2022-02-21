@@ -35,7 +35,7 @@ public class DElementCartaPorte extends cfd.DElement {
         moAttEntradaSalidaMerc = new DAttributeString("EntradaSalidaMerc", false);
         moAttViaEntradaSalida = new DAttributeString("ViaEntradaSalida", false);
         moAttPaisOrigenDestino = new DAttributeString("PaisOrigenDestino", false);
-        moAttTotalDistRec = new DAttributeDouble("TotalDistRec", true, 3);
+        moAttTotalDistRec = new DAttributeDouble("TotalDistRec", false, 3);
         
         mvAttributes.add(moAttVersion);
         mvAttributes.add(moAttTranspInternac);
