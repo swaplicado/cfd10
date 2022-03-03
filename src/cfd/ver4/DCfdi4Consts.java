@@ -21,8 +21,8 @@ public abstract class DCfdi4Consts {
     public static final HashMap<String, String> CancelaciónMotivos = new HashMap<>();
     
     static {
-        CancelaciónMotivos.put(CAN_MOTIVO_ERROR_CON_REL, "Comprobante emitido con errores de relación");
-        CancelaciónMotivos.put(CAN_MOTIVO_ERROR_SIN_REL, "Comprobante emitido con errores sin relación");
+        CancelaciónMotivos.put(CAN_MOTIVO_ERROR_CON_REL, "Comprobantes emitidos con errores con relación");
+        CancelaciónMotivos.put(CAN_MOTIVO_ERROR_SIN_REL, "Comprobantes emitidos con errores sin relación");
         CancelaciónMotivos.put(CAN_MOTIVO_OPERACION_CAN, "No se llevó acabo la operación");
         CancelaciónMotivos.put(CAN_MOTIVO_FACTURA_GLOBAL, "Operación nominativa relacionada en una factura global");
     }
