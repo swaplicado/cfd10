@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public abstract class DCfdi4Consts {
     
-    public static final String CAN_MOTIVO_ERROR_CON_REL = "01"; // Comprobante emitido con errores de relación
-    public static final String CAN_MOTIVO_ERROR_SIN_REL = "02"; // Comprobante emitido con errores sin relación
+    public static final String CAN_MOTIVO_ERROR_CON_REL = "01"; // Comprobantes emitidos con errores con relación
+    public static final String CAN_MOTIVO_ERROR_SIN_REL = "02"; // Comprobantes emitidos con errores sin relación
     public static final String CAN_MOTIVO_OPERACION_CAN = "03"; // No se llevó acabo la operación
     public static final String CAN_MOTIVO_FACTURA_GLOBAL = "04"; // Operación nominativa relacionada en una factura global
     
