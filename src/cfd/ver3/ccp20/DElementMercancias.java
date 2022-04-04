@@ -25,6 +25,9 @@ public class DElementMercancias extends cfd.DElement {
 
     private final ArrayList<DElementMercancia> maEltMercancias;
     private final DElementAutotransporte moEltAutotransporte;
+    private DElementTransporteMaritimo moEltTransporteMaritimo;
+    private DElementTransporteFerroviario moEltTransporteFerroviario;
+    private DElementTransporteAereo moEltTransporteAereo;
     
     public DElementMercancias() {
         super("cartaporte20:Mercancias");
@@ -41,6 +44,9 @@ public class DElementMercancias extends cfd.DElement {
 
         maEltMercancias = new ArrayList<>();
         moEltAutotransporte = new DElementAutotransporte();
+        moEltTransporteMaritimo = null;
+        moEltTransporteFerroviario = null;
+        moEltTransporteAereo = null;
     }
     
     public DAttributeDouble getAttPesoBrutoTotal() { return moAttPesoBrutoTotal; }
@@ -50,6 +56,13 @@ public class DElementMercancias extends cfd.DElement {
 
     public ArrayList<DElementMercancia> getEltMercancias() { return maEltMercancias; }
     public DElementAutotransporte getEltAutotransporte() { return moEltAutotransporte; }
+    public DElementTransporteMaritimo getEltTransporteMaritimo() { return moEltTransporteMaritimo; }
+    public DElementTransporteFerroviario getEltTransporteFerroviario() { return moEltTransporteFerroviario; }
+    public DElementTransporteAereo getEltTransporteAereo() { return moEltTransporteAereo; }
+    
+    public void setEltTransporteMaritimo(DElementTransporteMaritimo o) { moEltTransporteMaritimo = o; }
+    public void setEltTransporteFerroviario(DElementTransporteFerroviario o) { moEltTransporteFerroviario = o; }
+    public void setEltTransporteAereo(DElementTransporteAereo o) { moEltTransporteAereo = o; }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
