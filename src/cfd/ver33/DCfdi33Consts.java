@@ -5,6 +5,8 @@
  */
 package cfd.ver33;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
@@ -25,6 +27,8 @@ public abstract class DCfdi33Consts {
     public static final String REGEX_NUM_PREDIAL = "[0-9]{1,150}";
     
     public static final int STAMP_LAST_CHARS = 8;
+    
+    public static final int HOURS_TO_SIGN = 24 * 3; // 72 hrs, i.e., up to 3 days
 
     /*
     Constantes para la gestión de la cancelación de CFDI.
@@ -44,8 +48,9 @@ public abstract class DCfdi33Consts {
     public static final String ESTATUS_CANCEL_SIN_ACEPT = "Cancelado sin aceptación";
     public static final String ESTATUS_CANCEL_CON_ACEPT = "Cancelado con aceptación";
     public static final String ESTATUS_CANCEL_PLAZO_VENC = "Plazo vencido";
-    public static final String ESTATUS_CANCEL_PLAZO_VENC_ALT = "Cancelado plazo vencido";
-    public static final String ESTATUS_CANCEL_NINGUNO = "None";
+    public static final String ESTATUS_CANCEL_PLAZO_VENC_ALT = "Cancelado plazo vencido"; // new description set by authority in undetermined time
+    public static final String ESTATUS_CANCEL_NINGUNO = "None"; // description set by authority that means "CFDI in pending buffer"
+    public static final String ESTATUS_CANCEL_NINGUNO_TEXT = "CFDI in pending buffer"; // not really a description set by authority, corresponds to constant ESTATUS_CANCEL_PEND_BUFF_CODE
     
     public static final String ESTATUS_CANCEL_PROC_CODE = "Prc";
     public static final String ESTATUS_CANCEL_RECH_CODE = "Rec";
@@ -56,4 +61,16 @@ public abstract class DCfdi33Consts {
     
     /** Unexpected message in a succesful cancelation. */
     public static final String RESPONSE_CANCEL = "Petición de cancelación realizada exitosamente";
+    
+    /** Cancel status descriptions. */
+    public static final HashMap<String, String> EstatusCancelación = new HashMap<>();
+    
+    static {
+        EstatusCancelación.put(ESTATUS_CANCEL_PROC_CODE, ESTATUS_CANCEL_PROC);
+        EstatusCancelación.put(ESTATUS_CANCEL_RECH_CODE, ESTATUS_CANCEL_RECH);
+        EstatusCancelación.put(ESTATUS_CANCEL_SIN_ACEPT_CODE, ESTATUS_CANCEL_SIN_ACEPT);
+        EstatusCancelación.put(ESTATUS_CANCEL_CON_ACEPT_CODE, ESTATUS_CANCEL_CON_ACEPT);
+        EstatusCancelación.put(ESTATUS_CANCEL_PLAZO_VENC_CODE, ESTATUS_CANCEL_PLAZO_VENC);
+        EstatusCancelación.put(ESTATUS_CANCEL_PEND_BUFF_CODE, ESTATUS_CANCEL_NINGUNO_TEXT);
+    }
 }

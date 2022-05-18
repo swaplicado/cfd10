@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public abstract class DCfdi33Utils {
     
-    public static boolean matches(final String text, final String regex) throws Exception{
+    public static boolean matches(final String text, final String regex) throws Exception {
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(text).matches();
     }
@@ -46,8 +46,8 @@ public abstract class DCfdi33Utils {
     
     /**
      * Check SAT CFDI 3.3 Catalogs for reference.
-     * @param formaPago
-     * @return 
+     * @param formaPago Payment method SAT code.
+     * @return <code>true</code> if account payer is not required.
      */
     public static boolean notRequiredAccountPayer(final String formaPago) {
         return
@@ -58,8 +58,8 @@ public abstract class DCfdi33Utils {
     
     /**
      * Check SAT CFDI 3.3 Catalogs for reference.
-     * @param formaPago
-     * @return 
+     * @param formaPago Payment method SAT code.
+     * @return <code>true</code> if account receipt is not required.
      */
     public static boolean notRequiredAccountReceipt(final String formaPago) {
         return notRequiredAccountPayer(formaPago) || formaPago.equals("06");
@@ -67,10 +67,20 @@ public abstract class DCfdi33Utils {
     
     /**
      * Check SAT CFDI 3.3 Catalogs for reference.
-     * @param formaPago
-     * @return 
+     * @param formaPago Payment method SAT code.
+     * @return <code>true</code> if bank payer is not required.
      */
     public static boolean notRequiredBankPayer(final String formaPago) {
         return notRequiredAccountPayer(formaPago) || formaPago.equals("05") || formaPago.equals("06");
+    }
+    
+    /**
+     * Return cancel-status description in format: CODE - DESCRIPTION.
+     * @param cancelStatusCode cancel-status code required.
+     * @return Composed cancel-status description.
+     */
+    public static String getEstatusCancelación(final String cancelStatusCode) {
+        String description = DCfdi33Consts.EstatusCancelación.get(cancelStatusCode);
+        return description == null ? "" : cancelStatusCode + " - " + description;
     }
 }
