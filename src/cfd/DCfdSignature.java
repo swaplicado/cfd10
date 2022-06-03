@@ -79,6 +79,9 @@ public class DCfdSignature {
         else if (cfdVersion == DCfdConsts.CFDI_VER_33) {
             moSignatureSha1WithRsa = Signature.getInstance("SHA256withRSA");
         }
+        else if (cfdVersion == DCfdConsts.CFDI_VER_40) {
+            moSignatureSha1WithRsa = Signature.getInstance("SHA256withRSA");
+        }
         
         //System.out.println("Signature Provider: " + moSignatureSha1WithRsa.getProvider());
         //System.out.println("Signature Algorithm: " + moSignatureSha1WithRsa.getAlgorithm());

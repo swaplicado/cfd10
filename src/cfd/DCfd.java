@@ -93,6 +93,17 @@ public final class DCfd {
 
         return fileName;
     }
+    
+    public static String createFileName(cfd.ver40.DElementComprobante comprobante) {
+        String fileName = "";
+
+        fileName += comprobante.getEltEmisor().getAttRfc().getString() + "_";
+        fileName += comprobante.getAttTipoDeComprobante().getString()+ "_";
+        fileName += (comprobante.getAttSerie().getString().isEmpty() ? "" : comprobante.getAttSerie().getString() + "_");
+        fileName += DCfdUtils.CfdNumberFormat.format(SLibUtils.parseLong(comprobante.getAttFolio().getString()));
+
+        return fileName;
+    }
 
     public int write(cfd.ver2.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
         int result = 0;

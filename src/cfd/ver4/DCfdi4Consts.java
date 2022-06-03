@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Flores, Isabel Servín
  */
 public abstract class DCfdi4Consts {
     
@@ -17,6 +17,12 @@ public abstract class DCfdi4Consts {
     public static final String CAN_MOTIVO_ERROR_SIN_REL = "02"; // Comprobantes emitidos con errores sin relación
     public static final String CAN_MOTIVO_OPERACION_CAN = "03"; // No se llevó acabo la operación
     public static final String CAN_MOTIVO_FACTURA_GLOBAL = "04"; // Operación nominativa relacionada en una factura global
+    
+    public static final String CAT_OBJ_SIN_IMPUESTO = "01"; 
+    public static final String CAT_OBJ_CON_IMPUESTO = "02";
+    public static final String CAT_OBJ_CON_IMPUESTO_SIN_DES = "03";
+    
+    public static final String CAT_EXPORTACION_NA = "01";
     
     public static final HashMap<String, String> CancelaciónMotivos = new HashMap<>();
     
