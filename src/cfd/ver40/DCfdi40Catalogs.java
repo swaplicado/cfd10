@@ -32,7 +32,7 @@ public abstract class DCfdi40Catalogs {
     public static final String CFD_TP_N = "N";      // Nómina
     public static final String CFD_TP_P = "P";      // Pago
     
-    public static final String CFDI_USO_POR_DEF = "P01"; // Por definir
+    public static final String CFDI_USO_SIN_EFECTOS_FISCALES = "S01"; // Por definir
     
     public static final int MDP_PUE_ID = 1;         // ID pago en una sola exhibición
     public static final int MDP_PPD_ID = 2;         // ID pago en parcialidades o diferido

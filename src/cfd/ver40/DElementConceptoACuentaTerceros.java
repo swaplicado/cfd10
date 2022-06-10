@@ -33,4 +33,9 @@ public class DElementConceptoACuentaTerceros extends cfd.DElement {
         mvAttributes.add(moAttDomicilioFiscalACuentaTerceros);
     }
     
+    public DAttributeTypeRfc getAttRfcACuentaTerceros() { return moAttRfcACuentaTerceros; }
+    public DAttributeString getAttNombreACuentaTerceros() { return moAttNombreACuentaTerceros; }
+    public DAttributeString getAttRegimenFiscalACuentaTerceros() { return moAttRegimenFiscalACuentaTerceros; }
+    public DAttributeString getAttDomicilioFiscalACuentaTerceros() { return moAttDomicilioFiscalACuentaTerceros; }
+    
 }

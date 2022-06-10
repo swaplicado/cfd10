@@ -54,7 +54,7 @@ public class DElementConceptoImpuestos extends cfd.DElement {
         // validate child elements:
         
         if (moEltOpcConceptoImpuestosTraslados == null && moEltOpcConceptoImpuestosRetenciones == null) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODES + "'" + (new cfd.ver33.DElementConceptoImpuestosTraslados().getName()) + "', '" + (new cfd.ver33.DElementConceptoImpuestosRetenciones().getName()) + "'" + DElement.ERR_MSG_NODES_NO_EXIST);
+            throw new IllegalStateException(DElement.ERR_MSG_NODES + "'" + (new cfd.ver40.DElementConceptoImpuestosTraslados().getName()) + "', '" + (new cfd.ver40.DElementConceptoImpuestosRetenciones().getName()) + "'" + DElement.ERR_MSG_NODES_NO_EXIST);
         }
     }
     

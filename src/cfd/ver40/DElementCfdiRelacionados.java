@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez
+ * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
  */
 public class DElementCfdiRelacionados extends cfd.DElement {
 
     private final DAttributeString moAttTipoRelacion;
+    
+    private final DAttributeString moAttUuidRelacionado;
 
     private final ArrayList<cfd.ver40.DElementCfdiRelacionado> maEltCfdiRelacionados;
 
@@ -19,6 +21,8 @@ public class DElementCfdiRelacionados extends cfd.DElement {
         super("cfdi:CfdiRelacionados");
 
         moAttTipoRelacion = new DAttributeString("TipoRelacion", true, 2, 2);   // c_TipoRelacion catalog codes of 2 fixed digits
+        
+        moAttUuidRelacionado = new DAttributeString("UuidRelacionado", false);   
         
         mvAttributes.add(moAttTipoRelacion);
         
@@ -32,8 +36,18 @@ public class DElementCfdiRelacionados extends cfd.DElement {
     /*
      * Public methods
      */
+    
+    public void getAllUuidRelatedString() {
+        String msAllUuidRelated = "";
+        for (cfd.ver40.DElementCfdiRelacionado relacionado : maEltCfdiRelacionados) {
+            msAllUuidRelated += (msAllUuidRelated.isEmpty() ? "" : ", ") + relacionado.getAttUuid().getString().toUpperCase();
+        }
+        moAttUuidRelacionado.setString(msAllUuidRelated);
+    }
 
     public DAttributeString getAttTipoRelacion() { return moAttTipoRelacion; }
+    
+    public DAttributeString getAttUuidRelacionado() { return moAttUuidRelacionado; }
     
     public ArrayList<cfd.ver40.DElementCfdiRelacionado> getEltCfdiRelacionados() { return maEltCfdiRelacionados; }
     
@@ -44,7 +58,7 @@ public class DElementCfdiRelacionados extends cfd.DElement {
         // validate child elements:
         
         if (maEltCfdiRelacionados.isEmpty()) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementCfdiRelacionado().getName()) + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver40.DElementCfdiRelacionado().getName()) + "'.");
         }
     }
     

@@ -50,7 +50,7 @@ public class DElementComprobante extends cfd.DElement {
     private final cfd.ver40.DElementConceptos moEltConceptos;
     private cfd.ver40.DElementImpuestos moEltOpcImpuestos;
     private cfd.ver40.DElementComplemento moEltOpcComplemento;
-    private cfd.ver3.DElementAddenda moEltOpcAddenda;
+    private cfd.ver4.DElementAddenda moEltOpcAddenda;
 
     /**
      * 
@@ -223,7 +223,7 @@ public class DElementComprobante extends cfd.DElement {
     public void setEltReceptor(cfd.ver40.DElementReceptor o) { moEltReceptor = o; }
     public void setEltOpcImpuestos(cfd.ver40.DElementImpuestos o) { moEltOpcImpuestos = o; }
     public void setEltOpcComplemento(cfd.ver40.DElementComplemento o) { moEltOpcComplemento = o; }
-    public void setEltOpcAddenda(cfd.ver3.DElementAddenda o) { moEltOpcAddenda = o; }
+    public void setEltOpcAddenda(cfd.ver4.DElementAddenda o) { moEltOpcAddenda = o; }
 
     public DAttributeString getAttSerie() { return moAttSerie; }
     public DAttributeString getAttFolio() { return moAttFolio; }
@@ -251,7 +251,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver40.DElementConceptos getEltConceptos() { return moEltConceptos; }
     public cfd.ver40.DElementImpuestos getEltOpcImpuestos() { return moEltOpcImpuestos; }
     public cfd.ver40.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
-    public cfd.ver3.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
+    public cfd.ver4.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
     
     public cfd.ver40.DElementTimbreFiscalDigital getEltOpcComplementoTimbreFiscalDigital() {
         cfd.ver40.DElementTimbreFiscalDigital tfd = null;

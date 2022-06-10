@@ -34,7 +34,7 @@ public class DElementConceptoImpuestosRetenciones extends cfd.DElement implement
         // validate child elements:
         
         if (maEltConceptoImpuestoRetenciones.isEmpty()) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementConceptoImpuestoRetencion().getName()) + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver40.DElementConceptoImpuestoRetencion().getName()) + "'.");
         }
     }
     
