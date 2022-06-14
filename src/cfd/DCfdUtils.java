@@ -20,7 +20,6 @@ import cfd.ver33.DElementCfdiRelacionados;
 import cfd.ver33.DElementConceptoImpuestos;
 import cfd.ver33.DElementImpuestos;
 import cfd.ver40.DElementConceptoACuentaTerceros;
-import cfd.ver40.DElementInformacionGlobal;
 import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -3028,7 +3027,7 @@ public abstract class DCfdUtils {
         // CFDI relacionados:
     
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:CfdiRelacionados")) {
-            ArrayList<cfd.ver40.DElementCfdiRelacionados> arrCfdRelacionados = new ArrayList<>();
+            ArrayList<cfd.ver40.DElementCfdiRelacionados> arrayCfdiRelacionados = new ArrayList<>();
             
             for (Node nodeCfdiRelacionados : SXmlUtils.extractChildElements(nodeComprobante, "cfdi:CfdiRelacionados")) {
                 NamedNodeMap nodeCfdiRelacionadosMap = nodeCfdiRelacionados.getAttributes();
@@ -3044,10 +3043,11 @@ public abstract class DCfdUtils {
                     cfdiRelacionado.getAttUuid().setString(SXmlUtils.extractAttributeValue(nodeCfdiRelacionadoMap, "UUID", true));
                     cfdiRelacionados.getEltCfdiRelacionados().add(cfdiRelacionado);
                 }
-                arrCfdRelacionados.add(cfdiRelacionados);
+                
+                arrayCfdiRelacionados.add(cfdiRelacionados);
             }
             
-            comprobante.setEltOpcCfdiRelacionados(arrCfdRelacionados);
+            comprobante.setEltOpcCfdiRelacionados(arrayCfdiRelacionados);
         }
 
         // Emisor:
