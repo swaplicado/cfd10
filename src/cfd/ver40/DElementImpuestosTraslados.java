@@ -35,7 +35,7 @@ public class DElementImpuestosTraslados extends cfd.DElement implements DElement
         // validate child elements:
         
         if (maEltImpuestoTrasladados.isEmpty()) {
-            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver33.DElementImpuestoTraslado().getName()) + "'.");
+            throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new cfd.ver40.DElementImpuestoTraslado().getName()) + "'.");
         }
     }
     

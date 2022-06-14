@@ -11,7 +11,12 @@ import java.util.HashMap;
  *
  * @author Sergio Flores, Isabel Servín
  */
-public abstract class DCfdi4Consts {
+public abstract class DCfdVer4Consts {
+    
+    public static final int LEN_UUID = 36;
+    
+    public static final double VER_NOM_11 = 1.1;
+    public static final double VER_NOM_12 = 1.2;
     
     public static final String CAN_MOTIVO_ERROR_CON_REL = "01"; // Comprobantes emitidos con errores con relación
     public static final String CAN_MOTIVO_ERROR_SIN_REL = "02"; // Comprobantes emitidos con errores sin relación
