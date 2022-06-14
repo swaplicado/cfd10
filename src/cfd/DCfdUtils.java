@@ -114,452 +114,39 @@ public abstract class DCfdUtils {
         return elementTfd;
     }
     
-    private static cfd.DElement getElementComplementoPagos(final Node nodePagos) throws Exception {
-        cfd.DElement elementPagos = null;
+    private static cfd.DElement getElementComplementoLeyendasFiscales(final Node nodeLf) throws Exception {
+        cfd.DElement elementLf = null;
         
-        if (SXmlUtils.hasChildElement(nodePagos, "pago10:Pagos")) {
-            Node node = null;
-            NamedNodeMap namedNodeMap = null;
+        if (SXmlUtils.hasChildElement(nodeLf, "leyendasFisc:LeyendasFiscales")) {
+            Node node = SXmlUtils.extractChildElements(nodeLf, "leyendasFisc:LeyendasFiscales").get(0);
+            NamedNodeMap namedNodeMapChild = node.getAttributes();
 
-            node = SXmlUtils.extractChildElements(nodePagos, "pago10:Pagos").get(0);
-            namedNodeMap = node.getAttributes();
-
-            cfd.ver33.crp10.DElementPagos pagos = new cfd.ver33.crp10.DElementPagos();
-
-            pagos.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Version", true));
-
-            for (Node nodePago : SXmlUtils.extractChildElements(node, "pago10:Pago")) {
-                NamedNodeMap namedNodeMapPago = nodePago.getAttributes();
-
-                cfd.ver33.crp10.DElementPagosPago pago = new cfd.ver33.crp10.DElementPagosPago();
-
-                pago.getAttFechaPago().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FechaPago", true).replaceAll("T", " ")));
-                pago.getAttFormaDePagoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FormaDePagoP", true));
-                pago.getAttMonedaP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "MonedaP", true));
-                pago.getAttTipoCambioP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCambioP", false)));
-                pago.getAttMonto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "Monto", true)));
-                pago.getAttNumOperacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NumOperacion", false));
-                pago.getAttRfcEmisorCtaOrd().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaOrd", false));
-                pago.getAttNomBancoOrdExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NomBancoOrdExt", false));
-                pago.getAttCtaOrdenante().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaOrdenante", false));
-                pago.getAttRfcEmisorCtaBen().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaBen", false));
-                pago.getAttCtaBeneficiario().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaBeneficiario", false));
-                pago.getAttTipoCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCadPago", false));
-                pago.getAttCertPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CertPago", false));
-                pago.getAttCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CadPago", false));
-                pago.getAttSelloPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "SelloPago", false));
-
-                for (Node nodeDoctoRelacionado : SXmlUtils.extractChildElements(nodePago, "pago10:DoctoRelacionado")) {
-                    NamedNodeMap namedNodeMapDoctoRelacionado = nodeDoctoRelacionado.getAttributes();
-
-                    cfd.ver33.crp10.DElementDoctoRelacionado doctoRelacionado = new cfd.ver33.crp10.DElementDoctoRelacionado();
-                    
-                    doctoRelacionado.getAttIdDocumento().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "IdDocumento", true));
-                    doctoRelacionado.getAttSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Serie", false));
-                    doctoRelacionado.getAttFolio().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Folio", false));
-                    doctoRelacionado.getAttMonedaDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MonedaDR", true));
-                    doctoRelacionado.getAttTipoCambioDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "TipoCambioDR", false)));
-                    doctoRelacionado.getAttMetodoDePagoDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MetodoDePagoDR", true));
-                    doctoRelacionado.getAttNumParcialidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "NumParcialidad", true)));
-                    doctoRelacionado.getAttImpSaldoAnt().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoAnt", true)));
-                    doctoRelacionado.getAttImpPagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpPagado", false)));
-                    doctoRelacionado.getAttImpSaldoInsoluto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoInsoluto", false)));
-
-                    pago.getEltDoctoRelacionados().add(doctoRelacionado);
-                }
-
-                pagos.getEltPagos().add(pago);
+            cfd.ver3.clf10.DElementLeyendasFiscales clf = new cfd.ver3.clf10.DElementLeyendasFiscales();
+            
+            clf.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
+            
+            // Leyendas fiscales:
+            
+            Vector<Node> nodeChilds = SXmlUtils.extractChildElements(node, "leyendasFisc:Leyenda");
+            
+            for (Node nodeChild : nodeChilds) {
+                namedNodeMapChild = nodeChild.getAttributes();
+                
+                cfd.ver3.clf10.DElementLeyenda leyenda = new cfd.ver3.clf10.DElementLeyenda();
+                
+                leyenda.getAttDisposicionFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "disposicionFiscal", true));
+                leyenda.getAttNorma().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "norma", true));
+                leyenda.getAttTextoLeyenda().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "textoLeyenda", true));
+                
+                clf.getEltLeyendas().add(leyenda);
             }
-
-            elementPagos = pagos;
+            
+            elementLf = clf;
         }
         
-        return elementPagos;
+        return elementLf;
     }
     
-    private static cfd.DElement getElementComplementoNomina(final Node nodeNomina) throws Exception {
-        cfd.DElement elementNomina = null;
-        boolean version11 = SXmlUtils.hasChildElement(nodeNomina, "nomina:Nomina");
-        boolean version12 = SXmlUtils.hasChildElement(nodeNomina, "nomina12:Nomina");
-        
-        if (version11 || version12) {
-            Node node = null;
-            Node nodeChild = null;
-            Vector<Node> nodeChilds = null;
-            Vector<Node> nodeChildsAux = null;
-            NamedNodeMap namedNodeMapChild = null;
-
-            if (version11) {
-                node = SXmlUtils.extractChildElements(nodeNomina, "nomina:Nomina").get(0);
-                namedNodeMapChild = node.getAttributes();
-            }
-            else {
-                node = SXmlUtils.extractChildElements(nodeNomina, "nomina12:Nomina").get(0);
-                namedNodeMapChild = node.getAttributes();
-            }
-
-            double versionPayroll = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
-
-            if (versionPayroll == DCfdVer3Consts.VER_NOM_11) {
-                cfd.ver3.nom11.DElementNomina nomina = new cfd.ver3.nom11.DElementNomina();
-
-                nomina.getAttVersion().setString(versionPayroll + "");
-                nomina.getAttRegistroPatronal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RegistroPatronal", false));
-                nomina.getAttNumEmpleado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumEmpleado", true));
-                nomina.getAttCurp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CURP", true));
-                nomina.getAttTipoRegimen().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoRegimen", true)));
-                nomina.getAttNumSeguridadSocial().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumSeguridadSocial", false));
-                nomina.getAttFechaPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaPago", true)));
-                nomina.getAttFechaInicialPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicialPago", true)));
-                nomina.getAttFechaFinalPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaFinalPago", true)));
-                nomina.getAttNumDiasPagados().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumDiasPagados", true)));
-                nomina.getAttDepartamento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Departamento", false));
-                nomina.getAttClabe().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CLABE", false));
-                nomina.getAttBanco().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Banco", false)));
-                nomina.getAttFechaInicioRelLaboral().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicioRelLaboral", false)));
-                nomina.getAttAntiguedad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Antiguedad", false)));
-                nomina.getAttPuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Puesto", false));
-                nomina.getAttTipoContrato().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoContrato", false));
-                nomina.getAttTipoJornada().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoJornada", false));
-                nomina.getAttPeriodicidadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PeriodicidadPago", true));
-                nomina.getAttSalarioBaseCotApor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioBaseCotApor", false)));
-                nomina.getAttRiesgoPuesto().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RiesgoPuesto", false)));
-                nomina.getAttSalarioDiarioIntegrado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioDiarioIntegrado", false)));
-
-                // Perceptions:
-
-                if (SXmlUtils.hasChildElement(node, "nomina:Percepciones")) {
-                    cfd.ver3.nom11.DElementPercepciones percepciones = new cfd.ver3.nom11.DElementPercepciones();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:Percepciones").get(0);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    percepciones.getAttTotalGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalGravado", true)));
-                    percepciones.getAttTotalExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalExento", true)));
-
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:Percepcion");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom11.DElementPercepcion percepcion = new cfd.ver3.nom11.DElementPercepcion();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        percepcion.getAttTipoPercepcion().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoPercepcion", false)));
-                        percepcion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
-                        percepcion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
-                        percepcion.getAttImporteGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteGravado", true)));
-                        percepcion.getAttImporteExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteExento", true)));
-
-                        percepciones.getEltHijosPercepcion().add(percepcion);
-                    }
-                    nomina.setEltPercepciones(percepciones);
-                }
-
-                // Deductions:
-
-                if (SXmlUtils.hasChildElement(node, "nomina:Deducciones")) {
-                    cfd.ver3.nom11.DElementDeducciones deducciones = new cfd.ver3.nom11.DElementDeducciones();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:Deducciones").get(0);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    deducciones.getAttTotalGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalGravado", true)));
-                    deducciones.getAttTotalExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalExento", true)));
-
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:Deduccion");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom11.DElementDeduccion deduccion = new cfd.ver3.nom11.DElementDeduccion();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        deduccion.getAttTipoDeduccion().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoDeduccion", false)));
-                        deduccion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
-                        deduccion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
-                        deduccion.getAttImporteGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteGravado", true)));
-                        deduccion.getAttImporteExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteExento", true)));
-
-                        deducciones.getEltHijosDeduccion().add(deduccion);
-                    }
-                    nomina.setEltDeducciones(deducciones);
-                }
-
-                // Incapacities:
-
-                if (SXmlUtils.hasChildElement(node, "nomina:Incapacidades")) {
-                    cfd.ver3.nom11.DElementIncapacidades incapacidades = new cfd.ver3.nom11.DElementIncapacidades();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:Incapacidades").get(0);
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:Incapacidad");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom11.DElementIncapacidad incapacidad = new cfd.ver3.nom11.DElementIncapacidad();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        incapacidad.getAttDiasIncapacidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "DiasIncapacidad", true)));
-                        incapacidad.getAttTipoIncapacidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoIncapacidad", false)));
-                        incapacidad.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Descuento", true)));
-
-                        incapacidades.getEltHijosIncapacidad().add(incapacidad);
-                    }
-                    nomina.setEltIncapacidades(incapacidades);
-                }
-
-                // ExtraTimes:
-
-                if (SXmlUtils.hasChildElement(node, "nomina:HorasExtras")) {
-                    cfd.ver3.nom11.DElementHorasExtras horasExtras = new cfd.ver3.nom11.DElementHorasExtras();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:HorasExtras").get(0);
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:HorasExtra");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom11.DElementHorasExtra horasExtra = new cfd.ver3.nom11.DElementHorasExtra();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        horasExtra.getAttDias().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Dias", true)));
-                        horasExtra.getAttTipoHoras().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoHoras", true));
-                        horasExtra.getAttHorasExtra().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "HorasExtra", false)));
-                        horasExtra.getAttImportePagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImportePagado", true)));
-
-                        horasExtras.getEltHijosHorasExtra().add(horasExtra);
-                    }
-                    nomina.setEltHorasExtras(horasExtras);
-                }
-                
-                elementNomina = nomina;
-            }
-            else if (versionPayroll == DCfdVer3Consts.VER_NOM_12) {
-                cfd.ver3.nom12.DElementNomina nomina = new cfd.ver3.nom12.DElementNomina();
-
-                nomina.getAttVersion().setString(versionPayroll + "");
-                nomina.getAttFechaPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaPago", true)));
-                nomina.getAttFechaInicialPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicialPago", true)));
-                nomina.getAttFechaFinalPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaFinalPago", true)));
-                nomina.getAttNumDiasPagados().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumDiasPagados", true)));
-
-                // Emisor:
-
-                if (SXmlUtils.hasChildElement(node, "nomina12:Emisor")) {
-                    cfd.ver3.nom12.DElementEmisor emisor = new cfd.ver3.nom12.DElementEmisor();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Emisor").get(0);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    emisor.getAttRegistroPatronal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RegistroPatronal", false));
-
-                    nomina.setEltEmisor(emisor);
-                }
-
-                // Receptor:
-                
-                String dateInicioLab = "";
-
-                if (SXmlUtils.hasChildElement(node, "nomina12:Receptor")) {
-                    cfd.ver3.nom12.DElementReceptor receptor = new cfd.ver3.nom12.DElementReceptor();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Receptor").get(0);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    receptor.getAttCurp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Curp", true));
-                    receptor.getAttNumSeguridadSocial().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumSeguridadSocial", false));
-
-                    dateInicioLab = SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicioRelLaboral", false);
-
-                    if (!dateInicioLab.isEmpty()) {
-                        receptor.getAttFechaInicioRelLaboral().setDate(SLibUtils.DbmsDateFormatDate.parse(dateInicioLab));
-                    }
-                    receptor.getAttAntiguedad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Antigüedad", false));
-                    receptor.getAttTipoContrato().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoContrato", true));
-                    receptor.getAttSindicalizado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Sindicalizado", false));
-                    receptor.getAttTipoJornada().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoJornada", false));
-                    receptor.getAttTipoRegimen().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoRegimen", true));
-                    receptor.getAttNumEmpleado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumEmpleado", true));
-                    receptor.getAttDepartamento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Departamento", false));
-                    receptor.getAttPuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Puesto", false));
-                    receptor.getAttRiesgoPuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RiesgoPuesto", false));
-                    receptor.getAttPeriodicidadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PeriodicidadPago", true));
-                    receptor.getAttBanco().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Banco", false));
-                    receptor.getAttCuentaBancaria().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CuentaBancaria", false));
-                    receptor.getAttSalarioBaseCotApor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioBaseCotApor", false)));
-                    receptor.getAttSalarioDiarioIntegrado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioDiarioIntegrado", false)));
-                    receptor.getAttClaveEntFed().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveEntFed", true));
-
-                    nomina.setEltReceptor(receptor);
-                }
-
-                // Perceptions:
-
-                if (SXmlUtils.hasChildElement(node, "nomina12:Percepciones")) {
-                    cfd.ver3.nom12.DElementPercepciones percepciones = new cfd.ver3.nom12.DElementPercepciones();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Percepciones").get(0);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    percepciones.getAttTotalGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalGravado", false)));
-                    percepciones.getAttTotalExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalExento", false)));
-
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:Percepcion");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom12.DElementPercepcion percepcion = new cfd.ver3.nom12.DElementPercepcion();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        percepcion.getAttTipoPercepcion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoPercepcion", true));
-                        percepcion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
-                        percepcion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
-                        percepcion.getAttImporteGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteGravado", true)));
-                        percepcion.getAttImporteExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteExento", true)));
-
-                        // ExtraTimes:
-
-                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:HorasExtra")) {
-                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:HorasExtra");
-
-                            for (int overTime = 0; overTime < nodeChildsAux.size(); overTime++) {
-                                cfd.ver3.nom12.DElementHorasExtra horasExtra = new cfd.ver3.nom12.DElementHorasExtra();
-
-                                nodeChild = nodeChildsAux.get(overTime);
-                                namedNodeMapChild = nodeChild.getAttributes();
-
-                                horasExtra.getAttDias().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Dias", true)));
-                                horasExtra.getAttTipoHoras().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoHoras", true));
-                                horasExtra.getAttHorasExtra().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "HorasExtra", true)));
-                                horasExtra.getAttImportePagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImportePagado", true)));
-
-                                percepcion.getEltHijosHorasExtra().add(horasExtra);
-                            }
-                        }
-                        percepciones.getEltHijosPercepcion().add(percepcion);
-
-                    }
-                    nomina.setEltPercepciones(percepciones);
-                }
-
-                // Other payments:
-
-                if (SXmlUtils.hasChildElement(node, "nomina12:OtrosPagos")) {
-                    cfd.ver3.nom12.DElementOtrosPagos otrosPagos = new cfd.ver3.nom12.DElementOtrosPagos();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:OtrosPagos").get(0);
-
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:OtroPago");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom12.DElementOtroPago otroPago = new cfd.ver3.nom12.DElementOtroPago();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        otroPago.getAttTipoOtroPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoOtroPago", true));
-                        otroPago.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
-                        otroPago.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
-                        otroPago.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
-
-                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:SubsidioAlEmpleo")) {
-                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:SubsidioAlEmpleo");
-
-                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
-                                cfd.ver3.nom12.DElementSubsidioEmpleo subsidioEmpleo = new cfd.ver3.nom12.DElementSubsidioEmpleo();
-
-                                nodeChild = nodeChildsAux.get(sub);
-                                namedNodeMapChild = nodeChild.getAttributes();
-
-                                subsidioEmpleo.getAttSubsidioCausado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
-
-                                otroPago.setEltSubsidioEmpleo(subsidioEmpleo);
-                            }
-                        }
-
-                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:CompensacionSaldosAFavor")) {
-                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:CompensacionSaldosAFavor");
-
-                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
-                                cfd.ver3.nom12.DElementCompensacionSaldosFavor compensacionSaldosFavor = new cfd.ver3.nom12.DElementCompensacionSaldosFavor();
-
-                                nodeChild = nodeChildsAux.get(sub);
-                                namedNodeMapChild = nodeChild.getAttributes();
-
-                                compensacionSaldosFavor.getAttSaldoFavor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SaldoAFavor", true)));
-                                compensacionSaldosFavor.getAttAño().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Año", true)));
-                                compensacionSaldosFavor.getAttRemanenteSalFav().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RemanenteSalFav", false)));
-
-                                otroPago.setEltCompensacionSaldosFavor(compensacionSaldosFavor);
-                            }
-                        }
-
-                        otrosPagos.getEltHijosOtroPago().add(otroPago);
-                    }
-                    nomina.setEltOtrosPagos(otrosPagos);
-                }
-
-                // Deductions:
-
-                if (SXmlUtils.hasChildElement(node, "nomina12:Deducciones")) {
-                    cfd.ver3.nom12.DElementDeducciones deducciones = new cfd.ver3.nom12.DElementDeducciones();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Deducciones").get(0);
-                    namedNodeMapChild = nodeChild.getAttributes();
-
-                    deducciones.getAttTotalImpuestosRetenidos().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalImpuestosRetenidos", false)));
-                    deducciones.getAttTotalOtrasDeducciones().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalOtrasDeducciones", false)));
-
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:Deduccion");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom12.DElementDeduccion deduccion = new cfd.ver3.nom12.DElementDeduccion();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        deduccion.getAttTipoDeduccion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoDeduccion", true));
-                        deduccion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
-                        deduccion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
-                        deduccion.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
-
-                        deducciones.getEltHijosDeduccion().add(deduccion);
-                    }
-                    nomina.setEltDeducciones(deducciones);
-                }
-
-                // Incapacities:
-
-                if (SXmlUtils.hasChildElement(node, "nomina12:Incapacidades")) {
-                    cfd.ver3.nom12.DElementIncapacidades incapacidades = new cfd.ver3.nom12.DElementIncapacidades();
-
-                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Incapacidades").get(0);
-                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:Incapacidad");
-
-                    for (int i = 0; i < nodeChilds.size(); i++) {
-                        cfd.ver3.nom12.DElementIncapacidad incapacidad = new cfd.ver3.nom12.DElementIncapacidad();
-
-                        nodeChild = nodeChilds.get(i);
-                        namedNodeMapChild = nodeChild.getAttributes();
-
-                        incapacidad.getAttDiasIncapacidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "DiasIncapacidad", true)));
-                        incapacidad.getAttTipoIncapacidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoIncapacidad", true));
-                        incapacidad.getAttImporteMonetario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteMonetario", true)));
-
-                        incapacidades.getEltHijosIncapacidad().add(incapacidad);
-                    }
-                    nomina.setEltIncapacidades(incapacidades);
-                }
-                
-                elementNomina = nomina;
-            }
-        }
-        
-        return elementNomina;
-    }
-
     private static cfd.DElement getElementComplementoComercioExterior(final Node nodeCce) throws Exception {
         cfd.DElement elementCce = null;
         
@@ -1040,6 +627,452 @@ public abstract class DCfdUtils {
         }
         
         return elementCcp;
+    }
+
+    private static cfd.DElement getElementComplementoPagos(final Node nodePagos) throws Exception {
+        cfd.DElement elementPagos = null;
+        
+        if (SXmlUtils.hasChildElement(nodePagos, "pago10:Pagos")) {
+            Node node = null;
+            NamedNodeMap namedNodeMap = null;
+
+            node = SXmlUtils.extractChildElements(nodePagos, "pago10:Pagos").get(0);
+            namedNodeMap = node.getAttributes();
+
+            cfd.ver33.crp10.DElementPagos pagos = new cfd.ver33.crp10.DElementPagos();
+
+            pagos.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Version", true));
+
+            for (Node nodePago : SXmlUtils.extractChildElements(node, "pago10:Pago")) {
+                NamedNodeMap namedNodeMapPago = nodePago.getAttributes();
+
+                cfd.ver33.crp10.DElementPagosPago pago = new cfd.ver33.crp10.DElementPagosPago();
+
+                pago.getAttFechaPago().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FechaPago", true).replaceAll("T", " ")));
+                pago.getAttFormaDePagoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FormaDePagoP", true));
+                pago.getAttMonedaP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "MonedaP", true));
+                pago.getAttTipoCambioP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCambioP", false)));
+                pago.getAttMonto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "Monto", true)));
+                pago.getAttNumOperacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NumOperacion", false));
+                pago.getAttRfcEmisorCtaOrd().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaOrd", false));
+                pago.getAttNomBancoOrdExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NomBancoOrdExt", false));
+                pago.getAttCtaOrdenante().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaOrdenante", false));
+                pago.getAttRfcEmisorCtaBen().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaBen", false));
+                pago.getAttCtaBeneficiario().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaBeneficiario", false));
+                pago.getAttTipoCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCadPago", false));
+                pago.getAttCertPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CertPago", false));
+                pago.getAttCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CadPago", false));
+                pago.getAttSelloPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "SelloPago", false));
+
+                for (Node nodeDoctoRelacionado : SXmlUtils.extractChildElements(nodePago, "pago10:DoctoRelacionado")) {
+                    NamedNodeMap namedNodeMapDoctoRelacionado = nodeDoctoRelacionado.getAttributes();
+
+                    cfd.ver33.crp10.DElementDoctoRelacionado doctoRelacionado = new cfd.ver33.crp10.DElementDoctoRelacionado();
+                    
+                    doctoRelacionado.getAttIdDocumento().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "IdDocumento", true));
+                    doctoRelacionado.getAttSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Serie", false));
+                    doctoRelacionado.getAttFolio().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Folio", false));
+                    doctoRelacionado.getAttMonedaDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MonedaDR", true));
+                    doctoRelacionado.getAttTipoCambioDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "TipoCambioDR", false)));
+                    doctoRelacionado.getAttMetodoDePagoDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MetodoDePagoDR", true));
+                    doctoRelacionado.getAttNumParcialidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "NumParcialidad", true)));
+                    doctoRelacionado.getAttImpSaldoAnt().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoAnt", true)));
+                    doctoRelacionado.getAttImpPagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpPagado", false)));
+                    doctoRelacionado.getAttImpSaldoInsoluto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoInsoluto", false)));
+
+                    pago.getEltDoctoRelacionados().add(doctoRelacionado);
+                }
+
+                pagos.getEltPagos().add(pago);
+            }
+
+            elementPagos = pagos;
+        }
+        
+        return elementPagos;
+    }
+    
+    private static cfd.DElement getElementComplementoNomina(final Node nodeNomina) throws Exception {
+        cfd.DElement elementNomina = null;
+        boolean version11 = SXmlUtils.hasChildElement(nodeNomina, "nomina:Nomina");
+        boolean version12 = SXmlUtils.hasChildElement(nodeNomina, "nomina12:Nomina");
+        
+        if (version11 || version12) {
+            Node node = null;
+            Node nodeChild = null;
+            Vector<Node> nodeChilds = null;
+            Vector<Node> nodeChildsAux = null;
+            NamedNodeMap namedNodeMapChild = null;
+
+            if (version11) {
+                node = SXmlUtils.extractChildElements(nodeNomina, "nomina:Nomina").get(0);
+                namedNodeMapChild = node.getAttributes();
+            }
+            else {
+                node = SXmlUtils.extractChildElements(nodeNomina, "nomina12:Nomina").get(0);
+                namedNodeMapChild = node.getAttributes();
+            }
+
+            double versionPayroll = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
+
+            if (versionPayroll == DCfdVer3Consts.VER_NOM_11) {
+                cfd.ver3.nom11.DElementNomina nomina = new cfd.ver3.nom11.DElementNomina();
+
+                nomina.getAttVersion().setString(versionPayroll + "");
+                nomina.getAttRegistroPatronal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RegistroPatronal", false));
+                nomina.getAttNumEmpleado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumEmpleado", true));
+                nomina.getAttCurp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CURP", true));
+                nomina.getAttTipoRegimen().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoRegimen", true)));
+                nomina.getAttNumSeguridadSocial().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumSeguridadSocial", false));
+                nomina.getAttFechaPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaPago", true)));
+                nomina.getAttFechaInicialPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicialPago", true)));
+                nomina.getAttFechaFinalPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaFinalPago", true)));
+                nomina.getAttNumDiasPagados().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumDiasPagados", true)));
+                nomina.getAttDepartamento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Departamento", false));
+                nomina.getAttClabe().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CLABE", false));
+                nomina.getAttBanco().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Banco", false)));
+                nomina.getAttFechaInicioRelLaboral().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicioRelLaboral", false)));
+                nomina.getAttAntiguedad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Antiguedad", false)));
+                nomina.getAttPuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Puesto", false));
+                nomina.getAttTipoContrato().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoContrato", false));
+                nomina.getAttTipoJornada().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoJornada", false));
+                nomina.getAttPeriodicidadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PeriodicidadPago", true));
+                nomina.getAttSalarioBaseCotApor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioBaseCotApor", false)));
+                nomina.getAttRiesgoPuesto().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RiesgoPuesto", false)));
+                nomina.getAttSalarioDiarioIntegrado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioDiarioIntegrado", false)));
+
+                // Perceptions:
+
+                if (SXmlUtils.hasChildElement(node, "nomina:Percepciones")) {
+                    cfd.ver3.nom11.DElementPercepciones percepciones = new cfd.ver3.nom11.DElementPercepciones();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:Percepciones").get(0);
+                    namedNodeMapChild = nodeChild.getAttributes();
+
+                    percepciones.getAttTotalGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalGravado", true)));
+                    percepciones.getAttTotalExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalExento", true)));
+
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:Percepcion");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom11.DElementPercepcion percepcion = new cfd.ver3.nom11.DElementPercepcion();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        percepcion.getAttTipoPercepcion().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoPercepcion", false)));
+                        percepcion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
+                        percepcion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
+                        percepcion.getAttImporteGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteGravado", true)));
+                        percepcion.getAttImporteExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteExento", true)));
+
+                        percepciones.getEltHijosPercepcion().add(percepcion);
+                    }
+                    nomina.setEltPercepciones(percepciones);
+                }
+
+                // Deductions:
+
+                if (SXmlUtils.hasChildElement(node, "nomina:Deducciones")) {
+                    cfd.ver3.nom11.DElementDeducciones deducciones = new cfd.ver3.nom11.DElementDeducciones();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:Deducciones").get(0);
+                    namedNodeMapChild = nodeChild.getAttributes();
+
+                    deducciones.getAttTotalGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalGravado", true)));
+                    deducciones.getAttTotalExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalExento", true)));
+
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:Deduccion");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom11.DElementDeduccion deduccion = new cfd.ver3.nom11.DElementDeduccion();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        deduccion.getAttTipoDeduccion().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoDeduccion", false)));
+                        deduccion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
+                        deduccion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
+                        deduccion.getAttImporteGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteGravado", true)));
+                        deduccion.getAttImporteExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteExento", true)));
+
+                        deducciones.getEltHijosDeduccion().add(deduccion);
+                    }
+                    nomina.setEltDeducciones(deducciones);
+                }
+
+                // Incapacities:
+
+                if (SXmlUtils.hasChildElement(node, "nomina:Incapacidades")) {
+                    cfd.ver3.nom11.DElementIncapacidades incapacidades = new cfd.ver3.nom11.DElementIncapacidades();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:Incapacidades").get(0);
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:Incapacidad");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom11.DElementIncapacidad incapacidad = new cfd.ver3.nom11.DElementIncapacidad();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        incapacidad.getAttDiasIncapacidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "DiasIncapacidad", true)));
+                        incapacidad.getAttTipoIncapacidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoIncapacidad", false)));
+                        incapacidad.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Descuento", true)));
+
+                        incapacidades.getEltHijosIncapacidad().add(incapacidad);
+                    }
+                    nomina.setEltIncapacidades(incapacidades);
+                }
+
+                // ExtraTimes:
+
+                if (SXmlUtils.hasChildElement(node, "nomina:HorasExtras")) {
+                    cfd.ver3.nom11.DElementHorasExtras horasExtras = new cfd.ver3.nom11.DElementHorasExtras();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina:HorasExtras").get(0);
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina:HorasExtra");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom11.DElementHorasExtra horasExtra = new cfd.ver3.nom11.DElementHorasExtra();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        horasExtra.getAttDias().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Dias", true)));
+                        horasExtra.getAttTipoHoras().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoHoras", true));
+                        horasExtra.getAttHorasExtra().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "HorasExtra", false)));
+                        horasExtra.getAttImportePagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImportePagado", true)));
+
+                        horasExtras.getEltHijosHorasExtra().add(horasExtra);
+                    }
+                    nomina.setEltHorasExtras(horasExtras);
+                }
+                
+                elementNomina = nomina;
+            }
+            else if (versionPayroll == DCfdVer3Consts.VER_NOM_12) {
+                cfd.ver3.nom12.DElementNomina nomina = new cfd.ver3.nom12.DElementNomina();
+
+                nomina.getAttVersion().setString(versionPayroll + "");
+                nomina.getAttFechaPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaPago", true)));
+                nomina.getAttFechaInicialPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicialPago", true)));
+                nomina.getAttFechaFinalPago().setDate(SLibUtils.DbmsDateFormatDate.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaFinalPago", true)));
+                nomina.getAttNumDiasPagados().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumDiasPagados", true)));
+
+                // Emisor:
+
+                if (SXmlUtils.hasChildElement(node, "nomina12:Emisor")) {
+                    cfd.ver3.nom12.DElementEmisor emisor = new cfd.ver3.nom12.DElementEmisor();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Emisor").get(0);
+                    namedNodeMapChild = nodeChild.getAttributes();
+
+                    emisor.getAttRegistroPatronal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RegistroPatronal", false));
+
+                    nomina.setEltEmisor(emisor);
+                }
+
+                // Receptor:
+                
+                String dateInicioLab = "";
+
+                if (SXmlUtils.hasChildElement(node, "nomina12:Receptor")) {
+                    cfd.ver3.nom12.DElementReceptor receptor = new cfd.ver3.nom12.DElementReceptor();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Receptor").get(0);
+                    namedNodeMapChild = nodeChild.getAttributes();
+
+                    receptor.getAttCurp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Curp", true));
+                    receptor.getAttNumSeguridadSocial().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumSeguridadSocial", false));
+
+                    dateInicioLab = SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaInicioRelLaboral", false);
+
+                    if (!dateInicioLab.isEmpty()) {
+                        receptor.getAttFechaInicioRelLaboral().setDate(SLibUtils.DbmsDateFormatDate.parse(dateInicioLab));
+                    }
+                    receptor.getAttAntiguedad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Antigüedad", false));
+                    receptor.getAttTipoContrato().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoContrato", true));
+                    receptor.getAttSindicalizado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Sindicalizado", false));
+                    receptor.getAttTipoJornada().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoJornada", false));
+                    receptor.getAttTipoRegimen().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoRegimen", true));
+                    receptor.getAttNumEmpleado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumEmpleado", true));
+                    receptor.getAttDepartamento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Departamento", false));
+                    receptor.getAttPuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Puesto", false));
+                    receptor.getAttRiesgoPuesto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RiesgoPuesto", false));
+                    receptor.getAttPeriodicidadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PeriodicidadPago", true));
+                    receptor.getAttBanco().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Banco", false));
+                    receptor.getAttCuentaBancaria().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CuentaBancaria", false));
+                    receptor.getAttSalarioBaseCotApor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioBaseCotApor", false)));
+                    receptor.getAttSalarioDiarioIntegrado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SalarioDiarioIntegrado", false)));
+                    receptor.getAttClaveEntFed().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveEntFed", true));
+
+                    nomina.setEltReceptor(receptor);
+                }
+
+                // Perceptions:
+
+                if (SXmlUtils.hasChildElement(node, "nomina12:Percepciones")) {
+                    cfd.ver3.nom12.DElementPercepciones percepciones = new cfd.ver3.nom12.DElementPercepciones();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Percepciones").get(0);
+                    namedNodeMapChild = nodeChild.getAttributes();
+
+                    percepciones.getAttTotalGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalGravado", false)));
+                    percepciones.getAttTotalExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalExento", false)));
+
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:Percepcion");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom12.DElementPercepcion percepcion = new cfd.ver3.nom12.DElementPercepcion();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        percepcion.getAttTipoPercepcion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoPercepcion", true));
+                        percepcion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
+                        percepcion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
+                        percepcion.getAttImporteGravado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteGravado", true)));
+                        percepcion.getAttImporteExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteExento", true)));
+
+                        // ExtraTimes:
+
+                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:HorasExtra")) {
+                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:HorasExtra");
+
+                            for (int overTime = 0; overTime < nodeChildsAux.size(); overTime++) {
+                                cfd.ver3.nom12.DElementHorasExtra horasExtra = new cfd.ver3.nom12.DElementHorasExtra();
+
+                                nodeChild = nodeChildsAux.get(overTime);
+                                namedNodeMapChild = nodeChild.getAttributes();
+
+                                horasExtra.getAttDias().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Dias", true)));
+                                horasExtra.getAttTipoHoras().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoHoras", true));
+                                horasExtra.getAttHorasExtra().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "HorasExtra", true)));
+                                horasExtra.getAttImportePagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImportePagado", true)));
+
+                                percepcion.getEltHijosHorasExtra().add(horasExtra);
+                            }
+                        }
+                        percepciones.getEltHijosPercepcion().add(percepcion);
+
+                    }
+                    nomina.setEltPercepciones(percepciones);
+                }
+
+                // Other payments:
+
+                if (SXmlUtils.hasChildElement(node, "nomina12:OtrosPagos")) {
+                    cfd.ver3.nom12.DElementOtrosPagos otrosPagos = new cfd.ver3.nom12.DElementOtrosPagos();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:OtrosPagos").get(0);
+
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:OtroPago");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom12.DElementOtroPago otroPago = new cfd.ver3.nom12.DElementOtroPago();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        otroPago.getAttTipoOtroPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoOtroPago", true));
+                        otroPago.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
+                        otroPago.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
+                        otroPago.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
+
+                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:SubsidioAlEmpleo")) {
+                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:SubsidioAlEmpleo");
+
+                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
+                                cfd.ver3.nom12.DElementSubsidioEmpleo subsidioEmpleo = new cfd.ver3.nom12.DElementSubsidioEmpleo();
+
+                                nodeChild = nodeChildsAux.get(sub);
+                                namedNodeMapChild = nodeChild.getAttributes();
+
+                                subsidioEmpleo.getAttSubsidioCausado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubsidioCausado", true)));
+
+                                otroPago.setEltSubsidioEmpleo(subsidioEmpleo);
+                            }
+                        }
+
+                        if (SXmlUtils.hasChildElement(nodeChild, "nomina12:CompensacionSaldosAFavor")) {
+                            nodeChildsAux = SXmlUtils.extractChildElements(nodeChild, "nomina12:CompensacionSaldosAFavor");
+
+                            for (int sub = 0; sub < nodeChildsAux.size(); sub++) {
+                                cfd.ver3.nom12.DElementCompensacionSaldosFavor compensacionSaldosFavor = new cfd.ver3.nom12.DElementCompensacionSaldosFavor();
+
+                                nodeChild = nodeChildsAux.get(sub);
+                                namedNodeMapChild = nodeChild.getAttributes();
+
+                                compensacionSaldosFavor.getAttSaldoFavor().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SaldoAFavor", true)));
+                                compensacionSaldosFavor.getAttAño().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Año", true)));
+                                compensacionSaldosFavor.getAttRemanenteSalFav().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RemanenteSalFav", false)));
+
+                                otroPago.setEltCompensacionSaldosFavor(compensacionSaldosFavor);
+                            }
+                        }
+
+                        otrosPagos.getEltHijosOtroPago().add(otroPago);
+                    }
+                    nomina.setEltOtrosPagos(otrosPagos);
+                }
+
+                // Deductions:
+
+                if (SXmlUtils.hasChildElement(node, "nomina12:Deducciones")) {
+                    cfd.ver3.nom12.DElementDeducciones deducciones = new cfd.ver3.nom12.DElementDeducciones();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Deducciones").get(0);
+                    namedNodeMapChild = nodeChild.getAttributes();
+
+                    deducciones.getAttTotalImpuestosRetenidos().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalImpuestosRetenidos", false)));
+                    deducciones.getAttTotalOtrasDeducciones().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalOtrasDeducciones", false)));
+
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:Deduccion");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom12.DElementDeduccion deduccion = new cfd.ver3.nom12.DElementDeduccion();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        deduccion.getAttTipoDeduccion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoDeduccion", true));
+                        deduccion.getAttClave().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Clave", true));
+                        deduccion.getAttConcepto().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Concepto", true));
+                        deduccion.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Importe", true)));
+
+                        deducciones.getEltHijosDeduccion().add(deduccion);
+                    }
+                    nomina.setEltDeducciones(deducciones);
+                }
+
+                // Incapacities:
+
+                if (SXmlUtils.hasChildElement(node, "nomina12:Incapacidades")) {
+                    cfd.ver3.nom12.DElementIncapacidades incapacidades = new cfd.ver3.nom12.DElementIncapacidades();
+
+                    nodeChild = SXmlUtils.extractChildElements(node, "nomina12:Incapacidades").get(0);
+                    nodeChilds = SXmlUtils.extractChildElements(nodeChild, "nomina12:Incapacidad");
+
+                    for (int i = 0; i < nodeChilds.size(); i++) {
+                        cfd.ver3.nom12.DElementIncapacidad incapacidad = new cfd.ver3.nom12.DElementIncapacidad();
+
+                        nodeChild = nodeChilds.get(i);
+                        namedNodeMapChild = nodeChild.getAttributes();
+
+                        incapacidad.getAttDiasIncapacidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "DiasIncapacidad", true)));
+                        incapacidad.getAttTipoIncapacidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoIncapacidad", true));
+                        incapacidad.getAttImporteMonetario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ImporteMonetario", true)));
+
+                        incapacidades.getEltHijosIncapacidad().add(incapacidad);
+                    }
+                    nomina.setEltIncapacidades(incapacidades);
+                }
+                
+                elementNomina = nomina;
+            }
+        }
+        
+        return elementNomina;
     }
 
     private static cfd.ver3.DElementAddenda getElementAddendaAddenda1(final Node nodeAddenda) throws Exception {
@@ -1995,6 +2028,7 @@ public abstract class DCfdUtils {
         return comprobante;
     }
 
+    @Deprecated
     public static cfd.ver33.DElementComprobante getCfdi33(final String xml) throws Exception {
         // Comprobante:
 
@@ -2021,7 +2055,7 @@ public abstract class DCfdUtils {
         comprobante.getAttLugarExpedicion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "LugarExpedicion", true));
         comprobante.getAttConfirmacion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Confirmacion", false));
 
-        // CFDI Related:
+        // CFDI relacionados:
     
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:CfdiRelacionados")) {
             Node nodeCfdiRelacionados = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:CfdiRelacionados").get(0);
@@ -2062,7 +2096,7 @@ public abstract class DCfdUtils {
         comprobante.getEltReceptor().getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "NumRegIdTrib", false));
         comprobante.getEltReceptor().getAttUsoCFDI().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "UsoCFDI", true));
         
-        // Concepts:
+        // Conceptos:
 
         Node nodeConceptos = SXmlUtils.extractElements(doc, "cfdi:Conceptos").item(0);
         Vector<Node> childNodeConceptos = SXmlUtils.extractChildElements(nodeConceptos, "cfdi:Concepto");
@@ -2081,7 +2115,7 @@ public abstract class DCfdUtils {
             concepto.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Importe", true)));
             concepto.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Descuento", false)));
 
-            // Tax concept:
+            // Impuestos concepto:
 
             if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:Impuestos")) {
                 Vector<Node> childNodeImpuestos = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:Impuestos");
@@ -2201,7 +2235,7 @@ public abstract class DCfdUtils {
             comprobante.getEltConceptos().getEltConceptos().add(concepto);
         }
         
-        // Taxes:
+        // Impuestos:
         
         double dTotalImptoRetenido = 0;
         double dTotalImptoTrasladado = 0;
@@ -2265,41 +2299,47 @@ public abstract class DCfdUtils {
             }
         }
 
-        // Child elements of element 'cfdi:Complemento':
+        // Complemento:
         
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Complemento")) {
             Node nodeComplemento = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Complemento").get(0);
             
             cfd.ver33.DElementComplemento complemento = new cfd.ver33.DElementComplemento();
 
-            // 'Complemento Timbrado':
+            // Complemento 'Timbrado':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "tfd:TimbreFiscalDigital")) {
                 complemento.getElements().add(getElementComplementoTimbreFiscalDigital(nodeComplemento));
             }
 
-            // 'Complemento Recepción Pagos':
+            // Complemento 'Leyendas Fiscales 1.0':
 
-            if (SXmlUtils.hasChildElement(nodeComplemento, "pago10:Pagos")) {
-                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
+            if (SXmlUtils.hasChildElement(nodeComplemento, "leyendasFisc:LeyendasFiscales")) {
+                complemento.getElements().add(getElementComplementoLeyendasFiscales(nodeComplemento));
             }
-
-            // 'Complemento Nómina':
-
-            if (SXmlUtils.hasChildElement(nodeComplemento, "nomina:Nomina") || SXmlUtils.hasChildElement(nodeComplemento, "nomina12:Nomina")) {
-                complemento.getElements().add(getElementComplementoNomina(nodeComplemento));
-            }
-
-            // 'Complemento Comercio Exterior':
+            
+            // Complemento 'Comercio Exterior 1.1':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "cce11:ComercioExterior")) {
                 complemento.getElements().add(getElementComplementoComercioExterior(nodeComplemento));
             }
             
-            // 'Complemento Carta Porte':
+            // Complemento 'Carta Porte 2.0':
             
             if (SXmlUtils.hasChildElement(nodeComplemento, "cartaporte20:CartaPorte")) {
                 complemento.getElements().add(getElementComplementoCartaPorte(nodeComplemento));
+            }
+
+            // Complemento 'Recepción Pagos 1.0':
+
+            if (SXmlUtils.hasChildElement(nodeComplemento, "pago10:Pagos")) {
+                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
+            }
+
+            // Complemento 'Nómina 1.1 y 1.2':
+
+            if (SXmlUtils.hasChildElement(nodeComplemento, "nomina:Nomina") || SXmlUtils.hasChildElement(nodeComplemento, "nomina12:Nomina")) {
+                complemento.getElements().add(getElementComplementoNomina(nodeComplemento));
             }
 
             if (!complemento.getElements().isEmpty()) {
@@ -2346,14 +2386,30 @@ public abstract class DCfdUtils {
         comprobante.getAttTipoCambio().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoCambio", false)));
         comprobante.getAttTotal().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Total", true)));
         comprobante.getAttTipoDeComprobante().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoDeComprobante", true));
+        comprobante.getAttExportacion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Exportacion", true));
         comprobante.getAttMetodoPago().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "MetodoPago", false));
         comprobante.getAttLugarExpedicion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "LugarExpedicion", true));
         comprobante.getAttConfirmacion().setString(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Confirmacion", false));
+        
+        // Información global:
 
-        // CFDI Related:
+        if (SXmlUtils.hasChildElement(doc, "cfdi:InformacionGlobal")) {
+            cfd.ver40.DElementInformacionGlobal informacionGlobal = new cfd.ver40.DElementInformacionGlobal();
+            Node nodeInformacionGlobal = SXmlUtils.extractElements(doc, "cfdi:InformacionGlobal").item(0);
+            NamedNodeMap nodeInformacionGlobalMap = nodeInformacionGlobal.getAttributes();
+            
+            informacionGlobal.getAttPeriodicidad().setString(SXmlUtils.extractAttributeValue(nodeInformacionGlobalMap, "Periodicidad", true));
+            informacionGlobal.getAttMeses().setString(SXmlUtils.extractAttributeValue(nodeInformacionGlobalMap, "Meses", true));
+            informacionGlobal.getAttAño().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(nodeInformacionGlobalMap, "Periodicidad", true)));
+            
+            comprobante.setEltOpcInformacionGlobal(informacionGlobal);
+        }
+
+        // CFDI relacionados:
     
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:CfdiRelacionados")) {
             ArrayList<cfd.ver40.DElementCfdiRelacionados> arrCfdRelacionados = new ArrayList<>();
+            
             for (Node nodeCfdiRelacionados : SXmlUtils.extractChildElements(nodeComprobante, "cfdi:CfdiRelacionados")) {
                 NamedNodeMap nodeCfdiRelacionadosMap = nodeCfdiRelacionados.getAttributes();
 
@@ -2370,6 +2426,7 @@ public abstract class DCfdUtils {
                     arrCfdRelacionados.add(cfdiRelacionados);
                 }
             }
+            
             comprobante.setEltOpcCfdiRelacionados(arrCfdRelacionados);
         }
 
@@ -2379,7 +2436,7 @@ public abstract class DCfdUtils {
         NamedNodeMap nodeEmisorMap = nodeEmisor.getAttributes();
 
         comprobante.getEltEmisor().getAttRfc().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "Rfc", true));
-        comprobante.getEltEmisor().getAttNombre().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "Nombre", false));
+        comprobante.getEltEmisor().getAttNombre().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "Nombre", true));
         comprobante.getEltEmisor().getAttRegimenFiscal().setString(SXmlUtils.extractAttributeValue(nodeEmisorMap, "RegimenFiscal", true));
 
         // Receptor:
@@ -2388,12 +2445,14 @@ public abstract class DCfdUtils {
         NamedNodeMap nodeReceptorMap = nodeReceptor.getAttributes();
 
         comprobante.getEltReceptor().getAttRfc().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "Rfc", true));
-        comprobante.getEltReceptor().getAttNombre().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", false));
+        comprobante.getEltReceptor().getAttNombre().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", true));
+        comprobante.getEltReceptor().getAttDomicilioFiscalReceptor().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "DomicilioFiscalReceptor", true));
         comprobante.getEltReceptor().getAttResidenciaFiscal().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "ResidenciaFiscal", false));
         comprobante.getEltReceptor().getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "NumRegIdTrib", false));
+        comprobante.getEltReceptor().getAttRegimenFiscalReceptor().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "RegimenFiscalReceptor", true));
         comprobante.getEltReceptor().getAttUsoCFDI().setString(SXmlUtils.extractAttributeValue(nodeReceptorMap, "UsoCFDI", true));
         
-        // Concepts:
+        // Conceptos:
 
         Node nodeConceptos = SXmlUtils.extractElements(doc, "cfdi:Conceptos").item(0);
         Vector<Node> childNodeConceptos = SXmlUtils.extractChildElements(nodeConceptos, "cfdi:Concepto");
@@ -2411,8 +2470,9 @@ public abstract class DCfdUtils {
             concepto.getAttValorUnitario().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "ValorUnitario", true)));
             concepto.getAttImporte().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Importe", true)));
             concepto.getAttDescuento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "Descuento", false)));
+            concepto.getAttObjetoImp().setString(SXmlUtils.extractAttributeValue(childNodeConceptosMap, "ObjetoImp", true));
 
-            // Tax concept:
+            // Impuestos concepto:
 
             if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:Impuestos")) {
                 Vector<Node> childNodeImpuestos = SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:Impuestos");
@@ -2534,7 +2594,7 @@ public abstract class DCfdUtils {
             comprobante.getEltConceptos().getEltConceptos().add(concepto);
         }
         
-        // Taxes:
+        // Impuestos:
         
         double dTotalImptoRetenido = 0;
         double dTotalImptoTrasladado = 0;
@@ -2598,41 +2658,47 @@ public abstract class DCfdUtils {
             }
         }
 
-        // Child elements of element 'cfdi:Complemento':
+        // Complemento:
         
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Complemento")) {
             Node nodeComplemento = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Complemento").get(0);
             
             cfd.ver40.DElementComplemento complemento = new cfd.ver40.DElementComplemento();
 
-            // 'Complemento Timbrado':
+            // Complemento 'Timbrado':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "tfd:TimbreFiscalDigital")) {
                 complemento.getElements().add(getElementComplementoTimbreFiscalDigital(nodeComplemento));
             }
 
-            // 'Complemento Recepción Pagos':
+            // Complemento 'Leyendas Fiscales 1.0':
 
-            if (SXmlUtils.hasChildElement(nodeComplemento, "pago10:Pagos")) {
-                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
+            if (SXmlUtils.hasChildElement(nodeComplemento, "leyendasFisc:LeyendasFiscales")) {
+                complemento.getElements().add(getElementComplementoLeyendasFiscales(nodeComplemento));
             }
-
-            // 'Complemento Nómina':
-
-            if (SXmlUtils.hasChildElement(nodeComplemento, "nomina:Nomina") || SXmlUtils.hasChildElement(nodeComplemento, "nomina12:Nomina")) {
-                complemento.getElements().add(getElementComplementoNomina(nodeComplemento));
-            }
-
-            // 'Complemento Comercio Exterior':
+            
+            // Complemento 'Comercio Exterior 1.1':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "cce11:ComercioExterior")) {
                 complemento.getElements().add(getElementComplementoComercioExterior(nodeComplemento));
             }
             
-            // 'Complemento Carta Porte':
+            // Complemento 'Carta Porte 2.0':
             
             if (SXmlUtils.hasChildElement(nodeComplemento, "cartaporte20:CartaPorte")) {
                 complemento.getElements().add(getElementComplementoCartaPorte(nodeComplemento));
+            }
+
+            // Complemento 'Recepción Pagos 2.0':
+
+            if (SXmlUtils.hasChildElement(nodeComplemento, "pago20:Pagos")) {
+                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
+            }
+
+            // Complemento 'Nómina 1.2':
+
+            if (SXmlUtils.hasChildElement(nodeComplemento, "nomina12:Nomina")) {
+                complemento.getElements().add(getElementComplementoNomina(nodeComplemento));
             }
 
             if (!complemento.getElements().isEmpty()) {
@@ -2674,7 +2740,7 @@ public abstract class DCfdUtils {
                 node = SXmlUtils.extractChildElements(node, "nomina:Nomina").get(0);
                 namedNodeMap = node.getAttributes();
             }
-            else {
+            else if (SXmlUtils.hasChildElement(node, "nomina12:Nomina")) {
                 node = SXmlUtils.extractChildElements(node, "nomina12:Nomina").get(0);
                 namedNodeMap = node.getAttributes();
             }

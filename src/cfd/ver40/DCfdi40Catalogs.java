@@ -25,6 +25,22 @@ public abstract class DCfdi40Catalogs {
     public static final int CAT_REL_TP = 10;        // tipo relación
     public static final int CAT_CVE_UNID = 11;      // clave unidad
     public static final int CAT_CVE_PROD_SERV = 12; // clave producto o servicio
+    public static final int CAT_EXP = 16;           // exportación
+    public static final int CAT_GBL_PER = 17;       // global periodicidad
+    public static final int CAT_GBL_MES = 18;       // global meses
+    public static final int CAT_OBJ_IMP = 21;       // objeto impuesto
+    
+    public static final String XML_CFDI_USO = "c_UsoCFDI";
+    public static final String XML_MDP = "c_MetodoPago";
+    public static final String XML_FDP = "c_FormaPago";
+    public static final String XML_MON = "c_Moneda";
+    public static final String XML_REL_TP = "c_TipoRelacion";
+    public static final String XML_CVE_UNID = "c_ClaveUnidad";
+    public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
+    public static final String XML_EXP = "c_Exportacion";
+    public static final String XML_GBL_PER = "c_Periodicidad";
+    public static final String XML_GBL_MES = "c_Meses";
+    public static final String XML_OBJ_IMP = "c_ObjetoImp";
     
     public static final String CFD_TP_I = "I";      // Ingreso
     public static final String CFD_TP_E = "E";      // Egreso
@@ -53,25 +69,31 @@ public abstract class DCfdi40Catalogs {
     public static final String FAC_TP_CUOTA = "Cuota";
     public static final String FAC_TP_EXENTO = "Exento";
     
-    public static final String REL_TP_SUSTITUCION = "04";
-
-    public static final String XML_CFDI_USO = "c_UsoCFDI";
-    public static final String XML_MDP = "c_MetodoPago";
-    public static final String XML_FDP = "c_FormaPago";
-    public static final String XML_MON = "c_Moneda";
-    public static final String XML_REL_TP = "c_TipoRelacion";
-    public static final String XML_CVE_UNID = "c_ClaveUnidad";
-    public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
-    
     public static final String TxtSí = "Sí";
     public static final String TxtNo = "No";
     
+    public static final String ClaveUsoCfdiPagos = "CP01"; // Pagos
+    public static final String ClaveUsoCfdiNómina = "CN01"; // Nómina
+    
     public static final String ClaveMonedaMxn = "MXN";
     public static final String ClaveMonedaXxx = "XXX";
+    
+    public static final String ClaveExportacionNoAplica = "01";
+    
+    public static final String ClaveObjetoImpNo = "01";
+    public static final String ClaveObjetoImpSí = "02";
+    public static final String ClaveObjetoImpSíSinDesglose = "03";
+    
     public static final String ClaveProdServServsSueldosSalarios = "84111505";
     public static final String ClaveProdServServsFacturacion = "84111506";
+    
     public static final String ClaveUnidadAct = "ACT";
     
+    public static final String ClaveTipoRelaciónNotaCrédito = "01";
+    public static final String ClaveTipoRelaciónNotaDébito = "02";
+    public static final String ClaveTipoRelaciónDevolución = "03";
+    public static final String ClaveTipoRelaciónSustitución = "04";
+
     public static final String ConceptoPago = "Pago";
     public static final String ConceptoSueldosSalarios = "Pago de nómina";
     

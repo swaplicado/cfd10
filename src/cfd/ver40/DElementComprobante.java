@@ -105,8 +105,8 @@ public class DElementComprobante extends cfd.DElement {
         mvAttributes.add(moAttLugarExpedicion);
         mvAttributes.add(moAttConfirmacion);
 
-        maEltOpcCfdiRelacionados = null;
         moEltOpcInformacionGlobal = null;
+        maEltOpcCfdiRelacionados = null;
         moEltEmisor = new DElementEmisor();         // can be reset
         moEltReceptor = new DElementReceptor();     // can be reset
         moEltConceptos = new DElementConceptos();   // cannot be reset, is final
@@ -186,11 +186,12 @@ public class DElementComprobante extends cfd.DElement {
     private ArrayList<DElement> createElementsArray() {
         ArrayList<DElement> elements = new ArrayList<>();
 
-        if (maEltOpcCfdiRelacionados != null) {
-            elements.addAll(maEltOpcCfdiRelacionados);
-        }
         if (moEltOpcInformacionGlobal != null) {
             elements.add(moEltOpcInformacionGlobal);
+        }
+        
+        if (maEltOpcCfdiRelacionados != null) {
+            elements.addAll(maEltOpcCfdiRelacionados);
         }
         
         elements.add(moEltEmisor);
@@ -217,8 +218,8 @@ public class DElementComprobante extends cfd.DElement {
      */
 
     public float getVersion() { return DCfdConsts.CFDI_VER_40; }
+    public void setEltOpcInformacionGlobal(cfd.ver40.DElementInformacionGlobal o) { moEltOpcInformacionGlobal = o; }
     public void setEltOpcCfdiRelacionados(ArrayList<cfd.ver40.DElementCfdiRelacionados> o) { maEltOpcCfdiRelacionados = o; }
-    public void setEltInformacionGlobal(cfd.ver40.DElementInformacionGlobal o) { moEltOpcInformacionGlobal = o; }
     public void setEltEmisor(cfd.ver40.DElementEmisor o) { moEltEmisor = o; }
     public void setEltReceptor(cfd.ver40.DElementReceptor o) { moEltReceptor = o; }
     public void setEltOpcImpuestos(cfd.ver40.DElementImpuestos o) { moEltOpcImpuestos = o; }
@@ -244,8 +245,8 @@ public class DElementComprobante extends cfd.DElement {
     public DAttributeString getAttLugarExpedicion() { return moAttLugarExpedicion; }
     public DAttributeString getAttConfirmacion() { return moAttConfirmacion; }
 
+    public cfd.ver40.DElementInformacionGlobal getEltOpcInformacionGlobal() { return moEltOpcInformacionGlobal; }
     public ArrayList<cfd.ver40.DElementCfdiRelacionados> getEltOpcCfdiRelacionados() { return maEltOpcCfdiRelacionados; }
-    public cfd.ver40.DElementInformacionGlobal getEltInformacionGlobal() { return moEltOpcInformacionGlobal; }
     public cfd.ver40.DElementEmisor getEltEmisor() { return moEltEmisor; }
     public cfd.ver40.DElementReceptor getEltReceptor() { return moEltReceptor; }
     public cfd.ver40.DElementConceptos getEltConceptos() { return moEltConceptos; }

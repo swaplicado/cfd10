@@ -26,7 +26,7 @@ public class DElementReceptor extends cfd.DElement {
         moAttResidenciaFiscal = new DAttributeString("ResidenciaFiscal", false, 3, 3);      // c_Pais catalog codes of 3 fixed characters
         moAttNumRegIdTrib = new DAttributeString("NumRegIdTrib", false, 1, 40);     // from 1 to 40 characters
         moAttRegimenFiscalReceptor = new DAttributeString("RegimenFiscalReceptor", true, 3, 3);     // from 1 to 40 characters
-        moAttUsoCfdi = new DAttributeString("UsoCFDI", false, 3, 3);     // c_UsoCFDI catalog codes of 3 fixed characters
+        moAttUsoCfdi = new DAttributeString("UsoCFDI", true, 3, 3);     // c_UsoCFDI catalog codes of 3 fixed characters
 
         mvAttributes.add(moAttRfc);
         mvAttributes.add(moAttNombre);

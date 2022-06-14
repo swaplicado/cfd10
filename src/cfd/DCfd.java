@@ -186,6 +186,33 @@ public final class DCfd {
         return result;
     }
     
+    public int write(cfd.ver40.DElementComprobante comprobante, final java.lang.String stringSigned, final java.lang.String signature, final java.lang.String certNumber, final java.lang.String certBase64) throws java.io.IOException, java.lang.Exception {
+        int result = 0;
+
+        resetLastMembers();
+
+        comprobante.getAttSello().setString(signature);
+        comprobante.getAttNoCertificado().setString(certNumber);
+        comprobante.getAttCertificado().setString(certBase64);
+
+        String xmlFile = DCfdConsts.XML_HEADER + comprobante.getElementForXml();
+        String xmlFileName = createFileName(comprobante) + ".xml";
+        String xmlFilePath = msXmlBaseDir + xmlFileName;
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(xmlFilePath), "UTF-8"));
+        bw.write(xmlFile);
+        bw.close();
+
+        mtLastTimestamp = comprobante.getAttFecha().getDatetime();
+        msLastStringSigned = stringSigned;
+        msLastSignature = signature;
+        msLastXml = xmlFile;
+        msLastXmlFileName = xmlFileName;
+        msLastXmlFilePath = xmlFilePath;
+
+        return result;
+    }
+    
     public int write(final java.lang.String xml, final java.lang.String xmlName, final java.util.Date xmlDate, final java.lang.String stringSigned, final java.lang.String signature) throws java.io.IOException, java.lang.Exception {
         int result = 0;
 

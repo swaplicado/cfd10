@@ -26,6 +26,14 @@ public abstract class DCfdi33Catalogs {
     public static final int CAT_CVE_UNID = 11;      // clave unidad
     public static final int CAT_CVE_PROD_SERV = 12; // clave producto o servicio
     
+    public static final String XML_CFDI_USO = "c_UsoCFDI";
+    public static final String XML_MDP = "c_MetodoPago";
+    public static final String XML_FDP = "c_FormaPago";
+    public static final String XML_MON = "c_Moneda";
+    public static final String XML_REL_TP = "c_TipoRelacion";
+    public static final String XML_CVE_UNID = "c_ClaveUnidad";
+    public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
+    
     public static final String CFD_TP_I = "I";      // Ingreso
     public static final String CFD_TP_E = "E";      // Egreso
     public static final String CFD_TP_T = "T";      // Traslado
@@ -53,25 +61,22 @@ public abstract class DCfdi33Catalogs {
     public static final String FAC_TP_CUOTA = "Cuota";
     public static final String FAC_TP_EXENTO = "Exento";
     
-    public static final String REL_TP_SUSTITUCION = "04";
-
-    public static final String XML_CFDI_USO = "c_UsoCFDI";
-    public static final String XML_MDP = "c_MetodoPago";
-    public static final String XML_FDP = "c_FormaPago";
-    public static final String XML_MON = "c_Moneda";
-    public static final String XML_REL_TP = "c_TipoRelacion";
-    public static final String XML_CVE_UNID = "c_ClaveUnidad";
-    public static final String XML_CVE_PROD_SERV = "c_ClaveProdServ";
-    
     public static final String TxtSí = "Sí";
     public static final String TxtNo = "No";
     
     public static final String ClaveMonedaMxn = "MXN";
     public static final String ClaveMonedaXxx = "XXX";
+    
     public static final String ClaveProdServServsSueldosSalarios = "84111505";
     public static final String ClaveProdServServsFacturacion = "84111506";
+    
     public static final String ClaveUnidadAct = "ACT";
     
+    public static final String ClaveTipoRelaciónNotaCrédito = "01";
+    public static final String ClaveTipoRelaciónNotaDébito = "02";
+    public static final String ClaveTipoRelaciónDevolución = "03";
+    public static final String ClaveTipoRelaciónSustitución = "04";
+
     public static final String ConceptoPago = "Pago";
     public static final String ConceptoSueldosSalarios = "Pago de nómina";
     
