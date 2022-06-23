@@ -151,7 +151,7 @@ public abstract class DCfdUtils {
 
             cfd.ver3.clf10.DElementLeyendasFiscales clf = new cfd.ver3.clf10.DElementLeyendasFiscales();
             
-            clf.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
+            clf.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "version", true));
             
             // Leyendas fiscales:
             
@@ -162,8 +162,8 @@ public abstract class DCfdUtils {
                 
                 cfd.ver3.clf10.DElementLeyenda leyenda = new cfd.ver3.clf10.DElementLeyenda();
                 
-                leyenda.getAttDisposicionFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "disposicionFiscal", true));
-                leyenda.getAttNorma().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "norma", true));
+                leyenda.getAttDisposicionFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "disposicionFiscal", false));
+                leyenda.getAttNorma().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "norma", false));
                 leyenda.getAttTextoLeyenda().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "textoLeyenda", true));
                 
                 clf.getEltLeyendas().add(leyenda);

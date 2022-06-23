@@ -29,8 +29,8 @@ public class DElementConcepto extends cfd.DElement {
     private cfd.ver40.DElementConceptoACuentaTerceros moEltOpcConceptoACuentaTerceros;
     private final ArrayList<cfd.ver40.DElementConceptoInformacionAduanera> maEltOpcConceptoInformacionAduaneras;
     private ArrayList<cfd.ver40.DElementConceptoCuentaPredial> maEltOpcConceptoCuentaPredial;
-    private final ArrayList<cfd.ver40.DElementConceptoParte> maEltOpcConceptoPartes;
     private cfd.ver40.DElementComplementoConcepto moEltOpcComplementoConcepto;
+    private final ArrayList<cfd.ver40.DElementConceptoParte> maEltOpcConceptoPartes;
 
     public DElementConcepto() {
         super("cfdi:Concepto");

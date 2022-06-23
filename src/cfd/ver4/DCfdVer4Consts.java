@@ -29,6 +29,8 @@ public abstract class DCfdVer4Consts {
     
     public static final String CAT_EXPORTACION_NA = "01";
     
+    public static final String CAT_REG_FISCAL_RECEPTOR_NOM = "605";
+    
     public static final HashMap<String, String> CancelaciónMotivos = new HashMap<>();
     
     static {
