@@ -43,13 +43,13 @@ public class DElementDoctoRelacionado extends cfd.DElement {
         moAttSerie = new DAttributeString("Serie", false, 1, 25);       // text from 1 to 25 characters
         moAttFolio = new DAttributeString("Folio", false, 1, 40);       // text from 1 to 40 characters
         moAttMonedaDR = new DAttributeString("MonedaDR", true, 3, 3);   // c_Moneda catalog codes of 3 fixed digits
-        moAttEquivalenciaDR = new DAttributeTipoCambio6d("TipoCambioDR", false);
+        moAttEquivalenciaDR = new DAttributeTipoCambio6d("EquivalenciaDR", false);
         moAttNumParcialidad = new DAttributeInteger("NumParcialidad", true);
         moAttImpSaldoAnt = new DAttributeTypeImporte("ImpSaldoAnt", true);
         moAttImpPagado = new DAttributeTypeImporte("ImpPagado", true);
         moAttImpSaldoInsoluto = new DAttributeTypeImporte("ImpSaldoInsoluto", true);
         moAttImpSaldoInsoluto.setCanBeZero(true);
-        moAttObjetoImpDR = new DAttributeString("ObjetoImpDR", true, 3, 3);   // c_ObjetoImp catalog codes of 3 fixed digits
+        moAttObjetoImpDR = new DAttributeString("ObjetoImpDR", true, 2, 2);   // c_ObjetoImp catalog codes of 2 fixed digits
 
         mvAttributes.add(moAttIdDocumento);
         mvAttributes.add(moAttSerie);

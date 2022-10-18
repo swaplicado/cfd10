@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public abstract class DCfdVer3Utils {
+public abstract class DCfdVer4Utils {
     
     public static final HashSet<Character> ValidKeySet = new HashSet<>();   // SAT pattern for keys as XML-attribute values
     public static final HashSet<Character> ValidTextSet = new HashSet<>();  // SAT pattern for texts as XML-attribute values

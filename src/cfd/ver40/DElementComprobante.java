@@ -11,7 +11,7 @@ import cfd.ver3.cce11.DElementComercioExterior;
 import cfd.ver3.ccp20.DElementCartaPorte;
 import cfd.ver3.clf10.DElementLeyendasFiscales;
 import cfd.ver3.nom12.DElementNomina;
-import cfd.ver33.crp10.DElementPagos;
+import cfd.ver40.crp20.DElementPagos;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -164,12 +164,12 @@ public class DElementComprobante extends cfd.DElement {
         return has;
     }
 
-    private boolean hasComplementRp10() {
+    private boolean hasComplementRp20() {
         boolean has = false;
         
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
-                if (element instanceof cfd.ver33.crp10.DElementPagos) {
+                if (element instanceof cfd.ver40.crp20.DElementPagos) {
                     has = true;
                     break;
                 }
@@ -316,7 +316,7 @@ public class DElementComprobante extends cfd.DElement {
                 + (!hasComplementCe11()? "" : DElementComercioExterior.XMLNS + " ")
                 + (!hasComplementCp20()? "" : DElementCartaPorte.XMLNS + " ")
                 + (!hasComplementLf10()? "" : DElementLeyendasFiscales.XMLNS + " ")
-                + (!hasComplementRp10()? "" : DElementPagos.XMLNS + " ")
+                + (!hasComplementRp20()? "" : DElementPagos.XMLNS + " ")
                 + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS + " ")
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getNamespace().isEmpty() ? "" : moEltOpcAddenda.getNamespace() + " ")
                 + "xsi:schemaLocation=\""
@@ -324,7 +324,7 @@ public class DElementComprobante extends cfd.DElement {
                 + (!hasComplementCe11()? "" : " " + DElementComercioExterior.XSI)
                 + (!hasComplementCp20()? "" : " " + DElementCartaPorte.XSI)
                 + (!hasComplementLf10()? "" : " " + DElementLeyendasFiscales.XSI)
-                + (!hasComplementRp10()? "" : " " + DElementPagos.XSI)
+                + (!hasComplementRp20()? "" : " " + DElementPagos.XSI)
                 + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getXsdLocation().isEmpty() ? "" : " " + moEltOpcAddenda.getXsdLocation()) + "\"";
 

@@ -21,13 +21,16 @@ public class DElementTrasladoDR extends cfd.DElement {
     private final DAttributeTypeImporte moAttImporteDR;
     
     public DElementTrasladoDR() {
-        super("pagos20:TrasladoDR");
+        super("pago20:TrasladoDR");
         
         moAttBaseDR = new DAttributeTypeImporte("BaseDR", true);
         moAttImpuestoDR = new DAttributeString("ImpuestoDR", true, 3, 3);
         moAttTipoFactorDR = new DAttributeString("TipoFactorDR", true);
         moAttTasaOCuotaDR = new DAttributeTypeImporte("TasaOCuotaDR", false);
-        moAttImporteDR = new DAttributeTypeImporte("ImporteDR", true);
+        moAttTasaOCuotaDR.setDecimals(6);
+        moAttTasaOCuotaDR.setCanBeZero(true);
+        moAttImporteDR = new DAttributeTypeImporte("ImporteDR", false);
+        moAttImporteDR.setCanBeZero(true);
         
         mvAttributes.add(moAttBaseDR);
         mvAttributes.add(moAttImpuestoDR);

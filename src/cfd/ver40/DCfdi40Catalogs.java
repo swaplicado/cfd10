@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Flores, Isabel Servín
  */
 public abstract class DCfdi40Catalogs {
     
@@ -48,11 +48,6 @@ public abstract class DCfdi40Catalogs {
     public static final String CFD_TP_N = "N";      // Nómina
     public static final String CFD_TP_P = "P";      // Pago
     
-    public static final String CFDI_USO_SIN_EFECTOS_FISCALES = "S01"; // Por definir
-    
-    public static final int MDP_PUE_ID = 1;         // ID pago en una sola exhibición
-    public static final int MDP_PPD_ID = 2;         // ID pago en parcialidades o diferido
-    
     public static final String MDP_PUE = "PUE";     // Pago en una sola exhibición
     public static final String MDP_PPD = "PPD";     // Pago en parcialidades o diferido
     
@@ -65,20 +60,37 @@ public abstract class DCfdi40Catalogs {
     public static final String IMP_IVA = "002";     // IVA
     public static final String IMP_IEPS = "003";    // IEPS
     
+    public static final String REL_TP_NOTA_CREDITO = "01";
+    public static final String REL_TP_NOTA_DEBITO = "02";
+    public static final String REL_TP_DEVOLUCIÓN = "03";
+    public static final String REL_TP_SUSTITUCIÓN = "04";
+    public static final String REL_TP_TRASLADO_MER = "05";
+    public static final String REL_TP_TRASLADO_PRE = "06";
+    public static final String REL_TP_ANTICIPO = "07";
+    
     public static final String FAC_TP_TASA = "Tasa";
     public static final String FAC_TP_CUOTA = "Cuota";
     public static final String FAC_TP_EXENTO = "Exento";
     
+    public static final String CAT_REG_FISCAL_RECEPTOR_NOM = "605";
+    
+    public static final String TRNS_CFD_CAT_TP_REL_CDT = "01";  // credit note
+    public static final String TRNS_CFD_CAT_CTY_GRP_UE = "Unión Europea";   // European Union
+    public static final String TRNS_CFD_CAT_CTY_GRP_TLCAN = "TLCAN";        // TLCAN
+    
     public static final String TxtSí = "Sí";
     public static final String TxtNo = "No";
     
+    public static final String ClaveUsoCfdiSinEfectosFiscales = "S01"; 
     public static final String ClaveUsoCfdiPagos = "CP01"; // Pagos
     public static final String ClaveUsoCfdiNómina = "CN01"; // Nómina
+    public static final String ClaveUsoCfdiDevDescBon = "G02";    // Devoluciones, descuentos o bonificaciones
     
     public static final String ClaveMonedaMxn = "MXN";
     public static final String ClaveMonedaXxx = "XXX";
     
     public static final String ClaveExportacionNoAplica = "01";
+    public static final String ClaveExportacionAplica = "02";
     
     public static final String ClaveObjetoImpNo = "01";
     public static final String ClaveObjetoImpSí = "02";
@@ -97,6 +109,9 @@ public abstract class DCfdi40Catalogs {
     public static final String ConceptoPago = "Pago";
     public static final String ConceptoSueldosSalarios = "Pago de nómina";
     
+    public static final String DescripcionImpuestoTrasladado = "Trasladado";
+    public static final String DescripcionImpuestoRetenido = "Retenido";
+    
     public static final String ClaveNominaOrd = "O";
     public static final String ClaveNominaExt = "E";
     public static final String ClavePeriodicidadPagoSem = "02";
@@ -114,6 +129,9 @@ public abstract class DCfdi40Catalogs {
     public static final String ClaveArrendador = "03";
     public static final String ClaveNotificado = "04";
     
+    public static final String ClaveOrigen = "Origen";
+    public static final String ClaveDestino = "Destino";
+    
     public static final String PrefijoClaveOrigen = "OR";
     public static final String PrefijoClaveDestino = "DE";
     
@@ -121,6 +139,8 @@ public abstract class DCfdi40Catalogs {
     
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();
     public static final HashMap<String, String> Impuesto = new HashMap<>();
+    public static final HashMap<String, String> TipoRelación = new HashMap<>();
+    public static final HashMap<String, String> TipoFigura = new HashMap<>();
     
     static {
         TipoComprobante.put(CFD_TP_I, "Ingreso");
@@ -132,5 +152,18 @@ public abstract class DCfdi40Catalogs {
         Impuesto.put(IMP_ISR, "ISR");
         Impuesto.put(IMP_IVA, "IVA");
         Impuesto.put(IMP_IEPS, "IEPS");
+        
+        TipoRelación.put(REL_TP_NOTA_CREDITO, "Nota de crédito de los documentos relacionados");
+        TipoRelación.put(REL_TP_NOTA_DEBITO, "Nota de débito de los documentos relacionados"); 
+        TipoRelación.put(REL_TP_DEVOLUCIÓN, "Devolución de mercancía sobre facturas o traslados previos");
+        TipoRelación.put(REL_TP_SUSTITUCIÓN, "Sustitución de los CFDI previos");
+        TipoRelación.put(REL_TP_TRASLADO_MER, "Traslados de mercancías facturados previamente");
+        TipoRelación.put(REL_TP_TRASLADO_PRE, "Factura generada por los traslados previos"); 
+        TipoRelación.put(REL_TP_ANTICIPO, "CFDI por aplicación de anticipo");
+        
+        TipoFigura.put(ClaveChofer, "Chofer");
+        TipoFigura.put(ClavePropietario, "Propietario");
+        TipoFigura.put(ClaveArrendador, "Arrendatario");
+        TipoFigura.put(ClaveNotificado, "Notificado");
     }
 }
