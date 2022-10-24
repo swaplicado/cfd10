@@ -41,7 +41,17 @@ public abstract class DCfdi40Catalogs {
     public static final String XML_GBL_PER = "c_Periodicidad";
     public static final String XML_GBL_MES = "c_Meses";
     public static final String XML_OBJ_IMP = "c_ObjetoImp";
-    
+    public static final String XML_CCP_MAT_PEL = "c_CartaPorte_MaterialPeligroso";
+    public static final String XML_CCP_EMB_TP = "c_CartaPorte_TipoEmbalaje";
+    public static final String XML_CCP_PERM_TP = "c_CartaPorte_TipoPermiso";
+    public static final String XML_CCP_CFG_AUTO = "c_CartaPorte_ConfigAutotransporte";
+    public static final String XML_CCP_REM_STP = "c_CartaPorte_SubTipoRem";
+    public static final String XML_CCP_EDO_33 = "c_CFDI_Estado_33";
+    public static final String XML_CCP_EDO_40 = "c_CFDI_Estado_44";
+    public static final String XML_CCP_MUN = "c_CartaPorte_Municipio";
+    public static final String XML_CCP_LOC = "c_CartaPorte_Localidad";
+    public static final String XML_CCP_COL = "c_CartaPorte_Colonia";
+
     public static final String CFD_TP_I = "I";      // Ingreso
     public static final String CFD_TP_E = "E";      // Egreso
     public static final String CFD_TP_T = "T";      // Traslado
@@ -74,6 +84,10 @@ public abstract class DCfdi40Catalogs {
     
     public static final String ClaveUsoCfdiPagos = "CP01"; // Pagos
     public static final String ClaveUsoCfdiNómina = "CN01"; // Nómina
+    
+    public static final String ClavePaísMex = "MEX";
+    public static final String ClavePaísUsa = "USA";
+    public static final String ClavePaísCan = "CAN";
     
     public static final String ClaveMonedaMxn = "MXN";
     public static final String ClaveMonedaXxx = "XXX";
