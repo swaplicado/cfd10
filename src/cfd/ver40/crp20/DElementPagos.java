@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class DElementPagos extends cfd.DElement {
 
-    public static final String XSI = "http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
-    public static final String XMLNS = "xmlns:pago10=\"http://www.sat.gob.mx/Pagos\"";
+    public static final String XSI = "http://www.sat.gob.mx/Pagos20 http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd";
+    public static final String XMLNS = "xmlns:pago20=\"http://www.sat.gob.mx/Pagos20\"";
     
     /*
      * Attributes' declaration-order according to CRP 2.0 specification
@@ -57,7 +57,7 @@ public class DElementPagos extends cfd.DElement {
      * Public methods:
      */
 
-    public float getVersion() { return DCfdConsts.COMP_RP_10; }
+    public float getVersion() { return DCfdConsts.COMP_RP_20; }
 
     public DAttributeString getAttVersion() { return moAttVersion; }
     

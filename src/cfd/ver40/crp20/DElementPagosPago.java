@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez
+ * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
  */
 public class DElementPagosPago extends cfd.DElement {
 
@@ -35,6 +35,7 @@ public class DElementPagosPago extends cfd.DElement {
     private final DAttributeString moAttSelloPago;
     
     private final ArrayList<DElementDoctoRelacionado> maEltDoctoRelacionados;
+    private DElementImpuestosP moEltImpuestosP;
     
     /**
      * Creates a new instance of class DElementPagosPago.
@@ -75,16 +76,29 @@ public class DElementPagosPago extends cfd.DElement {
         mvAttributes.add(moAttSelloPago);
         
         maEltDoctoRelacionados = new ArrayList<>();
+        moEltImpuestosP = null;
     }
     
     /*
      * Private methods:
      */
     
+    private ArrayList<DElement> createElementsArray() {
+        ArrayList<DElement> elements = new ArrayList<>();
+
+        if (moEltImpuestosP != null) {
+            elements.add(moEltImpuestosP);
+        }
+        
+        return elements;
+     }
+    
     /*
      * Public methods:
      */
 
+    public void setEltImpuestosP(DElementImpuestosP o) { moEltImpuestosP = o; }
+    
     public DAttributeDatetime getAttFechaPago() { return moAttFechaPago; }
     public DAttributeString getAttFormaDePagoP() { return moAttFormaDePagoP; }
     public DAttributeString getAttMonedaP() { return moAttMonedaP; }
@@ -102,6 +116,7 @@ public class DElementPagosPago extends cfd.DElement {
     public DAttributeString getAttSelloPago() { return moAttSelloPago; }
 
     public ArrayList<DElementDoctoRelacionado> getEltDoctoRelacionados() { return maEltDoctoRelacionados; }
+    public DElementImpuestosP getEltImpuestosP() { return moEltImpuestosP; }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
@@ -128,8 +143,15 @@ public class DElementPagosPago extends cfd.DElement {
         }
 
         xml += ">";
-
+        
         for (DElementDoctoRelacionado element : maEltDoctoRelacionados) {
+            String aux = element.getElementForXml();
+            if (!aux.isEmpty()) {
+                xml += "\n" + aux;
+            }
+        }
+        
+        for (DElement element : createElementsArray()) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {
                 xml += "\n" + aux;
@@ -146,6 +168,10 @@ public class DElementPagosPago extends cfd.DElement {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
         
         for (DElementDoctoRelacionado element : maEltDoctoRelacionados) {
+            string += element.getElementForOriginalString();
+        }
+        
+        for (DElement element : createElementsArray()) {
             string += element.getElementForOriginalString();
         }
 

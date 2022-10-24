@@ -37,8 +37,8 @@ public class DElementTotales extends cfd.DElement {
         moAttTotalTrasladosImpuestoIVA8 = new DAttributeTypeImporte("TotalTrasladosImpuestoIVA8", false);
         moAttTotalTrasladosBaseIVA0 = new DAttributeTypeImporte("TotalTrasladosBaseIVA0", false);
         moAttTotalTrasladosImpuestoIVA0 = new DAttributeTypeImporte("TotalTrasladosImpuestoIVA0", false);
-        moAttTotalTrasladosBaseIVAExento = new DAttributeTypeImporte("TotalTrasladosBaseIVAExcento", false);
-        moAttMontoTotalPagos = new DAttributeTypeImporte("MontoTotalPagos", false);
+        moAttTotalTrasladosBaseIVAExento = new DAttributeTypeImporte("TotalTrasladosBaseIVAExento", false);
+        moAttMontoTotalPagos = new DAttributeTypeImporte("MontoTotalPagos", true);
         
         mvAttributes.add(moAttTotalRetencionesIVA);
         mvAttributes.add(moAttTotalRetencionesISR);
@@ -62,7 +62,7 @@ public class DElementTotales extends cfd.DElement {
     public DAttributeTypeImporte getAttTotalTrasladosImpuestoIVA8() { return moAttTotalTrasladosImpuestoIVA8; }
     public DAttributeTypeImporte getAttTotalTrasladosBaseIVA0() { return moAttTotalTrasladosBaseIVA0; }
     public DAttributeTypeImporte getAttTotalTrasladosImpuestoIVA0() { return moAttTotalTrasladosImpuestoIVA0; }
-    public DAttributeTypeImporte getAttTotalTrasladosBaseIVAExcento() { return moAttTotalTrasladosBaseIVAExento; }
+    public DAttributeTypeImporte getAttTotalTrasladosBaseIVAExento() { return moAttTotalTrasladosBaseIVAExento; }
     public DAttributeTypeImporte getAttMontoTotalPagos() { return moAttMontoTotalPagos; }
     
 }

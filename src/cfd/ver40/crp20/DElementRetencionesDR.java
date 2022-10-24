@@ -5,8 +5,6 @@
  */
 package cfd.ver40.crp20;
 
-import cfd.DAttribute;
-import cfd.DElement;
 import java.util.ArrayList;
 
 /**
@@ -15,56 +13,35 @@ import java.util.ArrayList;
  */
 public class DElementRetencionesDR extends cfd.DElement {
 
-    private final DElementRetencionDR moEltRetencionDR;
+    private final ArrayList<DElementRetencionDR> maEltRetencionDR;
     
     public DElementRetencionesDR() {
-        super("pagos20:RetencionesDR");
+        super("pago20:RetencionesDR");
         
-        moEltRetencionDR = new DElementRetencionDR();
+        maEltRetencionDR = new ArrayList<>();
     }
-    
-    /*
-     * Private methods:
-     */
-    
-     private ArrayList<DElement> createElementsArray() {
-        ArrayList<DElement> elements = new ArrayList<>();
-
-        if (moEltRetencionDR != null) {
-            elements.add(moEltRetencionDR);
-        }
-        
-        return elements;
-     }
     
     /*
      * Public methods:
      */
     
-     public DElementRetencionDR getEltRetencionDR() { return moEltRetencionDR; }
+    public ArrayList<DElementRetencionDR> getEltRetencionDR() { return maEltRetencionDR; }
      
-     @Override
+    @Override
     public java.lang.String getElementForXml() throws Exception {
         validateElement();
         
         String xml = "<" + msName;
 
-        for (DAttribute attribute : mvAttributes) {
-            String aux = attribute.getAttributeForXml();
-            if (!aux.isEmpty()) {
-                xml += " " + aux;
-            }
-        }
-
         xml += ">";
         
-        for (DElement element : createElementsArray()) {
+        for (DElementRetencionDR element : maEltRetencionDR) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {
                 xml += "\n" + aux;
             }
         }
-
+        
         xml += "\n</" + msName + ">";
 
         return xml;
@@ -75,7 +52,7 @@ public class DElementRetencionesDR extends cfd.DElement {
     public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
         
-        for (DElement element : createElementsArray()) {
+        for (DElementRetencionDR element : maEltRetencionDR) {
             string += element.getElementForOriginalString();
         }
         

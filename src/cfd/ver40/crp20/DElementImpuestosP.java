@@ -12,45 +12,45 @@ import java.util.ArrayList;
  *
  * @author Isabel Danae García Servín
  */
-public class DElementImpuestosDR extends cfd.DElement {
+public class DElementImpuestosP extends cfd.DElement {
 
-    private DElementRetencionesDR moEltRetencionesDR;
-    private DElementTrasladosDR moEltTrasladosDR;
+    private DElementRetencionesP moEltRetencionesP;
+    private DElementTrasladosP moEltTrasladosP;
     
-    public DElementImpuestosDR() {
-        super("pago20:ImpuestosDR");
+    public DElementImpuestosP() {
+        super("pago20:ImpuestosP");
         
-        moEltRetencionesDR = null;
-        moEltTrasladosDR = null;
+        moEltRetencionesP = null;
+        moEltTrasladosP = null;
     }
     
     /*
-     * Private methods:
-     */
+    * Private methods
+    */
     
     private ArrayList<DElement> createElementsArray() {
         ArrayList<DElement> elements = new ArrayList<>();
 
-        if (moEltRetencionesDR != null) {
-            elements.add(moEltRetencionesDR);
+        if (moEltRetencionesP != null) {
+            elements.add(moEltRetencionesP);
         }
         
-        if (moEltTrasladosDR != null) {
-            elements.add(moEltTrasladosDR);
+        if (moEltTrasladosP != null) {
+            elements.add(moEltTrasladosP);
         }
         
         return elements;
     }
-     
-     /*
-     * Public methods:
-     */
     
-    public void setEltRetencionesDR(DElementRetencionesDR o) { moEltRetencionesDR = o; }
-    public void setEltTrasladosDR(DElementTrasladosDR o) { moEltTrasladosDR = o; }
+    /*
+    * Public methods:
+    */
     
-    public DElementRetencionesDR getEltRetencionesDR() { return moEltRetencionesDR; }
-    public DElementTrasladosDR getEltTrasladosDR() { return moEltTrasladosDR; }
+    public void setEltRetencionesP(DElementRetencionesP o) { moEltRetencionesP = o; }
+    public void setEltTrasladosP(DElementTrasladosP o) { moEltTrasladosP = o; }
+    
+    public DElementRetencionesP getEltRetencionesDR() { return moEltRetencionesP; }
+    public DElementTrasladosP getEltTrasladosDR() { return moEltTrasladosP; }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
@@ -59,16 +59,16 @@ public class DElementImpuestosDR extends cfd.DElement {
         String xml = "<" + msName;
         
         xml += ">";
-
+        
         for (DElement element : createElementsArray()) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {
                 xml += "\n" + aux;
             }
         }
-
+        
         xml += "\n</" + msName + ">";
-
+        
         return xml;
     }
     
@@ -82,5 +82,4 @@ public class DElementImpuestosDR extends cfd.DElement {
 
         return string;
     }
-    
 }

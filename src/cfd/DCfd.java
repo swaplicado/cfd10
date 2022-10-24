@@ -19,7 +19,7 @@ import sa.lib.SLibUtils;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez
+ * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
  */
 public final class DCfd {
 
@@ -273,6 +273,44 @@ public final class DCfd {
     }
 
     public static BufferedImage createQrCodeBufferedImageCfdi33(final String uuid, final String rfcEmisor, final String rfcReceptor, final double total, final String sello) {
+        int x = 0;
+        int y = 0;
+        int grayValue = 0;
+        String data  = "";
+        DecimalFormat decimalFormat = new DecimalFormat("#." + SLibUtils.textRepeat("#", 6));
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = null;
+        BufferedImage bufferedImage = null;
+
+        data += DCfdi33Consts.URL_VERIFIC;
+        data += "?id=" + (uuid == null || uuid.isEmpty() ? SLibUtils.textRepeat("0", 40) : uuid);
+        data += "&re=" + (rfcEmisor == null || rfcEmisor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcEmisor);
+        data += "&rr=" + (rfcReceptor == null || rfcReceptor.isEmpty() ? SLibUtils.textRepeat("X", 13) : rfcReceptor);
+        data += "&tt=" + decimalFormat.format(SLibUtils.roundAmount(total));
+        data += "&fe=" + (sello == null || sello.isEmpty() ? SLibUtils.textRepeat("0", 8) : sello);
+
+        try {
+            bufferedImage = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
+            bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 140, 140);
+
+            for (y = 0; y < 140; y++) {
+                for (x = 0; x < 140; x++) {
+                     grayValue = (bitMatrix.get(x, y) ? 1 : 0) & 0xff;
+                     bufferedImage.setRGB(x, y, (grayValue == 0 ? 0xFFFFFF : 0));
+                }
+            }
+        }
+        catch (WriterException e) {
+            e.printStackTrace(System.err);
+        }
+        catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+
+        return bufferedImage;
+    }
+    
+    public static BufferedImage createQrCodeBufferedImageCfdi40(final String uuid, final String rfcEmisor, final String rfcReceptor, final double total, final String sello) {
         int x = 0;
         int y = 0;
         int grayValue = 0;

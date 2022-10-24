@@ -26,7 +26,8 @@ public class DElementRetencionDR extends cfd.DElement {
         moAttBaseDR = new DAttributeTypeImporte("BaseDR", true);
         moAttImpuestoDR = new DAttributeString("ImpuestoDR", true, 3, 3);
         moAttTipoFactorDR = new DAttributeString("TipoFactorDR", true);
-        moAttTasaOCuotaDR = new DAttributeTypeImporte("TasaOCuotaDR", false);
+        moAttTasaOCuotaDR = new DAttributeTypeImporte("TasaOCuotaDR", true);
+        moAttTasaOCuotaDR.setDecimals(6);
         moAttImporteDR = new DAttributeTypeImporte("ImporteDR", true);
         
         mvAttributes.add(moAttBaseDR);

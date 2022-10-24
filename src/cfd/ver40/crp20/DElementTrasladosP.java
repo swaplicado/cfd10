@@ -11,21 +11,21 @@ import java.util.ArrayList;
  *
  * @author Isabel Danae García Servín
  */
-public class DElementTrasladosDR extends cfd.DElement {
+public class DElementTrasladosP extends cfd.DElement {
 
-    private final ArrayList<DElementTrasladoDR> maEltTrasladoDR;
+    private final ArrayList<DElementTrasladoP> maEltTrasladoP;
     
-    public DElementTrasladosDR() {
-        super("pago20:TrasladosDR");
+    public DElementTrasladosP() {
+        super("pago20:TrasladosP");
         
-        maEltTrasladoDR = new ArrayList<>();
+        maEltTrasladoP = new ArrayList<>();
     }
     
     /*
     * Public methods
     */
     
-    public ArrayList<DElementTrasladoDR> getEltTrasladoDR() { return maEltTrasladoDR; }
+    public ArrayList<DElementTrasladoP> getEltTrasladoP() { return maEltTrasladoP; }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
@@ -35,7 +35,7 @@ public class DElementTrasladosDR extends cfd.DElement {
 
         xml += ">";
         
-        for (DElementTrasladoDR element : maEltTrasladoDR) {
+        for (DElementTrasladoP element : maEltTrasladoP) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {
                 xml += "\n" + aux;
@@ -51,7 +51,7 @@ public class DElementTrasladosDR extends cfd.DElement {
     public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
         
-        for (DElementTrasladoDR element : maEltTrasladoDR) {
+        for (DElementTrasladoP element : maEltTrasladoP) {
             string += element.getElementForOriginalString();
         }
         

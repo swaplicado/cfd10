@@ -80,6 +80,9 @@ public abstract class DCfdi33Catalogs {
     public static final String ConceptoPago = "Pago";
     public static final String ConceptoSueldosSalarios = "Pago de nómina";
     
+    public static final String DescripcionImpuestoTrasladado = "Trasladado";
+    public static final String DescripcionImpuestoRetenido = "Retenido";
+    
     public static final String ClaveNominaOrd = "O";
     public static final String ClaveNominaExt = "E";
     public static final String ClavePeriodicidadPagoSem = "02";

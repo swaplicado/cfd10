@@ -35,7 +35,7 @@ import sa.lib.xml.SXmlUtils;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez
+ * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
  */
 public abstract class DCfdUtils {
     
@@ -88,6 +88,7 @@ public abstract class DCfdUtils {
         return string;
     }
     
+    @Deprecated
     private static cfd.DElement getElementComplementoTimbreFiscalDigital33(final Node nodeTfd) throws Exception {
         cfd.DElement elementTfd = null;
         
@@ -657,7 +658,8 @@ public abstract class DCfdUtils {
         return elementCcp;
     }
 
-    private static cfd.DElement getElementComplementoPagos(final Node nodePagos) throws Exception {
+    @Deprecated
+    private static cfd.DElement getElementComplementoPagos10(final Node nodePagos) throws Exception {
         cfd.DElement elementPagos = null;
         
         if (SXmlUtils.hasChildElement(nodePagos, "pago10:Pagos")) {
@@ -709,6 +711,189 @@ public abstract class DCfdUtils {
                     doctoRelacionado.getAttImpSaldoInsoluto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoInsoluto", false)));
 
                     pago.getEltDoctoRelacionados().add(doctoRelacionado);
+                }
+
+                pagos.getEltPagos().add(pago);
+            }
+
+            elementPagos = pagos;
+        }
+        
+        return elementPagos;
+    }
+    
+    private static cfd.DElement getElementComplementoPagos20(final Node nodePagos) throws Exception {
+        cfd.DElement elementPagos = null;
+        
+        if (SXmlUtils.hasChildElement(nodePagos, "pago20:Pagos")) {
+            Node node;
+            NamedNodeMap namedNodeMap;
+
+            node = SXmlUtils.extractChildElements(nodePagos, "pago20:Pagos").get(0);
+            namedNodeMap = node.getAttributes();
+
+            cfd.ver40.crp20.DElementPagos pagos = new cfd.ver40.crp20.DElementPagos();
+
+            pagos.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMap, "Version", true));
+
+            if (SXmlUtils.hasChildElement(node, "pago20:Totales")) {
+                Node nodeTotales = SXmlUtils.extractChildElements(node, "pago20:Totales").get(0);
+                NamedNodeMap namedNodeMapTotales = nodeTotales.getAttributes();
+                
+                cfd.ver40.crp20.DElementTotales totales = pagos.getEltTotales();
+                
+                totales.getAttTotalRetencionesIVA().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalRetencionesIVA", false)));
+                totales.getAttTotalRetencionesISR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalRetencionesISR", false)));
+                totales.getAttTotalRetencionesIEPS().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalRetencionesIEPS", false)));
+                totales.getAttTotalTrasladosBaseIVA16().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosBaseIVA16", false)));
+                totales.getAttTotalTrasladosImpuestoIVA16().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosImpuestoIVA16", false)));
+                totales.getAttTotalTrasladosBaseIVA8().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosBaseIVA8", false)));
+                totales.getAttTotalTrasladosImpuestoIVA8().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosImpuestoIVA8", false)));
+                totales.getAttTotalTrasladosBaseIVA0().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosBaseIVA0", false)));
+                totales.getAttTotalTrasladosImpuestoIVA0().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosImpuestoIVA0", false)));
+                totales.getAttTotalTrasladosBaseIVAExento().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "TotalTrasladosBaseIVAExento", false)));
+                totales.getAttMontoTotalPagos().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTotales, "MontoTotalPagos", true)));
+            }
+            
+            for (Node nodePago : SXmlUtils.extractChildElements(node, "pago20:Pago")) {
+                NamedNodeMap namedNodeMapPago = nodePago.getAttributes();
+
+                cfd.ver40.crp20.DElementPagosPago pago = new cfd.ver40.crp20.DElementPagosPago();
+
+                pago.getAttFechaPago().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FechaPago", true).replaceAll("T", " ")));
+                pago.getAttFormaDePagoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "FormaDePagoP", true));
+                pago.getAttMonedaP().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "MonedaP", true));
+                pago.getAttTipoCambioP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCambioP", false)));
+                pago.getAttMonto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapPago, "Monto", true)));
+                pago.getAttNumOperacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NumOperacion", false));
+                pago.getAttRfcEmisorCtaOrd().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaOrd", false));
+                pago.getAttNomBancoOrdExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "NomBancoOrdExt", false));
+                pago.getAttCtaOrdenante().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaOrdenante", false));
+                pago.getAttRfcEmisorCtaBen().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "RfcEmisorCtaBen", false));
+                pago.getAttCtaBeneficiario().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CtaBeneficiario", false));
+                pago.getAttTipoCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "TipoCadPago", false));
+                pago.getAttCertPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CertPago", false));
+                pago.getAttCadPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "CadPago", false));
+                pago.getAttSelloPago().setString(SXmlUtils.extractAttributeValue(namedNodeMapPago, "SelloPago", false));
+
+                for (Node nodeDoctoRelacionado : SXmlUtils.extractChildElements(nodePago, "pago20:DoctoRelacionado")) {
+                    NamedNodeMap namedNodeMapDoctoRelacionado = nodeDoctoRelacionado.getAttributes();
+
+                    cfd.ver40.crp20.DElementDoctoRelacionado doctoRelacionado = new cfd.ver40.crp20.DElementDoctoRelacionado();
+                    
+                    doctoRelacionado.getAttIdDocumento().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "IdDocumento", true));
+                    doctoRelacionado.getAttSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Serie", false));
+                    doctoRelacionado.getAttFolio().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "Folio", false));
+                    doctoRelacionado.getAttMonedaDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "MonedaDR", true));
+                    doctoRelacionado.getAttEquivalenciaDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "EquivalenciaDR", false)));
+                    doctoRelacionado.getAttNumParcialidad().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "NumParcialidad", true)));
+                    doctoRelacionado.getAttImpSaldoAnt().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoAnt", true)));
+                    doctoRelacionado.getAttImpPagado().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpPagado", false)));
+                    doctoRelacionado.getAttImpSaldoInsoluto().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ImpSaldoInsoluto", false)));
+                    doctoRelacionado.getAttObjetoImpDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapDoctoRelacionado, "ObjetoImpDR", true));
+                    
+                    if (SXmlUtils.hasChildElement(nodeDoctoRelacionado, "pago20:ImpuestosDR")) {
+                        Node nodeImpuestosDR = SXmlUtils.extractChildElements(nodeDoctoRelacionado, "pago20:ImpuestosDR").get(0); 
+                        
+                        cfd.ver40.crp20.DElementImpuestosDR impuestosDR = new cfd.ver40.crp20.DElementImpuestosDR();
+                        
+                        if (SXmlUtils.hasChildElement(nodeImpuestosDR, "pago20:RetencionesDR")) {
+                            Node nodeRetencionesDR = SXmlUtils.extractChildElements(nodeImpuestosDR, "pago20:RetencionesDR").get(0);
+                            
+                            cfd.ver40.crp20.DElementRetencionesDR retencionesDR = new cfd.ver40.crp20.DElementRetencionesDR();
+                            
+                            for (Node nodeRetencionDR : SXmlUtils.extractChildElements(nodeRetencionesDR, "pago20:RetencionDR")) {
+                                NamedNodeMap namedNodeMapRetencionDR = nodeRetencionDR.getAttributes();
+                                
+                                cfd.ver40.crp20.DElementRetencionDR retencionDR = new cfd.ver40.crp20.DElementRetencionDR();
+                                
+                                retencionDR.getAttBaseDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "BaseDR", true)));
+                                retencionDR.getAttImpuestoDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "ImpuestoDR", true));
+                                retencionDR.getAttTipoFactorDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "TipoFactorDR", true));
+                                retencionDR.getAttTasaOCuotaDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "TasaOCuotaDR", true)));
+                                retencionDR.getAttImporteDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "ImporteDR", true)));
+                                
+                                retencionesDR.getEltRetencionDR().add(retencionDR);
+                            }
+                            
+                            impuestosDR.setEltRetencionesDR(retencionesDR);
+                        }
+                        
+                        if (SXmlUtils.hasChildElement(nodeImpuestosDR, "pago20:TrasladosDR")) {
+                            Node nodeTrasladosDR = SXmlUtils.extractChildElements(nodeImpuestosDR, "pago20:TrasladosDR").get(0);
+                            
+                            cfd.ver40.crp20.DElementTrasladosDR trasladosDR = new cfd.ver40.crp20.DElementTrasladosDR();
+                            
+                            for (Node nodeTrasladoDR : SXmlUtils.extractChildElements(nodeTrasladosDR, "pago20:TrasladoDR")) {
+                                NamedNodeMap namedNodeMapTrasladoDR = nodeTrasladoDR.getAttributes();
+                                
+                                cfd.ver40.crp20.DElementTrasladoDR trasladoDR = new cfd.ver40.crp20.DElementTrasladoDR();
+                                
+                                trasladoDR.getAttBaseDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "BaseDR", true)));
+                                trasladoDR.getAttImpuestoDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "ImpuestoDR", true));
+                                trasladoDR.getAttTipoFactorDR().setString(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "TipoFactorDR", true));
+                                trasladoDR.getAttTasaOCuotaDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "TasaOCuotaDR", false)));
+                                trasladoDR.getAttImporteDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "ImporteDR", false)));
+                                
+                                trasladosDR.getEltTrasladoDR().add(trasladoDR);
+                            }
+                            
+                            impuestosDR.setEltTrasladosDR(trasladosDR);
+                        }
+                       
+                        doctoRelacionado.setEltImpuestosDR(impuestosDR);
+                    }
+
+                    pago.getEltDoctoRelacionados().add(doctoRelacionado);
+                }
+                
+                if (SXmlUtils.hasChildElement(nodePago, "pago20:ImpuestosP")) {
+                    Node nodeImpuestosP = SXmlUtils.extractChildElements(nodePago, "pago20:ImpuestosP").get(0);
+                    
+                    cfd.ver40.crp20.DElementImpuestosP impuestosP = new cfd.ver40.crp20.DElementImpuestosP();
+                    
+                    if (SXmlUtils.hasChildElement(nodeImpuestosP, "pago20:RetencionesP")) {
+                        Node nodeRetencionesP = SXmlUtils.extractChildElements(nodeImpuestosP, "pago20:RetencionesP").get(0);
+                        
+                        cfd.ver40.crp20.DElementRetencionesP retencionesP = new cfd.ver40.crp20.DElementRetencionesP();
+                        
+                        for (Node nodeRetencionP : SXmlUtils.extractChildElements(nodeRetencionesP, "pago20:RetencionP")) {
+                            NamedNodeMap namedNodeMapRetencionP = nodeRetencionP.getAttributes();
+                            
+                            cfd.ver40.crp20.DElementRetencionP retencionP = new cfd.ver40.crp20.DElementRetencionP();
+                            
+                            retencionP.getAttImpuestoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapRetencionP, "ImpuestoP", true));
+                            retencionP.getAttImporteP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionP, "ImporteP", true)));
+
+                            retencionesP.getEltRetencionP().add(retencionP);
+                        }
+                        
+                        impuestosP.setEltRetencionesP(retencionesP);
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(nodeImpuestosP, "pago20:TrasladosP")) {
+                        Node nodeTrasladosP = SXmlUtils.extractChildElements(nodeImpuestosP, "pago20:TrasladosP").get(0);
+                        
+                        cfd.ver40.crp20.DElementTrasladosP trasladosP = new cfd.ver40.crp20.DElementTrasladosP();
+                        
+                        for (Node nodeTrasladoP : SXmlUtils.extractChildElements(nodeTrasladosP, "pago20:TrasladoP")) {
+                            NamedNodeMap namedNodeMapTrasladoP = nodeTrasladoP.getAttributes();
+                            
+                            cfd.ver40.crp20.DElementTrasladoP trasladoP = new cfd.ver40.crp20.DElementTrasladoP();
+                            
+                            trasladoP.getAttBaseP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "BaseP", true)));
+                            trasladoP.getAttImpuestoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "ImpuestoP", true));
+                            trasladoP.getAttTipoFactorP().setString(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "TipoFactorP", true));
+                            trasladoP.getAttTasaOCuotaP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "TasaOCuotaP", false)));
+                            trasladoP.getAttImporteP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "ImporteP", false)));
+                            
+                            trasladosP.getEltTrasladoP().add(trasladoP);
+                        }
+                        
+                        impuestosP.setEltTrasladosP(trasladosP);
+                    }
+                    
+                    pago.setEltImpuestosP(impuestosP);
                 }
 
                 pagos.getEltPagos().add(pago);
@@ -2952,9 +3137,9 @@ public abstract class DCfdUtils {
             // Complemento 'Recepción Pagos 1.0':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "pago10:Pagos")) {
-                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
+                complemento.getElements().add(getElementComplementoPagos10(nodeComplemento));
             }
-
+            
             // Complemento 'Nómina 1.1 y 1.2':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "nomina:Nomina") || SXmlUtils.hasChildElement(nodeComplemento, "nomina12:Nomina")) {
@@ -3325,7 +3510,7 @@ public abstract class DCfdUtils {
             // Complemento 'Recepción Pagos 2.0':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "pago20:Pagos")) {
-                complemento.getElements().add(getElementComplementoPagos(nodeComplemento));
+                complemento.getElements().add(getElementComplementoPagos20(nodeComplemento));
             }
 
             // Complemento 'Nómina 1.2':
