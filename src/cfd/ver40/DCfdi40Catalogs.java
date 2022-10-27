@@ -85,6 +85,7 @@ public abstract class DCfdi40Catalogs {
     public static final String CAT_REG_FISCAL_RECEPTOR_NOM = "605";
     
     public static final String TRNS_CFD_CAT_TP_REL_CDT = "01";  // credit note
+    
     public static final String TRNS_CFD_CAT_CTY_GRP_UE = "Unión Europea";   // European Union
     public static final String TRNS_CFD_CAT_CTY_GRP_TLCAN = "TLCAN";        // TLCAN
     
@@ -145,6 +146,9 @@ public abstract class DCfdi40Catalogs {
     
     public static final String ClaveOrigen = "Origen";
     public static final String ClaveDestino = "Destino";
+    
+    public static final String MercancíasEntrada = "Entrada";
+    public static final String MercancíasSalida = "Salida";
     
     public static final String PrefijoClaveOrigen = "OR";
     public static final String PrefijoClaveDestino = "DE";

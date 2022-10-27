@@ -14,6 +14,7 @@ public class DElementCartaPorte extends cfd.DElement {
 
     public static final String XSI = "http://www.sat.gob.mx/CartaPorte20  http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte20.xsd";
     public static final String XMLNS = "xmlns:cartaporte20=\"http://www.sat.gob.mx/CartaPorte20\"";
+    public static final String VERSION = "2.0";
 
     private final DAttributeString moAttVersion;
     private final DAttributeString moAttTranspInternac;
@@ -30,7 +31,7 @@ public class DElementCartaPorte extends cfd.DElement {
         super("cartaporte20:CartaPorte");
 
         moAttVersion = new DAttributeString("Version", true);
-        moAttVersion.setString("2.0");
+        moAttVersion.setString(VERSION);
         moAttTranspInternac = new DAttributeString("TranspInternac", true, 2, 2);
         moAttEntradaSalidaMerc = new DAttributeString("EntradaSalidaMerc", false);
         moAttViaEntradaSalida = new DAttributeString("ViaEntradaSalida", false);
