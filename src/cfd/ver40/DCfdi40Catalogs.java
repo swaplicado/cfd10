@@ -153,6 +153,9 @@ public abstract class DCfdi40Catalogs {
     public static final String PrefijoClaveOrigen = "OR";
     public static final String PrefijoClaveDestino = "DE";
     
+    public static final String DimensiónCm = "cm";
+    public static final String DimensiónPlg = "plg";
+    
     public static final double DIAS_PAG_MIN = 0.001;
     
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();
