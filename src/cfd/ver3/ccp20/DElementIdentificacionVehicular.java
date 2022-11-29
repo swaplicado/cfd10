@@ -33,5 +33,4 @@ public class DElementIdentificacionVehicular extends cfd.DElement {
     public DAttributeString getAttConfigVehicular() { return moAttConfigVehicular; }
     public DAttributeString getAttPlacaVM() { return moAttPlacaVM; }
     public DAttributeInteger getAttAnioModeloVM() { return moAttAnioModeloVM; }
-    
 }

@@ -6,6 +6,7 @@
 package cfd.ver3.ccp20;
 
 import cfd.DAttributeString;
+import cfd.DAttributeTypeImporte;
 
 /**
  *
@@ -19,7 +20,7 @@ public class DElementSeguros extends cfd.DElement {
     private final DAttributeString moAttPolizaMedAmbiente;
     private final DAttributeString moAttAseguraCarga;
     private final DAttributeString moAttPolizaCarga;
-    private final DAttributeString moAttPrimaSeguro;
+    private final DAttributeTypeImporte moAttPrimaSeguro;
 
     public DElementSeguros() {
         super("cartaporte20:Seguros");
@@ -30,7 +31,7 @@ public class DElementSeguros extends cfd.DElement {
         moAttPolizaMedAmbiente = new DAttributeString("PolizaMedAmbiente", false, 3, 30);
         moAttAseguraCarga = new DAttributeString("AseguraCarga", false, 3, 50);
         moAttPolizaCarga = new DAttributeString("PolizaCarga", false, 3, 30);
-        moAttPrimaSeguro = new DAttributeString("PrimaSeguro", false);
+        moAttPrimaSeguro = new DAttributeTypeImporte("PrimaSeguro", false);
         
         mvAttributes.add(moAttAseguraRespCivil);
         mvAttributes.add(moAttPolizaRespCivil);
@@ -41,13 +42,11 @@ public class DElementSeguros extends cfd.DElement {
         mvAttributes.add(moAttPrimaSeguro);
     }
     
-    
     public DAttributeString getAttAseguraRespCivil() { return moAttAseguraRespCivil; }
     public DAttributeString getAttPolizaRespCivil() { return moAttPolizaRespCivil; }
     public DAttributeString getAttAseguraMedAmbiente() { return moAttAseguraMedAmbiente; }
     public DAttributeString getAttPolizaMedAmbiente() { return moAttPolizaMedAmbiente; }
     public DAttributeString getAttAseguraCarga() { return moAttAseguraCarga; }
     public DAttributeString getAttPolizaCarga() { return moAttPolizaCarga; }
-    public DAttributeString getAttPrimaSeguro() { return moAttPrimaSeguro; }
-    
+    public DAttributeTypeImporte getAttPrimaSeguro() { return moAttPrimaSeguro; }
 }

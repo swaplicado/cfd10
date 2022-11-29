@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Isabel
+ * @author Isabel Danae García Servín
  */
 public class DElementDomicilio extends cfd.DElement {
     
@@ -60,5 +60,4 @@ public class DElementDomicilio extends cfd.DElement {
     public DAttributeString getAttEstado() { return moAttEstado; } 
     public DAttributeString getAttPais() { return moAttPais; } 
     public DAttributeString getAttCodigoPostal() { return moAttCodigoPostal; }
-    
 }

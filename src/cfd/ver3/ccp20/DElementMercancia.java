@@ -36,7 +36,7 @@ public class DElementMercancia extends cfd.DElement {
     private final DAttributeString moAttUUIDComercioExt;
     
     private final ArrayList<DElementCantidadTransporta> maEltCantidadTransporta;
-    private final ArrayList<DElementPedimentos> maEltPedimentos;
+    private ArrayList<DElementPedimentos> maEltPedimentos;
     
     public DElementMercancia() {
         super("cartaporte20:Mercancia");
@@ -79,12 +79,15 @@ public class DElementMercancia extends cfd.DElement {
         maEltPedimentos = null;
     }
     
+    public void setEltPedimentos(ArrayList<DElementPedimentos> array) { maEltPedimentos = array; }
+    
     public DAttributeString getAttBienesTransp() { return moAttBienesTransp; }
     public DAttributeString getAttClaveSTCC() { return moAttClaveSTCC; }
     public DAttributeString getAttDescripcion() { return moAttDescripcion; }
     public DAttributeDouble getAttCantidad() { return moAttCantidad; }
     public DAttributeString getAttClaveUnidad() { return moAttClaveUnidad; }
     public DAttributeString getAttUnidad() { return moAttUnidad; }
+    public DAttributeString getAttDimensiones() { return moAttDimensiones; }
     public DAttributeString getAttMaterialPeligroso() { return moAttMaterialPeligroso; }
     public DAttributeString getAttCveMaterialPeligroso() { return moAttCveMaterialPeligroso; }
     public DAttributeString getAttEmbalaje() { return moAttEmbalaje; }
@@ -97,7 +100,6 @@ public class DElementMercancia extends cfd.DElement {
     
     public ArrayList<DElementCantidadTransporta> getEltCantidadTransporta() { return maEltCantidadTransporta; }
     public ArrayList<DElementPedimentos> getEltPedimentos() { return maEltPedimentos; }
-    
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {

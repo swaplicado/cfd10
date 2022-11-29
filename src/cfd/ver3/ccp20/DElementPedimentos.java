@@ -24,5 +24,4 @@ public class DElementPedimentos extends cfd.DElement {
     }
     
     public DAttributeString getAttPedimento() { return moAttPedimento; }
-    
 }

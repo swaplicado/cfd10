@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Isabel Servín
+ * @author Isabel Danae García Servín
  */
 public class DElementTransporteMaritimo extends cfd.DElement {
 
@@ -24,6 +24,4 @@ public class DElementTransporteMaritimo extends cfd.DElement {
     }
     
     public DAttributeString getAttValor() { return moAttValor; }
-    
-    
 }

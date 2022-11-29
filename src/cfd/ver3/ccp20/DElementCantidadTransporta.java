@@ -37,5 +37,4 @@ public class DElementCantidadTransporta extends cfd.DElement {
     public DAttributeString getAttIDOrigen() { return moAttIDOrigen; }
     public DAttributeString getAttIDDestino() { return moAttIDDestino; }
     public DAttributeString getAttCvesTransporte() { return moAttCvesTransporte; }
-    
 }

@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Isabel
+ * @author Isabel Danae García Servín
  */
 public class DElementPartesTransporte extends cfd.DElement {
     
@@ -24,6 +24,4 @@ public class DElementPartesTransporte extends cfd.DElement {
     }
     
     public DAttributeString getAttParteTransporte() { return moAttParteTransporte; }
-    
-    
 }

@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Isabel Servín
+ * @author Isabel Danae García Servín
  */
 public class DElementTransporteAereo extends cfd.DElement {
     

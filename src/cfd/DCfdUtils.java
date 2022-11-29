@@ -563,8 +563,7 @@ public abstract class DCfdUtils {
                         seguros.getAttPolizaMedAmbiente().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PolizaMedAmbiente", false));
                         seguros.getAttAseguraCarga().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "AseguraCarga", false));
                         seguros.getAttPolizaCarga().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PolizaCarga", false));
-                        seguros.getAttPrimaSeguro().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PrimaSeguro", false));
-
+                        seguros.getAttPrimaSeguro().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PrimaSeguro", false)));
                     }
                 }
             }

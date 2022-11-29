@@ -114,5 +114,4 @@ public class DElementMercancias extends cfd.DElement {
         
         return string;
     }
-
 }

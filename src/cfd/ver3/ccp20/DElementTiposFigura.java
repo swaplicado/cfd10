@@ -62,7 +62,6 @@ public class DElementTiposFigura extends cfd.DElement {
     @Override
     public void validateElement() throws IllegalStateException, Exception {
         super.validateElement(); // validates attributes, if any
-
     }
     
     @Override
