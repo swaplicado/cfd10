@@ -19,6 +19,7 @@ public class DElementPedimentos extends cfd.DElement {
         super("cartaporte20:Pedimentos");
         
         moAttPedimento = new DAttributeString("Pedimento", true, 21, 21);
+        moAttPedimento.setTrimmable(false);
         
         mvAttributes.add(moAttPedimento);
     }
