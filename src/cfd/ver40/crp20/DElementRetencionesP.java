@@ -9,23 +9,36 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementRetencionesP extends cfd.DElement {
     
-    private final ArrayList<DElementRetencionP> maEltRetencionP;
+    private final ArrayList<DElementRetencionP> maEltRetencionPs;
 
     public DElementRetencionesP() {
         super("pago20:RetencionesP");
         
-        maEltRetencionP = new ArrayList<>();
+        maEltRetencionPs = new ArrayList<>();
     }
     
     /*
     * Public methods:
     */
     
-    public ArrayList<DElementRetencionP> getEltRetencionP() { return maEltRetencionP; }
+    public ArrayList<DElementRetencionP> getEltRetencionPs() { return maEltRetencionPs; }
+    
+    public DElementRetencionP getEltRetencionP(final String impuesto) {
+        DElementRetencionP retencionP = null;
+        
+        for (DElementRetencionP element : maEltRetencionPs) {
+            if (element.getAttImpuestoP().getString().equals(impuesto)) {
+                retencionP = element;
+                break;
+            }
+        }
+        
+        return retencionP;
+    }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
@@ -35,7 +48,7 @@ public class DElementRetencionesP extends cfd.DElement {
 
         xml += ">";
         
-        for (DElementRetencionP element : maEltRetencionP) {
+        for (DElementRetencionP element : maEltRetencionPs) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {
                 xml += "\n" + aux;
@@ -52,7 +65,7 @@ public class DElementRetencionesP extends cfd.DElement {
     public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
         
-        for (DElementRetencionP element : maEltRetencionP) {
+        for (DElementRetencionP element : maEltRetencionPs) {
             string += element.getElementForOriginalString();
         }
         

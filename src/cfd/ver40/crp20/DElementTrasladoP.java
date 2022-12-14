@@ -7,10 +7,11 @@ package cfd.ver40.crp20;
 
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
+import sa.lib.SLibUtils;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementTrasladoP extends cfd.DElement {
     
@@ -44,4 +45,12 @@ public class DElementTrasladoP extends cfd.DElement {
     public DAttributeString getAttTipoFactorP() { return moAttTipoFactorP; }
     public DAttributeTypeImporte getAttTasaOCuotaP() { return moAttTasaOCuotaP; }
     public DAttributeTypeImporte getAttImporteP() { return moAttImporteP; }
+    
+    public void addAttBaseP(final double base) {
+        moAttBaseP.setDouble(SLibUtils.roundAmount(moAttBaseP.getDouble() + base));
+    }
+    
+    public void addAttImporteP(final double importe) {
+        moAttImporteP.setDouble(SLibUtils.roundAmount(moAttImporteP.getDouble() + importe));
+    }
 }

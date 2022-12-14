@@ -111,4 +111,15 @@ public abstract class DCfdVer4Utils {
     public static String composeCatalogDescription(final String code, final String name) {
         return code + " - " + name;
     }
+    
+    /**
+     * Compares tasa o cuota.
+     * Tasa o cuota can have up to 6 decimals.
+     * @param tasaOCuota1 Tasa o cuota 1.
+     * @param tasaOCuota2 Tasa o cuota 2.
+     * @return <code>true</code> if both tasa o cuota are the same.
+     */
+    public static boolean compareTasaOCuota(final double tasaOCuota1, final double tasaOCuota2) {
+        return (int) (tasaOCuota1 * 1000000.0) == (int) (tasaOCuota2 * 1000000.0);
+    }
 }

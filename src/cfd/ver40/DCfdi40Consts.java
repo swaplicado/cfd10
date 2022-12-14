@@ -25,6 +25,10 @@ public abstract class DCfdi40Consts {
     public static final String REGEX_NUM_PREDIAL = "[0-9]{1,150}";
     
     public static final int STAMP_LAST_CHARS = 8;
+    
+    public static final double IVA_16 = 0.16;
+    public static final double IVA_08 = 0.08;
+    public static final double IVA_00 = 0.0;
 
     /*
     Constantes para la gestión de la cancelación de CFDI.

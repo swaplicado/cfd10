@@ -4,7 +4,10 @@ import cfd.DAttribute;
 import cfd.DAttributeString;
 import cfd.DCfdConsts;
 import cfd.DElement;
+import cfd.ver40.DCfdi40Catalogs;
+import cfd.ver40.DCfdi40Consts;
 import java.util.ArrayList;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -46,9 +49,7 @@ public class DElementPagos extends cfd.DElement {
      private ArrayList<DElement> createElementsArray() {
         ArrayList<DElement> elements = new ArrayList<>();
 
-        if (moEltTotales != null) {
-            elements.add(moEltTotales);
-        }
+        elements.add(moEltTotales);
         
         return elements;
      }
@@ -63,6 +64,89 @@ public class DElementPagos extends cfd.DElement {
     
     public DElementTotales getEltTotales() { return moEltTotales; }
     public ArrayList<DElementPagosPago> getEltPagos() { return maEltPagos; }
+    
+    public void computePagos() {
+        moEltTotales.clearTotales();
+        
+        for (DElementPagosPago pago : maEltPagos) {
+            pago.computePago();
+            
+            double tipoCambio;
+            
+            if (pago.getAttMonedaP().getString().equals(DCfdi40Catalogs.ClaveMonedaMxn)) {
+                tipoCambio = 1;
+            }
+            else {
+                tipoCambio = pago.getAttTipoCambioP().getDouble();
+            }
+            
+            double monto = SLibUtils.roundAmount(pago.getAttMonto().getDouble() * tipoCambio);
+            
+            moEltTotales.addAttMontoTotalPagos(monto);
+            
+            if (pago.getEltImpuestosP() != null) {
+                if (pago.getEltImpuestosP().getEltTrasladosP() != null) {
+                    for (DElementTrasladoP trasladoP : pago.getEltImpuestosP().getEltTrasladosP().getEltTrasladoPs()) {
+                        if (trasladoP.getAttImpuestoP().getString().equals(DCfdi40Catalogs.IMP_IVA)) {
+                            double base = SLibUtils.roundAmount(trasladoP.getAttBaseP().getDouble() * tipoCambio);
+                            double importe = SLibUtils.roundAmount(trasladoP.getAttImporteP().getDouble() * tipoCambio);
+                            
+                            switch (trasladoP.getAttTipoFactorP().getString()) {
+                                case DCfdi40Catalogs.FAC_TP_TASA:
+                                    if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_16 * 100)) {
+                                        moEltTotales.addAttTotalTrasladosBaseIVA16(base);
+                                        moEltTotales.addAttTotalTrasladosImpuestoIVA16(importe);
+                                    }
+                                    else if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_08 * 100)) {
+                                        moEltTotales.addAttTotalTrasladosBaseIVA8(base);
+                                        moEltTotales.addAttTotalTrasladosImpuestoIVA8(importe);
+                                    }
+                                    else if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_00 * 100)) {
+                                        moEltTotales.addAttTotalTrasladosBaseIVA0(base);
+                                        moEltTotales.addAttTotalTrasladosImpuestoIVA0(importe);
+                                    }
+                                    break;
+                                    
+                                case DCfdi40Catalogs.FAC_TP_CUOTA:
+                                    // nothing
+                                    break;
+                                    
+                                case DCfdi40Catalogs.FAC_TP_EXENTO:
+                                    moEltTotales.addAttTotalTrasladosBaseIVAExento(base);
+                                    break;
+                                    
+                                default:
+                                    // nothing
+                            }
+                        }
+                    }
+                }
+                
+                if (pago.getEltImpuestosP().getEltRetencionesP() != null) {
+                    for (DElementRetencionP retencionP : pago.getEltImpuestosP().getEltRetencionesP().getEltRetencionPs()) {
+                        double retencion = SLibUtils.roundAmount(retencionP.getAttImporteP().getDouble() * tipoCambio);
+                        
+                        switch (retencionP.getAttImpuestoP().getString()) {
+                            case DCfdi40Catalogs.IMP_IVA:
+                                moEltTotales.addAttTotalRetencionesIVA(retencion);
+                                break;
+                                
+                            case DCfdi40Catalogs.IMP_ISR:
+                                moEltTotales.addAttTotalRetencionesISR(retencion);
+                                break;
+                                
+                            case DCfdi40Catalogs.IMP_IEPS:
+                                moEltTotales.addAttTotalRetencionesIEPS(retencion);
+                                break;
+                                
+                            default:
+                                // nothing
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {

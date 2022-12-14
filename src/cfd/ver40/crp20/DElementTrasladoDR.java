@@ -10,7 +10,7 @@ import cfd.DAttributeTypeImporte;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementTrasladoDR extends cfd.DElement {
 
@@ -44,5 +44,4 @@ public class DElementTrasladoDR extends cfd.DElement {
     public DAttributeString getAttTipoFactorDR() { return moAttTipoFactorDR; }
     public DAttributeTypeImporte getAttTasaOCuotaDR() { return moAttTasaOCuotaDR; }
     public DAttributeTypeImporte getAttImporteDR() { return moAttImporteDR; }
-    
 }

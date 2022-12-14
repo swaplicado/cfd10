@@ -7,10 +7,11 @@ package cfd.ver40.crp20;
 
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
+import sa.lib.SLibUtils;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementRetencionP extends cfd.DElement {
 
@@ -29,4 +30,8 @@ public class DElementRetencionP extends cfd.DElement {
     
     public DAttributeString getAttImpuestoP() { return moAttImpuestoP; }
     public DAttributeTypeImporte getAttImporteP() { return moAttImporteP; }
+    
+    public void addAttImporteP(final double importe) {
+        moAttImporteP.setDouble(SLibUtils.roundAmount(moAttImporteP.getDouble() + importe));
+    }
 }

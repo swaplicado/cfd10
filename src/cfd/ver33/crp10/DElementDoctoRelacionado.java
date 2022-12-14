@@ -7,12 +7,13 @@ import cfd.DAttributeTypeImporte;
 import cfd.DElement;
 import cfd.ver33.DCfdi33Consts;
 import cfd.ver33.DCfdi33Utils;
+import cfd.ver40.DCfdi40Catalogs;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementDoctoRelacionado extends cfd.DElement {
+public class DElementDoctoRelacionado extends cfd.DElement implements cfd.ver40.crp20.DIntDoctoRelacionado {
 
     /*
      * Attributes' declaration-order according to CRP 1.0 specification
@@ -57,6 +58,8 @@ public class DElementDoctoRelacionado extends cfd.DElement {
         mvAttributes.add(moAttImpSaldoAnt);
         mvAttributes.add(moAttImpPagado);
         mvAttributes.add(moAttImpSaldoInsoluto);
+        
+        moAttMetodoDePagoDR.setString(DCfdi40Catalogs.MDP_PPD); // default value that allways remains the same
     }
     
     /*
@@ -67,16 +70,28 @@ public class DElementDoctoRelacionado extends cfd.DElement {
      * Public methods:
      */
 
+    @Override
     public DAttributeString getAttIdDocumento() { return moAttIdDocumento; }
+    @Override
     public DAttributeString getAttSerie() { return moAttSerie; }
+    @Override
     public DAttributeString getAttFolio() { return moAttFolio; }
+    @Override
     public DAttributeString getAttMonedaDR() { return moAttMonedaDR; }
     public DAttributeTipoCambio6d getAttTipoCambioDR() { return moAttTipoCambioDR; }
+    @Override
+    public DAttributeTipoCambio6d getAttEquivalenciaDR() { return getAttTipoCambioDR(); }
     public DAttributeString getAttMetodoDePagoDR() { return moAttMetodoDePagoDR; }
+    @Override
     public DAttributeInteger getAttNumParcialidad() { return moAttNumParcialidad; }
+    @Override
     public DAttributeTypeImporte getAttImpSaldoAnt() { return moAttImpSaldoAnt; }
+    @Override
     public DAttributeTypeImporte getAttImpPagado() { return moAttImpPagado; }
+    @Override
     public DAttributeTypeImporte getAttImpSaldoInsoluto() { return moAttImpSaldoInsoluto; }
+    @Override
+    public DAttributeString getAttObjetoImpDR() { throw new UnsupportedOperationException("Not supported yet."); }
 
     @Override
     public void validateElement() throws IllegalStateException, Exception {

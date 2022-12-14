@@ -6,10 +6,11 @@
 package cfd.ver40.crp20;
 
 import cfd.DAttributeTypeImporte;
+import sa.lib.SLibUtils;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementTotales extends cfd.DElement {
 
@@ -65,4 +66,61 @@ public class DElementTotales extends cfd.DElement {
     public DAttributeTypeImporte getAttTotalTrasladosBaseIVAExento() { return moAttTotalTrasladosBaseIVAExento; }
     public DAttributeTypeImporte getAttMontoTotalPagos() { return moAttMontoTotalPagos; }
     
+    public void clearTotales() {
+        moAttTotalRetencionesIVA.setDouble(0);
+        moAttTotalRetencionesISR.setDouble(0);
+        moAttTotalRetencionesIEPS.setDouble(0);
+        moAttTotalTrasladosBaseIVA16.setDouble(0);
+        moAttTotalTrasladosImpuestoIVA16.setDouble(0);
+        moAttTotalTrasladosBaseIVA8.setDouble(0);
+        moAttTotalTrasladosImpuestoIVA8.setDouble(0);
+        moAttTotalTrasladosBaseIVA0.setDouble(0);
+        moAttTotalTrasladosImpuestoIVA0.setDouble(0);
+        moAttTotalTrasladosBaseIVAExento.setDouble(0);
+        moAttMontoTotalPagos.setDouble(0);
+    }
+    
+    public void addAttTotalRetencionesIVA(final double retencion) {
+        moAttTotalRetencionesIVA.setDouble(SLibUtils.roundAmount(moAttTotalRetencionesIVA.getDouble() + retencion));
+    }
+    
+    public void addAttTotalRetencionesISR(final double retencion) { 
+        moAttTotalRetencionesISR.setDouble(SLibUtils.roundAmount(moAttTotalRetencionesISR.getDouble() + retencion));
+    }
+    
+    public void addAttTotalRetencionesIEPS(final double retencion) {
+        moAttTotalRetencionesIEPS.setDouble(SLibUtils.roundAmount(moAttTotalRetencionesIEPS.getDouble() + retencion));
+    }
+    
+    public void addAttTotalTrasladosBaseIVA16(final double base) {
+        moAttTotalTrasladosBaseIVA16.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVA16.getDouble() + base));
+    }
+    
+    public void addAttTotalTrasladosImpuestoIVA16(final double impuesto) {
+        moAttTotalTrasladosImpuestoIVA16.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosImpuestoIVA16.getDouble() + impuesto));
+    }
+    
+    public void addAttTotalTrasladosBaseIVA8(final double base) {
+        moAttTotalTrasladosBaseIVA8.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVA8.getDouble() + base));
+    }
+    
+    public void addAttTotalTrasladosImpuestoIVA8(final double impuesto) {
+        moAttTotalTrasladosImpuestoIVA8.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosImpuestoIVA8.getDouble() + impuesto));
+    }
+    
+    public void addAttTotalTrasladosBaseIVA0(final double base) {
+        moAttTotalTrasladosBaseIVA0.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVA0.getDouble() + base));
+    }
+    
+    public void addAttTotalTrasladosImpuestoIVA0(final double impuesto) {
+        moAttTotalTrasladosImpuestoIVA0.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosImpuestoIVA0.getDouble() + impuesto));
+    }
+    
+    public void addAttTotalTrasladosBaseIVAExento(final double base) {
+        moAttTotalTrasladosBaseIVAExento.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVAExento.getDouble() + base));
+    }
+    
+    public void addAttMontoTotalPagos(final double monto) {
+        moAttMontoTotalPagos.setDouble(SLibUtils.roundAmount(moAttMontoTotalPagos.getDouble() + monto));
+    }
 }

@@ -5,27 +5,43 @@
  */
 package cfd.ver40.crp20;
 
+import cfd.ver4.DCfdVer4Utils;
 import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementTrasladosP extends cfd.DElement {
 
-    private final ArrayList<DElementTrasladoP> maEltTrasladoP;
+    private final ArrayList<DElementTrasladoP> maEltTrasladoPs;
     
     public DElementTrasladosP() {
         super("pago20:TrasladosP");
         
-        maEltTrasladoP = new ArrayList<>();
+        maEltTrasladoPs = new ArrayList<>();
     }
     
     /*
     * Public methods
     */
     
-    public ArrayList<DElementTrasladoP> getEltTrasladoP() { return maEltTrasladoP; }
+    public ArrayList<DElementTrasladoP> getEltTrasladoPs() { return maEltTrasladoPs; }
+    
+    public DElementTrasladoP getEltTrasladoP(final String impuesto, final String tipoFactor, final double tasaOCuota) {
+        DElementTrasladoP trasladoP = null;
+        
+        for (DElementTrasladoP element : maEltTrasladoPs) {
+            if (element.getAttImpuestoP().getString().equals(impuesto) && 
+                    element.getAttTipoFactorP().equals(tipoFactor) && 
+                    DCfdVer4Utils.compareTasaOCuota(element.getAttTasaOCuotaP().getDouble(), tasaOCuota)) {
+                trasladoP = element;
+                break;
+            }
+        }
+        
+        return trasladoP;
+    }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
@@ -35,7 +51,7 @@ public class DElementTrasladosP extends cfd.DElement {
 
         xml += ">";
         
-        for (DElementTrasladoP element : maEltTrasladoP) {
+        for (DElementTrasladoP element : maEltTrasladoPs) {
             String aux = element.getElementForXml();
             if (!aux.isEmpty()) {
                 xml += "\n" + aux;
@@ -51,7 +67,7 @@ public class DElementTrasladosP extends cfd.DElement {
     public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
         
-        for (DElementTrasladoP element : maEltTrasladoP) {
+        for (DElementTrasladoP element : maEltTrasladoPs) {
             string += element.getElementForOriginalString();
         }
         

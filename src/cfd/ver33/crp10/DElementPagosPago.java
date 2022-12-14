@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementPagosPago extends cfd.DElement {
+public class DElementPagosPago extends cfd.DElement implements cfd.ver40.crp20.DIntPagosPago {
 
     /*
      * Attributes' declaration-order according to CRP 1.0 specification
@@ -34,7 +34,7 @@ public class DElementPagosPago extends cfd.DElement {
     private final DAttributeString moAttCadPago;
     private final DAttributeString moAttSelloPago;
     
-    private ArrayList<DElementDoctoRelacionado> maEltDoctoRelacionados;
+    private final ArrayList<DElementDoctoRelacionado> maEltDoctoRelacionados;
     
     /**
      * Creates a new instance of class DElementPagosPago.
@@ -85,20 +85,35 @@ public class DElementPagosPago extends cfd.DElement {
      * Public methods:
      */
 
+    @Override
     public DAttributeDatetime getAttFechaPago() { return moAttFechaPago; }
+    @Override
     public DAttributeString getAttFormaDePagoP() { return moAttFormaDePagoP; }
+    @Override
     public DAttributeString getAttMonedaP() { return moAttMonedaP; }
+    @Override
     public DAttributeTipoCambio getAttTipoCambioP() { return moAttTipoCambioP; }
+    @Override
     public DAttributeTypeImporte getAttMonto() { return moAttMonto; }
+    @Override
     public DAttributeString getAttNumOperacion() { return moAttNumOperacion; }
+    @Override
     public DAttributeString getAttRfcEmisorCtaOrd() { return moAttRfcEmisorCtaOrd; }
+    @Override
     public DAttributeString getAttNomBancoOrdExt() { return moAttNomBancoOrdExt; }
+    @Override
     public DAttributeString getAttCtaOrdenante() { return moAttCtaOrdenante; }
+    @Override
     public DAttributeString getAttRfcEmisorCtaBen() { return moAttRfcEmisorCtaBen; }
+    @Override
     public DAttributeString getAttCtaBeneficiario() { return moAttCtaBeneficiario; }
+    @Override
     public DAttributeString getAttTipoCadPago() { return moAttTipoCadPago; }
+    @Override
     public DAttributeString getAttCertPago() { return moAttCertPago; }
+    @Override
     public DAttributeString getAttCadPago() { return moAttCadPago; }
+    @Override
     public DAttributeString getAttSelloPago() { return moAttSelloPago; }
 
     public ArrayList<DElementDoctoRelacionado> getEltDoctoRelacionados() { return maEltDoctoRelacionados; }

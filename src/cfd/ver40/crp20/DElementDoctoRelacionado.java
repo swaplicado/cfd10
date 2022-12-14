@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
  */
-public class DElementDoctoRelacionado extends cfd.DElement {
+public class DElementDoctoRelacionado extends cfd.DElement implements DIntDoctoRelacionado {
 
     /*
      * Attributes' declaration-order according to CRP 2.0 specification
@@ -85,15 +85,25 @@ public class DElementDoctoRelacionado extends cfd.DElement {
 
     public void setEltImpuestosDR(DElementImpuestosDR o) { moEltImpuestosDR = o; }
      
+    @Override
     public DAttributeString getAttIdDocumento() { return moAttIdDocumento; }
+    @Override
     public DAttributeString getAttSerie() { return moAttSerie; }
+    @Override
     public DAttributeString getAttFolio() { return moAttFolio; }
+    @Override
     public DAttributeString getAttMonedaDR() { return moAttMonedaDR; }
+    @Override
     public DAttributeTipoCambio6d getAttEquivalenciaDR() { return moAttEquivalenciaDR; }
+    @Override
     public DAttributeInteger getAttNumParcialidad() { return moAttNumParcialidad; }
+    @Override
     public DAttributeTypeImporte getAttImpSaldoAnt() { return moAttImpSaldoAnt; }
+    @Override
     public DAttributeTypeImporte getAttImpPagado() { return moAttImpPagado; }
+    @Override
     public DAttributeTypeImporte getAttImpSaldoInsoluto() { return moAttImpSaldoInsoluto; }
+    @Override
     public DAttributeString getAttObjetoImpDR() { return moAttObjetoImpDR; }
     
     public DElementImpuestosDR getEltImpuestosDR() { return moEltImpuestosDR; }

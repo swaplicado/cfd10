@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestosDR extends cfd.DElement {
 

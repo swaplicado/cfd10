@@ -812,7 +812,7 @@ public abstract class DCfdUtils {
                                 retencionDR.getAttTasaOCuotaDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "TasaOCuotaDR", true)));
                                 retencionDR.getAttImporteDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionDR, "ImporteDR", true)));
                                 
-                                retencionesDR.getEltRetencionDR().add(retencionDR);
+                                retencionesDR.getEltRetencionDRs().add(retencionDR);
                             }
                             
                             impuestosDR.setEltRetencionesDR(retencionesDR);
@@ -834,7 +834,7 @@ public abstract class DCfdUtils {
                                 trasladoDR.getAttTasaOCuotaDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "TasaOCuotaDR", false)));
                                 trasladoDR.getAttImporteDR().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoDR, "ImporteDR", false)));
                                 
-                                trasladosDR.getEltTrasladoDR().add(trasladoDR);
+                                trasladosDR.getEltTrasladoDRs().add(trasladoDR);
                             }
                             
                             impuestosDR.setEltTrasladosDR(trasladosDR);
@@ -864,7 +864,7 @@ public abstract class DCfdUtils {
                             retencionP.getAttImpuestoP().setString(SXmlUtils.extractAttributeValue(namedNodeMapRetencionP, "ImpuestoP", true));
                             retencionP.getAttImporteP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapRetencionP, "ImporteP", true)));
 
-                            retencionesP.getEltRetencionP().add(retencionP);
+                            retencionesP.getEltRetencionPs().add(retencionP);
                         }
                         
                         impuestosP.setEltRetencionesP(retencionesP);
@@ -886,7 +886,7 @@ public abstract class DCfdUtils {
                             trasladoP.getAttTasaOCuotaP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "TasaOCuotaP", false)));
                             trasladoP.getAttImporteP().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapTrasladoP, "ImporteP", false)));
                             
-                            trasladosP.getEltTrasladoP().add(trasladoP);
+                            trasladosP.getEltTrasladoPs().add(trasladoP);
                         }
                         
                         impuestosP.setEltTrasladosP(trasladosP);

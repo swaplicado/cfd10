@@ -7,12 +7,13 @@ import cfd.DAttributeTipoCambio;
 import cfd.DAttributeTypeImporte;
 import cfd.DElement;
 import java.util.ArrayList;
+import sa.lib.SLibUtils;
 
 /**
  *
  * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
  */
-public class DElementPagosPago extends cfd.DElement {
+public class DElementPagosPago extends cfd.DElement implements DIntPagosPago {
 
     /*
      * Attributes' declaration-order according to CRP 1.0 specification
@@ -99,24 +100,105 @@ public class DElementPagosPago extends cfd.DElement {
 
     public void setEltImpuestosP(DElementImpuestosP o) { moEltImpuestosP = o; }
     
+    @Override
     public DAttributeDatetime getAttFechaPago() { return moAttFechaPago; }
+    @Override
     public DAttributeString getAttFormaDePagoP() { return moAttFormaDePagoP; }
+    @Override
     public DAttributeString getAttMonedaP() { return moAttMonedaP; }
+    @Override
     public DAttributeTipoCambio getAttTipoCambioP() { return moAttTipoCambioP; }
+    @Override
     public DAttributeTypeImporte getAttMonto() { return moAttMonto; }
+    @Override
     public DAttributeString getAttNumOperacion() { return moAttNumOperacion; }
+    @Override
     public DAttributeString getAttRfcEmisorCtaOrd() { return moAttRfcEmisorCtaOrd; }
+    @Override
     public DAttributeString getAttNomBancoOrdExt() { return moAttNomBancoOrdExt; }
+    @Override
     public DAttributeString getAttCtaOrdenante() { return moAttCtaOrdenante; }
+    @Override
     public DAttributeString getAttRfcEmisorCtaBen() { return moAttRfcEmisorCtaBen; }
+    @Override
     public DAttributeString getAttCtaBeneficiario() { return moAttCtaBeneficiario; }
+    @Override
     public DAttributeString getAttTipoCadPago() { return moAttTipoCadPago; }
+    @Override
     public DAttributeString getAttCertPago() { return moAttCertPago; }
+    @Override
     public DAttributeString getAttCadPago() { return moAttCadPago; }
+    @Override
     public DAttributeString getAttSelloPago() { return moAttSelloPago; }
 
     public ArrayList<DElementDoctoRelacionado> getEltDoctoRelacionados() { return maEltDoctoRelacionados; }
     public DElementImpuestosP getEltImpuestosP() { return moEltImpuestosP; }
+    
+    public void computePago() {
+        moEltImpuestosP = null;
+        
+        for (DElementDoctoRelacionado doctoRelacionado : maEltDoctoRelacionados) {
+            if (doctoRelacionado.getEltImpuestosDR() != null) {
+                double equivalenciaDR;
+                
+                if (doctoRelacionado.getAttMonedaDR().getString().equals(moAttMonedaP.getString())) {
+                    equivalenciaDR = 1;
+                }
+                else {
+                    equivalenciaDR = doctoRelacionado.getAttEquivalenciaDR().getDouble();
+                }
+                
+                if (moEltImpuestosP == null) {
+                    moEltImpuestosP = new DElementImpuestosP();
+                }
+                
+                if (doctoRelacionado.getEltImpuestosDR().getEltTrasladosDR() != null) {
+                    if (moEltImpuestosP.getEltTrasladosP() == null) {
+                        moEltImpuestosP.setEltTrasladosP(new DElementTrasladosP());
+                    }
+                    
+                    for (DElementTrasladoDR trasladoDR : doctoRelacionado.getEltImpuestosDR().getEltTrasladosDR().getEltTrasladoDRs()) {
+                        DElementTrasladoP trasladoP = moEltImpuestosP.getEltTrasladosP().getEltTrasladoP(
+                                trasladoDR.getAttImpuestoDR().getString(), 
+                                trasladoDR.getAttTipoFactorDR().getString(), 
+                                trasladoDR.getAttTasaOCuotaDR().getDouble());
+                        
+                        if (trasladoP == null) {
+                            trasladoP = new DElementTrasladoP();
+                            trasladoP.getAttImpuestoP().setString(trasladoDR.getAttImpuestoDR().getString());
+                            trasladoP.getAttTipoFactorP().setString(trasladoDR.getAttTipoFactorDR().getString());
+                            trasladoP.getAttTasaOCuotaP().setDouble(trasladoDR.getAttTasaOCuotaDR().getDouble());
+                            
+                            moEltImpuestosP.getEltTrasladosP().getEltTrasladoPs().add(trasladoP);
+                        }
+                        
+                        trasladoP.addAttBaseP(SLibUtils.roundAmount(trasladoDR.getAttBaseDR().getDouble() * equivalenciaDR));
+                        trasladoP.addAttImporteP(SLibUtils.roundAmount(trasladoDR.getAttImporteDR().getDouble() * equivalenciaDR));
+                    }
+                }
+                
+                if (doctoRelacionado.getEltImpuestosDR().getEltRetencionesDR() != null) {
+                    if (moEltImpuestosP.getEltRetencionesP() == null) {
+                        moEltImpuestosP.setEltRetencionesP(new DElementRetencionesP());
+                    }
+                    
+                    for (DElementRetencionDR retencionDR : doctoRelacionado.getEltImpuestosDR().getEltRetencionesDR().getEltRetencionDRs()) {
+                        DElementRetencionP retencionP = moEltImpuestosP.getEltRetencionesP().getEltRetencionP(
+                                retencionDR.getAttImpuestoDR().getString());
+                        
+                        if (retencionP == null) {
+                            retencionP = new DElementRetencionP();
+                            retencionP.getAttImpuestoP().setString(retencionDR.getAttImpuestoDR().getString());
+                            
+                            moEltImpuestosP.getEltRetencionesP().getEltRetencionPs().add(retencionP);
+                        }
+                        
+                        retencionP.addAttImporteP(SLibUtils.roundAmount(retencionDR.getAttImporteDR().getDouble() * equivalenciaDR));
+                    }
+                }
+            }
+        }
+    }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {

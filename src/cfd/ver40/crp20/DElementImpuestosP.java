@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
  */
 public class DElementImpuestosP extends cfd.DElement {
 
@@ -49,8 +49,8 @@ public class DElementImpuestosP extends cfd.DElement {
     public void setEltRetencionesP(DElementRetencionesP o) { moEltRetencionesP = o; }
     public void setEltTrasladosP(DElementTrasladosP o) { moEltTrasladosP = o; }
     
-    public DElementRetencionesP getEltRetencionesDR() { return moEltRetencionesP; }
-    public DElementTrasladosP getEltTrasladosDR() { return moEltTrasladosP; }
+    public DElementRetencionesP getEltRetencionesP() { return moEltRetencionesP; }
+    public DElementTrasladosP getEltTrasladosP() { return moEltTrasladosP; }
     
     @Override
     public java.lang.String getElementForXml() throws Exception {
