@@ -156,8 +156,6 @@ public abstract class DCfdi40Catalogs {
     public static final String DimensiónCm = "cm";
     public static final String DimensiónPlg = "plg";
     
-    public static final String RfcGenericoExtranjero = "XEXX010101000";
-    
     public static final double DIAS_PAG_MIN = 0.001;
     
     public static final HashMap<String, String> TipoComprobante = new HashMap<>();
