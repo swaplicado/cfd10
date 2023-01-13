@@ -83,6 +83,7 @@ public abstract class DCfdi40Catalogs {
     public static final String FAC_TP_EXENTO = "Exento";
     
     public static final String CAT_REG_FISCAL_RECEPTOR_NOM = "605";
+    public static final String CAT_REG_FISCAL_RECEPTOR_SIN_EFECTOS_FISC = "616";
     
     public static final String TRNS_CFD_CAT_TP_REL_CDT = "01";  // credit note
     
