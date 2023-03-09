@@ -89,7 +89,7 @@ public abstract class DCfdi40Catalogs {
     public static final String ClaveTipoRelaciónAplicaciónAnticipo = "07";
     
     public static final String ClaveRégimenFiscalSueldosSalarios = "605";
-    public static final String ClaveRégimenFiscalSinEfectosFiscales = "616";
+    public static final String ClaveRégimenFiscalSinObligacionesFiscales = "616";
     
     public static final String ClaveUsoCfdiSinEfectosFiscales = "S01"; 
     public static final String ClaveUsoCfdiPagos = "CP01";  // Pagos
