@@ -5,6 +5,8 @@
  */
 package cfd.ver40;
 
+import java.util.HashMap;
+
 
 /**
  *
@@ -13,7 +15,6 @@ package cfd.ver40;
 public abstract class DCfdi40Consts {
     
     public static final String XSLT_4_0_URL = "http://www.sat.gob.mx/sitio_internet/cfd/4/cadenaoriginal_4_0/cadenaoriginal_4_0.xslt";
-    public static final String XSLT_3_3_FILE = "cfdi/xslt/3.3/cadenaoriginal_3_3.xslt";
     public static final String XSLT_4_0_FILE = "cfdi/xslt/4.0/cadenaoriginal_4_0.xslt";
     public static final String URL_VERIFIC = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx";
     
@@ -26,6 +27,8 @@ public abstract class DCfdi40Consts {
     
     public static final int STAMP_LAST_CHARS = 8;
     
+    public static final int HOURS_TO_SIGN = 24 * 3; // 72 hrs, i.e., up to 3 days
+
     public static final double IVA_16 = 0.16;
     public static final double IVA_08 = 0.08;
     public static final double IVA_00 = 0.0;
@@ -48,8 +51,9 @@ public abstract class DCfdi40Consts {
     public static final String ESTATUS_CANCEL_SIN_ACEPT = "Cancelado sin aceptación";
     public static final String ESTATUS_CANCEL_CON_ACEPT = "Cancelado con aceptación";
     public static final String ESTATUS_CANCEL_PLAZO_VENC = "Plazo vencido";
-    public static final String ESTATUS_CANCEL_PLAZO_VENC_ALT = "Cancelado plazo vencido";
-    public static final String ESTATUS_CANCEL_NINGUNO = "None";
+    public static final String ESTATUS_CANCEL_PLAZO_VENC_ALT = "Cancelado plazo vencido"; // new description set by authority in undetermined time
+    public static final String ESTATUS_CANCEL_NINGUNO = "None"; // description set by authority that means "CFDI in pending buffer"
+    public static final String ESTATUS_CANCEL_NINGUNO_TEXT = "CFDI in pending buffer"; // not really a description set by authority, corresponds to constant ESTATUS_CANCEL_PEND_BUFF_CODE
     
     public static final String ESTATUS_CANCEL_PROC_CODE = "Prc";
     public static final String ESTATUS_CANCEL_RECH_CODE = "Rec";
@@ -60,4 +64,16 @@ public abstract class DCfdi40Consts {
     
     /** Unexpected message in a succesful cancelation. */
     public static final String RESPONSE_CANCEL = "Petición de cancelación realizada exitosamente";
+    
+    /** Cancel status descriptions. */
+    public static final HashMap<String, String> EstatusCancelación = new HashMap<>();
+    
+    static {
+        EstatusCancelación.put(ESTATUS_CANCEL_PROC_CODE, ESTATUS_CANCEL_PROC);
+        EstatusCancelación.put(ESTATUS_CANCEL_RECH_CODE, ESTATUS_CANCEL_RECH);
+        EstatusCancelación.put(ESTATUS_CANCEL_SIN_ACEPT_CODE, ESTATUS_CANCEL_SIN_ACEPT);
+        EstatusCancelación.put(ESTATUS_CANCEL_CON_ACEPT_CODE, ESTATUS_CANCEL_CON_ACEPT);
+        EstatusCancelación.put(ESTATUS_CANCEL_PLAZO_VENC_CODE, ESTATUS_CANCEL_PLAZO_VENC);
+        EstatusCancelación.put(ESTATUS_CANCEL_PEND_BUFF_CODE, ESTATUS_CANCEL_NINGUNO_TEXT);
+    }
 }
