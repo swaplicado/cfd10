@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Sergio Flores, Isabel Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel Servín
  */
 public abstract class DCfdVer4Consts {
     

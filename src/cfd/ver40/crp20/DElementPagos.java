@@ -75,9 +75,21 @@ public class DElementPagos extends cfd.DElement {
             
             if (pago.getAttMonedaP().getString().equals(DCfdi40Catalogs.ClaveMonedaMxn)) {
                 tipoCambio = 1;
+                pago.getAttTipoCambioP().setDecimals(0);
             }
             else {
                 tipoCambio = pago.getAttTipoCambioP().getDouble();
+                pago.getAttTipoCambioP().setDecimals(cfd.DAttributeTipoCambio.DECS);
+            }
+            
+            for (DElementDoctoRelacionado doctoRelacionado : pago.getEltDoctoRelacionados()) {
+                if (doctoRelacionado.getAttMonedaDR().getString().equals(pago.getAttMonedaP().getString())) {
+                    doctoRelacionado.getAttEquivalenciaDR().setDouble(1d);
+                    doctoRelacionado.getAttEquivalenciaDR().setDecimals(0);
+                }
+                else {
+                    doctoRelacionado.getAttEquivalenciaDR().setDecimals(cfd.DAttributeTipoCambio.DECS);
+                }
             }
             
             double monto = SLibUtils.roundAmount(pago.getAttMonto().getDouble() * tipoCambio);

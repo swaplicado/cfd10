@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public abstract class DCce11Catalogs {
     

@@ -10,8 +10,10 @@ package cfd;
  * @author Sergio Abraham Flores Gutiérrez
  */
 public class DAttributeTipoCambio extends DAttributeDouble {
+    
+    public static final int DECS = 4;
 
     public DAttributeTipoCambio(java.lang.String name, boolean isRequired) {
-        super(name, isRequired, 4);
+        super(name, isRequired, DECS);
     }
 }

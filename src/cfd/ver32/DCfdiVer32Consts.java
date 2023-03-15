@@ -7,7 +7,7 @@ package cfd.ver32;
 
 /**
  *
- * @author Sergio Flores
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public abstract class DCfdiVer32Consts {
 
