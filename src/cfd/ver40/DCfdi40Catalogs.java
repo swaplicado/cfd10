@@ -201,4 +201,8 @@ public abstract class DCfdi40Catalogs {
         FiguraTransporte.put(ClaveFiguraTransporteArrendador, "Arrendatario");
         FiguraTransporte.put(ClaveFiguraTransporteNotificado, "Notificado");
     }
+    
+    public static String[] createClavesPaísesNorteamérica() {
+        return new String[] { ClavePaísMex, ClavePaísUsa, ClavePaísCan };
+    }
 }
