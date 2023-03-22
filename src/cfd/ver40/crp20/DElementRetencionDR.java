@@ -7,6 +7,7 @@ package cfd.ver40.crp20;
 
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -42,4 +43,14 @@ public class DElementRetencionDR extends cfd.DElement {
     public DAttributeString getAttTipoFactorDR() { return moAttTipoFactorDR; }
     public DAttributeTypeImporte getAttTasaOCuotaDR() { return moAttTasaOCuotaDR; }
     public DAttributeTypeImporte getAttImporteDR() { return moAttImporteDR; }
+    
+    public void clearImporte() {
+        moAttBaseDR.setDouble(0);
+        moAttImporteDR.setDouble(0);
+    }
+    
+    public void addImporte(final double baseDR, final double importeDR) {
+        moAttBaseDR.setDouble(SLibUtils.roundAmount(moAttBaseDR.getDouble() + baseDR));
+        moAttImporteDR.setDouble(SLibUtils.roundAmount(moAttImporteDR.getDouble() + importeDR));
+    }
 }

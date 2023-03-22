@@ -3196,9 +3196,9 @@ public abstract class DCfdUtils {
         
         // Información global:
 
-        if (SXmlUtils.hasChildElement(doc, "cfdi:InformacionGlobal")) {
+        if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:InformacionGlobal")) {
             cfd.ver40.DElementInformacionGlobal informacionGlobal = new cfd.ver40.DElementInformacionGlobal();
-            Node nodeInformacionGlobal = SXmlUtils.extractElements(doc, "cfdi:InformacionGlobal").item(0);
+            Node nodeInformacionGlobal = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:InformacionGlobal").get(0);
             NamedNodeMap nodeInformacionGlobalMap = nodeInformacionGlobal.getAttributes();
             
             informacionGlobal.getAttPeriodicidad().setString(SXmlUtils.extractAttributeValue(nodeInformacionGlobalMap, "Periodicidad", true));
