@@ -33,7 +33,7 @@ public class DElementRetencionesDR extends cfd.DElement {
         
         for (DElementRetencionDR element : maEltRetencionDRs) {
             if (element.getAttImpuestoDR().getString().equals(impuesto) && 
-                    element.getAttTipoFactorDR().equals(tipoFactor) && 
+                    element.getAttTipoFactorDR().getString().equals(tipoFactor) && 
                     DCfdVer4Utils.compareTasaOCuota(element.getAttTasaOCuotaDR().getDouble(), tasaOCuota)) {
                 retencionDR = element;
                 break;

@@ -33,7 +33,7 @@ public class DElementTrasladosP extends cfd.DElement {
         
         for (DElementTrasladoP element : maEltTrasladoPs) {
             if (element.getAttImpuestoP().getString().equals(impuesto) && 
-                    element.getAttTipoFactorP().equals(tipoFactor) && 
+                    element.getAttTipoFactorP().getString().equals(tipoFactor) && 
                     DCfdVer4Utils.compareTasaOCuota(element.getAttTasaOCuotaP().getDouble(), tasaOCuota)) {
                 trasladoP = element;
                 break;
