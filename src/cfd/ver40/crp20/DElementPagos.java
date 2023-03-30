@@ -115,6 +115,7 @@ public class DElementPagos extends cfd.DElement {
                                     else if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_00 * 100)) {
                                         moEltTotales.addAttTotalTrasladosBaseIVA0(base);
                                         moEltTotales.addAttTotalTrasladosImpuestoIVA0(importe);
+                                        moEltTotales.getAttTotalTrasladosImpuestoIVA0().setCanBeZero(true);
                                     }
                                     break;
                                     
