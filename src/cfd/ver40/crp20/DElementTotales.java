@@ -80,47 +80,38 @@ public class DElementTotales extends cfd.DElement {
         moAttMontoTotalPagos.setDouble(0);
     }
     
-    public void addAttTotalRetencionesIVA(final double retencion) {
+    public void addTotalRetencionesIVA(final double retencion) {
         moAttTotalRetencionesIVA.setDouble(SLibUtils.roundAmount(moAttTotalRetencionesIVA.getDouble() + retencion));
     }
     
-    public void addAttTotalRetencionesISR(final double retencion) { 
+    public void addTotalRetencionesISR(final double retencion) { 
         moAttTotalRetencionesISR.setDouble(SLibUtils.roundAmount(moAttTotalRetencionesISR.getDouble() + retencion));
     }
     
-    public void addAttTotalRetencionesIEPS(final double retencion) {
+    public void addTotalRetencionesIEPS(final double retencion) {
         moAttTotalRetencionesIEPS.setDouble(SLibUtils.roundAmount(moAttTotalRetencionesIEPS.getDouble() + retencion));
     }
     
-    public void addAttTotalTrasladosBaseIVA16(final double base) {
+    public void addTotalTrasladosBaseImpuestoIVA16(final double base, final double impuesto) {
         moAttTotalTrasladosBaseIVA16.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVA16.getDouble() + base));
-    }
-    
-    public void addAttTotalTrasladosImpuestoIVA16(final double impuesto) {
         moAttTotalTrasladosImpuestoIVA16.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosImpuestoIVA16.getDouble() + impuesto));
     }
     
-    public void addAttTotalTrasladosBaseIVA8(final double base) {
+    public void addTotalTrasladosBaseImpuestoIVA8(final double base, final double impuesto) {
         moAttTotalTrasladosBaseIVA8.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVA8.getDouble() + base));
-    }
-    
-    public void addAttTotalTrasladosImpuestoIVA8(final double impuesto) {
         moAttTotalTrasladosImpuestoIVA8.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosImpuestoIVA8.getDouble() + impuesto));
     }
     
-    public void addAttTotalTrasladosBaseIVA0(final double base) {
+    public void addTotalTrasladosBaseImpuestoIVA0(final double base, final double impuesto) {
         moAttTotalTrasladosBaseIVA0.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVA0.getDouble() + base));
-    }
-    
-    public void addAttTotalTrasladosImpuestoIVA0(final double impuesto) {
         moAttTotalTrasladosImpuestoIVA0.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosImpuestoIVA0.getDouble() + impuesto));
     }
     
-    public void addAttTotalTrasladosBaseIVAExento(final double base) {
+    public void addTotalTrasladosBaseIVAExento(final double base) {
         moAttTotalTrasladosBaseIVAExento.setDouble(SLibUtils.roundAmount(moAttTotalTrasladosBaseIVAExento.getDouble() + base));
     }
     
-    public void addAttMontoTotalPagos(final double monto) {
+    public void addMontoTotalPagos(final double monto) {
         moAttMontoTotalPagos.setDouble(SLibUtils.roundAmount(moAttMontoTotalPagos.getDouble() + monto));
     }
 }

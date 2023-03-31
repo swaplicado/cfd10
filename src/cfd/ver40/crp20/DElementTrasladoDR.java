@@ -7,6 +7,7 @@ package cfd.ver40.crp20;
 
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
+import cfd.ver40.DCfdi40Catalogs;
 import sa.lib.SLibUtils;
 
 /**
@@ -46,13 +47,17 @@ public class DElementTrasladoDR extends cfd.DElement {
     public DAttributeTypeImporte getAttTasaOCuotaDR() { return moAttTasaOCuotaDR; }
     public DAttributeTypeImporte getAttImporteDR() { return moAttImporteDR; }
     
-    public void clearImporte() {
+    public void clearBaseDR() {
         moAttBaseDR.setDouble(0);
-        moAttImporteDR.setDouble(0);
     }
     
-    public void addImporte(final double baseDR, final double importeDR) {
+    public void addBaseDR(final double baseDR) {
         moAttBaseDR.setDouble(SLibUtils.roundAmount(moAttBaseDR.getDouble() + baseDR));
-        moAttImporteDR.setDouble(SLibUtils.roundAmount(moAttImporteDR.getDouble() + importeDR));
+    }
+    
+    public void computeImporteDR() {
+        if (moAttTipoFactorDR.getString().equals(DCfdi40Catalogs.FAC_TP_TASA)) {
+            moAttImporteDR.setDouble(SLibUtils.roundAmount(moAttBaseDR.getDouble() * moAttTasaOCuotaDR.getDouble()));
+        }
     }
 }

@@ -93,7 +93,7 @@ public class DElementPagos extends cfd.DElement {
             
             double monto = SLibUtils.roundAmount(pago.getAttMonto().getDouble() * tipoCambio);
             
-            moEltTotales.addAttMontoTotalPagos(monto);
+            moEltTotales.addMontoTotalPagos(monto);
             
             if (pago.getEltImpuestosP() != null) {
                 if (pago.getEltImpuestosP().getEltTrasladosP() != null) {
@@ -105,16 +105,13 @@ public class DElementPagos extends cfd.DElement {
                             switch (trasladoP.getAttTipoFactorP().getString()) {
                                 case DCfdi40Catalogs.FAC_TP_TASA:
                                     if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_16 * 100)) {
-                                        moEltTotales.addAttTotalTrasladosBaseIVA16(base);
-                                        moEltTotales.addAttTotalTrasladosImpuestoIVA16(importe);
+                                        moEltTotales.addTotalTrasladosBaseImpuestoIVA16(base, importe);
                                     }
                                     else if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_08 * 100)) {
-                                        moEltTotales.addAttTotalTrasladosBaseIVA8(base);
-                                        moEltTotales.addAttTotalTrasladosImpuestoIVA8(importe);
+                                        moEltTotales.addTotalTrasladosBaseImpuestoIVA8(base, importe);
                                     }
                                     else if ((int) (trasladoP.getAttTasaOCuotaP().getDouble() * 100) == (int) (DCfdi40Consts.IVA_00 * 100)) {
-                                        moEltTotales.addAttTotalTrasladosBaseIVA0(base);
-                                        moEltTotales.addAttTotalTrasladosImpuestoIVA0(importe);
+                                        moEltTotales.addTotalTrasladosBaseImpuestoIVA0(base, importe);
                                         moEltTotales.getAttTotalTrasladosImpuestoIVA0().setCanBeZero(true);
                                     }
                                     break;
@@ -124,7 +121,7 @@ public class DElementPagos extends cfd.DElement {
                                     break;
                                     
                                 case DCfdi40Catalogs.FAC_TP_EXENTO:
-                                    moEltTotales.addAttTotalTrasladosBaseIVAExento(base);
+                                    moEltTotales.addTotalTrasladosBaseIVAExento(base);
                                     break;
                                     
                                 default:
@@ -140,15 +137,15 @@ public class DElementPagos extends cfd.DElement {
                         
                         switch (retencionP.getAttImpuestoP().getString()) {
                             case DCfdi40Catalogs.IMP_IVA:
-                                moEltTotales.addAttTotalRetencionesIVA(retencion);
+                                moEltTotales.addTotalRetencionesIVA(retencion);
                                 break;
                                 
                             case DCfdi40Catalogs.IMP_ISR:
-                                moEltTotales.addAttTotalRetencionesISR(retencion);
+                                moEltTotales.addTotalRetencionesISR(retencion);
                                 break;
                                 
                             case DCfdi40Catalogs.IMP_IEPS:
-                                moEltTotales.addAttTotalRetencionesIEPS(retencion);
+                                moEltTotales.addTotalRetencionesIEPS(retencion);
                                 break;
                                 
                             default:

@@ -158,6 +158,8 @@ public class DElementPagosPago extends cfd.DElement implements DIntPagosPago {
                     }
                     
                     for (DElementTrasladoDR trasladoDR : doctoRelacionado.getEltImpuestosDR().getEltTrasladosDR().getEltTrasladoDRs()) {
+                        trasladoDR.computeImporteDR();
+                        
                         DElementTrasladoP trasladoP = moEltImpuestosP.getEltTrasladosP().getEltTrasladoP(
                                 trasladoDR.getAttImpuestoDR().getString(), 
                                 trasladoDR.getAttTipoFactorDR().getString(), 
@@ -172,8 +174,7 @@ public class DElementPagosPago extends cfd.DElement implements DIntPagosPago {
                             moEltImpuestosP.getEltTrasladosP().getEltTrasladoPs().add(trasladoP);
                         }
                         
-                        trasladoP.addAttBaseP(SLibUtils.roundAmount(trasladoDR.getAttBaseDR().getDouble() * equivalenciaDR));
-                        trasladoP.addAttImporteP(SLibUtils.roundAmount(trasladoDR.getAttImporteDR().getDouble() * equivalenciaDR));
+                        trasladoP.addBaseImporteP(SLibUtils.roundAmount(trasladoDR.getAttBaseDR().getDouble() / equivalenciaDR), SLibUtils.roundAmount(trasladoDR.getAttImporteDR().getDouble() / equivalenciaDR));
                     }
                 }
                 
@@ -183,6 +184,8 @@ public class DElementPagosPago extends cfd.DElement implements DIntPagosPago {
                     }
                     
                     for (DElementRetencionDR retencionDR : doctoRelacionado.getEltImpuestosDR().getEltRetencionesDR().getEltRetencionDRs()) {
+                        retencionDR.computeImporteDR();
+                        
                         DElementRetencionP retencionP = moEltImpuestosP.getEltRetencionesP().getEltRetencionP(
                                 retencionDR.getAttImpuestoDR().getString());
                         
@@ -193,7 +196,7 @@ public class DElementPagosPago extends cfd.DElement implements DIntPagosPago {
                             moEltImpuestosP.getEltRetencionesP().getEltRetencionPs().add(retencionP);
                         }
                         
-                        retencionP.addAttImporteP(SLibUtils.roundAmount(retencionDR.getAttImporteDR().getDouble() * equivalenciaDR));
+                        retencionP.addImporteP(SLibUtils.roundAmount(retencionDR.getAttImporteDR().getDouble() / equivalenciaDR));
                     }
                 }
             }

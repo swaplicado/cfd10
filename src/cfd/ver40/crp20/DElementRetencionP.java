@@ -31,7 +31,11 @@ public class DElementRetencionP extends cfd.DElement {
     public DAttributeString getAttImpuestoP() { return moAttImpuestoP; }
     public DAttributeTypeImporte getAttImporteP() { return moAttImporteP; }
     
-    public void addAttImporteP(final double importe) {
-        moAttImporteP.setDouble(SLibUtils.roundAmount(moAttImporteP.getDouble() + importe));
+    public void clearImporteP() {
+        moAttImporteP.setDouble(0);
+    }
+    
+    public void addImporteP(final double importeP) {
+        moAttImporteP.setDouble(SLibUtils.roundAmount(moAttImporteP.getDouble() + importeP));
     }
 }

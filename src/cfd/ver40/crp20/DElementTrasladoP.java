@@ -46,11 +46,13 @@ public class DElementTrasladoP extends cfd.DElement {
     public DAttributeTypeImporte getAttTasaOCuotaP() { return moAttTasaOCuotaP; }
     public DAttributeTypeImporte getAttImporteP() { return moAttImporteP; }
     
-    public void addAttBaseP(final double base) {
-        moAttBaseP.setDouble(SLibUtils.roundAmount(moAttBaseP.getDouble() + base));
+    public void clearBaseImporteP() {
+        moAttBaseP.setDouble(0);
+        moAttImporteP.setDouble(0);
     }
     
-    public void addAttImporteP(final double importe) {
-        moAttImporteP.setDouble(SLibUtils.roundAmount(moAttImporteP.getDouble() + importe));
+    public void addBaseImporteP(final double baseP, final double importeP) {
+        moAttBaseP.setDouble(SLibUtils.roundAmount(moAttBaseP.getDouble() + baseP));
+        moAttImporteP.setDouble(SLibUtils.roundAmount(moAttImporteP.getDouble() + importeP));
     }
 }
