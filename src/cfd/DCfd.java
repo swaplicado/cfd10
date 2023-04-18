@@ -19,7 +19,7 @@ import sa.lib.SLibUtils;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public final class DCfd {
 

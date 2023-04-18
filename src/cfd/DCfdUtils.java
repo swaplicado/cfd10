@@ -35,7 +35,7 @@ import sa.lib.xml.SXmlUtils;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public abstract class DCfdUtils {
     
