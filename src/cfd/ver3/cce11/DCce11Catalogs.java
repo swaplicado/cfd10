@@ -18,6 +18,9 @@ public abstract class DCce11Catalogs {
     /** CertificadoOrigen. Sí funge como tal. */
     public static final String CO_FUNGE = "1";
     
+    /** UnidadAduana. Servicio. */
+    public static final String UA_SERV = "99";
+    
     /** CertificadoOrigen. Catálogo de opciones disponibles de este atributo. */
     public static final HashMap<String, String> CertificadoOrigen = new HashMap<>();
     
