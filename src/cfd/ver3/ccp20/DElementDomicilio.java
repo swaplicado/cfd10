@@ -14,7 +14,7 @@ import cfd.DAttributeString;
 public class DElementDomicilio extends cfd.DElement {
     
     private final DAttributeString moAttCalle; 
-    private final DAttributeString moAttNumeroExteror; 
+    private final DAttributeString moAttNumeroExterior; 
     private final DAttributeString moAttNumeroInterior; 
     private final DAttributeString moAttColonia; 
     private final DAttributeString moAttLocalidad; 
@@ -28,7 +28,7 @@ public class DElementDomicilio extends cfd.DElement {
         super("cartaporte20:Domicilio");
         
         moAttCalle = new DAttributeString("Calle", false);
-        moAttNumeroExteror = new DAttributeString("NumeroExterior", false);
+        moAttNumeroExterior = new DAttributeString("NumeroExterior", false);
         moAttNumeroInterior = new DAttributeString("NumeroInterior", false);
         moAttColonia = new DAttributeString("Colonia", false);
         moAttLocalidad = new DAttributeString("Localidad", false);
@@ -39,7 +39,7 @@ public class DElementDomicilio extends cfd.DElement {
         moAttCodigoPostal = new DAttributeString("CodigoPostal", true, 1, 12);
         
         mvAttributes.add(moAttCalle);
-        mvAttributes.add(moAttNumeroExteror);
+        mvAttributes.add(moAttNumeroExterior);
         mvAttributes.add(moAttNumeroInterior);
         mvAttributes.add(moAttColonia);
         mvAttributes.add(moAttLocalidad);
@@ -51,7 +51,7 @@ public class DElementDomicilio extends cfd.DElement {
     }
     
     public DAttributeString getAttCalle() { return moAttCalle; } 
-    public DAttributeString getAttNumeroExteror() { return moAttNumeroExteror; } 
+    public DAttributeString getAttNumeroExterior() { return moAttNumeroExterior; } 
     public DAttributeString getAttNumeroInterior() { return moAttNumeroInterior; } 
     public DAttributeString getAttColonia() { return moAttColonia; } 
     public DAttributeString getAttLocalidad() { return moAttLocalidad; } 
