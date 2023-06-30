@@ -5,7 +5,6 @@
  */
 package cfd.ver3.ccp20;
 
-import cfd.DAttribute;
 import cfd.DAttributeString;
 
 /**
@@ -29,29 +28,4 @@ public class DElementRemolque extends cfd.DElement {
     
     public DAttributeString getAttSubTipoRem() { return moAttSubTipoRem; }
     public DAttributeString getAttPlaca() { return moAttPlaca; }
-    
-    @Override
-    public java.lang.String getElementForXml() throws Exception {
-        validateElement();
-        
-        String xml = "<" + msName;
-
-        for (DAttribute attribute : mvAttributes) {
-            String aux = attribute.getAttributeForXml();
-            xml += aux.isEmpty() ? "" : " " + aux;
-        }
-
-        xml += ">";
-
-        xml += "\n</" + msName + ">";
-
-        return xml;
-    }
-
-    @Override
-    public java.lang.String getElementForOriginalString() throws Exception {
-        String string = super.getElementForOriginalString(); // for element attributes and element validation
-
-        return string;
-    }
 }
