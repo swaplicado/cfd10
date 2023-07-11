@@ -53,7 +53,7 @@ public abstract class DCfdi40Catalogs {
     public static final String XML_CCP_CFG_AUTO = "c_CartaPorte_ConfigAutotransporte";  // XML catalog
     public static final String XML_CCP_REM_STP = "c_CartaPorte_SubTipoRem";             // XML catalog
     public static final String XML_CCP_EDO_33 = "c_CFDI_Estado_33";                     // XML catalog
-    public static final String XML_CCP_EDO_40 = "c_CFDI_Estado_44";                     // XML catalog
+    public static final String XML_CCP_EDO_40 = "c_CFDI_Estado_40";                     // XML catalog
     public static final String XML_CCP_MUN = "c_CartaPorte_Municipio";                  // XML catalog
     public static final String XML_CCP_LOC = "c_CartaPorte_Localidad";                  // XML catalog
     public static final String XML_CCP_COL = "c_CartaPorte_Colonia";                    // XML catalog
