@@ -157,6 +157,8 @@ public abstract class DCfdi40Catalogs {
     public static final String CcpDimensiónCm = "cm";
     public static final String CcpDimensiónPlg = "plg";
     
+    public static final String CcpConfigAutotransporteVl = "VL";
+    
     public static final String TextoSí = "Sí";
     public static final String TextoNo = "No";
     
