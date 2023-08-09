@@ -19,13 +19,15 @@ public class DElementImpuestos extends cfd.DElement {
     private cfd.ver40.DElementImpuestosTraslados moEltOpcImpuestosTraslados;
     
     private final cfd.ver40.DElementComprobante moEltParentComprobante;
+    
+    boolean mbRate = false;
 
     public DElementImpuestos(cfd.ver40.DElementComprobante parentComprobante) {
         super("cfdi:Impuestos");
 
         moAttTotalImpuestosRetenidos = new DAttributeTypeImporte("TotalImpuestosRetenidos", false);
         moAttTotalImpuestosTrasladados = new DAttributeTypeImporte("TotalImpuestosTrasladados", false);
-
+        
         mvAttributes.add(moAttTotalImpuestosRetenidos);
         mvAttributes.add(moAttTotalImpuestosTrasladados);
 
@@ -112,23 +114,26 @@ public class DElementImpuestos extends cfd.DElement {
             if (concepto.getEltOpcConceptoImpuestos() != null) {
                 if (concepto.getEltOpcConceptoImpuestos().getEltOpcImpuestosTrasladados() != null) {
                     for (DElementConceptoImpuestoTraslado impuestoTraslado : concepto.getEltOpcConceptoImpuestos().getEltOpcImpuestosTrasladados().getEltImpuestoTrasladados()) {
-                        imptosTrasladados += impuestoTraslado.getAttImporte().getDouble();
+                        if (!impuestoTraslado.getAttTipoFactor().getString().toLowerCase().equals(DCfdi40Catalogs.FAC_TP_EXENTO.toLowerCase())){
+                            imptosTrasladados += impuestoTraslado.getAttImporte().getDouble();
+                            mbRate = true;
+                        }
                     }
                 }
             }
         }
-        
+                
         if (SLibUtils.round(imptosTrasladados, moAttTotalImpuestosTrasladados.getDecimals()) != SLibUtils.round(moAttTotalImpuestosTrasladados.getDouble(), moAttTotalImpuestosTrasladados.getDecimals())) {
             throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosTrasladados.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
         }
-        
+
         if (moEltOpcImpuestosTraslados != null) {
             imptosTrasladados = 0;
-            
+
             for (DElementImpuestoTraslado impuestoTraslado : moEltOpcImpuestosTraslados.getEltImpuestoTrasladados()) {
                 imptosTrasladados += impuestoTraslado.getAttImporte().getDouble();
             }
-            
+
             if (SLibUtils.round(imptosTrasladados, moAttTotalImpuestosTrasladados.getDecimals()) != SLibUtils.round(moAttTotalImpuestosTrasladados.getDouble(), moAttTotalImpuestosTrasladados.getDecimals())) {
                 throw new Exception(DElement.ERR_MSG_ATTRIB + "'" + moAttTotalImpuestosTrasladados.getName() + "'" + DElement.ERR_MSG_ATTRIB_INVALID);
             }
@@ -142,9 +147,12 @@ public class DElementImpuestos extends cfd.DElement {
         String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            String aux = attribute.getAttributeForXml();
-            if (!aux.isEmpty()) {
-                xml += " " + aux;
+            if (attribute.getName().equals(moAttTotalImpuestosTrasladados.getName()) && mbRate) {
+            
+                String aux = attribute.getAttributeForXml();
+                if (!aux.isEmpty()) {
+                    xml += " " + aux;
+                }
             }
         }
 

@@ -54,6 +54,7 @@ public class DElementComercioExterior extends cfd.DElement {
         moAttObservaciones = new DAttributeString("Observaciones", false, 1, 300);
         moAttTipoCambioUSD = new DAttributeTipoCambio("TipoCambioUSD", false);
         moAttTotalUSD = new DAttributeTypeImporte("TotalUSD", false);
+        moAttTotalUSD.setCanBeZero(true);
 
         mvAttributes.add(moAttVersion);
         mvAttributes.add(moAttMotivoTraslado);
