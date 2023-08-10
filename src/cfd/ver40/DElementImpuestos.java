@@ -147,7 +147,7 @@ public class DElementImpuestos extends cfd.DElement {
         String xml = "<" + msName;
 
         for (DAttribute attribute : mvAttributes) {
-            if (attribute.getName().equals(moAttTotalImpuestosTrasladados.getName()) && mbRate) {
+            if (attribute.getName().equals(moAttTotalImpuestosRetenidos.getName()) || (attribute.getName().equals(moAttTotalImpuestosTrasladados.getName()) && mbRate)) {
             
                 String aux = attribute.getAttributeForXml();
                 if (!aux.isEmpty()) {
