@@ -8,7 +8,6 @@ import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
 import cfd.DElement;
 import cfd.ver3.cce11.DElementComercioExterior;
-import cfd.ver3.ccp20.DElementCartaPorte;
 import cfd.ver3.clf10.DElementLeyendasFiscales;
 import cfd.ver3.nom12.DElementNomina;
 import cfd.ver40.crp20.DElementPagos;
@@ -140,6 +139,21 @@ public class DElementComprobante extends cfd.DElement {
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver3.ccp20.DElementCartaPorte) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
+    
+    private boolean hasComplementCp30() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver4.ccp30.DElementCartaPorte) {
                     has = true;
                     break;
                 }
@@ -314,7 +328,8 @@ public class DElementComprobante extends cfd.DElement {
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/4\" "
                 + (!hasComplementCe11()? "" : DElementComercioExterior.XMLNS + " ")
-                + (!hasComplementCp20()? "" : DElementCartaPorte.XMLNS + " ")
+                + (!hasComplementCp20()? "" : cfd.ver3.ccp20.DElementCartaPorte.XMLNS + " ")
+                + (!hasComplementCp30()? "" : cfd.ver4.ccp30.DElementCartaPorte.XMLNS + " ")
                 + (!hasComplementLf10()? "" : DElementLeyendasFiscales.XMLNS + " ")
                 + (!hasComplementRp20()? "" : DElementPagos.XMLNS + " ")
                 + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS + " ")
@@ -322,7 +337,8 @@ public class DElementComprobante extends cfd.DElement {
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"
                 + (!hasComplementCe11()? "" : " " + DElementComercioExterior.XSI)
-                + (!hasComplementCp20()? "" : " " + DElementCartaPorte.XSI)
+                + (!hasComplementCp20()? "" : " " + cfd.ver3.ccp20.DElementCartaPorte.XSI)
+                + (!hasComplementCp30()? "" : " " + cfd.ver4.ccp30.DElementCartaPorte.XSI)
                 + (!hasComplementLf10()? "" : " " + DElementLeyendasFiscales.XSI)
                 + (!hasComplementRp20()? "" : " " + DElementPagos.XSI)
                 + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
