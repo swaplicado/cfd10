@@ -167,7 +167,200 @@ public abstract class DCfdUtils {
         return elementLf;
     }
     
-    private static cfd.DElement getElementComplementoComercioExterior(final Node nodeCce) throws Exception {
+    private static cfd.DElement getElementComplementoComercioExterior20(final Node nodeCce) throws Exception {
+        cfd.DElement elementCce = null;
+        
+        if (SXmlUtils.hasChildElement(nodeCce, "cce20:ComercioExterior")) {
+            Node node = null;
+            Node nodeChild = null;
+            Node nodeChildGrand = null;
+            Vector<Node> nodeChilds = null;
+            Vector<Node> nodeChildsAux = null;
+            NamedNodeMap namedNodeMapChild = null;
+
+            node = SXmlUtils.extractChildElements(nodeCce, "cce20:ComercioExterior").get(0);
+            namedNodeMapChild = node.getAttributes();
+
+            cfd.ver4.cce20.DElementComercioExterior cce = new cfd.ver4.cce20.DElementComercioExterior();
+
+            cce.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
+            cce.getAttMotivoTraslado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "MotivoTraslado", false));
+            //cce.getAttTipoOperacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoOperacion", true)); // deprecated in version 2.0
+            cce.getAttClaveDePedimento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveDePedimento", true));
+            cce.getAttCertificadoOrigen().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CertificadoOrigen", true)));
+            cce.getAttNumCertificadoOrigen().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumCertificadoOrigen", false));
+            cce.getAttNumeroExportadorConfiable().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroExportadorConfiable", false));
+            cce.getAttIncoterm().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Incoterm", false));
+            //cce.getAttSubdivision().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Subdivision", false))); // deprecated in version 2.0
+            cce.getAttObservaciones().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Observaciones", false));
+            cce.getAttTipoCambioUSD().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoCambioUSD", false)));
+            cce.getAttTotalUSD().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalUSD", false)));
+            
+            // Emisor:
+
+            if (SXmlUtils.hasChildElement(node, "cce20:Emisor")) {
+                cfd.ver4.cce20.DElementEmisor emisor = new cfd.ver4.cce20.DElementEmisor();
+
+                nodeChild = SXmlUtils.extractChildElements(node, "cce20:Emisor").get(0);
+                namedNodeMapChild = nodeChild.getAttributes();
+
+                emisor.getAttCurp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Curp", false));
+
+                if (SXmlUtils.hasChildElement(nodeChild, "cce20:Domicilio")) {
+                    cfd.ver4.cce20.DElementTipoDomicilioNac domicilioNac = new cfd.ver4.cce20.DElementTipoDomicilioNac();
+
+                    nodeChildGrand = SXmlUtils.extractChildElements(nodeChild, "cce20:Domicilio").get(0);
+                    namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                    domicilioNac.getAttCalle().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Calle", true));
+                    domicilioNac.getAttNoExterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroExterior", false));
+                    domicilioNac.getAttNoInterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroInterior", false));
+                    domicilioNac.getAttColonia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Colonia", false));
+                    domicilioNac.getAttLocalidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Localidad", false));
+                    domicilioNac.getAttReferencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Referencia", false));
+                    domicilioNac.getAttMunicipio().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Municipio", false));
+                    domicilioNac.getAttEstado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Estado", true));
+                    domicilioNac.getAttPais().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pais", true));
+                    domicilioNac.getAttCodigoPostal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CodigoPostal", true));
+                    
+                    emisor.setEltDomicilio(domicilioNac);
+                }
+                
+                cce.setEltEmisor(emisor);
+            }
+
+            // Propietario:
+
+            if (SXmlUtils.hasChildElement(node, "cfdi:Propietario")) {
+                cfd.ver4.cce20.DElementPropietario propietario = new cfd.ver4.cce20.DElementPropietario();
+
+                nodeChild = SXmlUtils.extractChildElements(node, "cfdi:Propietario").get(0);
+                namedNodeMapChild = nodeChild.getAttributes();
+
+                propietario.getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTrib", true));
+                propietario.getAttResidenciaFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ResidenciaFiscal", true));
+                
+                cce.setEltPropietario(propietario);
+            }
+
+            // Receptor:
+
+            if (SXmlUtils.hasChildElement(node, "cce20:Receptor")) {
+                cfd.ver4.cce20.DElementReceptor receptor = new cfd.ver4.cce20.DElementReceptor();
+
+                nodeChild = SXmlUtils.extractChildElements(node, "cce20:Receptor").get(0);
+                namedNodeMapChild = nodeChild.getAttributes();
+
+                receptor.getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTrib", false));
+
+                if (SXmlUtils.hasChildElement(nodeChild, "cce20:Domicilio")) {
+                    cfd.ver4.cce20.DElementTipoDomicilioInt domicilioInt = new cfd.ver4.cce20.DElementTipoDomicilioInt();
+
+                    nodeChildGrand = SXmlUtils.extractChildElements(nodeChild, "cce20:Domicilio").get(0);
+                    namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                    domicilioInt.getAttCalle().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Calle", true));
+                    domicilioInt.getAttNoExterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroExterior", false));
+                    domicilioInt.getAttNoInterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroInterior", false));
+                    domicilioInt.getAttColonia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Colonia", false));
+                    domicilioInt.getAttLocalidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Localidad", false));
+                    domicilioInt.getAttReferencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Referencia", false));
+                    domicilioInt.getAttMunicipio().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Municipio", false));
+                    domicilioInt.getAttEstado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Estado", true));
+                    domicilioInt.getAttPais().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pais", true));
+                    domicilioInt.getAttCodigoPostal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CodigoPostal", true));
+                    
+                    receptor.setEltDomicilio(domicilioInt);
+                }
+                
+                cce.setEltReceptor(receptor);
+            }
+            
+            // Destinatario:
+
+            if (SXmlUtils.hasChildElement(node, "cce20:Destinatario")) {
+                cfd.ver4.cce20.DElementDestinatario destinatario = new cfd.ver4.cce20.DElementDestinatario();
+
+                nodeChild = SXmlUtils.extractChildElements(node, "cce20:Destinatario").get(0);
+                namedNodeMapChild = nodeChild.getAttributes();
+
+                destinatario.getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTrib", false));
+                destinatario.getAttNombre().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Nombre", false));
+
+                if (SXmlUtils.hasChildElement(nodeChild, "cce20:Domicilio")) {
+                    cfd.ver4.cce20.DElementTipoDomicilioInt domicilioInt = destinatario.getEltDomicilio();
+
+                    nodeChildGrand = SXmlUtils.extractChildElements(nodeChild, "cce20:Domicilio").get(0);
+                    namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                    domicilioInt.getAttCalle().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Calle", true));
+                    domicilioInt.getAttNoExterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroExterior", false));
+                    domicilioInt.getAttNoInterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroInterior", false));
+                    domicilioInt.getAttColonia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Colonia", false));
+                    domicilioInt.getAttLocalidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Localidad", false));
+                    domicilioInt.getAttReferencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Referencia", false));
+                    domicilioInt.getAttMunicipio().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Municipio", false));
+                    domicilioInt.getAttEstado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Estado", true));
+                    domicilioInt.getAttPais().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pais", true));
+                    domicilioInt.getAttCodigoPostal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CodigoPostal", true));
+                    
+                    //destinatario.setEltDomicilio(domicilioInt); domicilio already instantiated in destinatario instantiation
+                }
+                
+                cce.setEltDestinatario(destinatario);
+            }
+            
+            // Mercancías:
+
+            if (SXmlUtils.hasChildElement(node, "cce20:Mercancias")) {
+                cfd.ver4.cce20.DElementMercancias mercancias = new cfd.ver4.cce20.DElementMercancias();
+
+                nodeChild = SXmlUtils.extractChildElements(node, "cce20:Mercancias").get(0);
+                
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cce20:Mercancia");
+                
+                for (Node child : nodeChilds) {
+                    cfd.ver4.cce20.DElementMercancia mercancia = new cfd.ver4.cce20.DElementMercancia();
+                    
+                    namedNodeMapChild = child.getAttributes();
+                    
+                    mercancia.getAttNoIdentificacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NoIdentificacion", true));
+                    mercancia.getAttFraccionArancelaria().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FraccionArancelaria", false));
+                    mercancia.getAttCantidadAduana().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CantidadAduana", false)));
+                    mercancia.getAttUnidadAduana().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UnidadAduana", false));
+                    mercancia.getAttValorUnitarioAduana().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ValorUnitarioAduana", false)));
+                    mercancia.getAttValorDolares().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ValorDolares", true)));
+                    
+                    if (SXmlUtils.hasChildElement(child, "cce20:DescripcionesEspecificas")) {
+                        nodeChildsAux = SXmlUtils.extractChildElements(child, "cce20:DescripcionesEspecificas");
+                        
+                        for (Node childAux : nodeChildsAux) {
+                            cfd.ver4.cce20.DElementDescripcionesEspecificas descripcionesEspecificas = new cfd.ver4.cce20.DElementDescripcionesEspecificas();
+                            
+                            namedNodeMapChild = childAux.getAttributes();
+                    
+                            descripcionesEspecificas.getAttMarca().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Marca", true));
+                            descripcionesEspecificas.getAttModelo().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Modelo", false));
+                            descripcionesEspecificas.getAttSubModelo().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubModelo", false));
+                            descripcionesEspecificas.getAttNumeroSerie().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroSerie", false));
+                            
+                            mercancia.getEltDescripcionesEspecificas().add(descripcionesEspecificas);
+                        }
+                    }
+                    
+                    mercancias.getEltMercancias().add(mercancia);
+                }
+                
+                cce.setEltMercancias(mercancias);
+            }
+            
+            elementCce = cce;
+        }
+        
+        return elementCce;
+    }
+    
+    private static cfd.DElement getElementComplementoComercioExterior11(final Node nodeCce) throws Exception {
         cfd.DElement elementCce = null;
         
         if (SXmlUtils.hasChildElement(nodeCce, "cce11:ComercioExterior")) {
@@ -3406,7 +3599,7 @@ public abstract class DCfdUtils {
             // Complemento 'Comercio Exterior 1.1':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "cce11:ComercioExterior")) {
-                complemento.getElements().add(getElementComplementoComercioExterior(nodeComplemento));
+                complemento.getElements().add(getElementComplementoComercioExterior11(nodeComplemento));
             }
             
             // Complemento 'Carta Porte 2.0':
@@ -3776,16 +3969,16 @@ public abstract class DCfdUtils {
                 complemento.getElements().add(getElementComplementoLeyendasFiscales(nodeComplemento));
             }
             
+            // Complemento 'Comercio Exterior 2.0':
+
+            if (SXmlUtils.hasChildElement(nodeComplemento, "cce20:ComercioExterior")) {
+                complemento.getElements().add(getElementComplementoComercioExterior20(nodeComplemento));
+            }
+            
             // Complemento 'Comercio Exterior 1.1':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "cce11:ComercioExterior")) {
-                complemento.getElements().add(getElementComplementoComercioExterior(nodeComplemento));
-            }
-            
-            // Complemento 'Carta Porte 2.0':
-            
-            if (SXmlUtils.hasChildElement(nodeComplemento, "cartaporte20:CartaPorte")) {
-                complemento.getElements().add(getElementComplementoCartaPorte20(nodeComplemento));
+                complemento.getElements().add(getElementComplementoComercioExterior11(nodeComplemento));
             }
             
             // Complemento 'Carta Porte 3.0':
@@ -3794,6 +3987,12 @@ public abstract class DCfdUtils {
                 complemento.getElements().add(getElementComplementoCartaPorte30(nodeComplemento));
             }
 
+            // Complemento 'Carta Porte 2.0':
+            
+            if (SXmlUtils.hasChildElement(nodeComplemento, "cartaporte20:CartaPorte")) {
+                complemento.getElements().add(getElementComplementoCartaPorte20(nodeComplemento));
+            }
+            
             // Complemento 'Recepción Pagos 2.0':
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "pago20:Pagos")) {

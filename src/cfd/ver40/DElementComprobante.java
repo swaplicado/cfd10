@@ -7,10 +7,6 @@ import cfd.DAttributeTipoCambio;
 import cfd.DAttributeTypeImporte;
 import cfd.DCfdConsts;
 import cfd.DElement;
-import cfd.ver3.cce11.DElementComercioExterior;
-import cfd.ver3.clf10.DElementLeyendasFiscales;
-import cfd.ver3.nom12.DElementNomina;
-import cfd.ver40.crp20.DElementPagos;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -124,6 +120,21 @@ public class DElementComprobante extends cfd.DElement {
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
                 if (element instanceof cfd.ver3.cce11.DElementComercioExterior) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
+    
+    private boolean hasComplementCe20() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver4.cce20.DElementComercioExterior) {
                     has = true;
                     break;
                 }
@@ -327,21 +338,23 @@ public class DElementComprobante extends cfd.DElement {
         String xml = "<" + msName + " "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/4\" "
-                + (!hasComplementCe11()? "" : DElementComercioExterior.XMLNS + " ")
+                + (!hasComplementCe11()? "" : cfd.ver3.cce11.DElementComercioExterior.XMLNS + " ")
+                + (!hasComplementCe20()? "" : cfd.ver4.cce20.DElementComercioExterior.XMLNS + " ")
                 + (!hasComplementCp20()? "" : cfd.ver3.ccp20.DElementCartaPorte.XMLNS + " ")
                 + (!hasComplementCp30()? "" : cfd.ver4.ccp30.DElementCartaPorte.XMLNS + " ")
-                + (!hasComplementLf10()? "" : DElementLeyendasFiscales.XMLNS + " ")
-                + (!hasComplementRp20()? "" : DElementPagos.XMLNS + " ")
-                + (!isCfdiPayroll() ? "" : DElementNomina.XMLNS + " ")
+                + (!hasComplementLf10()? "" : cfd.ver3.clf10.DElementLeyendasFiscales.XMLNS + " ")
+                + (!hasComplementRp20()? "" : cfd.ver40.crp20.DElementPagos.XMLNS + " ")
+                + (!isCfdiPayroll() ? "" : cfd.ver3.nom12.DElementNomina.XMLNS + " ")
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getNamespace().isEmpty() ? "" : moEltOpcAddenda.getNamespace() + " ")
                 + "xsi:schemaLocation=\""
                 + "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"
-                + (!hasComplementCe11()? "" : " " + DElementComercioExterior.XSI)
+                + (!hasComplementCe11()? "" : " " + cfd.ver3.cce11.DElementComercioExterior.XSI)
+                + (!hasComplementCe20()? "" : " " + cfd.ver4.cce20.DElementComercioExterior.XSI)
                 + (!hasComplementCp20()? "" : " " + cfd.ver3.ccp20.DElementCartaPorte.XSI)
                 + (!hasComplementCp30()? "" : " " + cfd.ver4.ccp30.DElementCartaPorte.XSI)
-                + (!hasComplementLf10()? "" : " " + DElementLeyendasFiscales.XSI)
-                + (!hasComplementRp20()? "" : " " + DElementPagos.XSI)
-                + (!isCfdiPayroll() ? "" : " " + DElementNomina.XSI)
+                + (!hasComplementLf10()? "" : " " + cfd.ver3.clf10.DElementLeyendasFiscales.XSI)
+                + (!hasComplementRp20()? "" : " " + cfd.ver40.crp20.DElementPagos.XSI)
+                + (!isCfdiPayroll() ? "" : " " + cfd.ver3.nom12.DElementNomina.XSI)
                 + (moEltOpcAddenda == null || moEltOpcAddenda.getXsdLocation().isEmpty() ? "" : " " + moEltOpcAddenda.getXsdLocation()) + "\"";
 
         for (DAttribute attribute : mvAttributes) {

@@ -28,11 +28,11 @@ public class DElementComercioExterior extends cfd.DElement {
     private final DAttributeTipoCambio moAttTipoCambioUSD;
     private final DAttributeTypeImporte moAttTotalUSD;
 
-    protected cfd.ver3.cce11.DElementEmisor moEltEmisor;
-    protected cfd.ver3.cce11.DElementPropietario moEltPropietario;
-    protected cfd.ver3.cce11.DElementReceptor moEltReceptor;
-    protected cfd.ver3.cce11.DElementDestinatario moEltDestinatario;
-    protected cfd.ver3.cce11.DElementMercancias moEltMercancias;
+    protected cfd.ver4.cce20.DElementEmisor moEltEmisor;
+    protected cfd.ver4.cce20.DElementPropietario moEltPropietario;
+    protected cfd.ver4.cce20.DElementReceptor moEltReceptor;
+    protected cfd.ver4.cce20.DElementDestinatario moEltDestinatario;
+    protected cfd.ver4.cce20.DElementMercancias moEltMercancias;
 
     public DElementComercioExterior() {
         super("cce20:ComercioExterior");
@@ -103,11 +103,11 @@ public class DElementComercioExterior extends cfd.DElement {
      * Public methods:
      */
 
-    public void setEltEmisor(cfd.ver3.cce11.DElementEmisor o) { moEltEmisor = o; }
-    public void setEltPropietario(cfd.ver3.cce11.DElementPropietario o) { moEltPropietario = o; }
-    public void setEltReceptor(cfd.ver3.cce11.DElementReceptor o) { moEltReceptor = o; }
-    public void setEltDestinatario(cfd.ver3.cce11.DElementDestinatario o) { moEltDestinatario = o; }
-    public void setEltMercancias(cfd.ver3.cce11.DElementMercancias o) { moEltMercancias = o; }
+    public void setEltEmisor(cfd.ver4.cce20.DElementEmisor o) { moEltEmisor = o; }
+    public void setEltPropietario(cfd.ver4.cce20.DElementPropietario o) { moEltPropietario = o; }
+    public void setEltReceptor(cfd.ver4.cce20.DElementReceptor o) { moEltReceptor = o; }
+    public void setEltDestinatario(cfd.ver4.cce20.DElementDestinatario o) { moEltDestinatario = o; }
+    public void setEltMercancias(cfd.ver4.cce20.DElementMercancias o) { moEltMercancias = o; }
     
     public DAttributeString getAttVersion() { return moAttVersion; }
     public DAttributeString getAttMotivoTraslado() { return moAttMotivoTraslado; }
@@ -120,11 +120,11 @@ public class DElementComercioExterior extends cfd.DElement {
     public DAttributeTipoCambio getAttTipoCambioUSD() { return moAttTipoCambioUSD; }
     public DAttributeTypeImporte getAttTotalUSD() { return moAttTotalUSD; }
 
-    public cfd.ver3.cce11.DElementEmisor getEltEmisor() { return moEltEmisor; }
-    public cfd.ver3.cce11.DElementPropietario getEltPropietario() { return moEltPropietario; }
-    public cfd.ver3.cce11.DElementReceptor getEltReceptor() { return moEltReceptor; }
-    public cfd.ver3.cce11.DElementDestinatario getEltDestinatario() { return moEltDestinatario; }
-    public cfd.ver3.cce11.DElementMercancias getEltMercancias() { return moEltMercancias; }
+    public cfd.ver4.cce20.DElementEmisor getEltEmisor() { return moEltEmisor; }
+    public cfd.ver4.cce20.DElementPropietario getEltPropietario() { return moEltPropietario; }
+    public cfd.ver4.cce20.DElementReceptor getEltReceptor() { return moEltReceptor; }
+    public cfd.ver4.cce20.DElementDestinatario getEltDestinatario() { return moEltDestinatario; }
+    public cfd.ver4.cce20.DElementMercancias getEltMercancias() { return moEltMercancias; }
 
     @Override
     public java.lang.String getElementForXml() throws Exception {

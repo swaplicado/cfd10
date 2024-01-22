@@ -6,6 +6,7 @@
 package cfd.ver40;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  *
@@ -134,6 +135,11 @@ public abstract class DCfdi40Catalogs {
     public static final String ClavePeriodicidadPagoSem = "02";
     public static final String ClavePeriodicidadPagoQna = "04";
     public static final String ClavePeriodicidadPagoOtra = "99";
+    public static final String ClaveTipoPercepciónPrimaAntigüedad = "022";
+    public static final String ClaveTipoPercepciónPagosSeparación = "023";
+    public static final String ClaveTipoPercepciónIndemnizaciones = "025";
+    public static final String ClaveTipoPercepciónJubilacionesPensiones = "039";
+    public static final String ClaveTipoPercepciónJubilacionesPensionesParcialidades = "044";
     public static final String ClaveTipoContratoModalidadTrabajoComisión = "08";
     public static final String ClaveTipoRégimenSueldos = "02";
     public static final String ClaveTipoRégimenJubilados = "03";
@@ -170,6 +176,7 @@ public abstract class DCfdi40Catalogs {
     public static final HashMap<String, String> Exportación = new HashMap<>();
     public static final HashMap<String, String> ObjetoImp = new HashMap<>();
     public static final HashMap<String, String> FiguraTransporte = new HashMap<>();
+    public static final HashSet<String> TiposPercepcionesQueNoSonSueldos = new HashSet<>();
     
     static {
         TipoComprobante.put(CFD_TP_I, "Ingreso");
@@ -203,6 +210,12 @@ public abstract class DCfdi40Catalogs {
         FiguraTransporte.put(ClaveFiguraTransportePropietario, "Propietario");
         FiguraTransporte.put(ClaveFiguraTransporteArrendador, "Arrendatario");
         FiguraTransporte.put(ClaveFiguraTransporteNotificado, "Notificado");
+        
+        TiposPercepcionesQueNoSonSueldos.add(ClaveTipoPercepciónPrimaAntigüedad);
+        TiposPercepcionesQueNoSonSueldos.add(ClaveTipoPercepciónPagosSeparación);
+        TiposPercepcionesQueNoSonSueldos.add(ClaveTipoPercepciónIndemnizaciones);
+        TiposPercepcionesQueNoSonSueldos.add(ClaveTipoPercepciónJubilacionesPensiones);
+        TiposPercepcionesQueNoSonSueldos.add(ClaveTipoPercepciónJubilacionesPensionesParcialidades);
     }
     
     public static String[] createClavesPaísesNorteamérica() {
