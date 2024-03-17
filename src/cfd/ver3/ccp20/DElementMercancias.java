@@ -8,7 +8,6 @@ package cfd.ver3.ccp20;
 import cfd.DAttribute;
 import cfd.DAttributeDouble;
 import cfd.DAttributeInteger;
-import cfd.DAttributeString;
 import cfd.DElement;
 import java.util.ArrayList;
 
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 public class DElementMercancias extends cfd.DElement {
 
     private final DAttributeDouble moAttPesoBrutoTotal;
-    private final DAttributeString moAttUnidadPeso;
     private final DAttributeDouble moAttPesoNetoTotal;
     private final DAttributeInteger moAttNumTotalMercancias;
 
@@ -33,12 +31,10 @@ public class DElementMercancias extends cfd.DElement {
         super("cartaporte20:Mercancias");
         
         moAttPesoBrutoTotal = new DAttributeDouble("PesoBrutoTotal", true, 3);
-        moAttUnidadPeso = new DAttributeString("UnidadPeso", true);
         moAttPesoNetoTotal = new DAttributeDouble("PesoNetoTotal", false, 3);
         moAttNumTotalMercancias = new DAttributeInteger("NumTotalMercancias", true);
         
         mvAttributes.add(moAttPesoBrutoTotal);
-        mvAttributes.add(moAttUnidadPeso);
         mvAttributes.add(moAttPesoNetoTotal);
         mvAttributes.add(moAttNumTotalMercancias);
 
@@ -50,7 +46,6 @@ public class DElementMercancias extends cfd.DElement {
     }
     
     public DAttributeDouble getAttPesoBrutoTotal() { return moAttPesoBrutoTotal; }
-    public DAttributeString getAttUnidadPeso() { return moAttUnidadPeso; }
     public DAttributeDouble getAttPesoNetoTotal() { return moAttPesoNetoTotal; }
     public DAttributeInteger getAttNumTotalMercancias() { return moAttNumTotalMercancias; }
 
