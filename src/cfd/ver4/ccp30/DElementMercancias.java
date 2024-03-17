@@ -20,7 +20,6 @@ public class DElementMercancias extends cfd.DElement {
 
     private final DAttributeDouble moAttPesoBrutoTotal;
     private final DAttributeString moAttUnidadPeso;
-    private final DAttributeDouble moAttPesoNetoTotal;
     private final DAttributeInteger moAttNumTotalMercancias;
     private final DAttributeString moAttLogisticaInversaRecoleccionDevolucion;
 
@@ -35,13 +34,11 @@ public class DElementMercancias extends cfd.DElement {
         
         moAttPesoBrutoTotal = new DAttributeDouble("PesoBrutoTotal", true, 3);
         moAttUnidadPeso = new DAttributeString("UnidadPeso", true);
-        moAttPesoNetoTotal = new DAttributeDouble("PesoNetoTotal", false, 3);
         moAttNumTotalMercancias = new DAttributeInteger("NumTotalMercancias", true);
         moAttLogisticaInversaRecoleccionDevolucion = new DAttributeString("LogisticaInversaRecoleccionDevolucion", false, 2, 2);
         
         mvAttributes.add(moAttPesoBrutoTotal);
         mvAttributes.add(moAttUnidadPeso);
-        mvAttributes.add(moAttPesoNetoTotal);
         mvAttributes.add(moAttNumTotalMercancias);
         mvAttributes.add(moAttLogisticaInversaRecoleccionDevolucion);
 
@@ -54,7 +51,6 @@ public class DElementMercancias extends cfd.DElement {
     
     public DAttributeDouble getAttPesoBrutoTotal() { return moAttPesoBrutoTotal; }
     public DAttributeString getAttUnidadPeso() { return moAttUnidadPeso; }
-    public DAttributeDouble getAttPesoNetoTotal() { return moAttPesoNetoTotal; }
     public DAttributeInteger getAttNumTotalMercancias() { return moAttNumTotalMercancias; }
     public DAttributeString getAttLogisticaInversaRecoleccionDevolucion() { return moAttLogisticaInversaRecoleccionDevolucion; }
 
