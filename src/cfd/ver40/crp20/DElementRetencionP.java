@@ -11,7 +11,7 @@ import sa.lib.SLibUtils;
 
 /**
  *
- * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementRetencionP extends cfd.DElement {
 

@@ -5,7 +5,7 @@ import cfd.DElement;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementReceptor extends cfd.DElement {
 

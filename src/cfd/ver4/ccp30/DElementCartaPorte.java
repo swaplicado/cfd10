@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementCartaPorte extends cfd.DElement {
 
@@ -21,8 +21,8 @@ public class DElementCartaPorte extends cfd.DElement {
     private final DAttributeString moAttTranspInternac;
     private final DAttributeString moAttRegimenAduanero;
     private final DAttributeString moAttEntradaSalidaMerc;
-    private final DAttributeString moAttViaEntradaSalida;
     private final DAttributeString moAttPaisOrigenDestino;
+    private final DAttributeString moAttViaEntradaSalida;
     private final DAttributeDouble moAttTotalDistRec;
     private final DAttributeString moAttRegistroISTMO;
     private final DAttributeString moAttUbicacionPoloOrigen;
@@ -41,8 +41,8 @@ public class DElementCartaPorte extends cfd.DElement {
         moAttTranspInternac = new DAttributeString("TranspInternac", true, 2, 2);
         moAttRegimenAduanero = new DAttributeString("RegimenAduanero", false);
         moAttEntradaSalidaMerc = new DAttributeString("EntradaSalidaMerc", false);
-        moAttViaEntradaSalida = new DAttributeString("ViaEntradaSalida", false);
         moAttPaisOrigenDestino = new DAttributeString("PaisOrigenDestino", false);
+        moAttViaEntradaSalida = new DAttributeString("ViaEntradaSalida", false);
         moAttTotalDistRec = new DAttributeDouble("TotalDistRec", false, 3);
         moAttRegistroISTMO = new DAttributeString("RegistroISTMO", false, 2, 2);
         moAttUbicacionPoloOrigen = new DAttributeString("UbicacionPoloOrigen", false);
@@ -53,8 +53,8 @@ public class DElementCartaPorte extends cfd.DElement {
         mvAttributes.add(moAttTranspInternac);
         mvAttributes.add(moAttRegimenAduanero);
         mvAttributes.add(moAttEntradaSalidaMerc);
-        mvAttributes.add(moAttViaEntradaSalida);
         mvAttributes.add(moAttPaisOrigenDestino);
+        mvAttributes.add(moAttViaEntradaSalida);
         mvAttributes.add(moAttTotalDistRec);
         mvAttributes.add(moAttRegistroISTMO);
         mvAttributes.add(moAttUbicacionPoloOrigen);
@@ -100,8 +100,8 @@ public class DElementCartaPorte extends cfd.DElement {
     public DAttributeString getAttTransInternac() { return moAttTranspInternac; }
     public DAttributeString getAttRegimenAduanero() { return moAttRegimenAduanero; }
     public DAttributeString getAttEntradaSalidaMerc() { return moAttEntradaSalidaMerc; }
-    public DAttributeString getAttViaEntradaSalida() { return moAttViaEntradaSalida; }
     public DAttributeString getAttPaisOrigenDestino() { return moAttPaisOrigenDestino; }
+    public DAttributeString getAttViaEntradaSalida() { return moAttViaEntradaSalida; }
     public DAttributeDouble getAttTotalDistRec() { return moAttTotalDistRec; }
     public DAttributeString getAttRegistroISTMO() { return moAttRegistroISTMO; }
     public DAttributeString getAttUbicacionPoloOrigen() { return moAttUbicacionPoloOrigen; }

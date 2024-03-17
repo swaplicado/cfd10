@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementCartaPorte extends cfd.DElement {
 
@@ -19,8 +19,8 @@ public class DElementCartaPorte extends cfd.DElement {
     private final DAttributeString moAttVersion;
     private final DAttributeString moAttTranspInternac;
     private final DAttributeString moAttEntradaSalidaMerc;
-    private final DAttributeString moAttViaEntradaSalida;
     private final DAttributeString moAttPaisOrigenDestino;
+    private final DAttributeString moAttViaEntradaSalida;
     private final DAttributeDouble moAttTotalDistRec;
     
     protected cfd.ver3.ccp20.DElementUbicaciones moEltUbicaciones;
@@ -34,15 +34,15 @@ public class DElementCartaPorte extends cfd.DElement {
         moAttVersion.setString(VERSION);
         moAttTranspInternac = new DAttributeString("TranspInternac", true, 2, 2);
         moAttEntradaSalidaMerc = new DAttributeString("EntradaSalidaMerc", false);
-        moAttViaEntradaSalida = new DAttributeString("ViaEntradaSalida", false);
         moAttPaisOrigenDestino = new DAttributeString("PaisOrigenDestino", false);
+        moAttViaEntradaSalida = new DAttributeString("ViaEntradaSalida", false);
         moAttTotalDistRec = new DAttributeDouble("TotalDistRec", false, 3);
         
         mvAttributes.add(moAttVersion);
         mvAttributes.add(moAttTranspInternac);
         mvAttributes.add(moAttEntradaSalidaMerc);
-        mvAttributes.add(moAttViaEntradaSalida);
         mvAttributes.add(moAttPaisOrigenDestino);
+        mvAttributes.add(moAttViaEntradaSalida);
         mvAttributes.add(moAttTotalDistRec);
         
         moEltUbicaciones = new DElementUbicaciones();
@@ -83,8 +83,8 @@ public class DElementCartaPorte extends cfd.DElement {
     public DAttributeString getAttVersion() { return moAttVersion; }
     public DAttributeString getAttTransInternac() { return moAttTranspInternac; }
     public DAttributeString getAttEntradaSalidaMerc() { return moAttEntradaSalidaMerc; }
-    public DAttributeString getAttViaEntradaSalida() { return moAttViaEntradaSalida; }
     public DAttributeString getAttPaisOrigenDestino() { return moAttPaisOrigenDestino; }
+    public DAttributeString getAttViaEntradaSalida() { return moAttViaEntradaSalida; }
     public DAttributeDouble getAttTotalDistRec() { return moAttTotalDistRec; }
     
     public cfd.ver3.ccp20.DElementUbicaciones getEltUbicaciones() { return moEltUbicaciones; }

@@ -9,7 +9,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementDomicilio extends cfd.DElement {
     

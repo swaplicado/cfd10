@@ -10,7 +10,7 @@ import cfd.DAttributeTypeImporte;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementSeguros extends cfd.DElement {
     

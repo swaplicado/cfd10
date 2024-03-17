@@ -10,7 +10,7 @@ import cfd.DAttributeTypeRfc;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementConceptoACuentaTerceros extends cfd.DElement {
 

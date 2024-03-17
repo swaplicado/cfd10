@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementCfdiRelacionados extends cfd.DElement {
 

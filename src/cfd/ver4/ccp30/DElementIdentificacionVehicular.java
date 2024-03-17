@@ -11,7 +11,7 @@ import cfd.DAttributeString;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementIdentificacionVehicular extends cfd.DElement {
 

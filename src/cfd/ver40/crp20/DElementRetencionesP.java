@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Isabel Danae García Servín, Sergio Abraham Flores Gutiérrez
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementRetencionesP extends cfd.DElement {
     

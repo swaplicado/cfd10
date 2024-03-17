@@ -14,7 +14,7 @@ import sa.lib.xml.SXmlUtils;
 
 /**
  *
- * @author Isabel Danae García Servín
+ * @author Sergio Abraham Flores Gutiérrez, Isabel García
  */
 public class DElementComprobante extends cfd.DElement {
 
