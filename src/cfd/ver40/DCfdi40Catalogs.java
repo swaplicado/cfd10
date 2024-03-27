@@ -48,11 +48,15 @@ public abstract class DCfdi40Catalogs {
     public static final String XML_GBL_MES = "c_Meses";                 // XML catalog
     public static final String XML_OBJ_IMP = "c_ObjetoImp";             // both as XML & this-class-fixed catalog
     
+    public static final String XML_CCP_REG_ADU = "c_CartaPorte_RegimenAduanero";        // XML catalog
     public static final String XML_CCP_MAT_PEL = "c_CartaPorte_MaterialPeligroso";      // XML catalog
     public static final String XML_CCP_EMB_TP = "c_CartaPorte_TipoEmbalaje";            // XML catalog
     public static final String XML_CCP_PERM_TP = "c_CartaPorte_TipoPermiso";            // XML catalog
+    public static final String XML_CCP_MAT_TP = "c_CartaPorte_TipoMateria";             // XML catalog
+    public static final String XML_CCP_DOC_ADU = "c_CartaPorte_DocumentoAduanero";      // XML catalog
     public static final String XML_CCP_CFG_AUTO = "c_CartaPorte_ConfigAutotransporte";  // XML catalog
     public static final String XML_CCP_REM_STP = "c_CartaPorte_SubTipoRem";             // XML catalog
+    public static final String XML_CCP_REG_IST = "c_CartaPorte_RegistroISTMO";          // XML catalog
     public static final String XML_CCP_EDO_33 = "c_CFDI_Estado_33";                     // XML catalog
     public static final String XML_CCP_EDO_40 = "c_CFDI_Estado_40";                     // XML catalog
     public static final String XML_CCP_MUN = "c_CartaPorte_Municipio";                  // XML catalog
