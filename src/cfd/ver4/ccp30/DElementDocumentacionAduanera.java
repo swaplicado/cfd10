@@ -35,7 +35,7 @@ public class DElementDocumentacionAduanera extends cfd.DElement {
     }
     
     public DAttributeString getAttTipoDocumento() { return moAttTipoDocumento; }
-    public DAttributeString getAttPedimento() { return moAttNumPedimento; }
+    public DAttributeString getAttNumPedimento() { return moAttNumPedimento; }
     public DAttributeString getAttIdentDocAduanero() { return moAttIdentDocAduanero; }
     public DAttributeTypeRfc getAttRFCImpo() { return moAttRFCImpo; }
 }

@@ -961,7 +961,7 @@ public abstract class DCfdUtils {
                         cantidadTransporta.getAttIDDestino().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDDestino", true));
                         cantidadTransporta.getAttCvesTransporte().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CvesTransporte", false));
 
-                        mercancia.getEltCantidadTransporta().add(cantidadTransporta);
+                        mercancia.getEltCantidadTransportas().add(cantidadTransporta);
                     }
                 }
                 mercancias.getEltMercancias().add(mercancia);
@@ -973,9 +973,9 @@ public abstract class DCfdUtils {
                         nodeChildGrandAux = nodeChildsAux.get(j);
                         namedNodeMapChild = nodeChildGrandAux.getAttributes();
 
-                        docAduanera.getAttPedimento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pedimento", true));
+                        docAduanera.getAttNumPedimento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pedimento", true));
 
-                        mercancia.getEltPedimentos().add(docAduanera);
+                        mercancia.getEltDocumentacionAduaneras().add(docAduanera);
                     }
                 }
             }

@@ -36,8 +36,8 @@ public class DElementMercancia extends cfd.DElement {
     private final DAttributeString moAttFraccionArancelaria;
     private final DAttributeString moAttUUIDComercioExt;
     
-    private final ArrayList<DElementCantidadTransporta> maEltCantidadTransporta;
-    private ArrayList<DElementDocumentacionAduanera> maEltDocumentacionAduanera;
+    private final ArrayList<DElementCantidadTransporta> maEltCantidadTransportas;
+    private ArrayList<DElementDocumentacionAduanera> maEltDocumentacionAduaneras;
     
     public DElementMercancia() {
         super("cartaporte30:Mercancia");
@@ -78,11 +78,11 @@ public class DElementMercancia extends cfd.DElement {
         mvAttributes.add(moAttFraccionArancelaria);
         mvAttributes.add(moAttUUIDComercioExt);
         
-        maEltCantidadTransporta = new ArrayList<>();
-        maEltDocumentacionAduanera = null;
+        maEltCantidadTransportas = new ArrayList<>();
+        maEltDocumentacionAduaneras = null;
     }
     
-    public void setEltPedimentos(ArrayList<DElementDocumentacionAduanera> array) { maEltDocumentacionAduanera = array; }
+    public void setEltDocumentacionAduaneras(ArrayList<DElementDocumentacionAduanera> array) { maEltDocumentacionAduaneras = array; }
     
     public DAttributeString getAttBienesTransp() { return moAttBienesTransp; }
     public DAttributeString getAttClaveSTCC() { return moAttClaveSTCC; }
@@ -102,8 +102,8 @@ public class DElementMercancia extends cfd.DElement {
     public DAttributeString getAttFraccionArancelaria() { return moAttFraccionArancelaria; }
     public DAttributeString getAttUUIDComercioExt() { return moAttUUIDComercioExt; }
     
-    public ArrayList<DElementCantidadTransporta> getEltCantidadTransporta() { return maEltCantidadTransporta; }
-    public ArrayList<DElementDocumentacionAduanera> getEltPedimentos() { return maEltDocumentacionAduanera; }
+    public ArrayList<DElementCantidadTransporta> getEltCantidadTransportas() { return maEltCantidadTransportas; }
+    public ArrayList<DElementDocumentacionAduanera> getEltDocumentacionAduaneras() { return maEltDocumentacionAduaneras; }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {
@@ -111,7 +111,7 @@ public class DElementMercancia extends cfd.DElement {
 
         // validate child elements:
         
-        if (maEltCantidadTransporta.isEmpty()) {
+        if (maEltCantidadTransportas.isEmpty()) {
             throw new IllegalStateException(DElement.ERR_MSG_NODE + "'" + msName + "'" + DElement.ERR_MSG_NODE_NO_CHILD + "'" + (new DElementCantidadTransporta().getName()) + "'.");
         }
         
@@ -130,13 +130,13 @@ public class DElementMercancia extends cfd.DElement {
 
         xml += ">";
         
-        for (DElementCantidadTransporta element : maEltCantidadTransporta) {
+        for (DElementCantidadTransporta element : maEltCantidadTransportas) {
             String aux = element.getElementForXml();
             xml += aux.isEmpty() ? "" : "\n" + aux;
         }
         
-        if (maEltDocumentacionAduanera != null) {
-            for (DElementDocumentacionAduanera element : maEltDocumentacionAduanera) {
+        if (maEltDocumentacionAduaneras != null) {
+            for (DElementDocumentacionAduanera element : maEltDocumentacionAduaneras) {
                 String aux = element.getElementForXml();
                 xml += aux.isEmpty() ? "" : "\n" + aux;
             }
@@ -151,12 +151,14 @@ public class DElementMercancia extends cfd.DElement {
     public java.lang.String getElementForOriginalString() throws Exception {
         String string = super.getElementForOriginalString(); // for element attributes and element validation
 
-        for (DElementCantidadTransporta element : maEltCantidadTransporta) {
+        for (DElementCantidadTransporta element : maEltCantidadTransportas) {
             string += element.getElementForOriginalString();
         }
 
-        for (DElementDocumentacionAduanera element : maEltDocumentacionAduanera) {
-            string += element.getElementForOriginalString();
+        if (maEltDocumentacionAduaneras != null) {
+            for (DElementDocumentacionAduanera element : maEltDocumentacionAduaneras) {
+                string += element.getElementForOriginalString();
+            }
         }
         
         return string;
