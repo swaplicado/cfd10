@@ -173,6 +173,21 @@ public class DElementComprobante extends cfd.DElement {
         
         return has;
     }
+    
+    private boolean hasComplementCp31() {
+        boolean has = false;
+        
+        if (moEltOpcComplemento != null) {
+            for (DElement element : moEltOpcComplemento.getElements()) {
+                if (element instanceof cfd.ver4.ccp31.DElementCartaPorte) {
+                    has = true;
+                    break;
+                }
+            }
+        }
+        
+        return has;
+    }
 
     private boolean hasComplementLf10() {
         boolean has = false;
@@ -342,6 +357,7 @@ public class DElementComprobante extends cfd.DElement {
                 + (!hasComplementCe20()? "" : cfd.ver4.cce20.DElementComercioExterior.XMLNS + " ")
                 + (!hasComplementCp20()? "" : cfd.ver3.ccp20.DElementCartaPorte.XMLNS + " ")
                 + (!hasComplementCp30()? "" : cfd.ver4.ccp30.DElementCartaPorte.XMLNS + " ")
+                + (!hasComplementCp31()? "" : cfd.ver4.ccp31.DElementCartaPorte.XMLNS + " ")
                 + (!hasComplementLf10()? "" : cfd.ver3.clf10.DElementLeyendasFiscales.XMLNS + " ")
                 + (!hasComplementRp20()? "" : cfd.ver40.crp20.DElementPagos.XMLNS + " ")
                 + (!isCfdiPayroll() ? "" : cfd.ver3.nom12.DElementNomina.XMLNS + " ")
@@ -352,6 +368,7 @@ public class DElementComprobante extends cfd.DElement {
                 + (!hasComplementCe20()? "" : " " + cfd.ver4.cce20.DElementComercioExterior.XSI)
                 + (!hasComplementCp20()? "" : " " + cfd.ver3.ccp20.DElementCartaPorte.XSI)
                 + (!hasComplementCp30()? "" : " " + cfd.ver4.ccp30.DElementCartaPorte.XSI)
+                + (!hasComplementCp31()? "" : " " + cfd.ver4.ccp31.DElementCartaPorte.XSI)
                 + (!hasComplementLf10()? "" : " " + cfd.ver3.clf10.DElementLeyendasFiscales.XSI)
                 + (!hasComplementRp20()? "" : " " + cfd.ver40.crp20.DElementPagos.XSI)
                 + (!isCfdiPayroll() ? "" : " " + cfd.ver3.nom12.DElementNomina.XSI)

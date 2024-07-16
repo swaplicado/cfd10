@@ -1132,6 +1132,297 @@ public abstract class DCfdUtils {
         return elementCcp;
     }
     
+    private static cfd.DElement getElementComplementoCartaPorte31(final Node nodeCcp) throws Exception {
+        cfd.DElement elementCcp = null;
+        
+        if (SXmlUtils.hasChildElement(nodeCcp, "cartaporte31:CartaPorte")) {
+            Node node = null;
+            Node nodeChild = null;
+            Node nodeChildGrand = null;
+            Node nodeChildGrandAux = null;
+            Node nodeChildGrandAuxAux = null;
+            Vector<Node> nodeChilds = null;
+            Vector<Node> nodeChildsAux = null;
+            Vector<Node> nodeChildsAuxAux = null;
+            NamedNodeMap namedNodeMapChild = null;
+
+            node = SXmlUtils.extractChildElements(nodeCcp, "cartaporte31:CartaPorte").get(0);
+            namedNodeMapChild = node.getAttributes();
+
+            cfd.ver4.ccp31.DElementCartaPorte ccp = new cfd.ver4.ccp31.DElementCartaPorte();
+
+            ccp.getAttVersion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Version", true));
+            ccp.getAttIdCCP().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IdCCP", true));
+            ccp.getAttTransInternac().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TranspInternac", true));
+            ccp.getAttEntradaSalidaMerc().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "EntradaSalidaMerc", false));
+            ccp.getAttViaEntradaSalida().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ViaEntradaSalida", false));
+            ccp.getAttPaisOrigenDestino().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PaisOrigenDestino", false));
+            ccp.getAttTotalDistRec().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TotalDistRec", false)));
+            
+            // Ubicaciones:
+
+            cfd.ver4.ccp31.DElementUbicaciones ubicaciones = new cfd.ver4.ccp31.DElementUbicaciones();
+
+            nodeChild = SXmlUtils.extractChildElements(node, "cartaporte31:Ubicaciones").get(0);
+
+            nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:Ubicacion");
+
+            for (int i = 0; i < nodeChilds.size(); i++) {
+                cfd.ver4.ccp31.DElementUbicacion ubicacion = new cfd.ver4.ccp31.DElementUbicacion();
+
+                nodeChildGrand = nodeChilds.get(i);
+                namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                ubicacion.getAttTipoUbicacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoUbicacion", true));
+                ubicacion.getAttIDUbicacion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDUbicacion", false));
+                ubicacion.getAttRFCRemitenteDestinatario().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RFCRemitenteDestinatario", true));
+                ubicacion.getAttNombreRemitenteDestinatario().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NombreRemitenteDestinatario", false));
+                ubicacion.getAttNumRegIdTrib().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTrib", false));
+                ubicacion.getAttResidenciaFiscal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ResidenciaFiscal", false));
+                ubicacion.getAttFechaHoraSalidaLlegada().setDatetime(SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FechaHoraSalidaLlegada", true).replaceAll("T", " ")));
+                ubicacion.getAttDistanciaRecorrida().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "DistanciaRecorrida", false)));
+
+                if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte31:Domicilio")) {
+                    nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:Domicilio");
+                    for (int j = 0; j < nodeChildsAux.size(); j++) {
+                        cfd.ver4.ccp31.DElementDomicilio domicilio = ubicacion.getEltDomicilio();
+                        nodeChildGrandAux = nodeChildsAux.get(j);
+                        namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                        domicilio.getAttCalle().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Calle", false));
+                        domicilio.getAttNumeroExterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroExterior", false));
+                        domicilio.getAttNumeroInterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroInterior", false));
+                        domicilio.getAttColonia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Colonia", false));
+                        domicilio.getAttLocalidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Localidad", false));
+                        domicilio.getAttReferencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Referencia", false));
+                        domicilio.getAttMunicipio().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Municipio", false));
+                        domicilio.getAttEstado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Estado", true));
+                        domicilio.getAttPais().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pais", true));
+                        domicilio.getAttCodigoPostal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CodigoPostal", true));
+                    }
+                }
+                ubicaciones.getEltUbicaciones().add(ubicacion);
+            }
+            ccp.setEltUbicaciones(ubicaciones);
+        
+            
+            // Mercancias:
+
+            cfd.ver4.ccp31.DElementMercancias mercancias = new cfd.ver4.ccp31.DElementMercancias();
+
+            nodeChild = SXmlUtils.extractChildElements(node, "cartaporte31:Mercancias").get(0);
+            namedNodeMapChild = nodeChild.getAttributes();
+
+            mercancias.getAttPesoBrutoTotal().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PesoBrutoTotal", true)));
+            mercancias.getAttUnidadPeso().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UnidadPeso", true));
+            mercancias.getAttNumTotalMercancias().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumTotalMercancias", true)));
+            mercancias.getAttLogisticaInversaRecoleccionDevolucion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "LogisticaInversaRecoleccionDevolucion", false));
+
+            nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:Mercancia");
+
+            for (int i = 0; i < nodeChilds.size(); i++) {
+                cfd.ver4.ccp31.DElementMercancia mercancia = new cfd.ver4.ccp31.DElementMercancia();
+
+                nodeChildGrand = nodeChilds.get(i);
+                namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                mercancia.getAttBienesTransp().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "BienesTransp", true));
+                mercancia.getAttDescripcion().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Descripcion", true));
+                mercancia.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Cantidad", true)));
+                mercancia.getAttClaveUnidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ClaveUnidad", true));
+                mercancia.getAttUnidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Unidad", false));
+                mercancia.getAttMaterialPeligroso().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "MaterialPeligroso", false));
+                mercancia.getAttCveMaterialPeligroso().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CveMaterialPeligroso", false));
+                mercancia.getAttEmbalaje().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Embalaje", false));
+                mercancia.getAttPesoEnKg().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PesoEnKg", true)));
+                mercancia.getAttValorMercancia().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ValorMercancia", false)));
+                mercancia.getAttMoneda().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Moneda", false));
+                mercancia.getAttFraccionArancelaria().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "FraccionArancelaria", false));
+                mercancia.getAttUUIDComercioExt().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "UUIDComercioExt", false));
+
+                if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte31:CantidadTransporta")) {
+                    nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:CantidadTransporta");
+                    for (int j = 0; j < nodeChildsAux.size(); j++) {
+                        cfd.ver4.ccp31.DElementCantidadTransporta cantidadTransporta = new cfd.ver4.ccp31.DElementCantidadTransporta();
+                        nodeChildGrandAux = nodeChildsAux.get(j);
+                        namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                        cantidadTransporta.getAttCantidad().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Cantidad", true)));
+                        cantidadTransporta.getAttIDOrigen().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDOrigen", true));
+                        cantidadTransporta.getAttIDDestino().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "IDDestino", true));
+                        cantidadTransporta.getAttCvesTransporte().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CvesTransporte", false));
+
+                        mercancia.getEltCantidadTransportas().add(cantidadTransporta);
+                    }
+                }
+                mercancias.getEltMercancias().add(mercancia);
+
+                if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte31:Pedimentos")) {
+                    nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:Pedimentos");
+                    for (int j = 0; j < nodeChildsAux.size(); j++) {
+                        cfd.ver4.ccp31.DElementDocumentacionAduanera docAduanera = new cfd.ver4.ccp31.DElementDocumentacionAduanera();
+                        nodeChildGrandAux = nodeChildsAux.get(j);
+                        namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                        docAduanera.getAttNumPedimento().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pedimento", true));
+
+                        mercancia.getEltDocumentacionAduaneras().add(docAduanera);
+                    }
+                }
+            }
+            if (SXmlUtils.hasChildElement(nodeChild, "cartaporte31:Autotransporte")) {
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:Autotransporte");
+                for (int i = 0; i < nodeChilds.size(); i++) {
+                    cfd.ver4.ccp31.DElementAutotransporte autotransporte = mercancias.getEltAutotransporte();
+
+                    nodeChildGrand = nodeChilds.get(i);
+                    namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                    autotransporte.getAttPermSCT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PermSCT", true));
+                    autotransporte.getAttNumPermisoSCT().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumPermisoSCT", true));
+
+                    nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:IdentificacionVehicular");
+                    for (int j = 0; j < nodeChildsAux.size(); j++) {
+                        cfd.ver4.ccp31.DElementIdentificacionVehicular identificacionVehicular = autotransporte.getEltIdentificacionVehicular();
+                        nodeChildGrandAux = nodeChildsAux.get(j);
+                        namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                        identificacionVehicular.getAttConfigVehicular().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ConfigVehicular", true));
+                        identificacionVehicular.getAttPlacaVM().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PlacaVM", true));
+                        identificacionVehicular.getAttAnioModeloVM().setInteger(SLibUtils.parseInt(SXmlUtils.extractAttributeValue(namedNodeMapChild, "AnioModeloVM", true)));
+                        identificacionVehicular.getAttPesoBrutoVehicular().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PesoBrutoVehicular", true)));
+
+                    }
+
+                    if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte31:Remolques")) {
+                        nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:Remolques");
+                        for (int j = 0; j < nodeChildsAux.size(); j++) {
+                            cfd.ver4.ccp31.DElementRemolques remolques = new cfd.ver4.ccp31.DElementRemolques();
+                            nodeChildGrandAux = nodeChildsAux.get(j);
+
+                            nodeChildsAuxAux = SXmlUtils.extractChildElements(nodeChildGrandAux, "cartaporte31:Remolque");
+                            for (int k = 0; k < nodeChildsAuxAux.size(); k++) {
+                                cfd.ver4.ccp31.DElementRemolque remolque = new cfd.ver4.ccp31.DElementRemolque();
+                                nodeChildGrandAuxAux = nodeChildsAuxAux.get(k);
+
+                                namedNodeMapChild = nodeChildGrandAuxAux.getAttributes();
+
+                                remolque.getAttSubTipoRem().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "SubTipoRem", true));
+                                remolque.getAttPlaca().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Placa", true));
+
+                                remolques.getEltRemolques().add(remolque);
+                            }
+
+                            autotransporte.setEltRemolques(remolques);
+                        }
+                    }
+                
+                    nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:Seguros");
+                    for (int j = 0; j < nodeChildsAux.size(); j++) {
+                        cfd.ver4.ccp31.DElementSeguros seguros = autotransporte.getEltSeguros();
+                        nodeChildGrandAux = nodeChildsAux.get(j);
+                        namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                        seguros.getAttAseguraRespCivil().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "AseguraRespCivil", true));
+                        seguros.getAttPolizaRespCivil().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PolizaRespCivil", true));
+                        seguros.getAttAseguraMedAmbiente().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "AseguraMedAmbiente", false));
+                        seguros.getAttPolizaMedAmbiente().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PolizaMedAmbiente", false));
+                        seguros.getAttAseguraCarga().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "AseguraCarga", false));
+                        seguros.getAttPolizaCarga().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PolizaCarga", false));
+                        seguros.getAttPrimaSeguro().setDouble(SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(namedNodeMapChild, "PrimaSeguro", false)));
+                    }
+                }
+            }
+
+            if (SXmlUtils.hasChildElement(nodeChild, "cartaporte31:TransporteMaritimo")) {
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:TransporteMaritimo");
+                cfd.ver4.ccp31.DElementTransporteMaritimo maritimo = new cfd.ver4.ccp31.DElementTransporteMaritimo();
+                maritimo.getAttValor().setString(nodeChilds.toString());
+                mercancias.setEltTransporteMaritimo(maritimo);
+            }
+            if (SXmlUtils.hasChildElement(nodeChild, "cartaporte31:TransporteAereo")) {
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:TransporteAereo");
+                cfd.ver4.ccp31.DElementTransporteAereo aereo = new cfd.ver4.ccp31.DElementTransporteAereo();
+                aereo.getAttValor().setString(nodeChilds.toString());
+                mercancias.setEltTransporteAereo(aereo);
+            }
+            if (SXmlUtils.hasChildElement(nodeChild, "cartaporte31:TransporteFerroviario")) {
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:TransporteFerroviario");
+                cfd.ver4.ccp31.DElementTransporteFerroviario ferroviario = new cfd.ver4.ccp31.DElementTransporteFerroviario();
+                ferroviario.getAttValor().setString(nodeChilds.toString());
+                mercancias.setEltTransporteFerroviario(ferroviario);
+            }
+            
+            ccp.setEltMercancias(mercancias);
+            
+            //Figura Transporte
+
+            if (SXmlUtils.hasChildElement(node, "cartaporte31:FiguraTransporte")) {
+                cfd.ver4.ccp31.DElementFiguraTransporte figuraTransporte = new cfd.ver4.ccp31.DElementFiguraTransporte();
+
+                nodeChild = SXmlUtils.extractChildElements(node, "cartaporte31:FiguraTransporte").get(0);
+                
+                nodeChilds = SXmlUtils.extractChildElements(nodeChild, "cartaporte31:TiposFigura");
+
+                for (int i = 0; i < nodeChilds.size(); i++) {
+                    cfd.ver4.ccp31.DElementTiposFigura tiposFigura = new cfd.ver4.ccp31.DElementTiposFigura();
+
+                    nodeChildGrand = nodeChilds.get(i);
+                    namedNodeMapChild = nodeChildGrand.getAttributes();
+
+                    tiposFigura.getAttTipoFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "TipoFigura", true));
+                    tiposFigura.getAttRFCFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "RFCFigura", false));
+                    tiposFigura.getAttNumLicencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumLicencia", false));
+                    tiposFigura.getAttNombreFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NombreFigura", true));
+                    tiposFigura.getAttNumRegIdTribFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumRegIdTribFigura", false));
+                    tiposFigura.getAttResidenciaFiscalFigura().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ResidenciaFiscalFigura", false));
+                    
+                    if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte31:Domicilio")) {
+                        nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:Domicilio");
+                        for (int j = 0; j < nodeChildsAux.size(); j++) {
+                            cfd.ver4.ccp31.DElementDomicilio domicilio = new cfd.ver4.ccp31.DElementDomicilio();
+                            nodeChildGrandAux = nodeChildsAux.get(j);
+                            namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                            domicilio.getAttCalle().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Calle", false));
+                            domicilio.getAttNumeroExterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroExterior", false));
+                            domicilio.getAttNumeroInterior().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "NumeroInterior", false));
+                            domicilio.getAttColonia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Colonia", false));
+                            domicilio.getAttLocalidad().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Localidad", false));
+                            domicilio.getAttReferencia().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Referencia", false));
+                            domicilio.getAttMunicipio().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Municipio", false));
+                            domicilio.getAttEstado().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Estado", true));
+                            domicilio.getAttPais().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "Pais", true));
+                            domicilio.getAttCodigoPostal().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "CodigoPostal", true));
+
+                            tiposFigura.setEltDomicilio(domicilio);
+                        }
+                    }
+                    
+                    if (SXmlUtils.hasChildElement(nodeChildGrand, "cartaporte31:PartesTransporte")) {
+                        nodeChildsAux = SXmlUtils.extractChildElements(nodeChildGrand, "cartaporte31:PartesTransporte");
+                        for (int j = 0; j < nodeChildsAux.size(); j++) {
+                            cfd.ver4.ccp31.DElementPartesTransporte partesTransporte = new cfd.ver4.ccp31.DElementPartesTransporte();
+                            nodeChildGrandAux = nodeChildsAux.get(j);
+                            namedNodeMapChild = nodeChildGrandAux.getAttributes();
+
+                            partesTransporte.getAttParteTransporte().setString(SXmlUtils.extractAttributeValue(namedNodeMapChild, "ParteTransporte", true));
+
+                            tiposFigura.getEltPartesTransporte().add(partesTransporte);
+                        }
+                    }
+                   
+                    figuraTransporte.getEltTiposFigura().add(tiposFigura);
+                }
+                ccp.setEltFiguraTransporte(figuraTransporte);
+            }
+            
+            elementCcp = ccp;
+        }
+        
+        return elementCcp;
+    }
+    
     @Deprecated
     private static cfd.DElement getElementComplementoPagos10(final Node nodePagos) throws Exception {
         cfd.DElement elementPagos = null;
@@ -3979,6 +4270,12 @@ public abstract class DCfdUtils {
 
             if (SXmlUtils.hasChildElement(nodeComplemento, "cce11:ComercioExterior")) {
                 complemento.getElements().add(getElementComplementoComercioExterior11(nodeComplemento));
+            }
+            
+            // Complemento 'Carta Porte 3.1':
+            
+            if (SXmlUtils.hasChildElement(nodeComplemento, "cartaporte31:CartaPorte")) {
+                complemento.getElements().add(getElementComplementoCartaPorte31(nodeComplemento));
             }
             
             // Complemento 'Carta Porte 3.0':
