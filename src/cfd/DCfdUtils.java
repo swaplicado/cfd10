@@ -33,6 +33,13 @@ public abstract class DCfdUtils {
     public static final DecimalFormat AmountFormat = new DecimalFormat("#." + SLibUtils.textRepeat("0", SLibUtils.getDecimalFormatAmount().getMaximumFractionDigits()));
     public static final DecimalFormat CfdNumberFormat = new DecimalFormat(SLibUtils.textRepeat("0", DCfdConsts.LEN_CFD_NUM));   // to be used in composing XML file name
     
+    /** Check if given RFC is one of the generic ones.
+     * @param rfc RFC to be checked.
+     */
+    public static boolean isRfcGeneric(final String rfc) {
+        return rfc.equals(DCfdConsts.RFC_GEN_NAC) || rfc.equals(DCfdConsts.RFC_GEN_INT);
+    }
+    
     /**
      * Clean all XML entites considered in sa.lib.SLibUtils.XmlEntityNamesMap from supplied XML String.
      * @param xml Supplied XML String.
