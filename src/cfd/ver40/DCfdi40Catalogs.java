@@ -74,6 +74,7 @@ public abstract class DCfdi40Catalogs {
     
     public static final String FDP_EFECTIVO = "01";
     public static final String FDP_CHEQUE = "02";
+    public static final String FDP_TRANSFERENCIA = "03";
     public static final String FDP_COMPENSACION = "17";
     public static final String FDP_APLIC_ANTICIPOS = "30";
     public static final String FDP_POR_DEF = "99"; // Por definir
