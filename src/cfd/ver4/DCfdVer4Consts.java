@@ -14,6 +14,7 @@ import java.util.HashMap;
 public abstract class DCfdVer4Consts {
     
     public static final int LEN_UUID = 36;
+    public static final int LEN_UUID_1ST_SEGMENT = 8;
     
     public static final double VER_NOM_11 = 1.1;
     public static final double VER_NOM_12 = 1.2;
