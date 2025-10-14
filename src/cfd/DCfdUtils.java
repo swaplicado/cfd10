@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -32,6 +33,14 @@ public abstract class DCfdUtils {
     
     public static final DecimalFormat AmountFormat = new DecimalFormat("#." + SLibUtils.textRepeat("0", SLibUtils.getDecimalFormatAmount().getMaximumFractionDigits()));
     public static final DecimalFormat CfdNumberFormat = new DecimalFormat(SLibUtils.textRepeat("0", DCfdConsts.LEN_CFD_NUM));   // to be used in composing XML file name
+    
+    /**
+     * Creates regex Pattern for RFC validation.
+     * @return Regex Pattern.
+     */
+    public static Pattern createRfcPattern() {
+        return Pattern.compile("(?i)^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$");
+    }
     
     /** Check if given RFC is one of the generic ones.
      * @param rfc RFC to be checked.
