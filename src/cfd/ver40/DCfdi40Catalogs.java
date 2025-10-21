@@ -5,6 +5,7 @@
  */
 package cfd.ver40;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -103,6 +104,19 @@ public abstract class DCfdi40Catalogs {
     public static final String ClaveUsoCfdiPagos = "CP01";  // Pagos
     public static final String ClaveUsoCfdiNómina = "CN01"; // Nómina
     public static final String ClaveUsoCfdiDevolucionesDescuentos = "G02";  // Devoluciones, descuentos o bonificaciones
+    
+    public static final ArrayList<String> ClavesUsoCfdiActivoFijo = new ArrayList<>();
+    
+    static {
+        ClavesUsoCfdiActivoFijo.add("I01");
+        ClavesUsoCfdiActivoFijo.add("I02");
+        ClavesUsoCfdiActivoFijo.add("I03");
+        ClavesUsoCfdiActivoFijo.add("I04");
+        ClavesUsoCfdiActivoFijo.add("I05");
+        ClavesUsoCfdiActivoFijo.add("I06");
+        ClavesUsoCfdiActivoFijo.add("I07");
+        ClavesUsoCfdiActivoFijo.add("I08");
+    }
     
     public static final String ClavePaísMex = "MEX";
     public static final String ClavePaísUsa = "USA";
