@@ -3,7 +3,7 @@ package cfd.ver40.crp20;
 import cfd.DAttribute;
 import cfd.DAttributeInteger;
 import cfd.DAttributeString;
-import cfd.DAttributeTipoCambio6d;
+import cfd.DAttributeTipoCambio10d;
 import cfd.DAttributeTypeImporte;
 import cfd.DElement;
 import cfd.ver33.DCfdi33Consts;
@@ -24,7 +24,7 @@ public class DElementDoctoRelacionado extends cfd.DElement implements DIntDoctoR
     private final DAttributeString moAttSerie;
     private final DAttributeString moAttFolio;
     private final DAttributeString moAttMonedaDR;
-    private final DAttributeTipoCambio6d moAttEquivalenciaDR;
+    private final DAttributeTipoCambio10d moAttEquivalenciaDR;
     private final DAttributeInteger moAttNumParcialidad;
     private final DAttributeTypeImporte moAttImpSaldoAnt;
     private final DAttributeTypeImporte moAttImpPagado;
@@ -43,7 +43,7 @@ public class DElementDoctoRelacionado extends cfd.DElement implements DIntDoctoR
         moAttSerie = new DAttributeString("Serie", false, 1, 25);       // text from 1 to 25 characters
         moAttFolio = new DAttributeString("Folio", false, 1, 40);       // text from 1 to 40 characters
         moAttMonedaDR = new DAttributeString("MonedaDR", true, 3, 3);   // c_Moneda catalog codes of 3 fixed digits
-        moAttEquivalenciaDR = new DAttributeTipoCambio6d("EquivalenciaDR", false);
+        moAttEquivalenciaDR = new DAttributeTipoCambio10d("EquivalenciaDR", false);
         moAttNumParcialidad = new DAttributeInteger("NumParcialidad", true);
         moAttImpSaldoAnt = new DAttributeTypeImporte("ImpSaldoAnt", true);
         moAttImpPagado = new DAttributeTypeImporte("ImpPagado", true);
@@ -94,7 +94,7 @@ public class DElementDoctoRelacionado extends cfd.DElement implements DIntDoctoR
     @Override
     public DAttributeString getAttMonedaDR() { return moAttMonedaDR; }
     @Override
-    public DAttributeTipoCambio6d getAttEquivalenciaDR() { return moAttEquivalenciaDR; }
+    public DAttributeTipoCambio10d getAttEquivalenciaDR() { return moAttEquivalenciaDR; }
     @Override
     public DAttributeInteger getAttNumParcialidad() { return moAttNumParcialidad; }
     @Override

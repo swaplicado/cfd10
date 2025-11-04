@@ -13,7 +13,7 @@ import cfd.ver40.DCfdi40Catalogs;
  *
  * @author Sergio Abraham Flores Gutiérrez
  */
-public class DElementDoctoRelacionado extends cfd.DElement implements cfd.ver40.crp20.DIntDoctoRelacionado {
+public class DElementDoctoRelacionado extends cfd.DElement implements DIntDoctoRelacionado {
 
     /*
      * Attributes' declaration-order according to CRP 1.0 specification
