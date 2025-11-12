@@ -141,6 +141,7 @@ public abstract class DCfdi40Catalogs {
     public static final String ClaveProdServServsFacturacion = "84111506";
     
     public static final String ClaveUnidadAct = "ACT";
+    public static final String ClaveUnidadServicio = "E48";
     
     public static final String ConceptoPago = "Pago";
     public static final String ConceptoSueldosSalarios = "Pago de nómina";
