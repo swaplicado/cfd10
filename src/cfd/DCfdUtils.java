@@ -14,6 +14,7 @@ import cfd.ver40.DElementConceptoACuentaTerceros;
 import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Pattern;
@@ -4340,6 +4341,60 @@ public abstract class DCfdUtils {
         return comprobante;
     }
     
+    public static CfdEssentials getCfdi40Essentials(final String xml) throws Exception {
+        // Comprobante:
+
+        Document doc = SXmlUtils.parseDocument(xml);
+        Node nodeComprobante = SXmlUtils.extractElements(doc, "cfdi:Comprobante").item(0);
+        NamedNodeMap nodeComprobanteMap = nodeComprobante.getAttributes();
+        
+        float version = SLibUtils.parseFloat(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Version", true));
+        String tipoComprobante = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoDeComprobante", true);
+        String serie = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Serie", false);
+        String folio = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Folio", false);
+        Date fecha = SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Fecha", true).replaceAll("T", " "));
+        double total = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Total", true));
+        String moneda = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Moneda", true);
+        double tipoCambio = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoCambio", false));
+        String metodoPago = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "MetodoPago", false);
+        
+        // Emisor:
+
+        Node nodeEmisor = SXmlUtils.extractElements(doc, "cfdi:Emisor").item(0);
+        NamedNodeMap nodeEmisorMap = nodeEmisor.getAttributes();
+
+        String emisor = SXmlUtils.extractAttributeValue(nodeEmisorMap, "Nombre", true);
+        String emisorRfc = SXmlUtils.extractAttributeValue(nodeEmisorMap, "Rfc", true);
+
+        // Receptor:
+
+        Node nodeReceptor = SXmlUtils.extractElements(doc, "cfdi:Receptor").item(0);
+        NamedNodeMap nodeReceptorMap = nodeReceptor.getAttributes();
+
+        String receptor = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Rfc", true);
+        String receptorRfc = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", true);
+        String usoCFDI = SXmlUtils.extractAttributeValue(nodeReceptorMap, "UsoCFDI", true);
+        
+        String uuid = "";
+
+        // Complemento:
+        
+        if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Complemento")) {
+            Node nodeComplemento = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Complemento").get(0);
+            
+            // Complemento 'Timbrado':
+
+            if (SXmlUtils.hasChildElement(nodeComplemento, "tfd:TimbreFiscalDigital")) {
+                Node nodeTfd = SXmlUtils.extractChildElements(nodeComplemento, "tfd:TimbreFiscalDigital").get(0);
+                NamedNodeMap namedNodeMapTfd = nodeTfd.getAttributes();
+
+                uuid = SXmlUtils.extractAttributeValue(namedNodeMapTfd, "UUID", true);
+            }
+        }
+        
+        return new CfdEssentials(version, tipoComprobante, serie, folio, fecha, total, moneda, tipoCambio, metodoPago, emisorRfc, emisor, receptorRfc, receptor, usoCFDI, uuid);
+    }
+    
     public static float getCfdiVersion(final String xml) throws Exception {
         DocumentBuilder docBuilder;
         Document doc;
@@ -4364,7 +4419,7 @@ public abstract class DCfdUtils {
                 version = SLibUtils.parseFloat(SXmlUtils.extractAttributeValue(namedNodeMap, "Version", true));
             }
             catch(Exception e) {
-                
+                SLibUtils.printException(DCfdUtils.class.getName(), e);
             }
         }
         
@@ -4397,5 +4452,53 @@ public abstract class DCfdUtils {
         }
         
         return version;
+    }
+    
+    public static class CfdEssentials {
+        
+        public float Version;
+        public String TipoComprobante;
+        public String Serie;
+        public String Folio;
+        public Date Fecha;
+        public double Total;
+        public String Moneda;
+        public double TipoCambio;
+        public String MetodoPago;
+        public String EmisorRfc;
+        public String Emisor;
+        public String ReceptorRfc;
+        public String Receptor;
+        public String UsoCFDI;
+        public String Uuid;
+        
+        public CfdEssentials(final float version, final String tipoComprobante, final String serie, final String folio, final Date fecha, 
+                final double total, final String moneda, final double tipoCambio, final String metodoPago, 
+                final String emisorRfc, final String emisor, final String receptorRfc, final String receptor, final String usoCFDI, final String uuid) {
+            Version = version;
+            TipoComprobante = tipoComprobante;
+            Serie = serie;
+            Folio = folio;
+            Fecha = fecha;
+            Total = total;
+            Moneda = moneda;
+            TipoCambio = tipoCambio;
+            MetodoPago = metodoPago;
+            EmisorRfc = emisorRfc;
+            Emisor = emisor;
+            ReceptorRfc = receptorRfc;
+            Receptor = receptor;
+            UsoCFDI = usoCFDI;
+            Uuid = uuid;
+        }
+        
+        public String composeFolio() {
+            return Serie + (Serie.isEmpty() ? "" : "-") + Folio;
+        }
+        
+        public String composeEffectiveFolio() {
+            String folio = composeFolio();
+            return !folio.isEmpty() ? folio : Uuid;
+        }
     }
 }
