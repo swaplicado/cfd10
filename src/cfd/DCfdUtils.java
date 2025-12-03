@@ -4177,16 +4177,14 @@ public abstract class DCfdUtils {
 
             if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:CuentaPredial")) {
                 if (SXmlUtils.hasChildElement(childNodeConceptos.get(i), "cfdi:CuentaPredial")) {
-                    ArrayList<cfd.ver40.DElementConceptoCuentaPredial> arrCuentaPredial = new ArrayList<>();
                     for (Node nodeCuentaPredial : SXmlUtils.extractChildElements(childNodeConceptos.get(i), "cfdi:CuentaPredial")) {
                         NamedNodeMap nodeCuentaPredialMap = nodeCuentaPredial.getAttributes();
 
-                        cfd.ver40.DElementConceptoCuentaPredial predial = new cfd.ver40.DElementConceptoCuentaPredial();
-                        predial.getAttNumero().setString(SXmlUtils.extractAttributeValue(nodeCuentaPredialMap, "Numero", true));
-                        arrCuentaPredial.add(predial);
+                        cfd.ver40.DElementConceptoCuentaPredial cuentaPredial = new cfd.ver40.DElementConceptoCuentaPredial();
+                        cuentaPredial.getAttNumero().setString(SXmlUtils.extractAttributeValue(nodeCuentaPredialMap, "Numero", true));
+                        
+                        concepto.getEltOpcConceptoCuentaPredials().add(cuentaPredial);
                     }
-
-                    concepto.setEltOpcConceptoCuentaPredial(arrCuentaPredial);
                 }
             }
             

@@ -28,9 +28,9 @@ public class DElementConcepto extends cfd.DElement {
     private cfd.ver40.DElementConceptoImpuestos moEltOpcConceptoImpuestos;
     private cfd.ver40.DElementConceptoACuentaTerceros moEltOpcConceptoACuentaTerceros;
     private final ArrayList<cfd.ver40.DElementConceptoInformacionAduanera> maEltOpcConceptoInformacionAduaneras;
-    private ArrayList<cfd.ver40.DElementConceptoCuentaPredial> maEltOpcConceptoCuentaPredial;
-    private cfd.ver40.DElementComplementoConcepto moEltOpcComplementoConcepto;
+    private final ArrayList<cfd.ver40.DElementConceptoCuentaPredial> maEltOpcConceptoCuentaPredials;
     private final ArrayList<cfd.ver40.DElementConceptoParte> maEltOpcConceptoPartes;
+    private cfd.ver40.DElementComplementoConcepto moEltOpcComplementoConcepto;
 
     public DElementConcepto() {
         super("cfdi:Concepto");
@@ -63,7 +63,7 @@ public class DElementConcepto extends cfd.DElement {
         moEltOpcConceptoImpuestos = null;
         moEltOpcConceptoACuentaTerceros = null;
         maEltOpcConceptoInformacionAduaneras = new ArrayList<>();
-        maEltOpcConceptoCuentaPredial = new ArrayList<>();
+        maEltOpcConceptoCuentaPredials = new ArrayList<>();
         maEltOpcConceptoPartes = new ArrayList<>();
         moEltOpcComplementoConcepto = null;
     }
@@ -87,8 +87,8 @@ public class DElementConcepto extends cfd.DElement {
             elements.addAll(maEltOpcConceptoInformacionAduaneras);
         }
         
-        if (maEltOpcConceptoCuentaPredial != null) {
-            elements.addAll(maEltOpcConceptoCuentaPredial);
+        if (!maEltOpcConceptoCuentaPredials.isEmpty()) {
+            elements.addAll(maEltOpcConceptoCuentaPredials);
         }
         
         if (!maEltOpcConceptoPartes.isEmpty()) {
@@ -108,7 +108,6 @@ public class DElementConcepto extends cfd.DElement {
 
     public void setEltOpcConceptoImpuestos(cfd.ver40.DElementConceptoImpuestos o) { moEltOpcConceptoImpuestos = o; }
     public void setEltOpcConceptoACuentaTerceros(cfd.ver40.DElementConceptoACuentaTerceros o) { moEltOpcConceptoACuentaTerceros = o; }
-    public void setEltOpcConceptoCuentaPredial(ArrayList<cfd.ver40.DElementConceptoCuentaPredial> o) { maEltOpcConceptoCuentaPredial = o; }
     public void setEltOpcComplementoConcepto(cfd.ver40.DElementComplementoConcepto o) { moEltOpcComplementoConcepto = o; }
 
     public cfd.DAttributeString getAttClaveProdServ() { return moAttClaveProdServ; }
@@ -125,7 +124,7 @@ public class DElementConcepto extends cfd.DElement {
     public cfd.ver40.DElementConceptoImpuestos getEltOpcConceptoImpuestos() { return moEltOpcConceptoImpuestos; }
     public cfd.ver40.DElementConceptoACuentaTerceros getEltOpcACuentaTerceros() { return moEltOpcConceptoACuentaTerceros; }
     public ArrayList<cfd.ver40.DElementConceptoInformacionAduanera> getEltOpcConceptoInformacionAduaneras() { return maEltOpcConceptoInformacionAduaneras; }
-    public ArrayList<cfd.ver40.DElementConceptoCuentaPredial> getEltOpcConceptoCuentaPredial() { return maEltOpcConceptoCuentaPredial; }
+    public ArrayList<cfd.ver40.DElementConceptoCuentaPredial> getEltOpcConceptoCuentaPredials() { return maEltOpcConceptoCuentaPredials; }
     public ArrayList<cfd.ver40.DElementConceptoParte> getEltOpcConceptoPartes() { return maEltOpcConceptoPartes; }
     public cfd.ver40.DElementComplementoConcepto getEltOpcComplementoConcepto() { return moEltOpcComplementoConcepto; }
     

@@ -42,7 +42,7 @@ public class DElementComprobante extends cfd.DElement {
     private ArrayList<cfd.ver40.DElementCfdiRelacionados> maEltOpcCfdiRelacionados;
     private cfd.ver40.DElementEmisor moEltEmisor;
     private cfd.ver40.DElementReceptor moEltReceptor;
-    private final cfd.ver40.DElementConceptos moEltConceptos;
+    private final cfd.ver40.DElementConceptos moEltConceptos; // final to prevent from being reset
     private cfd.ver40.DElementImpuestos moEltOpcImpuestos;
     private cfd.ver40.DElementComplemento moEltOpcComplemento;
     private cfd.ver4.DElementAddenda moEltOpcAddenda;
