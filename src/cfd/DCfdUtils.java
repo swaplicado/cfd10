@@ -4489,14 +4489,5 @@ public abstract class DCfdUtils {
             UsoCFDI = usoCFDI;
             Uuid = uuid;
         }
-        
-        public String composeFolio() {
-            return Serie + (Serie.isEmpty() ? "" : "-") + Folio;
-        }
-        
-        public String composeEffectiveFolio() {
-            String folio = composeFolio();
-            return !folio.isEmpty() ? folio : Uuid;
-        }
     }
 }
