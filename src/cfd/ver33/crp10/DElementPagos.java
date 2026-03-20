@@ -2,9 +2,9 @@ package cfd.ver33.crp10;
 
 import cfd.DAttribute;
 import cfd.DAttributeString;
-import cfd.DCfdConsts;
 import cfd.DElement;
 import java.util.ArrayList;
+import sa.lib.SLibUtils;
 
 /**
  *
@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class DElementPagos extends cfd.DElement {
 
+    public static final String VERSION = "1.0";
+    public static final String NAME = "pago10:Pagos";
     public static final String XSI = "http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
     public static final String XMLNS = "xmlns:pago10=\"http://www.sat.gob.mx/Pagos\"";
     
@@ -27,10 +29,10 @@ public class DElementPagos extends cfd.DElement {
      * Creates a new instance of class DElementPagos.
      */
     public DElementPagos() {
-        super("pago10:Pagos");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true, 3, 3); // fixed text value "1.0"
-        moAttVersion.setString("" + DCfdConsts.COMP_RP_10);
+        moAttVersion.setString(VERSION);
 
         mvAttributes.add(moAttVersion);
 
@@ -45,7 +47,7 @@ public class DElementPagos extends cfd.DElement {
      * Public methods:
      */
 
-    public float getVersion() { return DCfdConsts.COMP_RP_10; }
+    public float getVersion() { return SLibUtils.parseFloat(VERSION); }
 
     public DAttributeString getAttVersion() { return moAttVersion; }
     

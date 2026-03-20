@@ -17,6 +17,8 @@ import cfd.DAttributeTypeImporte;
  */
 public class DElementNomina extends cfd.DElement {
     
+    public static final String VERSION = "1.2";
+    public static final String NAME = "nomina12:Nomina";
     public static final String XSI = "http://www.sat.gob.mx/nomina12 http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd";
     public static final String XMLNS = "xmlns:nomina12=\"http://www.sat.gob.mx/nomina12\"";
 
@@ -38,10 +40,10 @@ public class DElementNomina extends cfd.DElement {
     protected cfd.ver3.nom12.DElementIncapacidades moEltIncapacidades;
 
     public DElementNomina() {
-        super("nomina12:Nomina");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true);
-        moAttVersion.setString("1.2");
+        moAttVersion.setString(VERSION);
         moAttTipoNomina = new DAttributeString("TipoNomina", true);
         moAttFechaPago = new DAttributeDate("FechaPago", true);
         moAttFechaInicialPago = new DAttributeDate("FechaInicialPago", true);

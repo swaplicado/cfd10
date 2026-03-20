@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel García
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementCartaPorte extends cfd.DElement {
 
+    public static final String VERSION = "2.0";
+    public static final String NAME = "cartaporte20:CartaPorte";
     public static final String XSI = "http://www.sat.gob.mx/CartaPorte20  http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte20.xsd";
     public static final String XMLNS = "xmlns:cartaporte20=\"http://www.sat.gob.mx/CartaPorte20\"";
-    public static final String VERSION = "2.0";
 
     private final DAttributeString moAttVersion;
     private final DAttributeString moAttTranspInternac;
@@ -28,7 +29,7 @@ public class DElementCartaPorte extends cfd.DElement {
     protected cfd.ver3.ccp20.DElementFiguraTransporte moEltFiguraTransporte;
     
     public DElementCartaPorte() {
-        super("cartaporte20:CartaPorte");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true);
         moAttVersion.setString(VERSION);

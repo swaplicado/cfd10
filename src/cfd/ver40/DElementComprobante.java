@@ -14,7 +14,7 @@ import sa.lib.xml.SXmlUtils;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel García
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementComprobante extends cfd.DElement {
 
@@ -294,19 +294,23 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver40.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
     public cfd.ver4.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
     
-    public cfd.ver40.DElementTimbreFiscalDigital getEltOpcComplementoTimbreFiscalDigital() {
-        cfd.ver40.DElementTimbreFiscalDigital tfd = null;
+    public cfd.DElement getComplemento(final String nombreComplemento) {
+        cfd.DElement complemento = null;
         
         if (moEltOpcComplemento != null) {
             for (DElement element : moEltOpcComplemento.getElements()) {
-                if (element.getName().compareTo("tfd:TimbreFiscalDigital") == 0) {
-                    tfd = (cfd.ver40.DElementTimbreFiscalDigital) element;
+                if (element.getName().equals(nombreComplemento)) {
+                    complemento = element;
                     break;
                 }
             }
         }
         
-        return tfd;
+        return complemento;
+    }
+    
+    public cfd.ver40.DElementTimbreFiscalDigital getEltOpcComplementoTimbreFiscalDigital() {
+        return (cfd.ver40.DElementTimbreFiscalDigital) getComplemento(cfd.ver40.DElementTimbreFiscalDigital.NAME);
     }
     
     @Override

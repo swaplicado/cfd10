@@ -14,7 +14,8 @@ import cfd.DAttributeString;
  */
 public class DElementTimbreFiscalDigital extends cfd.DElement {
     
-    public static final String VER = "1.1";
+    public static final String VERSION = "1.1";
+    public static final String NAME = "tfd:TimbreFiscalDigital";
 
     protected DAttributeString moAttVersion;
     protected DAttributeString moAttUuid;
@@ -26,10 +27,10 @@ public class DElementTimbreFiscalDigital extends cfd.DElement {
     protected DAttributeString moAttSelloSAT;
 
     public DElementTimbreFiscalDigital() {
-        super("tfd:TimbreFiscalDigital");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true);
-        moAttVersion.setString(VER);
+        moAttVersion.setString(VERSION);
         moAttUuid = new DAttributeString("UUID", true);
         moAttFechaTimbrado = new DAttributeString("FechaTimbrado", true);
         moAttRfcProvCertif = new DAttributeString("RfcProvCertif", true);

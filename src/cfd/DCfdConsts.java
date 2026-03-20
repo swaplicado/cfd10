@@ -28,9 +28,6 @@ public abstract class DCfdConsts {
     public static final float CFDI_VER_33 = 3.3f;
     public static final float CFDI_VER_40 = 4.0f;
     
-    public static final float COMP_RP_10 = 1.0f;
-    public static final float COMP_RP_20 = 2.0f;
-
     public static final String RFC_GEN_NAC = "XAXX010101000";
     public static final String RFC_GEN_INT = "XEXX010101000";
     

@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class DElementComercioExterior extends cfd.DElement {
 
+    public static final String VERSION = "2.0";
+    public static final String NAME = "cce20:ComercioExterior";
     public static final String XSI = "http://www.sat.gob.mx/ComercioExterior20  http://www.sat.gob.mx/sitio_internet/cfd/ComercioExterior20/ComercioExterior20.xsd";
     public static final String XMLNS = "xmlns:cce20=\"http://www.sat.gob.mx/ComercioExterior20\"";
 
@@ -35,10 +37,10 @@ public class DElementComercioExterior extends cfd.DElement {
     protected cfd.ver4.cce20.DElementMercancias moEltMercancias;
 
     public DElementComercioExterior() {
-        super("cce20:ComercioExterior");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true);
-        moAttVersion.setString("2.0");
+        moAttVersion.setString(VERSION);
         moAttMotivoTraslado = new DAttributeString("MotivoTraslado", false, 2, 2);
         moAttClaveDePedimento = new DAttributeString("ClaveDePedimento", true, 2, 2);
         moAttCertificadoOrigen = new DAttributeInteger("CertificadoOrigen", true, 1, 1);

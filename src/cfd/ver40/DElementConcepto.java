@@ -7,10 +7,11 @@ import cfd.DAttributeTypeImporteUnitario;
 import cfd.DCfdMath;
 import cfd.DElement;
 import java.util.ArrayList;
+import sa.lib.SLibUtils;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel García
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementConcepto extends cfd.DElement {
 
@@ -127,6 +128,48 @@ public class DElementConcepto extends cfd.DElement {
     public ArrayList<cfd.ver40.DElementConceptoCuentaPredial> getEltOpcConceptoCuentaPredials() { return maEltOpcConceptoCuentaPredials; }
     public ArrayList<cfd.ver40.DElementConceptoParte> getEltOpcConceptoPartes() { return maEltOpcConceptoPartes; }
     public cfd.ver40.DElementComplementoConcepto getEltOpcComplementoConcepto() { return moEltOpcComplementoConcepto; }
+    
+    /**
+     * Obtener la suma de los importes de los impuestos trasladados del impuesto deseado.
+     * @param códigoImpuesto Código del impuesto deseado (DCfdi40Catalogs.IMP_...)
+     * @return 
+     */
+    public double getSumOfImporteDeImpuestosTrasladados(final String códigoImpuesto) {
+        double sum = 0;
+        
+        if (moEltOpcConceptoImpuestos != null) {
+            if (moEltOpcConceptoImpuestos.getEltOpcImpuestosTrasladados() != null) {
+                for (cfd.ver40.DElementConceptoImpuestoTraslado traslado : moEltOpcConceptoImpuestos.getEltOpcImpuestosTrasladados().getEltImpuestoTrasladados()) {
+                    if (traslado.getAttImpuesto().getString().equals(códigoImpuesto)) {
+                        sum = SLibUtils.roundAmount(sum + traslado.getAttImporte().getDouble());
+                    }
+                }
+            }
+        }
+        
+        return sum;
+    }
+    
+    /**
+     * Obtener la suma de los importes de los impuestos retenidos del impuesto deseado.
+     * @param códigoImpuesto Código del impuesto deseado (DCfdi40Catalogs.IMP_...)
+     * @return 
+     */
+    public double getSumOfImporteDeImpuestosRetenidos(final String códigoImpuesto) {
+        double sum = 0;
+        
+        if (moEltOpcConceptoImpuestos != null) {
+            if (moEltOpcConceptoImpuestos.getEltOpcImpuestosRetenciones()!= null) {
+                for (cfd.ver40.DElementConceptoImpuestoRetencion retención : moEltOpcConceptoImpuestos.getEltOpcImpuestosRetenciones().getEltImpuestoRetenciones()) {
+                    if (retención.getAttImpuesto().getString().equals(códigoImpuesto)) {
+                        sum = SLibUtils.roundAmount(sum + retención.getAttImporte().getDouble());
+                    }
+                }
+            }
+        }
+        
+        return sum;
+    }
     
     @Override
     public void validateElement() throws IllegalStateException, Exception {

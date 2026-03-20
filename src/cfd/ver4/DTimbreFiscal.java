@@ -24,7 +24,7 @@ public class DTimbreFiscal {
     protected int mnPacId;
 
     public DTimbreFiscal() {
-        msVersion = DElementTimbreFiscalDigital.VER;
+        msVersion = DElementTimbreFiscalDigital.VERSION;
         msUuid = "";
         msFechaTimbrado = "";
         msRfcProvCertif = "";

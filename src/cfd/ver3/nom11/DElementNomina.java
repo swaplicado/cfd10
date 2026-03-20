@@ -18,6 +18,9 @@ import cfd.DAttributeTypeImporte;
  */
 public class DElementNomina extends cfd.DElement {
 
+    public static final String VERSION = "1.1";
+    public static final String NAME = "nomina:Nomina";
+    
     protected cfd.DAttributeString moAttVersion;
     protected cfd.DAttributeString moAttRegistroPatronal;
     protected cfd.DAttributeString moAttNumEmpleado;
@@ -47,10 +50,10 @@ public class DElementNomina extends cfd.DElement {
     protected cfd.ver3.nom11.DElementHorasExtras moEltHorasExtras;
 
     public DElementNomina() {
-        super("nomina:Nomina");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true);
-        moAttVersion.setString("1.1");
+        moAttVersion.setString(VERSION);
         moAttRegistroPatronal = new DAttributeString("RegistroPatronal", false);
         moAttNumEmpleado = new DAttributeString("NumEmpleado", true);
         moAttCurp = new DAttributeString("CURP", true);

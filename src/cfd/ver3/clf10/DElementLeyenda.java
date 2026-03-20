@@ -13,12 +13,14 @@ import cfd.DAttributeString;
  */
 public class DElementLeyenda extends cfd.DElement {
     
+    public static final String NAME = "leyendasFisc:Leyenda";
+    
     private DAttributeString moAttDisposicionFiscal;
     private DAttributeString moAttNorma;
     private DAttributeString moAttTextoLeyenda;
     
     public DElementLeyenda() {
-        super("leyendasFisc:Leyenda");
+        super(NAME);
         
         moAttDisposicionFiscal = new DAttributeString("disposicionFiscal", false, 1);
         moAttNorma = new DAttributeString("norma", false, 1);

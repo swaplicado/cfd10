@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Sergio Abraham Flores Gutiérrez, Isabel García
+ * @author Sergio Abraham Flores Gutiérrez
  */
 public class DElementCartaPorte extends cfd.DElement {
 
+    public static final String VERSION = "3.0";
+    public static final String NAME = "cartaporte30:CartaPorte";
     public static final String XSI = "http://www.sat.gob.mx/CartaPorte30  http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte30.xsd";
     public static final String XMLNS = "xmlns:cartaporte30=\"http://www.sat.gob.mx/CartaPorte30\"";
-    public static final String VERSION = "3.0";
 
     private final DAttributeString moAttVersion;
     private final DAttributeString moAttIdCCP;
@@ -33,7 +34,7 @@ public class DElementCartaPorte extends cfd.DElement {
     protected cfd.ver4.ccp30.DElementFiguraTransporte moEltFiguraTransporte;
     
     public DElementCartaPorte() {
-        super("cartaporte30:CartaPorte");
+        super(NAME);
 
         moAttVersion = new DAttributeString("Version", true);
         moAttVersion.setString(VERSION);
