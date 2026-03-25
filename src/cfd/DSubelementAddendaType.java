@@ -17,5 +17,7 @@ public enum DSubelementAddendaType {
     Bachoco,
     GrupoModelo,
     Elektra,
-    Continental
+    Continental,
+    Interfactura,
+    Hortifrut
 }
