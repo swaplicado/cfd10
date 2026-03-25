@@ -60,4 +60,24 @@ public class DElementDomicilio extends cfd.DElement {
     public DAttributeString getAttEstado() { return moAttEstado; } 
     public DAttributeString getAttPais() { return moAttPais; } 
     public DAttributeString getAttCodigoPostal() { return moAttCodigoPostal; }
+    
+    /**
+     * Compose address of attributes calle, número exterior and númerio interior.
+     * @return Address.
+     */
+    public String composeAddress() {
+        String address = moAttCalle.getString();
+        
+        if (!address.isEmpty()) {
+            if (!moAttNumeroExterior.getString().isEmpty()) {
+                address += " #" + moAttNumeroExterior.getString();
+                
+                if (!moAttNumeroInterior.getString().isEmpty()) {
+                    address += "-" + moAttNumeroInterior.getString();
+                }
+            }
+        }
+        
+        return address;
+    }
 }

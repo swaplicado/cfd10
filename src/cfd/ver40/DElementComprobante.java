@@ -294,7 +294,7 @@ public class DElementComprobante extends cfd.DElement {
     public cfd.ver40.DElementComplemento getEltOpcComplemento() { return moEltOpcComplemento; }
     public cfd.ver4.DElementAddenda getEltOpcAddenda() { return moEltOpcAddenda; }
     
-    public cfd.DElement getComplemento(final String nombreComplemento) {
+    public cfd.DElement getEltComplemento(final String nombreComplemento) {
         cfd.DElement complemento = null;
         
         if (moEltOpcComplemento != null) {
@@ -310,7 +310,7 @@ public class DElementComprobante extends cfd.DElement {
     }
     
     public cfd.ver40.DElementTimbreFiscalDigital getEltOpcComplementoTimbreFiscalDigital() {
-        return (cfd.ver40.DElementTimbreFiscalDigital) getComplemento(cfd.ver40.DElementTimbreFiscalDigital.NAME);
+        return (cfd.ver40.DElementTimbreFiscalDigital) getEltComplemento(cfd.ver40.DElementTimbreFiscalDigital.NAME);
     }
     
     @Override

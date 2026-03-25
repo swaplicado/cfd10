@@ -25,6 +25,18 @@ public class DElementUbicaciones extends cfd.DElement {
     
     public ArrayList<DElementUbicacion> getEltUbicaciones() { return maEltUbicaciones; }
     
+    public ArrayList<DElementUbicacion> getEltUbicaciones(final String tipoUbicación) {
+        ArrayList<DElementUbicacion> ubicaciones = new ArrayList<>();
+        
+        for (DElementUbicacion ubicación : maEltUbicaciones) {
+            if (ubicación.getAttTipoUbicacion().getString().equals(tipoUbicación)) {
+                ubicaciones.add(ubicación);
+            }
+        }
+        
+        return ubicaciones;
+    }
+    
     @Override
     public void validateElement() throws IllegalStateException, Exception {
         super.validateElement(); // validates attributes, if any
