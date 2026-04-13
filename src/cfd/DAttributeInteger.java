@@ -64,6 +64,11 @@ public class DAttributeInteger extends DAttribute {
     public int getLengthMax() { return mnLengthMax; }
     public boolean getCanBeZero() { return mbCanBeZero; }
     public cfd.DElementWithChildren getElementWithChildrenToCheck() { return miElementWithChildrenToCheck; }
+    public java.text.DecimalFormat getFixedFormat() { return moFixedFormat; }
+    
+    public String getFormattedInteger() {
+        return composeInteger();
+    }
 
     @Override
     public void validateValue() {

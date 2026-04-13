@@ -39,7 +39,12 @@ public class DAttributeDouble extends DAttribute {
     public double getDouble() { return mdDouble; }
     public boolean getCanBeZero() { return mbCanBeZero; }
     public cfd.DElementWithChildren getElementWithChildrenToCheck() { return miElementWithChildrenToCheck; }
+    public java.text.DecimalFormat getDecimalFormat() { return moDecimalFormat; }
 
+    public String getFormattedDouble() {
+        return moDecimalFormat.format(mdDouble);
+    }
+    
     @Override
     public void validateValue() {
         if (mbIsRequired && mdDouble == 0 && !mbCanBeZero) {
