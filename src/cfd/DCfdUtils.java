@@ -4339,7 +4339,7 @@ public abstract class DCfdUtils {
         return comprobante;
     }
     
-    public static CfdEssentials getCfdi40Essentials(final String xml) throws Exception {
+    public static CfdiEssentials createCfdiEssentials(final String xml) throws Exception {
         // Comprobante:
 
         Document doc = SXmlUtils.parseDocument(xml);
@@ -4350,7 +4350,7 @@ public abstract class DCfdUtils {
         String tipoComprobante = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoDeComprobante", true);
         String serie = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Serie", false);
         String folio = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Folio", false);
-        Date fecha = SLibUtils.DbmsDateFormatDatetime.parse(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Fecha", true).replaceAll("T", " "));
+        Date fecha = SLibUtils.IsoFormatDatetime.parse(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Fecha", true));
         double total = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Total", true));
         String moneda = SXmlUtils.extractAttributeValue(nodeComprobanteMap, "Moneda", true);
         double tipoCambio = SLibUtils.parseDouble(SXmlUtils.extractAttributeValue(nodeComprobanteMap, "TipoCambio", false));
@@ -4373,9 +4373,10 @@ public abstract class DCfdUtils {
         String receptorRfc = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", true);
         String usoCFDI = SXmlUtils.extractAttributeValue(nodeReceptorMap, "UsoCFDI", true);
         
+        // Complemento timbre fiscal digital:
+        
         String uuid = "";
-
-        // Complemento:
+        Date fechaTimbrado = null;
         
         if (SXmlUtils.hasChildElement(nodeComprobante, "cfdi:Complemento")) {
             Node nodeComplemento = SXmlUtils.extractChildElements(nodeComprobante, "cfdi:Complemento").get(0);
@@ -4387,10 +4388,14 @@ public abstract class DCfdUtils {
                 NamedNodeMap namedNodeMapTfd = nodeTfd.getAttributes();
 
                 uuid = SXmlUtils.extractAttributeValue(namedNodeMapTfd, "UUID", true);
+                fechaTimbrado = SLibUtils.IsoFormatDatetime.parse(SXmlUtils.extractAttributeValue(namedNodeMapTfd, "FechaTimbrado", true));
             }
         }
         
-        return new CfdEssentials(version, tipoComprobante, serie, folio, fecha, total, moneda, tipoCambio, metodoPago, emisorRfc, emisor, receptorRfc, receptor, usoCFDI, uuid);
+        return new CfdiEssentials(version, tipoComprobante, serie, folio, fecha,
+                total, moneda, tipoCambio, metodoPago,
+                emisorRfc, emisor, receptorRfc, receptor, usoCFDI,
+                uuid, fechaTimbrado);
     }
     
     public static float getCfdiVersion(final String xml) throws Exception {
@@ -4424,6 +4429,14 @@ public abstract class DCfdUtils {
         return version;
     }
     
+    public static boolean isCfd(final float version) {
+        return version == DCfdConsts.CFD_VER_20 || version == DCfdConsts.CFD_VER_22;
+    }
+    
+    public static boolean isCfdi(final float version) {
+        return version == DCfdConsts.CFDI_VER_32 || version == DCfdConsts.CFDI_VER_33 || version >= DCfdConsts.CFDI_VER_40;
+    }
+    
     public static double getVersionPayrollComplement(final String xml) throws Exception {
         DocumentBuilder docBuilder = null;
         Document doc = null;
@@ -4452,7 +4465,7 @@ public abstract class DCfdUtils {
         return version;
     }
     
-    public static class CfdEssentials {
+    public static class CfdiEssentials {
         
         public float Version;
         public String TipoComprobante;
@@ -4469,10 +4482,12 @@ public abstract class DCfdUtils {
         public String Receptor;
         public String UsoCFDI;
         public String Uuid;
+        public Date FechaTimbrado;
         
-        public CfdEssentials(final float version, final String tipoComprobante, final String serie, final String folio, final Date fecha, 
-                final double total, final String moneda, final double tipoCambio, final String metodoPago, 
-                final String emisorRfc, final String emisor, final String receptorRfc, final String receptor, final String usoCFDI, final String uuid) {
+        public CfdiEssentials(final float version, final String tipoComprobante, final String serie, final String folio, final Date fecha,
+                final double total, final String moneda, final double tipoCambio, final String metodoPago,
+                final String emisorRfc, final String emisor, final String receptorRfc, final String receptor, final String usoCFDI,
+                final String uuid, final Date fechaTimbrado) {
             Version = version;
             TipoComprobante = tipoComprobante;
             Serie = serie;
@@ -4488,6 +4503,7 @@ public abstract class DCfdUtils {
             Receptor = receptor;
             UsoCFDI = usoCFDI;
             Uuid = uuid;
+            FechaTimbrado = fechaTimbrado;
         }
     }
 }
