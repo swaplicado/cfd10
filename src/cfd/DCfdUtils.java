@@ -4369,8 +4369,8 @@ public abstract class DCfdUtils {
         Node nodeReceptor = SXmlUtils.extractElements(doc, "cfdi:Receptor").item(0);
         NamedNodeMap nodeReceptorMap = nodeReceptor.getAttributes();
 
-        String receptor = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Rfc", true);
-        String receptorRfc = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", true);
+        String receptor = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Nombre", true);
+        String receptorRfc = SXmlUtils.extractAttributeValue(nodeReceptorMap, "Rfc", true);
         String usoCFDI = SXmlUtils.extractAttributeValue(nodeReceptorMap, "UsoCFDI", true);
         
         // Complemento timbre fiscal digital:
