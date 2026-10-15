@@ -7,6 +7,7 @@ package cfd.ver40.crp20;
 
 import cfd.DAttributeString;
 import cfd.DAttributeTypeImporte;
+import cfd.DAttributeTypeImporte6d;
 import cfd.ver40.DCfdi40Catalogs;
 import sa.lib.SLibUtils;
 
@@ -16,7 +17,7 @@ import sa.lib.SLibUtils;
  */
 public class DElementTrasladoDR extends cfd.DElement {
 
-    private final DAttributeTypeImporte moAttBaseDR;
+    private final DAttributeTypeImporte6d moAttBaseDR;
     private final DAttributeString moAttImpuestoDR;
     private final DAttributeString moAttTipoFactorDR;
     private final DAttributeTypeImporte moAttTasaOCuotaDR;
@@ -25,7 +26,7 @@ public class DElementTrasladoDR extends cfd.DElement {
     public DElementTrasladoDR() {
         super("pago20:TrasladoDR");
         
-        moAttBaseDR = new DAttributeTypeImporte("BaseDR", true);
+        moAttBaseDR = new DAttributeTypeImporte6d("BaseDR", true);
         moAttImpuestoDR = new DAttributeString("ImpuestoDR", true, 3, 3);
         moAttTipoFactorDR = new DAttributeString("TipoFactorDR", true);
         moAttTasaOCuotaDR = new DAttributeTypeImporte("TasaOCuotaDR", false);
@@ -41,7 +42,7 @@ public class DElementTrasladoDR extends cfd.DElement {
         mvAttributes.add(moAttImporteDR);
     }
     
-    public DAttributeTypeImporte getAttBaseDR() { return moAttBaseDR; }
+    public DAttributeTypeImporte6d getAttBaseDR() { return moAttBaseDR; }
     public DAttributeString getAttImpuestoDR() { return moAttImpuestoDR; }
     public DAttributeString getAttTipoFactorDR() { return moAttTipoFactorDR; }
     public DAttributeTypeImporte getAttTasaOCuotaDR() { return moAttTasaOCuotaDR; }
@@ -52,7 +53,7 @@ public class DElementTrasladoDR extends cfd.DElement {
     }
     
     public void addBaseDR(final double baseDR) {
-        moAttBaseDR.setDouble(SLibUtils.roundAmount(moAttBaseDR.getDouble() + baseDR));
+        moAttBaseDR.setDouble(SLibUtils.round(moAttBaseDR.getDouble() + baseDR, DAttributeTypeImporte6d.DECS));
     }
     
     public void computeImporteDR() {
